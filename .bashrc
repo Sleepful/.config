@@ -119,3 +119,4 @@ fi
 export PATH=~/.emacs.d/bin:$PATH
 export PATH="$(yarn global bin):$PATH"
 alias cfg='/usr/bin/git --git-dir=/home/zipoh/.cfg/ --work-tree=/home/zipoh'
+alias g='git'

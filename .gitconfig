@@ -1,0 +1,31 @@
+[user]
+	email = josepablov@gmail.com
+	name = Sleepful
+[credential]
+	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+[alias]
+	br = !git for-each-ref --sort=committerdate refs/heads --format='%(color:bold)%(align:15)%(HEAD)%(color:yellow)%(refname:short)%(end)%(align:20)%(color:bold green)%(committerdate:relative)%(end)%(color:magenta)%(authorname)\n%(color:blue)%(subject)\n%(color:reset)' --color=always|column -ts'|'
+	amend = commit --amend -m
+	pushb = push -u origin HEAD
+	aa = add -A .
+	cm = commit -m
+	st = status
+	unstage = restore --staged
+	co = checkout
+	logf = log --stat
+	logl = log -p
+	logo = log --oneline
+	fetcha = fetch --all
+	pulla = pull --all
+	# checkout new branch with commit message:
+	# conew BRANCHNAME commit-msg
+	conew = "!conew(){ git checkout -b \"$1\" && git commit --allow-empty -m \"$2\" && git push -u origin HEAD; }; conew"
+	# delete branch from local and remote
+	# delbr BRANCHNAME
+	delbr = "!delbr(){ git branch -D \"$1\" && git push -d origin \"$1\"; }; delbr"
+	fixup = commit --fixup=HEAD
+	refixup = rebase --autosquash -i HEAD~~
+	uncommit = reset --soft HEAD~
+	tracked = ls-tree -r --name-only HEAD
+[core]
+	hooksPath = ~/.githooks/
