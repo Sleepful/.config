@@ -26,6 +26,6 @@
 	fixup = commit --fixup=HEAD
 	refixup = rebase --autosquash -i HEAD~~
 	uncommit = reset --soft HEAD~
-	tracked = ls-tree -r --name-only HEAD
+	tracked = ls-tree --full-tree -r --name-only HEAD
 [core]
 	hooksPath = ~/.githooks/
