@@ -1,2 +1,5 @@
 #!/bin/bash
-git clone https://github.com/sourcegraph/javascript-typescript-langserver.git ~/Code/Forks
+DIR=~/Code/Forks
+git clone https://github.com/sourcegraph/javascript-typescript-langserver.git $DIR
+npm install $DIR
+npm run build $DIR

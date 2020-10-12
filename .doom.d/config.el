@@ -61,7 +61,7 @@
 
 ;; search for projects here
 (setq projectile-project-search-path '("~/Code/" "~/Language/" "~/Code/Forks"))
-;; open dired on root folder after opening project with projectile
+;; open dired on root folder after opening project with projectile (perhaps not working)
 (setq projectile-switch-project-action #'projectile-dired)
 
 
@@ -80,8 +80,11 @@
       :desc "Swap right" "TAB k"
       #'+workspace/swap-right)
 (map! "M-p" #'+workspace/display)
+(map! :leader
+      :desc "Last window" "w `"
+      #'evil-window-mru)
 
-;; layout config
+;; Layout config
 (setq-default truncate-lines 'nil) ;; wrap lines by default
 
 ;; Web stuff!
@@ -89,7 +92,36 @@
 ; (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode)) ;; auto-enable web mode for .js/.jsx files
 ; (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))) ;; associate jsx files with web-mode jsx
 
-(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode)) ;; auto-enable web mode for css
+;; Auto-enable modes for files
+
+; (setq modes '(
+;               '("\\.css?\\'" . web-mode)
+;               '("\\.jsx\\'" . js-jsx-mode)
+;               '("\\.tsx\\'" . js-jsx-mode)
+;               ))
+; (dolist (elt modes)
+;   (add-to-list 'auto-mode-alist elt))
+
+;(let ((correlations '(
+;                       '("\\.css?\\'" . web-mode)
+;                       '("\\.jsx\\'" . js-jsx-mode)
+;                       '("\\.tsx\\'" . js-jsx-mode)
+;                       )
+;                     ))
+;  (dolist (elt correlations)
+;    (add-to-list 'auto-mode-alist elt))
+;  )
+
+(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-jsx-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . js-jsx-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . js-jsx-mode))
+(add-hook 'js-jsx-mode-hook 'lsp-mode)
+(add-hook 'js-jsx-mode-hook 'js2-minor-mode)
+(add-hook 'lsp-mode-hook 'lsp-ui-mode)
+(add-hook 'lsp-mode-hook 'lsp)
+(add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "typescriptreact"))
 
 (use-package! web-mode
   :custom
@@ -100,3 +132,11 @@
 ;; these arent working
 ; (eval-after-load 'flycheck
 ;   '(flycheck-add-mode 'javascript-jshint 'web-mode))
+
+;; Evil mode
+;; The following snippet will make Evil treat an Emacs symbol as a word, useful for 'w' movements
+;; in words with special symbols like 'foo-bar'
+(with-eval-after-load 'evil
+    (defalias #'forward-evil-word #'forward-evil-symbol)
+    ;; make evil-search-word look for symbol rather than word boundaries
+    (setq-default evil-symbol-word-search t))
