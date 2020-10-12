@@ -33,7 +33,8 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+; (setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -53,6 +54,49 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; DOOM !!!
+
+;; always emojify mode
 (add-hook 'after-init-hook #'global-emojify-mode)
 
-(setq projectile-project-search-path '("~/Code/" "~/Language/"))
+;; search for projects here
+(setq projectile-project-search-path '("~/Code/" "~/Language/" "~/Code/Forks"))
+;; open dired on root folder after opening project with projectile
+(setq projectile-switch-project-action #'projectile-dired)
+
+
+;; keybindings
+(map! :leader "w a" #'ace-window)
+(defun save-bury-buffer () (interactive) (save-buffer) (evil-switch-to-windows-last-buffer) (+workspace/display))
+(map! :leader ; "b w"
+      :desc "Save buffer and switch" "b w"
+      #'save-bury-buffer)
+(map! "M-]" #'+workspace/switch-right)
+(map! "M-[" #'+workspace/switch-left)
+(map! :leader
+      :desc "Swap left" "TAB j"
+      #'+workspace/swap-left)
+(map! :leader
+      :desc "Swap right" "TAB k"
+      #'+workspace/swap-right)
+(map! "M-p" #'+workspace/display)
+
+;; layout config
+(setq-default truncate-lines 'nil) ;; wrap lines by default
+
+;; Web stuff!
+; commented out because web-mode on js/jsx files does not support lsp/xref/flycheck ...etc
+; (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode)) ;; auto-enable web mode for .js/.jsx files
+; (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))) ;; associate jsx files with web-mode jsx
+
+(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode)) ;; auto-enable web mode for css
+
+(use-package! web-mode
+  :custom
+  (web-mode-markup-indent-offset 2)
+  (web-mode-css-indent-offset 2)
+  (web-mode-code-indent-offset 2))
+
+;; these arent working
+; (eval-after-load 'flycheck
+;   '(flycheck-add-mode 'javascript-jshint 'web-mode))

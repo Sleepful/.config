@@ -104,6 +104,11 @@ bindsym $mod+$alt+space exec $i3-wm.program.file_search
 # Window and Workspace Navigation
 ###############################################################################
 
+## Navigate // Focus Parent // <> a ##
+bindsym $mod+a focus parent 
+## Navigate // Focus Child // <> q ##
+bindsym $mod+q focus child
+
 ## Navigate // Relative Window // <> ↑ ↓ ← → ##
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -139,20 +144,27 @@ bindsym $mod+Ctrl+8 workspace number $ws18
 bindsym $mod+Ctrl+9 workspace number $ws19
 bindsym $mod+Ctrl+0 workspace number $ws20
 
-# Navigate between workspaces
-bindsym $mod+q workspace back_and_forth
+## Navigate between workspaces
+# bindsym $mod+q workspace back_and_forth
+bindsym $mod+Tab workspace back_and_forth
 
 ## Navigate // Next Workspace // <> Tab ##
-bindsym $mod+Tab workspace next
+# bindsym $mod+Tab workspace next
 
 ## Navigate // Next Workspace // <><Alt> → ##
 bindsym $mod+$alt+Right workspace next
 
+## Navigate // Next Workspace // <> [
+bindsym $mod+bracketright workspace next
+
 ## Navigate // Previous Workspace // <><Shift> Tab ##
-bindsym $mod+Shift+Tab workspace prev
+# bindsym $mod+Shift+Tab workspace prev
 
 ## Navigate // Previous Workspace // <><Alt> ← ##
 bindsym $mod+$alt+Left workspace prev
+
+## Navigate // Next Workspace // <> ]
+bindsym $mod+bracketleft workspace prev
 
 ## Navigate // Scratchpad // <><Ctrl> a ##
 bindsym $mod+Ctrl+a scratchpad show
@@ -491,6 +503,10 @@ set_from_resource $i3-wm.bar.status_command i3-wm.bar.status_command i3xrocks -u
 
 # The bar configuration
 bar {
+  # disable scrolling in the bar
+  bindsym button4 nop
+  bindsym button5 nop
+  #
   position $i3-wm.bar.position
   font $i3-wm.bar.font
   separator_symbol $i3-wm.bar.separator

@@ -118,5 +118,11 @@ fi
 
 export PATH=~/.emacs.d/bin:$PATH
 export PATH="$(yarn global bin):$PATH"
+export PATH="~/.bin:$PATH"
 alias cfg='/usr/bin/git --git-dir=/home/zipoh/.cfg/ --work-tree=/home/zipoh'
 alias g='git'
+alias code='cd ~/Code'
+alias lang='cd ~/Language'
+alias jslsp='node ~/Code/Forks/javascript-typescript-langserver/lib/language-server-stdio'
+alias bashrc='source ~/.bashrc'
+alias vimbashrc='vim ~/.bashrc'
