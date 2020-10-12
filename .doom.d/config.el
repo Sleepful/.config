@@ -112,13 +112,16 @@
 ;    (add-to-list 'auto-mode-alist elt))
 ;  )
 
-(defvar lsp-language-id-configuration '(js-jsx-mode . "typescriptreact")) ;configuration of the lsp-mode to identify language-id:
+(defvar lsp-language-id-configuration '(( js-jsx-mode . "typescriptreact" ))) ;configuration of the lsp-mode to identify language-id:
 (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-jsx-mode))
+;(add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
+;(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-jsx-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" .  web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . js-jsx-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . js-jsx-mode))
 (add-hook 'js-jsx-mode-hook 'js2-minor-mode)
+(add-hook 'web-mode-hook 'js2-minor-mode)
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 (add-hook 'js-jsx-mode-hook 'lsp!)
 ;(add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "typescriptreact"))
@@ -142,17 +145,27 @@
 ;; formats the buffer before saving
 (add-hook 'before-save-hook 'tide-format-before-save)
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
-(add-hook 'js-jsx-mode-hook #'setup-tide-mode)
+;(add-hook 'js-jsx-mode-hook #'setup-tide-mode)
 
 ;; end of Tide mode setup
 
-;; web mode (not working so well)
+;; web mode
 
 (use-package! web-mode
   :custom
   (web-mode-markup-indent-offset 2)
   (web-mode-css-indent-offset 2)
   (web-mode-code-indent-offset 2))
+
+;; tide and webmode stuff
+;(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "jsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+;; configure jsx-tide checker to run after your default jsx checker
+;(flycheck-add-mode 'javascript-eslint 'web-mode)
+;(flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
 
 ;; these arent working
 ; (eval-after-load 'flycheck

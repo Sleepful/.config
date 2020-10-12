@@ -7,4 +7,8 @@ sudo apt-get update
 # those lines above should uncomment the lines needed for build-dep
 sudo apt-get build-dep emacs
 $EmacsDIR/autogen.sh
-$EmacsDIR/configure.sh --with-imagemagick
+sudo apt install libjansson-dev # necessary for json support
+$EmacsDIR/configure.sh --with-imagemagick --with-json
+make $EmacsDIR
+sudo make install $EmacsDIR
+
