@@ -112,16 +112,41 @@
 ;    (add-to-list 'auto-mode-alist elt))
 ;  )
 
+(defvar lsp-language-id-configuration '(js-jsx-mode . "typescriptreact")) ;configuration of the lsp-mode to identify language-id:
 (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-jsx-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . js-jsx-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . js-jsx-mode))
-(add-hook 'js-jsx-mode-hook 'lsp-mode)
 (add-hook 'js-jsx-mode-hook 'js2-minor-mode)
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-(add-hook 'lsp-mode-hook 'lsp)
-(add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "typescriptreact"))
+(add-hook 'js-jsx-mode-hook 'lsp!)
+;(add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "typescriptreact"))
+;(add-hook 'js-jsx-mode-hook 'lsp-mode)
+;(add-hook 'lsp-mode-hook 'lsp)
+
+;; Tide mode (from their README)
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  (company-mode +1)
+  )
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+(add-hook 'js-jsx-mode-hook #'setup-tide-mode)
+
+;; end of Tide mode setup
+
+;; web mode (not working so well)
 
 (use-package! web-mode
   :custom
