@@ -79,9 +79,12 @@
 (map! :leader
       :desc "Swap right" "TAB k"
       #'+workspace/swap-right)
+(map! :leader
+      :desc "Last workspace" "TAB e"
+      #'+workspace/other)
 (map! "M-p" #'+workspace/display)
 (map! :leader
-      :desc "Last window" "w `"
+      :desc "Last window" "w e"
       #'evil-window-mru)
 
 ;; Layout config
@@ -112,7 +115,7 @@
 ;    (add-to-list 'auto-mode-alist elt))
 ;  )
 
-(defvar lsp-language-id-configuration '(( js-jsx-mode . "typescriptreact" ))) ;configuration of the lsp-mode to identify language-id:
+(defvar lsp-language-id-configuration '(( web-mode . "typescriptreact" )( js-jsx-mode . "typescriptreact" ))) ;configuration of the lsp-mode to identify language-id:
 (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
 ;(add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
 ;(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-jsx-mode))
@@ -123,7 +126,8 @@
 (add-hook 'js-jsx-mode-hook 'js2-minor-mode)
 (add-hook 'web-mode-hook 'js2-minor-mode)
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-(add-hook 'js-jsx-mode-hook 'lsp!)
+;(add-hook 'js-jsx-mode-hook 'lsp!)
+(add-hook 'web-mode-hook 'lsp!)
 ;(add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "typescriptreact"))
 ;(add-hook 'js-jsx-mode-hook 'lsp-mode)
 ;(add-hook 'lsp-mode-hook 'lsp)
@@ -159,10 +163,11 @@
 
 ;; tide and webmode stuff
 ;(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (string-equal "jsx" (file-name-extension buffer-file-name))
-              (setup-tide-mode))))
+;(add-hook 'web-mode-hook
+;          (lambda ()
+;            (when (string-equal "jsx" (file-name-extension buffer-file-name))
+;              (setup-tide-mode))))
+
 ;; configure jsx-tide checker to run after your default jsx checker
 ;(flycheck-add-mode 'javascript-eslint 'web-mode)
 ;(flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
@@ -178,3 +183,19 @@
     (defalias #'forward-evil-word #'forward-evil-symbol)
     ;; make evil-search-word look for symbol rather than word boundaries
     (setq-default evil-symbol-word-search t))
+
+; by default `evil-show-marks' (SPC-s-r) opens `counsel-mark-ring' (because of doom remapping)
+; instead we want to open `counsel-evil-marks'
+(use-package! counsel
+  :init
+  (define-key!
+    [remap evil-show-marks]          #'counsel-evil-marks
+  ))
+
+; center cursor when searching with `evil-ex-search-next'
+(advice-add 'evil-ex-search-next :after
+            (lambda (&rest x) (evil-scroll-line-to-center (line-number-at-pos))))
+(advice-add 'evil-ex-search-previous :after
+            (lambda (&rest x) (evil-scroll-line-to-center (line-number-at-pos))))
+(advice-add 'evil-ex-search-forward :after
+            (lambda (&rest x) (evil-scroll-line-to-center (line-number-at-pos))))
