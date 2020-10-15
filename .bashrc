@@ -126,3 +126,4 @@ alias lang='cd ~/Language'
 alias jslsp='node ~/Code/Forks/javascript-typescript-langserver/lib/language-server-stdio'
 alias bashrc='source ~/.bashrc'
 alias vimbashrc='vim ~/.bashrc'
+alias vim='vim -S ~/.vimrc' # necessary only if using neovim, as neovim reads the config from somewhere else
