@@ -54,18 +54,59 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;; DOOM !!!
 
-;; always emojify mode
+;####################################
+;#                                  #
+;#   Personal config starts here    #
+;#                                  #
+;####################################
+
+;; ----------------
+;; Layout
+;; ----------------
+(setq-default truncate-lines 'nil) ;; wrap lines by default
+; emojify
 (add-hook 'after-init-hook #'global-emojify-mode)
+;(add-hook 'after-init-hook #'global-hl-line-mode)
+; hl-line-mode
+;(remove-hook! (prog-mode text-mode conf-mode special-mode) #'hl-line-mode) ;remove hook from hl-line-mode to use my own
+;(set-face-attribute hl-line-face nil :underline t :foreground nil :background nil)
+;(custom-set-faces! '(hl-line-face :background nil :underline t))
+;(add-hook! 'doom-load-theme-hook
+;  (set-face-attribute 'hl-line nil :background nil :underline t)
+;  (set-face-attribute 'hl-line-face nil :underline t)
+;  (set-face-attribute 'global-hl-line-sticky-flag t)
+;   (setq hl-line-sticky-flag 't)
+(custom-set-faces!
+  '(hl-line :underline "#8470ff" :background nil)
+  '(solaire-hl-line-face :background nil)
+  )
+(after! hl-line (progn
+                  (setq hl-line-sticky-flag t)
+                  (set-face-attribute 'hl-line nil :background nil)))
+;(set-face-attribute 'hl-line nil :background nil)
+;(set-face-attribute 'hl-line-sticky-flag t)
+;(setq global-hl-line-sticky-flag t)
+;(setq hl-line-sticky-flag 't)
+;(defvar hl-line-sticky-flag 'f)
+;   (setq hl-line-sticky-flag 't)
+;(add-hook hl-line-mode-hook '(setq hl-line-sticky-flag 't))
 
+
+;; ----------------
+;; projectile
+;; ----------------
+;
 ;; search for projects here
 (setq projectile-project-search-path '("~/Code/" "~/Language/" "~/Code/Forks"))
-;; open dired on root folder after opening project with projectile (perhaps not working)
+;; open dired on root folder after opening project with projectile (perhaps not working) https://docs.projectile.mx/projectile/configuration.html
 (setq projectile-switch-project-action #'projectile-dired)
 
 
+;; ----------------
 ;; keybindings
+;; ----------------
+;
 (map! :leader "w a" #'ace-window)
 (defun save-bury-buffer () (interactive) (save-buffer) (evil-switch-to-windows-last-buffer) (+workspace/display))
 (map! :leader ; "b w"
@@ -86,11 +127,35 @@
 (map! :leader
       :desc "Last window" "w e"
       #'evil-window-mru)
+(map! :desc "Paste below"
+      :n "] p"
+      #'(lambda () (interactive)
+          (evil-insert-newline-below)
+          (insert (current-kill 0))))
+(map! :desc "Paste above"
+      :n "[ p"
+      #'(lambda () (interactive)
+          (evil-insert-newline-above)
+          (insert (current-kill 0))))
+(map! :leader
+      :desc "Up"
+      :m "k"
+      #'(lambda () (interactive)
+             (evil-previous-line 6)
+             ;(evil-scroll-line-to-center (line-number-at-pos))
+        ))
+(map! :leader
+      :desc "Down"
+      :m "j"
+      #'(lambda () (interactive)
+             (evil-next-line 6)
+             ;(evil-scroll-line-to-center (line-number-at-pos))
+        ))
 
-;; Layout config
-(setq-default truncate-lines 'nil) ;; wrap lines by default
-
+;; ----------------
 ;; Web stuff!
+;; ----------------
+;
 ; commented out because web-mode on js/jsx files does not support lsp/xref/flycheck ...etc
 ; (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode)) ;; auto-enable web mode for .js/.jsx files
 ; (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))) ;; associate jsx files with web-mode jsx
@@ -115,24 +180,58 @@
 ;    (add-to-list 'auto-mode-alist elt))
 ;  )
 
-(defvar lsp-language-id-configuration '(( web-mode . "typescriptreact" )( js-jsx-mode . "typescriptreact" ))) ;configuration of the lsp-mode to identify language-id:
+
+; Major modes to turn on
+; ----------------------
+;
 (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
 ;(add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
 ;(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-jsx-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" .  web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . js-jsx-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . js-jsx-mode))
-(add-hook 'js-jsx-mode-hook 'js2-minor-mode)
-(add-hook 'web-mode-hook 'js2-minor-mode)
-(add-hook 'lsp-mode-hook 'lsp-ui-mode)
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 ;(add-hook 'js-jsx-mode-hook 'lsp!)
-(add-hook 'web-mode-hook 'lsp!)
 ;(add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "typescriptreact"))
 ;(add-hook 'js-jsx-mode-hook 'lsp-mode)
 ;(add-hook 'lsp-mode-hook 'lsp)
 
+; Lsp mode configuration (if it is used)
+; ----------------------
+;
+(defvar lsp-language-id-configuration '(( web-mode . "typescriptreact" )( js-jsx-mode . "typescriptreact" ))) ;configuration of the lsp-mode to identify language-id:
+(add-hook 'lsp-mode-hook 'lsp-ui-mode)
+
+;; js-jsx-mode: the baked-in emacs mode, new to emacs 27
+; ----------------------
+;
+(add-hook 'js-jsx-mode-hook 'js2-minor-mode) ; not using this but just in case
+
+;; LSP or TIDE
+; ----------------------
+;
+;(add-hook 'web-mode-hook 'lsp!)
+(add-hook 'web-mode-hook 'setup-tide-mode)
+
+;; web mode
+; ----------------------
+;
+(use-package! web-mode
+  :custom
+  (web-mode-markup-indent-offset 2)
+  (web-mode-css-indent-offset 2)
+  (web-mode-code-indent-offset 2))
+
+(setq web-mode-content-types-alist
+  '(("json" . "\\.api\\'")
+    ("xml"  . "\\.api\\'")
+    ("jsx"  . "\\.js[x]?\\'")))
+
+(add-hook 'web-mode-hook 'js2-minor-mode)
+
 ;; Tide mode (from their README)
+; ----------------------
+;
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
@@ -151,15 +250,8 @@
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 ;(add-hook 'js-jsx-mode-hook #'setup-tide-mode)
 
-;; end of Tide mode setup
+;; end of Tide mode setup -------
 
-;; web mode
-
-(use-package! web-mode
-  :custom
-  (web-mode-markup-indent-offset 2)
-  (web-mode-css-indent-offset 2)
-  (web-mode-code-indent-offset 2))
 
 ;; tide and webmode stuff
 ;(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
@@ -176,7 +268,10 @@
 ; (eval-after-load 'flycheck
 ;   '(flycheck-add-mode 'javascript-jshint 'web-mode))
 
+;; ----------------
 ;; Evil mode
+;; ----------------
+;
 ;; The following snippet will make Evil treat an Emacs symbol as a word, useful for 'w' movements
 ;; in words with special symbols like 'foo-bar'
 (with-eval-after-load 'evil
@@ -194,8 +289,17 @@
 
 ; center cursor when searching with `evil-ex-search-next'
 (advice-add 'evil-ex-search-next :after
-            (lambda (&rest x) (evil-scroll-line-to-center (line-number-at-pos))))
+            (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
 (advice-add 'evil-ex-search-previous :after
-            (lambda (&rest x) (evil-scroll-line-to-center (line-number-at-pos))))
+            (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
 (advice-add 'evil-ex-search-forward :after
-            (lambda (&rest x) (evil-scroll-line-to-center (line-number-at-pos))))
+            (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
+; quicker line up/down, commented lines are the same thing but remap remaps everywhere
+;(map! :m "C-y" (cmd!! #'evil-scroll-line-up 4)
+;      :m "C-e" (cmd!! #'evil-scroll-line-down 4))
+(map! [remap evil-scroll-line-up] (cmd!! #'evil-scroll-line-up 8)
+      [remap evil-scroll-line-down] (cmd!! #'evil-scroll-line-down 8))
+
+(after! evil-escape (progn
+                      (setq-default evil-escape-key-sequence "jk")
+                      (setq-default evil-escape-unordered-key-sequence t)))
