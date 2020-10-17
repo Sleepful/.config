@@ -67,31 +67,21 @@
 (setq-default truncate-lines 'nil) ;; wrap lines by default
 ; emojify
 (add-hook 'after-init-hook #'global-emojify-mode)
-;(add-hook 'after-init-hook #'global-hl-line-mode)
-; hl-line-mode
-;(remove-hook! (prog-mode text-mode conf-mode special-mode) #'hl-line-mode) ;remove hook from hl-line-mode to use my own
-;(set-face-attribute hl-line-face nil :underline t :foreground nil :background nil)
-;(custom-set-faces! '(hl-line-face :background nil :underline t))
-;(add-hook! 'doom-load-theme-hook
-;  (set-face-attribute 'hl-line nil :background nil :underline t)
-;  (set-face-attribute 'hl-line-face nil :underline t)
-;  (set-face-attribute 'global-hl-line-sticky-flag t)
-;   (setq hl-line-sticky-flag 't)
+; face
 (custom-set-faces!
-  '(hl-line :underline "#8470ff" :background nil)
+  '(hl-line :underline "light slate blue" :background nil :distant-foreground "medium purple" :distant-background "black")
   '(solaire-hl-line-face :background nil)
+  '(region :background "VioletRed4" :distant-foreground "green")
+  '(line-number-current-line :foreground "cyan")
+  '(solaire-mode-line-face :background "black" :underline nil)
+  '(solaire-mode-line-inactive-face :background "190e22" :foreground "medium aquamarine")
   )
 (after! hl-line (progn
                   (setq hl-line-sticky-flag t)
-                  (set-face-attribute 'hl-line nil :background nil)))
-;(set-face-attribute 'hl-line nil :background nil)
-;(set-face-attribute 'hl-line-sticky-flag t)
-;(setq global-hl-line-sticky-flag t)
-;(setq hl-line-sticky-flag 't)
-;(defvar hl-line-sticky-flag 'f)
-;   (setq hl-line-sticky-flag 't)
-;(add-hook hl-line-mode-hook '(setq hl-line-sticky-flag 't))
-
+                  ))
+(setq evil-normal-state-cursor '(box    "turquoise")
+      evil-insert-state-cursor '(bar    "turquoise")
+      evil-visual-state-cursor '(hollow "turquoise"))
 
 ;; ----------------
 ;; projectile
@@ -140,16 +130,14 @@
 (map! :leader
       :desc "Up"
       :m "k"
-      #'(lambda () (interactive)
-             (evil-previous-line 6)
-             ;(evil-scroll-line-to-center (line-number-at-pos))
+      #'(lambda (number) (interactive "P")
+             (evil-previous-line (* 6 (or number 1)))
         ))
 (map! :leader
       :desc "Down"
       :m "j"
-      #'(lambda () (interactive)
-             (evil-next-line 6)
-             ;(evil-scroll-line-to-center (line-number-at-pos))
+      #'(lambda (number) (interactive "P")
+             (evil-next-line (* 6 (or number 1)))
         ))
 
 ;; ----------------
@@ -212,6 +200,12 @@
 ;
 ;(add-hook 'web-mode-hook 'lsp!)
 (add-hook 'web-mode-hook 'setup-tide-mode)
+
+;; Eglot
+; ----------------------
+;
+; commented until turned on through init.el with (lsp +eglot)
+;(add-to-list 'eglot-server-programs '(web-mode . ("js-ts-ls.sh")))
 
 ;; web mode
 ; ----------------------
