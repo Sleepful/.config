@@ -117,14 +117,35 @@ if ! shopt -oq posix; then
 fi
 
 export PATH=~/.emacs.d/bin:$PATH
-export PATH="$(yarn global bin):$PATH"
 export PATH="~/.bin:$PATH"
-alias cfg='/usr/bin/git --git-dir=/home/zipoh/.cfg/ --work-tree=/home/zipoh'
+alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias cfgsetup='cfg config status.showuntrackedfiles no'
 alias g='git'
 alias code='cd ~/Code'
+alias notes='cd ~/Notes'
 alias lang='cd ~/Language'
 alias jslsp='node ~/Code/Forks/javascript-typescript-langserver/lib/language-server-stdio'
 alias sobashrc='source ~/.bashrc'
 alias bashrc='vim ~/.bashrc'
 alias vimrc='vim ~/.vimrc'
 alias vim='vim -S ~/.vimrc' # necessary only if using neovim, as neovim reads the config from somewhere else
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  echo "linux detected"
+  # LINUX configs
+  export PATH="$(yarn global bin):$PATH"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  echo "MACOS detected"
+  #MACOS configs
+  #postgres path
+  export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+  #redis path
+  PATH="/Applications/Redis.app/Contents/Resources/Vendor/redis/bin:$PATH"
+  #NVM
+  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+else
+  echo "Unknown OS: $OSTYPE"
+fi
+

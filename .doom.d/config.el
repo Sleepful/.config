@@ -74,7 +74,7 @@
   '(region :background "VioletRed4" :distant-foreground "green")
   '(line-number-current-line :foreground "cyan")
   '(solaire-mode-line-face :background "black" :underline nil)
-  '(solaire-mode-line-inactive-face :background "190e22" :foreground "medium aquamarine")
+  '(solaire-mode-line-inactive-face :background "#190e22" :foreground "medium aquamarine")
   '(web-mode-interpolate-color1-face :foreground "peach puff")
   '(web-mode-javascript-string-face :foreground "medium aquamarine")
   )
@@ -90,16 +90,24 @@
 ;; ----------------
 ;
 ;; search for projects here
-(setq projectile-project-search-path '("~/Code/" "~/Language/" "~/Code/Forks"))
+(setq projectile-project-search-path '("~/Code/" "~/Language/" "~/Code/Forks" "~/Notes"))
 ;; open dired on root folder after opening project with projectile (perhaps not working) https://docs.projectile.mx/projectile/configuration.html
 (setq projectile-switch-project-action #'projectile-dired)
 
+
+;; ----------------
+;; Forge : Magit Integration with Ghub
+;; ----------------
+;
+(use-package! forge :after magit)
+(setq auth-sources '("~/.authinfo.gpg"))
 
 ;; ----------------
 ;; keybindings
 ;; ----------------
 ;
 (map! :leader "w a" #'ace-window)
+(map! :leader "ESC" #'evil-switch-to-windows-last-buffer) ; to use with my cute keyboard
 (defun save-bury-buffer () (interactive) (save-buffer) (evil-switch-to-windows-last-buffer) (+workspace/display))
 (map! :leader ; "b w"
       :desc "Save buffer and switch" "b w"
@@ -224,6 +232,10 @@
     ("jsx"  . "\\.js[x]?\\'")))
 
 (add-hook 'web-mode-hook 'js2-minor-mode)
+
+; web-mode formatting options:
+(flycheck-add-mode 'javascript-eslint 'web-mode) ; allow flycheck to be enabled on web-mode with javascript-eslint checker
+(add-hook 'web-mode-hook 'prettier-js-mode) ; enable prettier formatting
 
 ;; Emmet mode
 ; ----------------------

@@ -29,3 +29,5 @@
 	tracked = ls-tree --full-tree -r --name-only HEAD
 [core]
 	hooksPath = ~/.githooks/
+[github]
+	user = Sleepful

@@ -69,7 +69,7 @@ nnoremap j gj
 nnoremap k gk
 
 "To exit insert mode
-"imap df <Esc>l
+imap df <Esc>l
 
 
 "Autofill enclosures
