@@ -75,6 +75,8 @@
   '(line-number-current-line :foreground "cyan")
   '(solaire-mode-line-face :background "black" :underline nil)
   '(solaire-mode-line-inactive-face :background "190e22" :foreground "medium aquamarine")
+  '(web-mode-interpolate-color1-face :foreground "peach puff")
+  '(web-mode-javascript-string-face :foreground "medium aquamarine")
   )
 (after! hl-line (progn
                   (setq hl-line-sticky-flag t)
@@ -172,7 +174,7 @@
 ; Major modes to turn on
 ; ----------------------
 ;
-(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+;(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
 ;(add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
 ;(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-jsx-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" .  web-mode))
@@ -222,6 +224,11 @@
     ("jsx"  . "\\.js[x]?\\'")))
 
 (add-hook 'web-mode-hook 'js2-minor-mode)
+
+;; Emmet mode
+; ----------------------
+;
+(setq emmet-expand-jsx-className? t) ;; default nil, expands class attributes to "className" instead of "class"
 
 ;; Tide mode (from their README)
 ; ----------------------
@@ -287,6 +294,9 @@
 (advice-add 'evil-ex-search-previous :after
             (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
 (advice-add 'evil-ex-search-forward :after
+            (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
+; center cursor when jumping to a mark
+(advice-add 'evil-goto-mark :after
             (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
 ; quicker line up/down, commented lines are the same thing but remap remaps everywhere
 ;(map! :m "C-y" (cmd!! #'evil-scroll-line-up 4)

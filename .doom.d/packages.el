@@ -53,4 +53,3 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (unpin! tide)
-;(unpin! tide-lv)
