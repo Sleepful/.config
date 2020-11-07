@@ -145,6 +145,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  # necessary for doom emacs to work with macports
+  export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
 else
   echo "Unknown OS: $OSTYPE"
 fi

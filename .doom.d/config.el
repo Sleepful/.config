@@ -185,9 +185,9 @@
 ;(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
 ;(add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
 ;(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-jsx-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" .  web-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'"  . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'"  . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 ;(add-hook 'js-jsx-mode-hook 'lsp!)
 ;(add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "typescriptreact"))
@@ -234,8 +234,12 @@
 (add-hook 'web-mode-hook 'js2-minor-mode)
 
 ; web-mode formatting options:
-(flycheck-add-mode 'javascript-eslint 'web-mode) ; allow flycheck to be enabled on web-mode with javascript-eslint checker
-(add-hook 'web-mode-hook 'prettier-js-mode) ; enable prettier formatting
+(use-package! flycheck
+  :config
+  (flycheck-add-mode 'javascript-eslint 'web-mode) ; allow flycheck to be enabled on web-mode with javascript-eslint checker
+  )
+;(add-hook! 'web-mode-hook 'prettier-mode) ; enable prettier formatting
+;(add-hook! 'web-mode-hook 'prettier-js-mode) ; enable prettier formatting
 
 ;; Emmet mode
 ; ----------------------
@@ -319,3 +323,14 @@
 (after! evil-escape (progn
                       (setq-default evil-escape-key-sequence "jk")
                       (setq-default evil-escape-unordered-key-sequence t)))
+
+
+; Little snippet to zoom in globally, evaluate in scratch buffer or here:
+; (set-face-attribute 'default nil :height 150)
+
+; This advice makes zoom/scaling affect every buffer.
+; Source: https://stackoverflow.com/a/18784131/2446144
+(defadvice text-scale-increase (around all-buffers (arg) activate)
+  (dolist (buffer (buffer-list))
+    (with-current-buffer buffer
+      ad-do-it)))
