@@ -151,7 +151,79 @@
         ))
 
 ;; ----------------
-;; Web stuff!
+;; Evil mode
+;; ----------------
+;
+;; The following snippet will make Evil treat an Emacs symbol as a word, useful for 'w' movements
+;; in words with special symbols like 'foo-bar'
+(with-eval-after-load 'evil
+    (defalias #'forward-evil-word #'forward-evil-symbol)
+    ;; make evil-search-word look for symbol rather than word boundaries
+    (setq-default evil-symbol-word-search t))
+
+; by default `evil-show-marks' (SPC-s-r) opens `counsel-mark-ring' (because of doom remapping)
+; instead we want to open `counsel-evil-marks'
+(use-package! counsel
+  :init
+  (define-key!
+    [remap evil-show-marks]          #'counsel-evil-marks
+  ))
+
+; center cursor when searching with `evil-ex-search-next'
+(advice-add 'evil-ex-search-next :after
+            (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
+(advice-add 'evil-ex-search-previous :after
+            (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
+(advice-add 'evil-ex-search-forward :after
+            (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
+; center cursor when jumping to a mark
+(advice-add 'evil-goto-mark :after
+            (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
+; quicker line up/down, commented lines are the same thing but remap remaps everywhere
+;(map! :m "C-y" (cmd!! #'evil-scroll-line-up 4)
+;      :m "C-e" (cmd!! #'evil-scroll-line-down 4))
+(map! [remap evil-scroll-line-up] (cmd!! #'evil-scroll-line-up 8)
+      [remap evil-scroll-line-down] (cmd!! #'evil-scroll-line-down 8))
+
+(after! evil-escape (progn
+                      (setq-default evil-escape-key-sequence "jk")
+                      (setq-default evil-escape-unordered-key-sequence t)))
+
+
+; Little snippet to zoom in globally, evaluate in scratch buffer or here:
+; (set-face-attribute 'default nil :height 150)
+
+; This advice makes zoom/scaling affect every buffer.
+; Source: https://stackoverflow.com/a/18784131/2446144
+(defadvice text-scale-increase (around all-buffers (arg) activate)
+  (dolist (buffer (buffer-list))
+    (with-current-buffer buffer
+      ad-do-it)))
+
+;; ----------------
+;; keybinding ideas to implement
+;; ----------------
+
+; search word on cursor position, going to the top of the file first
+; search word on cursor position
+
+;; ----------------
+;; MacOS keybindings
+;; ----------------
+;
+
+(setq mac-command-modifier 'control) ; turn CMD into CTRL inside emacs
+
+;; ----------------
+;; Web keybindings
+;; ----------------
+;
+
+; tide jump to definition
+; js2 jump to definition
+
+;; ----------------
+;; Web configuration
 ;; ----------------
 ;
 ; commented out because web-mode on js/jsx files does not support lsp/xref/flycheck ...etc
@@ -285,52 +357,3 @@
 ; (eval-after-load 'flycheck
 ;   '(flycheck-add-mode 'javascript-jshint 'web-mode))
 
-;; ----------------
-;; Evil mode
-;; ----------------
-;
-;; The following snippet will make Evil treat an Emacs symbol as a word, useful for 'w' movements
-;; in words with special symbols like 'foo-bar'
-(with-eval-after-load 'evil
-    (defalias #'forward-evil-word #'forward-evil-symbol)
-    ;; make evil-search-word look for symbol rather than word boundaries
-    (setq-default evil-symbol-word-search t))
-
-; by default `evil-show-marks' (SPC-s-r) opens `counsel-mark-ring' (because of doom remapping)
-; instead we want to open `counsel-evil-marks'
-(use-package! counsel
-  :init
-  (define-key!
-    [remap evil-show-marks]          #'counsel-evil-marks
-  ))
-
-; center cursor when searching with `evil-ex-search-next'
-(advice-add 'evil-ex-search-next :after
-            (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
-(advice-add 'evil-ex-search-previous :after
-            (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
-(advice-add 'evil-ex-search-forward :after
-            (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
-; center cursor when jumping to a mark
-(advice-add 'evil-goto-mark :after
-            (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
-; quicker line up/down, commented lines are the same thing but remap remaps everywhere
-;(map! :m "C-y" (cmd!! #'evil-scroll-line-up 4)
-;      :m "C-e" (cmd!! #'evil-scroll-line-down 4))
-(map! [remap evil-scroll-line-up] (cmd!! #'evil-scroll-line-up 8)
-      [remap evil-scroll-line-down] (cmd!! #'evil-scroll-line-down 8))
-
-(after! evil-escape (progn
-                      (setq-default evil-escape-key-sequence "jk")
-                      (setq-default evil-escape-unordered-key-sequence t)))
-
-
-; Little snippet to zoom in globally, evaluate in scratch buffer or here:
-; (set-face-attribute 'default nil :height 150)
-
-; This advice makes zoom/scaling affect every buffer.
-; Source: https://stackoverflow.com/a/18784131/2446144
-(defadvice text-scale-increase (around all-buffers (arg) activate)
-  (dolist (buffer (buffer-list))
-    (with-current-buffer buffer
-      ad-do-it)))
