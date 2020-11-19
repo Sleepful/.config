@@ -92,7 +92,7 @@
 ;; search for projects here
 (setq projectile-project-search-path '("~/Code/" "~/Language/" "~/Code/Forks" "~/Notes"))
 ;; open dired on root folder after opening project with projectile (perhaps not working) https://docs.projectile.mx/projectile/configuration.html
-(setq projectile-switch-project-action #'projectile-dired)
+;(setq projectile-switch-project-action #'projectile-dired)
 
 
 ;; ----------------
@@ -149,6 +149,30 @@
       #'(lambda (number) (interactive "P")
              (evil-next-line (* 6 (or number 1)))
         ))
+(map! :leader
+      :desc "Up"
+      :m "K"
+      #'(lambda (number) (interactive "P")
+             (evil-previous-line (* 18 (or number 1)))
+        ))
+(map! :leader
+      :desc "Down"
+      :m "J"
+      #'(lambda (number) (interactive "P")
+             (evil-next-line (* 18 (or number 1)))
+        ))
+(map!
+ :i "C-k" #'evil-previous-line
+ :i "C-j" #'evil-next-line
+ :i "C-h" #'left-char
+ :i "C-l" #'right-char
+      )
+
+;; keybindings lost:
+; C-j +default/newline
+; C-K evil-insert-digraph
+; C-h describe-key-briefly
+; C-l recenter-top-bottom
 
 ;; ----------------
 ;; Evil mode
@@ -206,6 +230,8 @@
 
 ; search word on cursor position, going to the top of the file first
 ; search word on cursor position
+; snippets are missing
+; open window with current buffer to given side, close buffer in previous window
 
 ;; ----------------
 ;; MacOS keybindings
@@ -259,8 +285,8 @@
 ;(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-jsx-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'"  . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.ts\\'"  . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'"  . typescript-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
 ;(add-hook 'js-jsx-mode-hook 'lsp!)
 ;(add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "typescriptreact"))
 ;(add-hook 'js-jsx-mode-hook 'lsp-mode)
@@ -312,6 +338,8 @@
   )
 ;(add-hook! 'web-mode-hook 'prettier-mode) ; enable prettier formatting
 ;(add-hook! 'web-mode-hook 'prettier-js-mode) ; enable prettier formatting
+;(add-hook! 'typescript-mode-hook 'prettier-js-mode) ; enable prettier formatting
+(add-hook 'after-init-hook #'global-prettier-mode)
 
 ;; Emmet mode
 ; ----------------------
@@ -335,7 +363,7 @@
 (setq company-tooltip-align-annotations t)
 
 ;; formats the buffer before saving
-(add-hook 'before-save-hook 'tide-format-before-save)
+;(add-hook 'before-save-hook 'tide-format-before-save) ; removed because I'm using prettier and it generates conflict
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 ;(add-hook 'js-jsx-mode-hook #'setup-tide-mode)
 

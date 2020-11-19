@@ -7,6 +7,7 @@
 
 (package! prettier)
 (package! prettier-js)
+(package! import-js)
 (package! emojify)
 (package! rainbow-delimiters)
 
@@ -28,6 +29,14 @@
 (package! tide
  :recipe (:host github :repo "ananthakumaran/tide"
           :branch "fix-multiline-highlight"))
+;(package! straight
+  ;:recipe `(:host github
+            ;:repo "raxod502/straight.el"
+            ;:branch ,straight-repository-branch
+            ;:local-repo "straight.el"
+            ;:files ("straight*.el"))
+  ;:pin "728ea18ea590fcd8fb48f5bed30e135942d97221")
+
 ;; If you'd like to disable a package included with Doom, you can do so here
 ;; with the `:disable' property:
 ;(package! builtin-package :disable t)
@@ -56,3 +65,4 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (unpin! tide)
+(unpin! straight)
