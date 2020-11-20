@@ -365,6 +365,7 @@
 ;; formats the buffer before saving
 ;(add-hook 'before-save-hook 'tide-format-before-save) ; removed because I'm using prettier and it generates conflict
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
+(add-hook 'typescript-mode-hook #'emmet-mode)
 ;(add-hook 'js-jsx-mode-hook #'setup-tide-mode)
 
 ;; end of Tide mode setup -------
