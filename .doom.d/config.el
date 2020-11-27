@@ -93,7 +93,28 @@
 (setq projectile-project-search-path '("~/Code/" "~/Language/" "~/Code/Forks" "~/Notes"))
 ;; open dired on root folder after opening project with projectile (perhaps not working) https://docs.projectile.mx/projectile/configuration.html
 ;(setq projectile-switch-project-action #'projectile-dired)
+;
 
+;; ----------------
+;; Persp-mode
+;; ----------------
+;
+
+;; create the "shell" perspective automatically for eshell buffers
+(persp-def-auto-persp "shell" :buffer-name "doom:eshell")
+(persp-def-auto-persp "new" :buffer-name "new")
+
+;; ----------------
+;; Eshell-mode
+;; ----------------
+;
+
+;; this one renames your eshell buffers to the last command you typed in:
+(defun rename-eshell-buffer ()
+  (rename-buffer (buffer-substring-no-properties
+            eshell-last-input-start
+            (1- eshell-last-input-end))) )
+(setq eshell-input-filter-functions 'rename-eshell-buffer)
 
 ;; ----------------
 ;; Forge : Magit Integration with Ghub
@@ -105,7 +126,38 @@
 ;; ----------------
 ;; keybindings
 ;; ----------------
+
+;; ----------------
+;; Org-mode keybindings
+;; ----------------
 ;
+
+; add more convenient org-ctrl-c-minus to SPC-m--
+(map! (:when (featurep! :lang org)
+        (:map org-mode-map
+          :localleader
+          :desc "org-ctrl-c-minus" "-" #'org-ctrl-c-minus)))
+
+;; ----------------
+;; Magit keybindings
+;; ----------------
+;
+
+(defun commit-pull-push ()
+  (interactive)
+  (magit-call-git "add" ".")
+  (magit-call-git "commit" "-m" "automatic commit")
+  (magit-call-git "pull")
+  (magit-call-git "push")
+  (magit-refresh))
+
+(map! :leader "g p" 'commit-pull-push)
+
+;; ----------------
+;; Navigation keybindings
+;; ----------------
+;
+
 (map! :leader "w a" #'ace-window)
 (map! :leader "ESC" #'evil-switch-to-windows-last-buffer) ; to use with my cute keyboard
 (defun save-bury-buffer () (interactive) (save-buffer) (evil-switch-to-windows-last-buffer) (+workspace/display))
@@ -239,6 +291,7 @@
 ;
 
 (setq mac-command-modifier 'control) ; turn CMD into CTRL inside emacs
+(setq mac-control-modifier 'super) ; turn CTRL into CMD inside emacs
 
 ;; ----------------
 ;; Web keybindings
@@ -336,9 +389,6 @@
   :config
   (flycheck-add-mode 'javascript-eslint 'web-mode) ; allow flycheck to be enabled on web-mode with javascript-eslint checker
   )
-;(add-hook! 'web-mode-hook 'prettier-mode) ; enable prettier formatting
-;(add-hook! 'web-mode-hook 'prettier-js-mode) ; enable prettier formatting
-;(add-hook! 'typescript-mode-hook 'prettier-js-mode) ; enable prettier formatting
 (add-hook 'after-init-hook #'global-prettier-mode)
 
 ;; Emmet mode
@@ -369,20 +419,3 @@
 ;(add-hook 'js-jsx-mode-hook #'setup-tide-mode)
 
 ;; end of Tide mode setup -------
-
-
-;; tide and webmode stuff
-;(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
-;(add-hook 'web-mode-hook
-;          (lambda ()
-;            (when (string-equal "jsx" (file-name-extension buffer-file-name))
-;              (setup-tide-mode))))
-
-;; configure jsx-tide checker to run after your default jsx checker
-;(flycheck-add-mode 'javascript-eslint 'web-mode)
-;(flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
-
-;; these arent working
-; (eval-after-load 'flycheck
-;   '(flycheck-add-mode 'javascript-jshint 'web-mode))
-
