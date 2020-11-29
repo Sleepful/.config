@@ -128,7 +128,7 @@
 ;; ----------------
 
 ;; ----------------
-;; Org-mode keybindings
+;; Org-mode keybindings & Config
 ;; ----------------
 ;
 
@@ -137,6 +137,8 @@
         (:map org-mode-map
           :localleader
           :desc "org-ctrl-c-minus" "-" #'org-ctrl-c-minus)))
+; show empty lines at the end of a subtree when the trees are folded
+(setq org-cycle-separator-lines 1)
 
 ;; ----------------
 ;; Magit keybindings
