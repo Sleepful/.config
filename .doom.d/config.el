@@ -103,6 +103,12 @@
 ;; create the "shell" perspective automatically for eshell buffers
 (persp-def-auto-persp "shell" :buffer-name "doom:eshell")
 (persp-def-auto-persp "new" :buffer-name "new")
+;; balance windows automatically, becuz treemacs unbalances them
+;; @Henrik: "Treemacs can't be persisted across workspaces, so it has to be closed. Which means you have a hole to fill."
+;; it always balances windows tho, might be good to modify it to work only if treemacs is open or something
+(add-hook! 'persp-activated-functions
+  (defun rebalance-windows-after-switch (&rest _)
+    (balance-windows)))
 
 ;; ----------------
 ;; Eshell-mode
