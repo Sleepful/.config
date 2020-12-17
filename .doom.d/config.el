@@ -130,6 +130,14 @@
 (setq auth-sources '("~/.authinfo.gpg"))
 
 ;; ----------------
+;; Magit config
+;; ----------------
+;
+
+(transient-append-suffix 'magit-rebase "-d"
+  '("-D" "Lie about author date" "--ignore-date"))
+
+;; ----------------
 ;; keybindings
 ;; ----------------
 
