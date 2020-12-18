@@ -134,8 +134,9 @@
 ;; ----------------
 ;
 
-(transient-append-suffix 'magit-rebase "-d"
-  '("-D" "Lie about author date" "--ignore-date"))
+(add-hook! 'magit-mode-hook
+  (transient-append-suffix 'magit-rebase "-d"
+    '("-D" "Lie about author date" "--ignore-date")))
 
 ;; ----------------
 ;; keybindings
