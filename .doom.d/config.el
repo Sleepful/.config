@@ -86,6 +86,14 @@
       evil-visual-state-cursor '(hollow "turquoise"))
 
 ;; ----------------
+;; Layout
+;; ----------------
+;
+
+(use-package! uniquify
+  :config (setq uniquify-buffer-name-style 'forward))
+
+;; ----------------
 ;; projectile
 ;; ----------------
 ;
