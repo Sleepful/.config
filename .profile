@@ -15,3 +15,5 @@ alias jslsp='node ~/Code/Forks/javascript-typescript-langserver/lib/language-ser
 alias vimrc='vim ~/.vimrc'
 alias vim='vim -S ~/.vimrc' # necessary only if using neovim, as neovim reads the config from somewhere else
 
+alias emacs='TERM=xterm-emacs-kitty emacs -nw'
+
