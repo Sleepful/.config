@@ -162,6 +162,9 @@
           :desc "org-ctrl-c-minus" "-" #'org-ctrl-c-minus)))
 ; show empty lines at the end of a subtree when the trees are folded
 (setq org-cycle-separator-lines 1)
+(setq org-src-fontify-natively t)
+;(use-package! org-mode :config
+              ;(org-babel-do-load-languages 'org-babel-load-languages '((sh . t))))
 
 ;; ----------------
 ;; Magit keybindings
@@ -296,10 +299,10 @@
 
 ; This advice makes zoom/scaling affect every buffer.
 ; Source: https://stackoverflow.com/a/18784131/2446144
-(defadvice text-scale-increase (around all-buffers (arg) activate)
-  (dolist (buffer (buffer-list))
-    (with-current-buffer buffer
-      ad-do-it)))
+;(defadvice text-scale-increase (around all-buffers (arg) activate)
+;  (dolist (buffer (buffer-list))
+;    (with-current-buffer buffer
+;      ad-do-it)))
 
 ;; ----------------
 ;; keybinding ideas to implement
