@@ -116,19 +116,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=~/.emacs.d/bin:$PATH
-export PATH="~/.bin:$PATH"
-alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-alias cfgsetup='cfg config status.showuntrackedfiles no'
-alias g='git'
-alias code='cd ~/Code'
-alias notes='cd ~/Notes'
-alias lang='cd ~/Language'
-alias jslsp='node ~/Code/Forks/javascript-typescript-langserver/lib/language-server-stdio'
-alias sobashrc='source ~/.bashrc'
+source ~/.profile
+
 alias bashrc='vim ~/.bashrc'
-alias vimrc='vim ~/.vimrc'
-alias vim='vim -S ~/.vimrc' # necessary only if using neovim, as neovim reads the config from somewhere else
+alias sobashrc='source ~/.bashrc'
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   echo "linux detected"
@@ -145,9 +136,11 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  eval "nvm use --lts"
   # necessary for doom emacs to work with macports
   export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
+  # tell mac to shut its hole
+  export BASH_SILENCE_DEPRECATION_WARNING=1
 else
   echo "Unknown OS: $OSTYPE"
 fi
-
