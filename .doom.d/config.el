@@ -62,6 +62,11 @@
 ;####################################
 
 ;; ----------------
+;; Shell
+;; ----------------
+(add-to-list 'term-file-aliases '("alacritty" . "xterm"))
+
+;; ----------------
 ;; Layout
 ;; ----------------
 (setq-default truncate-lines 'nil) ;; wrap lines by default
