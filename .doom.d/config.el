@@ -198,7 +198,9 @@
       :desc "Save buffer and switch" "b w"
       #'save-bury-buffer)
 (map! "M-]" #'+workspace/switch-right)
-(map! "M-[" #'+workspace/switch-left)
+; THIS ONE CREATES WEIRD BEHAVIOR IN TTY WHEN CHANGING TERMINAL FOCUS:
+(map! :when (display-graphic-p) "M-[" #'+workspace/switch-left)
+;;;;;; CUARANTINE THE ABOVE LINE WITH :when (display-graphic-p)
 (map! :leader
       :desc "Swap left" "TAB j"
       #'+workspace/swap-left)

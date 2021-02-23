@@ -1,0 +1,19 @@
+window:
+  decorations: buttonless
+
+font:
+  size: 18.0
+  use_thin_strokes: true
+
+key_bindings:
+  # avoid osx close window command
+  - { key: Q, mods: Command, action: None }
+  # avoid osx close tab command
+  - { key: W, mods: Command, action: None }
+  # avoid osx hide command
+  - { key: H, mods: Command, action: None }
+
+# Send ESC (\x1b) before characters when alt is pressed.
+alt_send_esc: false
+# Sadly, this doesn't help changing `option` to `alt` in macos
+# :(
