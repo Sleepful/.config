@@ -126,11 +126,13 @@
 ;; balance windows automatically, becuz treemacs unbalances them
 ;; @Henrik: "Treemacs can't be persisted across workspaces, so it has to be closed. Which means you have a hole to fill."
 ;; it always balances windows tho, might be good to modify it to work only if treemacs is open or something
-(add-hook! 'persp-activated-functions
-  (defun rebalance-windows-after-switch (&rest _)
-    (balance-windows)
-    )
-  )
+;(add-hook! 'persp-activated-functions
+;  (defun rebalance-windows-after-switch (&rest _)
+;    (balance-windows)
+;    )
+;  ) ; out of commission, add it only for treemacs buffers
+
+;(remove-hook! 'persp-activated-functions rebalance-windows-after-switch)
 
 ;; ----------------
 ;; Eshell-mode
@@ -248,6 +250,10 @@
 (map! :leader "w a" #'ace-window)
 (map! :leader "ESC" #'evil-switch-to-windows-last-buffer) ; to use with my cute keyboard
 (defun save-bury-buffer () (interactive) (save-buffer) (evil-switch-to-windows-last-buffer) (+workspace/display))
+;; file path
+(map! "M-P" '+default/yank-buffer-path)
+(map! "M-]" '+default/yank-buffer-path-relative-to-project)
+;; workspace
 (map! :leader ; "b w"
       :desc "Save buffer and switch" "b w"
       #'save-bury-buffer)
