@@ -16,6 +16,9 @@
 (package! yaml-mode)
 (package! raku-mode)
 (package! pyim)
+(package! centered-cursor-mode
+ :recipe (:host github :repo "andre-r/centered-cursor-mode.el"
+          :branch "dev"))
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
@@ -35,13 +38,13 @@
 (package! tide
  :recipe (:host github :repo "ananthakumaran/tide"
           :branch "master"))
-(package! straight
-  :recipe `(:host github
-            :repo "raxod502/straight.el"
-            :branch ,straight-repository-branch
-            :local-repo "straight.el"
-            :files ("straight*.el"))
-  :pin "728ea18ea590fcd8fb48f5bed30e135942d97221")
+;(package! straight
+;  :recipe `(:host github
+;            :repo "raxod502/straight.el"
+;            :branch ,straight-repository-branch
+;            :local-repo "straight.el"
+;            :files ("straight*.el"))
+;  :pin "728ea18ea590fcd8fb48f5bed30e135942d97221")
 
 ;; If you'd like to disable a package included with Doom, you can do so here
 ;; with the `:disable' property:
@@ -71,4 +74,4 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (unpin! tide)
-(unpin! straight)
+;(unpin! straight)

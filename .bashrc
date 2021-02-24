@@ -119,7 +119,7 @@ fi
 source ~/.profile
 
 alias bashrc='vim ~/.bashrc'
-alias sobashrc='source ~/.bashrc'
+alias sorc='source ~/.bashrc'
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   echo "linux detected"
