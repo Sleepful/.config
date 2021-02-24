@@ -251,12 +251,12 @@
 (map! :leader ; "b w"
       :desc "Save buffer and switch" "b w"
       #'save-bury-buffer)
-(map! "M-/" #'+workspace/switch-right
-      "M-'" #'+workspace/switch-right
+(map! "M-/" #'+workspace/switch-right   ; rm dabbrev-expand
+      "M-'" #'+workspace/switch-right   ; rm abbrev-prefix-mark
       )
 (map! :n
-      "M-;" #'+workspace/switch-left
-      "M-." #'+workspace/switch-left
+      "M-;" #'+workspace/switch-left    ; rm comment-dwim
+      "M-." #'+workspace/switch-left    ; rm evil-repeat-pop-next
       )
 (map! :leader
       :desc "Swap left" "TAB j"
