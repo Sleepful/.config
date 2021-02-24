@@ -31,7 +31,7 @@ export EDITOR="TERM=xterm-emacs-kitty emacsclient -nw"                  # $EDITO
 
 alias py='python3'
 
-alias kittyconf='vim ~/.config/kitty/kitty.conf'
+alias krc='ec ~/.config/kitty/kitty.conf'
 
 ## Anki
 alias ankicm='cd /Users/corporatejose/Library/Application\ Support/Anki2/User\ 1/collection.media'
