@@ -72,6 +72,13 @@
 (setq-default truncate-lines 'nil) ;; wrap lines by default
 ; emojify
 (add-hook 'after-init-hook #'global-emojify-mode)
+; centered cursor
+(add-hook 'after-init-hook #'global-centered-cursor-mode)
+(use-package! centered-cursor-mode
+  :init (setq mwheel-scroll-up-function 1 mwheel-scroll-down-function 1) ; fix for terminal on `dev' branch, otherwise black-screen
+  ;:config (setq ccm-recenter-at-end-of-file t)) ; this is useful for `master' branch of package, not `dev' branch
+  )
+
 ; face
 (custom-set-faces!
   '(hl-line :underline "light slate blue" :background nil :distant-foreground "medium purple" :distant-background "black")
@@ -121,7 +128,9 @@
 ;; it always balances windows tho, might be good to modify it to work only if treemacs is open or something
 (add-hook! 'persp-activated-functions
   (defun rebalance-windows-after-switch (&rest _)
-    (balance-windows)))
+    (balance-windows)
+    )
+  )
 
 ;; ----------------
 ;; Eshell-mode
@@ -151,9 +160,47 @@
   (transient-append-suffix 'magit-rebase "-d"
     '("-D" "Lie about author date" "--ignore-date")))
 
+;;                                    ╳
+;; ────────────────────────────────╮ ╱ ╲
+;; Keybindings                     │╳ ! ╳
+;; ────────────────────────────────╯ ╲ ╱
+;;                                    ╳
+
 ;; ----------------
-;; keybindings
+;; General
 ;; ----------------
+;
+
+; this one kinda is kinda lame
+(map! :leader :desc "Search home directory" "s h"
+      #'(lambda ()
+          (interactive)
+            (call-interactively
+             (cond ((featurep! :completion ivy)
+                    (+ivy-file-search
+                      :in "~/"))
+                   (#'rgrep)))))
+
+; lame too
+(map! :leader :desc "Search home directory" "f h"
+     #'(lambda ()
+         (interactive)
+         (call-interactively
+          (let ((default-directory "~/"))
+            (counsel-find-file)))))
+
+; leave M-j alone in elisp files
+(map! :after outline
+      :map outline-mode-map
+      :n "M-j" #'default-indent-new-line)
+
+;(map! :leader :desc "Search home directory" "f g"
+     ;#'(lambda ()
+         ;(interactive)
+         ;(call-interactively
+            ;(fd-dired "~/" ""))))
+; doesn't work because macOS `ls' is from BSD, not coreutils, idk how to fix
+; update: i think it's fixed, by itself, idk, so tired
 
 ;; ----------------
 ;; Org-mode keybindings & Config
@@ -191,16 +238,26 @@
 ;; ----------------
 ;
 
+; Terminal
+;----------
+(map! :when (eq (display-graphic-p) nil) :n "C-i" #'better-jumper-jump-forward)
+(map! :when (eq (display-graphic-p) nil) :leader "<escape>" #'evil-switch-to-windows-last-buffer)
+
+; GUI
+;-----
 (map! :leader "w a" #'ace-window)
 (map! :leader "ESC" #'evil-switch-to-windows-last-buffer) ; to use with my cute keyboard
 (defun save-bury-buffer () (interactive) (save-buffer) (evil-switch-to-windows-last-buffer) (+workspace/display))
 (map! :leader ; "b w"
       :desc "Save buffer and switch" "b w"
       #'save-bury-buffer)
-(map! "M-]" #'+workspace/switch-right)
-; THIS ONE CREATES WEIRD BEHAVIOR IN TTY WHEN CHANGING TERMINAL FOCUS:
-(map! :when (display-graphic-p) "M-[" #'+workspace/switch-left)
-;;;;;; CUARANTINE THE ABOVE LINE WITH :when (display-graphic-p)
+(map! "M-/" #'+workspace/switch-right
+      "M-'" #'+workspace/switch-right
+      )
+(map! :n
+      "M-;" #'+workspace/switch-left
+      "M-." #'+workspace/switch-left
+      )
 (map! :leader
       :desc "Swap left" "TAB j"
       #'+workspace/swap-left)
@@ -228,13 +285,13 @@
       :desc "Up"
       :m "k"
       #'(lambda (number) (interactive "P")
-             (evil-previous-line (* 6 (or number 1)))
+             (evil-previous-line (* 16 (or number 1)))
         ))
 (map! :leader
       :desc "Down"
       :m "j"
       #'(lambda (number) (interactive "P")
-             (evil-next-line (* 6 (or number 1)))
+             (evil-next-line (* 16 (or number 1)))
         ))
 (map! :leader
       :desc "Up"
@@ -261,6 +318,11 @@
 ; C-h describe-key-briefly
 ; C-l recenter-top-bottom
 
+(map! ;switch mark set and mark travel
+ :n "m" #'evil-goto-mark
+ :n "M" #'evil-set-marker
+ :n "`" #'evil-set-marker)
+
 ;; ----------------
 ;; Evil mode
 ;; ----------------
@@ -280,6 +342,11 @@
     [remap evil-show-marks]          #'counsel-evil-marks
   ))
 
+; center always, similar to `set scrolloff=999' in vim
+;(setq scroll-margin 99)
+;(setq maximum-scroll-margin 0.49)
+; ----> use centered-cursor-mode instead
+
 ; center cursor when searching with `evil-ex-search-next'
 (advice-add 'evil-ex-search-next :after
             (lambda (&rest _x) (evil-scroll-line-to-center (line-number-at-pos))))
@@ -293,8 +360,17 @@
 ; quicker line up/down, commented lines are the same thing but remap remaps everywhere
 ;(map! :m "C-y" (cmd!! #'evil-scroll-line-up 4)
 ;      :m "C-e" (cmd!! #'evil-scroll-line-down 4))
-(map! [remap evil-scroll-line-up] (cmd!! #'evil-scroll-line-up 8)
-      [remap evil-scroll-line-down] (cmd!! #'evil-scroll-line-down 8))
+;(map! [remap evil-scroll-line-up] (cmd!! #'evil-scroll-line-up 8)
+;      [remap evil-scroll-line-down] (cmd!! #'evil-scroll-line-down 8))
+; commented remap this time, due to centered-cursor-mode
+(map! :m "C-e"
+      #'(lambda (number) (interactive "P")
+             (evil-next-line (* 6 (or number 1)))
+        ))
+(map! :m "C-y"
+      #'(lambda (number) (interactive "P")
+             (evil-previous-line (* 6 (or number 1)))
+        ))
 
 (after! evil-escape (progn
                       (setq-default evil-escape-key-sequence "jk")
@@ -424,7 +500,7 @@
   :config
   (flycheck-add-mode 'javascript-eslint 'web-mode) ; allow flycheck to be enabled on web-mode with javascript-eslint checker
   )
-(add-hook 'after-init-hook #'global-prettier-mode)
+;(add-hook 'after-init-hook #'global-prettier-mode) DEPRACATED, instead add to web-mode-hook and typescript-mode-hook
 
 ;; Emmet mode
 ; ----------------------
@@ -452,5 +528,7 @@
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (add-hook 'typescript-mode-hook #'emmet-mode)
 ;(add-hook 'js-jsx-mode-hook #'setup-tide-mode)
+(add-hook 'typescript-mode-hook #'prettier-mode)
+(add-hook 'web-mode-hook #'prettier-mode)
 
 ;; end of Tide mode setup -------

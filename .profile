@@ -12,11 +12,22 @@ alias code='cd ~/Code'
 alias notes='cd ~/Notes'
 alias lang='cd ~/Language'
 alias jslsp='node ~/Code/Forks/javascript-typescript-langserver/lib/language-server-stdio'
-alias vimrc='vim ~/.vimrc'
+alias vrc='vim ~/.vimrc'
 alias vim='vim -S ~/.vimrc' # necessary only if using neovim, as neovim reads the config from somewhere else
 
-alias emak='TERM=xterm-emacs-kitty emacs -nw'
-alias emac='TERM=xterm-emacs emacs -nw'
+alias emak='TERM=xterm-emacs emacs -nw'
+alias emac='TERM=xterm-emacs-kitty emacs -nw'
+alias ec='TERM=xterm-emacs-kitty emacsclient -nw'
+function ecn(){
+  emacsclient -n "$@" 
+}
+function ecnc(){
+  emacsclient -n -c "$@"
+}
+alias zrc='ec ~/.zshrc'
+alias prc='ec ~/.profile'
+export ALTERNATE_EDITOR=""
+export EDITOR="TERM=xterm-emacs-kitty emacsclient -nw"                  # $EDITOR opens in terminal
 
 alias py='python3'
 
@@ -28,6 +39,16 @@ alias anki='cd /Users/corporatejose/Documents/Anki'
 
 #others
 alias bf='cd ~/Code/brightflow-connectors'
+
+### scripty
+
+# pyenv
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
+fi
+
+if ! ps -e -o args | grep -q '^emacs --daemon$'; then
+  emacs --daemon
+else
+  echo "Emacs server Online"
 fi

@@ -1,5 +1,6 @@
-
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
+
+alias sorc='source ~/.zshrc'
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   echo "linux detected"
@@ -7,7 +8,13 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   export PATH="$(yarn global bin):$PATH"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   echo "MACOS detected"
+  rpb(){ # copy path from file into clipboard
+    realpath "$1" | pbcopy
+  }
   #MACOS configs
+  # gnu coreutils from `brew install coreutils`
+  export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
+  export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
   #postgres path
   export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
   #redis path
@@ -23,10 +30,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 else
   echo "Unknown OS: $OSTYPE"
 fi
-
-
-
-
 
 
 
