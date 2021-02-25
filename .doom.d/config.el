@@ -260,8 +260,8 @@
 (map! "M-/" #'+workspace/switch-right   ; rm dabbrev-expand
       "M-'" #'+workspace/switch-right   ; rm abbrev-prefix-mark
       )
-(map! :n
-      "M-;" #'+workspace/switch-left    ; rm comment-dwim
+(map! "M-;" #'+workspace/switch-left    ; rm comment-dwim
+      :n
       "M-." #'+workspace/switch-left    ; rm evil-repeat-pop-next
       )
 (map! :leader
@@ -287,6 +287,22 @@
       #'(lambda () (interactive)
           (evil-insert-newline-above)
           (insert (current-kill 0))))
+(map! :m "C-h"
+      #'(lambda (number) (interactive "P")
+             (evil-previous-line (* 3 (or number 1)))
+        ))
+(map! :m "C-l"
+      #'(lambda (number) (interactive "P")
+             (evil-next-line (* 3 (or number 1)))
+        ))
+(map! :m "C-e"
+      #'(lambda (number) (interactive "P")
+             (evil-next-line (* 6 (or number 1)))
+        ))
+(map! :m "C-y"
+      #'(lambda (number) (interactive "P")
+             (evil-previous-line (* 6 (or number 1)))
+        ))
 (map! :leader
       :desc "Up"
       :m "k"
@@ -294,7 +310,6 @@
              (evil-previous-line (* 16 (or number 1)))
         ))
 (map! :leader
-      :desc "Down"
       :m "j"
       #'(lambda (number) (interactive "P")
              (evil-next-line (* 16 (or number 1)))
@@ -369,14 +384,6 @@
 ;(map! [remap evil-scroll-line-up] (cmd!! #'evil-scroll-line-up 8)
 ;      [remap evil-scroll-line-down] (cmd!! #'evil-scroll-line-down 8))
 ; commented remap this time, due to centered-cursor-mode
-(map! :m "C-e"
-      #'(lambda (number) (interactive "P")
-             (evil-next-line (* 6 (or number 1)))
-        ))
-(map! :m "C-y"
-      #'(lambda (number) (interactive "P")
-             (evil-previous-line (* 6 (or number 1)))
-        ))
 
 (after! evil-escape (progn
                       (setq-default evil-escape-key-sequence "jk")
