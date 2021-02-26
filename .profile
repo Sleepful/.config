@@ -8,13 +8,20 @@ export PATH="$HOME/.bin:$PATH"
 alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias cfgsetup='cfg config status.showuntrackedfiles no'
 alias g='git'
+
+# cds
 alias code='cd ~/Code'
 alias notes='cd ~/Notes'
 alias lang='cd ~/Language'
-alias jslsp='node ~/Code/Forks/javascript-typescript-langserver/lib/language-server-stdio'
 alias vrc='vim ~/.vimrc'
 alias vim='vim -S ~/.vimrc' # necessary only if using neovim, as neovim reads the config from somewhere else
+# anki
+alias ankicm='cd /Users/corporatejose/Library/Application\ Support/Anki2/User\ 1/collection.media'
+alias anki='cd /Users/corporatejose/Documents/Anki'
+# others
+alias bf='cd ~/Code/brightflow-connectors'
 
+# emacs
 alias emak='TERM=xterm-emacs emacs -nw'
 alias emac='TERM=xterm-emacs-kitty emacs -nw'
 alias ec='TERM=xterm-emacs-kitty emacsclient -nw'
@@ -26,19 +33,22 @@ function ecnc(){
 }
 alias zrc='ec ~/.zshrc'
 alias prc='ec ~/.profile'
+alias krc='ec ~/.config/kitty/kitty.conf'
+# used for emacsclient..i think? *doubt*
 export ALTERNATE_EDITOR=""
 export EDITOR="TERM=xterm-emacs-kitty emacsclient -nw"                  # $EDITOR opens in terminal
+# used in emacs .config
+alias jslsp='node ~/Code/Forks/javascript-typescript-langserver/lib/language-server-stdio'
 
+# utility
 alias py='python3'
+alias lsbin='ls ~/.bin'
+alias bin='cd ~/.bin'
+function prcg(){ #TODO: this one still doesn't work
+  grep -A 4 -B 1 -- "$@" ~/.profile
+}
 
-alias krc='ec ~/.config/kitty/kitty.conf'
 
-## Anki
-alias ankicm='cd /Users/corporatejose/Library/Application\ Support/Anki2/User\ 1/collection.media'
-alias anki='cd /Users/corporatejose/Documents/Anki'
-
-#others
-alias bf='cd ~/Code/brightflow-connectors'
 
 ### scripty
 
