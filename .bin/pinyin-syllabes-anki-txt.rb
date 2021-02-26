@@ -12,6 +12,7 @@ def combine vowel, tone
   [vowel.ord, $utf[tone]].pack('U*')
 end
 
+# (a1) => ā
 def utfPinyin pinyin
   tonal = pinyin =~ /[A-Z]/
   tone = pinyin[/\d/]
@@ -20,14 +21,16 @@ def utfPinyin pinyin
   pinyin
 end
 
+# (a) => [a, ā, ā, á, â]
 def syllabes syllabe
-  [*1..4].map{|t| utfPinyin syllabe+t.to_s}
+  [*1..4].map{|t| utfPinyin syllabe+t.to_s}.unshift syllabe.downcase
 end
 
 def row basePinyin
   pinyins = syllabes basePinyin
   ankiPinyins = pinyins.map{|p| p+';'}
-  ankiSounds = [*1..4].map{ |t| "[sound:#{basePinyin+t.to_s}.mp3];" }
+  ankiSounds = [*1..4].map{ |tone|
+    "[sound:#{basePinyin.downcase+tone.to_s}.mp3];" }
   ( ankiPinyins+ankiSounds ).join
 end
 
