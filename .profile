@@ -31,6 +31,7 @@ function ecn(){
 function ecnc(){
   emacsclient -n -c "$@"
 }
+alias pkec="pkill emacs"
 alias zrc='ec ~/.zshrc'
 alias prc='ec ~/.profile'
 alias krc='ec ~/.config/kitty/kitty.conf'
