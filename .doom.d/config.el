@@ -191,10 +191,13 @@
           (let ((default-directory "~/"))
             (counsel-find-file)))))
 
-; leave M-j alone in elisp files
+; outline gets activated in elisp files
 (map! :after outline
       :map outline-mode-map
-      :n "M-j" #'default-indent-new-line)
+      :n "M-j" nil ;
+      :n "C-j" nil ; outline-forward-same-level
+      :n "C-k" nil ; outline-backward-same-level
+      )
 
 ;(map! :leader :desc "Search home directory" "f g"
      ;#'(lambda ()
@@ -287,11 +290,19 @@
       #'(lambda () (interactive)
           (evil-insert-newline-above)
           (insert (current-kill 0))))
-(map! :m "C-h"
+(map! :m "C-h" ; rm help (spc h k)
+      #'(lambda (number) (interactive "P")
+             (evil-backward-char (* 3 (or number 1)))
+        ))
+(map! :m "C-l" ; rm recenter-top-bottom
+      #'(lambda (number) (interactive "P")
+             (evil-forward-char (* 3 (or number 1)))
+        ))
+(map! :m "C-k" ; rm kill line
       #'(lambda (number) (interactive "P")
              (evil-previous-line (* 3 (or number 1)))
         ))
-(map! :m "C-l"
+(map! :m "C-j" ; rm +default/newline
       #'(lambda (number) (interactive "P")
              (evil-next-line (* 3 (or number 1)))
         ))
