@@ -62,6 +62,16 @@
 ;####################################
 
 ;; ----------------
+;; Dotfiles
+;; ----------------
+; These ones match my bash aliases :)
+
+(defun krc ()(interactive)(find-file "~/.config/kitty/kitty.conf"))
+(defun prc ()(interactive)(find-file "~/.profile"))
+(defun vrc ()(interactive)(find-file "~/.vimrc"))
+(defun zrc ()(interactive)(find-file "~/.zshrc"))
+
+;; ----------------
 ;; Shell
 ;; ----------------
 (add-to-list 'term-file-aliases '("alacritty" . "xterm"))
@@ -191,6 +201,13 @@
           (let ((default-directory "~/"))
             (counsel-find-file)))))
 
+(map! :leader :desc "Search .bin directory" "f b"
+     #'(lambda ()
+         (interactive)
+         (call-interactively
+          (let ((default-directory "~/.bin/"))
+            (counsel-find-file)))))
+
 ; outline gets activated in elisp files
 (map! :after outline
       :map outline-mode-map
@@ -292,27 +309,27 @@
           (insert (current-kill 0))))
 (map! :m "C-h" ; rm help (spc h k)
       #'(lambda (number) (interactive "P")
-             (evil-backward-char (* 3 (or number 1)))
+             (evil-backward-char (* 16 (or number 1)))
         ))
 (map! :m "C-l" ; rm recenter-top-bottom
       #'(lambda (number) (interactive "P")
-             (evil-forward-char (* 3 (or number 1)))
+             (evil-forward-char (* 16 (or number 1)))
         ))
 (map! :m "C-k" ; rm kill line
       #'(lambda (number) (interactive "P")
-             (evil-previous-line (* 3 (or number 1)))
+             (evil-previous-line (* 4 (or number 1)))
         ))
 (map! :m "C-j" ; rm +default/newline
       #'(lambda (number) (interactive "P")
-             (evil-next-line (* 3 (or number 1)))
+             (evil-next-line (* 4 (or number 1)))
         ))
 (map! :m "C-e"
       #'(lambda (number) (interactive "P")
-             (evil-next-line (* 6 (or number 1)))
+             (evil-next-line (* 8 (or number 1)))
         ))
 (map! :m "C-y"
       #'(lambda (number) (interactive "P")
-             (evil-previous-line (* 6 (or number 1)))
+             (evil-previous-line (* 8 (or number 1)))
         ))
 (map! :leader
       :desc "Up"

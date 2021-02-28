@@ -1,0 +1,11 @@
+#+TITLE: Todos
+* Evil visual mode
+when I leave a visual selection, the cursor jumps back to the start of the visual selection. Is there a way to let the cursor stay at the ending position of the selection after removing the selection?
+* Enter/leave emacsclient - projectile
+when opening from terminal with `ec`, emacsclient opens in a new workspace
+when leaving this emacsclient `qq`, the workspace and its buffer dies
+how to leave without killing workspacebuffer? maybe `enc` first and then `ec`? we don't want this all the time
+- something like "quit but leave open" would be nice, perhaps new hotkey `qk` "quit keep". Maybe this is just `ecn arg && ec $_`
+- however, 'ecn' can't be used without file arg. How to open ec without new workspace?
+- something like "ec" but without "new workspace" would be very nice
+* add "counsel dotfiles"
