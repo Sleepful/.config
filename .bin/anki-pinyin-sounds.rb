@@ -65,7 +65,7 @@ def cli argv, i
 end
 
 def anki pinyins
-  "ruby ~/.bin/pinyin-syllabes-anki-txt.rb #{pinyins} >> #{$importFile}";end
+  "ruby ~/.bin/pinyin-syllabes-anki-txt.rb #{pinyins} > #{$importFile}";end
 def yoyo pinyins
   "cd #{$mediaDir} && ruby ~/.bin/yoyo-dl.rb #{pinyins.downcase}"; end
 

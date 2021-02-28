@@ -15,6 +15,7 @@ alias notes='cd ~/Notes'
 alias lang='cd ~/Language'
 alias vrc='vim ~/.vimrc'
 alias vim='vim -S ~/.vimrc' # necessary only if using neovim, as neovim reads the config from somewhere else
+alias kdir='cd ~/Code/GitBuilds/kitty'
 # anki
 alias ankicm='cd /Users/corporatejose/Library/Application\ Support/Anki2/User\ 1/collection.media'
 alias anki='cd /Users/corporatejose/Documents/Anki'
@@ -25,11 +26,12 @@ alias bf='cd ~/Code/brightflow-connectors'
 alias emak='TERM=xterm-emacs emacs -nw'
 alias emac='TERM=xterm-emacs-kitty emacs -nw'
 alias ec='TERM=xterm-emacs-kitty emacsclient -nw'
-function ecn(){
-  emacsclient -n "$@" 
+alias ee='ec -e "(progn (+workspace:delete)(+workspace/switch-to-final))"'
+function es(){
+  emacsclient -n $@
 }
-function ecnc(){
-  emacsclient -n -c "$@"
+function ek(){
+  emacsclient -n $@ && ec $_
 }
 alias pkec="pkill emacs"
 alias zrc='ec ~/.zshrc'

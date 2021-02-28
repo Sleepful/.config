@@ -4,6 +4,8 @@ ankifile  = '~/Documents/Anki/run1.txt'
 script = '~/.bin/anki-pinyin-sounds.rb'
 
 vowels = %{
+  A E yI O Wu
+
   Ai Ei  wEi
   Ao Ou  yOu
   yE yuE Er
@@ -43,7 +45,7 @@ vowels = %{
 
 }.gsub(/[[:space:]]/, " ")
 
-exec "ruby #{script} -d #{ankimedia} -f #{ankifile} #{vowels}"
+exec "ruby #{script} -d #{ankimedia} -f #{ankifile} #{vowels} --text"
 
 =begin
 
