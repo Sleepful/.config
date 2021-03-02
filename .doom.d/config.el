@@ -208,6 +208,13 @@
           (let ((default-directory "~/.bin/"))
             (counsel-find-file)))))
 
+(map! :leader :desc "Search projectile directory" "f w"
+     #'(lambda ()
+         (interactive)
+         (call-interactively
+          (let ((default-directory (projectile-project-root)))
+            (counsel-find-file)))))
+
 ; outline gets activated in elisp files
 (map! :after outline
       :map outline-mode-map
