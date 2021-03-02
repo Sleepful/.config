@@ -31,8 +31,6 @@ else
   echo "Unknown OS: $OSTYPE"
 fi
 
-
-
 ## oh-my-zsh config:
 
 # If you come from bash you might have to change your $PATH.
@@ -107,12 +105,21 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode)
+plugins=(git
+         vi-mode
+        )
 
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
-MODE_INDICATOR="%F{yellow}+%f"
+#MODE_INDICATOR="%F{yellow}+%f"
 
 source $ZSH/oh-my-zsh.sh
+
+# Pure must be activated ~after~ `source $ZSH/oh-my-zsh.sh`
+# fpath+=$HOME/Code/GitBuilds/pure
+# autoload -U promptinit; promptinit
+# prompt pure
+# if Pure isn't installed, just add zsh theme such as "robbyrussel", comment above lines
+
 
 # User configuration
 
