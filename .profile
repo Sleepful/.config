@@ -21,6 +21,7 @@ alias ankicm='cd /Users/corporatejose/Library/Application\ Support/Anki2/User\ 1
 alias anki='cd /Users/corporatejose/Documents/Anki'
 # others
 alias bf='cd ~/Code/brightflow-connectors'
+alias bfng='ngrok http  31111 -subdomain=josesesesej'
 
 # emacs
 alias emak='TERM=xterm-emacs emacs -nw'
@@ -33,7 +34,7 @@ function es(){
 function ek(){
   emacsclient -n $@ && ec $_
 }
-alias pkec="pkill emacs"
+alias pke="pkill emacs"
 alias zrc='ec ~/.zshrc'
 alias prc='ec ~/.profile'
 alias krc='ec ~/.config/kitty/kitty.conf'
