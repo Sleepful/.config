@@ -21,6 +21,7 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+(setq doom-unicode-font (font-spec :family "DejaVu Sans Mono"))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -90,22 +91,24 @@
   )
 
 ; face
-(custom-set-faces!
-  '(hl-line :underline "light slate blue" :background nil :distant-foreground "medium purple" :distant-background "black")
-  '(solaire-hl-line-face :background nil)
-  '(region :background "VioletRed4" :distant-foreground "green")
-  '(line-number-current-line :foreground "cyan")
-  '(solaire-mode-line-face :background "black" :underline nil)
-  '(solaire-mode-line-inactive-face :background "#190e22" :foreground "medium aquamarine")
-  '(web-mode-interpolate-color1-face :foreground "peach puff")
-  '(web-mode-javascript-string-face :foreground "medium aquamarine")
-  )
-(after! hl-line (progn
-                  (setq hl-line-sticky-flag t)
-                  ))
-(setq evil-normal-state-cursor '(box    "turquoise")
-      evil-insert-state-cursor '(bar    "turquoise")
-      evil-visual-state-cursor '(hollow "turquoise"))
+;(custom-set-faces!
+  ;'(hl-line :underline "light slate blue"
+            ;;:background nil
+            ;:distant-foreground "medium purple" )
+  ;;'(solaire-hl-line-face :background nil)
+  ;'(region :background "VioletRed4" :distant-foreground "green")
+  ;'(line-number-current-line :foreground "cyan")
+  ;'(solaire-mode-line-face :underline nil)
+  ;'(solaire-mode-line-inactive-face :background "#190e22" :foreground "medium aquamarine")
+  ;'(web-mode-interpolate-color1-face :foreground "peach puff")
+  ;'(web-mode-javascript-string-face :foreground "medium aquamarine")
+  ;)
+;(after! hl-line (progn
+                  ;(setq hl-line-sticky-flag t)
+                  ;))
+;(setq evil-normal-state-cursor '(box    "turquoise")
+      ;evil-insert-state-cursor '(bar    "turquoise")
+      ;evil-visual-state-cursor '(hollow "turquoise"))
 
 ;; ----------------
 ;; Layout
@@ -208,11 +211,12 @@
           (let ((default-directory "~/.bin/"))
             (counsel-find-file)))))
 
+;; same as SPC p . though
 (map! :leader :desc "Search projectile directory" "f w"
      #'(lambda ()
          (interactive)
          (call-interactively
-          (let ((default-directory (projectile-project-root)))
+          (let ((default-directory (or (projectile-project-root) default-directory)))
             (counsel-find-file)))))
 
 ; outline gets activated in elisp files
@@ -284,7 +288,7 @@
 (map! :leader ; "b w"
       :desc "Save buffer and switch" "b w"
       #'save-bury-buffer)
-(map! "M-/" #'+workspace/switch-right   ; rm dabbrev-expand
+(map! ; "M-/" #'+workspace/switch-right   ; rm dabbrev-expand
       "M-'" #'+workspace/switch-right   ; rm abbrev-prefix-mark
       )
 (map! "M-;" #'+workspace/switch-left    ; rm comment-dwim
@@ -580,3 +584,27 @@
 (add-hook 'web-mode-hook #'prettier-mode)
 
 ;; end of Tide mode setup -------
+
+;; super cool figure out import
+
+(defun import-pls ()
+  (interactive)
+  (insert-for-yank
+    (concat
+     "import { } from '"
+     (file-name-sans-extension
+      (file-relative-name
+        (read-string "Import from: ")
+       (file-name-directory
+       (or
+        (file-relative-name (buffer-file-name (buffer-base-buffer)) (doom-project-root))
+        (read-string "Import into: ")))
+       ))
+     "'")))
+
+;; bribri input method
+; ----------------------
+;(quail-define-package "Bribri diacritics" "Bribri" "BB")
+;
+;(quail-define-rules
+ ;("_a" "a͟͟"))
