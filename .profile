@@ -16,9 +16,12 @@ alias lang='cd ~/Language'
 alias vrc='vim ~/.vimrc'
 alias vim='vim -S ~/.vimrc' # necessary only if using neovim, as neovim reads the config from somewhere else
 alias kdir='cd ~/Code/GitBuilds/kitty'
+alias ktdir='cd ~/Code/GitBuilds/kitty-themes/themes'
+alias gbs='cd ~/Code/GitBuilds'
+# macOs
 # anki
-alias ankicm='cd /Users/corporatejose/Library/Application\ Support/Anki2/User\ 1/collection.media'
-alias anki='cd /Users/corporatejose/Documents/Anki'
+alias ankicm='cd ~/Library/Application\ Support/Anki2/User\ 1/collection.media'
+alias anki='cd ~/Documents/Anki'
 # others
 alias bf='cd ~/Code/brightflow-connectors'
 alias bfng='ngrok http  31111 -subdomain=josesesesej'
