@@ -282,7 +282,7 @@
 (map! :leader "ESC" #'evil-switch-to-windows-last-buffer) ; to use with my cute keyboard
 (defun save-bury-buffer () (interactive) (save-buffer) (evil-switch-to-windows-last-buffer) (+workspace/display))
 ;; file path
-(map! "M-P" '+default/yank-buffer-path)
+(map! "M-}" '+default/yank-buffer-path)
 (map! "M-]" '+default/yank-buffer-path-relative-to-project)
 ;; workspace
 (map! :leader ; "b w"
