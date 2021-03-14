@@ -1,5 +1,7 @@
 #!/bin/bash
 #
+#   File taken from iTerm2 tests 😊
+#
 #   This file echoes four gradients with 24-bit color codes
 #   to the terminal to demonstrate their functionality.
 #   The foreground escape sequence is ^[38;2;<r>;<g>;<b>m
