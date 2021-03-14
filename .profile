@@ -9,6 +9,7 @@ alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias cfgsetup='cfg config status.showuntrackedfiles no'
 alias g='git'
 
+alias sprc='source ~/.profile'
 # cds
 alias code='cd ~/Code'
 alias notes='cd ~/Notes'
@@ -69,3 +70,18 @@ if ! ps -e -o args | grep -q '^emacs --daemon$'; then
 else
   echo "Emacs server Online"
 fi
+
+alias org='cd ~/Code/orgzly'
+alias ngdav='ngrok http 80 -subdomain=orgzlying'
+function npmdav(){
+  sudo echo -n "WebDav Password: "
+  read -s password
+  echo
+  if [ -z "$password" ]; then
+     echo "Password cannot be empty..."
+  else
+    sudo npx webdav-cli --port 80 --username admin --password $password
+  fi
+}
+alias webdav='ngdav > /dev/null & npmdav'
+alias kbg="pgrep -P $$ | head -n -2 | sudo xargs kill && fg"
