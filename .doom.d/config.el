@@ -26,7 +26,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-challenger-deep)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -41,6 +41,7 @@
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
+(load! "bribri-mode")
 ;; - `use-package!' for configuring packages
 ;; - `after!' for running code after a package has loaded
 ;; - `add-load-path!' for adding directories to the `load-path', relative to
@@ -71,6 +72,14 @@
 (defun prc ()(interactive)(find-file "~/.profile"))
 (defun vrc ()(interactive)(find-file "~/.vimrc"))
 (defun zrc ()(interactive)(find-file "~/.zshrc"))
+;(setq-default transparent 'nil)
+(defun transparent-emacs ()
+  (interactive)
+  (unless (display-graphic-p (selected-frame))
+;    (cond (= transparent 'nil))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+; (add-hook 'window-setup-hook 'transparent-emacs)
+
 
 ;; ----------------
 ;; Shell
@@ -602,9 +611,3 @@
        ))
      "'")))
 
-;; bribri input method
-; ----------------------
-;(quail-define-package "Bribri diacritics" "Bribri" "BB")
-;
-;(quail-define-rules
- ;("_a" "a͟͟"))

@@ -23,9 +23,12 @@ alias gbs='cd ~/Code/GitBuilds'
 # anki
 alias ankicm='cd ~/Library/Application\ Support/Anki2/User\ 1/collection.media'
 alias anki='cd ~/Documents/Anki'
+
 # others
 alias bf='cd ~/Code/brightflow-connectors'
 alias bfng='ngrok http  31111 -subdomain=josesesesej'
+alias bfsyncdev='NODE_ENV=development node ./dist/src/scripts/schedule-connection-sync.js 9ddcc9d0-861d-11eb-b582-acde48001122'
+alias bfsync='cd ~/Code/brightflow-connectors && DATABASE_URL=postgres:///brightflow_transient NODE_ENV=development node ./dist/src/scripts/schedule-connection-sync.js 9ddcc9d0-861d-11eb-b582-acde48001122'
 
 # emacs
 alias emak='TERM=xterm-emacs emacs -nw'
@@ -44,7 +47,7 @@ alias prc='ec ~/.profile'
 alias krc='ec ~/.config/kitty/kitty.conf'
 # used for emacsclient..i think? *doubt*
 export ALTERNATE_EDITOR=""
-export EDITOR="TERM=xterm-emacs-kitty emacsclient -nw"                  # $EDITOR opens in terminal
+export EDITOR="emacsclient -nw"                  # $EDITOR opens in terminal
 # used in emacs .config
 alias jslsp='node ~/Code/Forks/javascript-typescript-langserver/lib/language-server-stdio'
 
@@ -52,8 +55,11 @@ alias jslsp='node ~/Code/Forks/javascript-typescript-langserver/lib/language-ser
 alias py='python3'
 alias lsbin='ls ~/.bin'
 alias bin='cd ~/.bin'
-function prcg(){ #TODO: this one still doesn't work
-  grep -A 4 -B 1 -- "$@" ~/.profile
+function prcg(){
+  # Stolen version does work
+  more ~/.profile | grep -b1 -a4 $1
+  # My version does not work
+  # grep -A 4 -B 1 -- "$@" ~/.profile
 }
 
 
