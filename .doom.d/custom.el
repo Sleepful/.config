@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("f4876796ef5ee9c82b125a096a590c9891cec31320569fc6ff602ff99ed73dca" default))
+   '("f2927d7d87e8207fa9a0a003c0f222d45c948845de162c885bf6ad2a255babfd" "f4876796ef5ee9c82b125a096a590c9891cec31320569fc6ff602ff99ed73dca" default))
  '(emojify-emoji-styles '(unicode))
  '(org-agenda-files '("~/.doom.d/todos.org"))
  '(pyim-dicts nil))

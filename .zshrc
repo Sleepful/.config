@@ -31,6 +31,9 @@ else
   echo "Unknown OS: $OSTYPE"
 fi
 
+# NPM
+export NODE_PATH=$NODE_PATH:`npm root -g`
+
 ## oh-my-zsh config:
 
 # If you come from bash you might have to change your $PATH.
