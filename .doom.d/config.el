@@ -534,6 +534,7 @@
 ;(add-hook 'web-mode-hook 'lsp!)
 (add-hook 'web-mode-hook 'setup-tide-mode)
 
+
 ;; Eglot
 ; ----------------------
 ;
@@ -559,8 +560,8 @@
 ; web-mode formatting options:
 (use-package! flycheck
   :config
-  (flycheck-add-mode 'javascript-eslint 'web-mode) ; allow flycheck to be enabled on web-mode with javascript-eslint checker
-  )
+  (flycheck-add-mode 'javascript-eslint 'web-mode)) ; allow flycheck to be enabled on web-mode with javascript-eslint checker)
+
 ;(add-hook 'after-init-hook #'global-prettier-mode) DEPRACATED, instead add to web-mode-hook and typescript-mode-hook
 
 ;; Emmet mode
@@ -571,6 +572,22 @@
 ;; Tide mode (from their README)
 ; ----------------------
 ;
+
+;(flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
+
+(use-package! tide
+  :after flycheck
+  :config
+  (flycheck-add-next-checker
+   'typescript-tide
+   'javascript-eslint)
+)
+
+(setenv "PATH" (concat (getenv "PATH") ":~/.nvm/versions/node/v14.15.4/lib/node_modules"))
+(setq exec-path (append exec-path '(":~/.nvm/versions/node/v14.15.4/lib/node_modules")))
+;(setenv "PATH" (concat (getenv "PATH") ":~/.nvm/versions"))
+;(setq exec-path (append exec-path '(":~/.nvm/versions")))
+
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
@@ -591,6 +608,8 @@
 ;(add-hook 'js-jsx-mode-hook #'setup-tide-mode)
 (add-hook 'typescript-mode-hook #'prettier-mode)
 (add-hook 'web-mode-hook #'prettier-mode)
+; for .js files (ts-mode won't launch)
+(add-hook 'rjsx-mode-hook #'prettier-mode)
 
 ;; end of Tide mode setup -------
 

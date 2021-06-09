@@ -67,5 +67,9 @@
 (quail-define-package "Bribri diacritics" "Bribri" "BB")
 (eval `(quail-define-rules ,@(create-key-translation)))
 
-; not displaying properly in my terminal:
-;("i03" ["ï̲"]) ("o02" ["ò̲"])  ("u02" ["ù̲"]) ("u03" ["ü̲"]))
+; whole set:
+; "á" "à" "ä" "a̲" "á̲" "à̲" "ä̲"
+; "é" "è" "ë" "e̲" "é̲" "è̲" "ë̲"
+; "í" "ì" "ï" "i̲" "í̲" "ì̲" "ï̲"
+; "ó" "ò" "ö" "o̲" "ó̲" "ò̲" "ö̲"
+; "ú" "ù" "ü" "u̲" "ú̲" "ù̲" "ü̲"
