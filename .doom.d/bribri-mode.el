@@ -66,6 +66,7 @@
 
 (quail-define-package "Bribri diacritics" "Bribri" "BB")
 (eval `(quail-define-rules ,@(create-key-translation)))
+(quail-defrule "n;" ["ñ"])
 
 ; whole set:
 ; "á" "à" "ä" "a̲" "á̲" "à̲" "ä̲"
