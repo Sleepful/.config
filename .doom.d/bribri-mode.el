@@ -74,3 +74,7 @@
 ; "í" "ì" "ï" "i̲" "í̲" "ì̲" "ï̲"
 ; "ó" "ò" "ö" "o̲" "ó̲" "ò̲" "ö̲"
 ; "ú" "ù" "ü" "u̲" "ú̲" "ù̲" "ü̲"
+
+
+; Missing:
+; Reemplazar dieresis por techito en "u", y "i"

@@ -18,7 +18,10 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   #postgres path
   export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
   #redis path
-  PATH="/Applications/Redis.app/Contents/Resources/Vendor/redis/bin:$PATH"
+  export PATH="/Applications/Redis.app/Contents/Resources/Vendor/redis/bin:$PATH"
+  # sclang path (supercollider through brew cas)
+  export PATH="/Applications/SuperCollider.app/Contents/MacOS:$PATH"
+
   #NVM
   export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
@@ -47,6 +50,7 @@ export ZSH="/Users/corporatejose/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
+
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -150,3 +154,7 @@ export LANG=en_US.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+
+PROMPT="%{$fg_bold[blue]%}%* %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+RPROMPT='${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} %{$reset_color%}'
