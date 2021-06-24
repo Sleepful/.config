@@ -18,7 +18,10 @@
 (package! pyim)
 (package! centered-cursor-mode
  :recipe (:host github :repo "andre-r/centered-cursor-mode.el"
-          :branch "dev"))
+          :branch "dev" :build (:not compile)))
+
+;; super collider! Let the good boops roll.
+(package! sclang-mode :recipe (:host github :repo "supercollider/scel" :files ("el/*.el")))
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)

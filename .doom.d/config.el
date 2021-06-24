@@ -42,6 +42,7 @@
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 (load! "bribri-mode")
+(load! "supercollider")
 ;; - `use-package!' for configuring packages
 ;; - `after!' for running code after a package has loaded
 ;; - `add-load-path!' for adding directories to the `load-path', relative to
@@ -95,7 +96,7 @@
 ; centered cursor
 (add-hook 'after-init-hook #'global-centered-cursor-mode)
 (use-package! centered-cursor-mode
-  :init (setq mwheel-scroll-up-function 1 mwheel-scroll-down-function 1) ; fix for terminal on `dev' branch, otherwise black-screen
+  :init (setq mwheel-scroll-up-function 1 mwheel-scroll-down-function 1 mouse-wheel-mode 1) ; fix for terminal on `dev' branch, otherwise black-screen
   ;:config (setq ccm-recenter-at-end-of-file t)) ; this is useful for `master' branch of package, not `dev' branch
   )
 
@@ -583,8 +584,12 @@
    'javascript-eslint)
 )
 
-(setenv "PATH" (concat (getenv "PATH") ":~/.nvm/versions/node/v14.15.4/lib/node_modules"))
-(setq exec-path (append exec-path '(":~/.nvm/versions/node/v14.15.4/lib/node_modules")))
+(setenv "PATH" (concat (getenv "PATH")
+                       ":~/.nvm/versions/node/v14.15.4/lib/node_modules:/Applications/SuperCollider.app/Contents/MacOS"
+                       ))
+(setq exec-path (append exec-path '(
+                                    ":~/.nvm/versions/node/v14.15.4/lib/node_modules:/Applications/SuperCollider.app/Contents/MacOS"
+                                    )))
 ;(setenv "PATH" (concat (getenv "PATH") ":~/.nvm/versions"))
 ;(setq exec-path (append exec-path '(":~/.nvm/versions")))
 
