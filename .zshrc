@@ -30,6 +30,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
   # tell mac to shut its hole
   export BASH_SILENCE_DEPRECATION_WARNING=1
+  export ASDF_DATA_DIR=`brew --prefix asdf`/
+  source $ASDF_DATA_DIR/asdf.sh
 else
   echo "Unknown OS: $OSTYPE"
 fi

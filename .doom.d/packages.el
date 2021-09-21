@@ -5,6 +5,8 @@
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
 
+(package! elixir-mode)
+(package! alchemist)
 ;; im using prettier, worked better
 (package! prettier)
 ;; i don't remember the issue with prettier-js
@@ -22,6 +24,7 @@
 
 ;; super collider! Let the good boops roll.
 (package! sclang-mode :recipe (:host github :repo "supercollider/scel" :files ("el/*.el")))
+(package! w3m)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)

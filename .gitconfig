@@ -31,3 +31,5 @@
 	hooksPath = ~/.githooks/
 [github]
 	user = Sleepful
+[pull]
+	rebase = false

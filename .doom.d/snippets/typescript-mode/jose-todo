@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: jose todo
+# key: todo
+# condition: t
+# --
+/* TODO(josé):
+ * $0
+ * */
