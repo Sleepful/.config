@@ -119,7 +119,7 @@
        ;;csharp            ; unity, .NET, and mono shenanigans
        ;;data              ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
-       ;;elixir            ; erlang done right
+       (elixir +lsp)            ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
        ;;erlang            ; an elegant language for a more civilized age
@@ -165,7 +165,7 @@
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
-       web               ; the tubes
+       (web +html)              ; the tubes
        ;;yaml              ; JSON, but readable
 
        :email

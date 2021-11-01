@@ -24,8 +24,35 @@ alias gbs='cd ~/Code/GitBuilds'
 # anki
 alias ankicm='cd ~/Library/Application\ Support/Anki2/User\ 1/collection.media'
 alias anki='cd ~/Documents/Anki'
+# termdown
+function pomo(){
+  termdown "$@" && tput bel && terminal-notifier -message "$@ pomo complete"
+}
+
+# git
+function gcorb(){
+  git checkout -b release/`date +%+4Y.%m.%d`-r$@
+}
+function gcr(){
+ git commit -m "prepare release `date +%+4Y.%m.%d`-r$@"
+}
+function gtr(){
+ git tag `date +%+4Y.%m.%d`-r$@
+}
+alias gpt='git push --tags'
+
 
 # others
+alias localdb='DATABASE_URL=postgres://postgres:postgres@localhost:5432/brightflow_development'
+alias stagedb='DATABASE_URL=$(echo "`heroku pg:credentials:url --remote staging | grep postgres | sed "s: ::g" | tr -s \\n `?ssl=no-verify")'
+alias stageredis='REDIS_URL=`heroku redis:credentials --remote staging`'
+alias stageall=$'eval $(heroku config --remote staging | tail -n +2 | sed "s/\:[[:blank:]]*\\(.*\\)/=\'\\1\'/g" | tr "\n" " ")' #"
+# alias bfstaging2='eval $(heroku config --remote staging | tail -n +2 | sed "s/\:[[:blank:]]*\(.*\)/='\''\1'\''/g" | tr "\n" " ")'
+alias proddb='DATABASE_URL=$(echo "`heroku pg:credentials:url --remote production | grep postgres | sed "s: ::g" | tr -s \\n `?ssl=no-verify")'
+alias prodredis='REDIS_URL=`heroku redis:credentials --remote production`'
+alias prodall=$'eval $(heroku config --remote staging | tail -n +2 | sed "s/\:[[:blank:]]*\\(.*\\)/=\'\\1\'/g" | tr "\n" " ")' #"
+
+alias localredis='REDIS_URL=redis://localhost:6379/0'
 alias herokus='TERM=ansi heroku run -r staging -- bash'
 alias herokup='TERM=ansi heroku run -r production -- bash'
 alias herokuslog='heroku logs -t -r staging | tee staging.log'

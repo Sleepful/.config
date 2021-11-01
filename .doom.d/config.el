@@ -92,11 +92,11 @@
 ;; ----------------
 (setq-default truncate-lines 'nil) ;; wrap lines by default
 ; emojify
-(add-hook 'after-init-hook #'global-emojify-mode)
+;(add-hook 'after-init-hook #'global-emojify-mode)
 ; centered cursor
 (add-hook 'after-init-hook #'global-centered-cursor-mode)
 (use-package! centered-cursor-mode
-  :init (setq mwheel-scroll-up-function 1 mwheel-scroll-down-function 1 mouse-wheel-mode 1) ; fix for terminal on `dev' branch, otherwise black-screen
+  ;:init (setq mwheel-scroll-up-function 1 mwheel-scroll-down-function 1 mouse-wheel-mode 1) ; fix for terminal on `dev' branch, otherwise black-screen
   ;:config (setq ccm-recenter-at-end-of-file t)) ; this is useful for `master' branch of package, not `dev' branch
   )
 
@@ -509,6 +509,11 @@
 ;(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
 ;(add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
 ;(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-jsx-mode))
+;
+; eelixir :/
+;(add-to-list 'auto-mode-alist '("\\.html\.eex\\'"  . elixir-mode))
+;(setq web-mode-engines-alist
+;      '(("elixir" . "\\.html\\.eex\\'")))
 (add-to-list 'auto-mode-alist '("\\.js\\'"  . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'"  . typescript-mode))
@@ -521,7 +526,20 @@
 ; Lsp mode configuration (if it is used)
 ; ----------------------
 ;
-(defvar lsp-language-id-configuration '(( web-mode . "typescriptreact" )( js-jsx-mode . "typescriptreact" ))) ;configuration of the lsp-mode to identify language-id:
+(use-package! lsp-mode
+  :commands lsp
+  :ensure t
+  :diminish lsp-mode
+  :hook
+  (elixir-mode . lsp)
+  :init
+  (add-to-list 'exec-path "~/Code/elixir-ls-1.12")
+  )
+(after! lsp-mode (add-to-list
+   'lsp-language-id-configuration
+   '(( web-mode . "typescriptreact" )
+     ( js-jsx-mode . "typescriptreact" )
+    )))
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 
 ;; js-jsx-mode: the baked-in emacs mode, new to emacs 27
@@ -546,6 +564,7 @@
 ; ----------------------
 ;
 (use-package! web-mode
+  :commands web-mode-set-engine
   :custom
   (web-mode-markup-indent-offset 2)
   (web-mode-css-indent-offset 2)
@@ -556,7 +575,8 @@
     ("xml"  . "\\.api\\'")
     ("jsx"  . "\\.js[x]?\\'")))
 
-(add-hook 'web-mode-hook 'js2-minor-mode)
+; do not use js2 minor with web mode
+;(add-hook 'web-mode-hook 'js2-minor-mode)
 
 ; web-mode formatting options:
 (use-package! flycheck
