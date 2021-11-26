@@ -262,6 +262,16 @@
               ;(org-babel-do-load-languages 'org-babel-load-languages '((sh . t))))
 
 ;; ----------------
+;; Elixir keybindings
+;; ----------------
+;
+(map! :after alchemist
+      :map alchemist-mode-map
+      :n "C-j" nil ; alchemist-goto-jump-to-next-def-symbol
+      :n "C-k" nil ; alchemist-goto-jump-to-previous-def-symbol
+      )
+
+;; ----------------
 ;; Magit keybindings
 ;; ----------------
 ;
@@ -394,6 +404,17 @@
  :n "`" #'evil-set-marker)
 
 ;; ----------------
+;; Code edit
+;; ----------------
+;
+(map! :i "TAB" #'+web/indent-or-yas-or-emmet-expand)
+; for above to work nicely, below does stuff:
+; https://github.com/smihica/emmet-mode/issues/64
+(use-package! yasnippet
+  :config
+  (setq yas-snippet-revival nil))
+
+;; ----------------
 ;; Evil mode
 ;; ----------------
 ;
@@ -457,6 +478,7 @@
 ; search word on cursor position
 ; snippets are missing
 ; open window with current buffer to given side, close buffer in previous window
+; g as leader key in insert mode for symbols, replace ;
 
 ;; ----------------
 ;; MacOS keybindings

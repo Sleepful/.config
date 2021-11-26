@@ -13,6 +13,7 @@ alias sprc='source ~/.profile'
 alias ssecret='source ~/.secret'
 # cds
 alias code='cd ~/Code'
+alias phx='cd ~/Code/programmingPhx'
 alias notes='cd ~/Notes'
 alias lang='cd ~/Language'
 alias vrc='vim ~/.vimrc'
@@ -40,9 +41,15 @@ function gtr(){
  git tag `date +%+4Y.%m.%d`-r$@
 }
 alias gpt='git push --tags'
+# Postgres MACOS stuff
+alias clearpgpid='pkill postgres && rm ~/Library/Application Support/Postgres/var-13/postmaster.pid'
+# Npm/Yarn MACOS stuff
+alias fixgyp="sudo rm -r -f `xcode-select --print-path` \
+  && xcode-select --install"
 
-
+alias psf='ps aux | grep -i'
 # others
+alias h='echo "head .git/HEAD" | pbcopy'
 alias localdb='DATABASE_URL=postgres://postgres:postgres@localhost:5432/brightflow_development'
 alias stagedb='DATABASE_URL=$(echo "`heroku pg:credentials:url --remote staging | grep postgres | sed "s: ::g" | tr -s \\n `?ssl=no-verify")'
 alias stageredis='REDIS_URL=`heroku redis:credentials --remote staging`'
@@ -94,6 +101,11 @@ function prcg(){
   # grep -A 4 -B 1 -- "$@" ~/.profile
 }
 
+
+# elixir
+alias xie='iex -S mix'
+# miex: opens iex in context of project in directory
+# (root directory of the project i think)
 
 
 ### scripty
