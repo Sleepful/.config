@@ -414,6 +414,56 @@
   :config
   (setq yas-snippet-revival nil))
 
+; helpful macros for map-keybindings and keybindings:
+(defmacro insertchar (char)
+  `(lambda ()
+          (interactive)
+          (self-insert-command 1 ',char))
+  )
+
+(defmacro keybindings ()
+  `(map! (:prefix-map ("g" . "shortcuts")
+      :i
+      ,@(mapcan (lambda (pair)
+          (list (car pair)
+                `(insertchar ,@(cdr pair))))
+        map-keybindings))))
+
+(defconst
+  map-keybindings '(
+                    ("g" ?g)
+                    ("j" ?\()
+                    ("k" ?\))
+                    ("i" ?\[)
+                    ("o" ?\])
+                    ("n" ?\{)
+                    ("m" ?\})
+                    ("c" ?,)
+                    ("d" ?.)
+                    ("a" ?\*)
+                    ("b" ?\\)
+                    ("q" ?\?)
+                    ("y" ?\&)
+                    ("u" ?\|)
+                    ))
+
+; put all the 'map-keybindings behind the prefix defined in (keybindings)
+(keybindings)
+
+
+; Example of the keybindings macro expansion:
+;(map!
+;; :prefix-map is necessary to avoid error over :prefix
+;      (:prefix-map ("g" . "shortcuts")
+;      :i
+;      "g"
+;      (insertchar ?g)
+;      "j"
+;      (insertchar ?\()
+;      "k"
+;      (insertchar ?\))))
+
+
 ;; ----------------
 ;; Evil mode
 ;; ----------------
