@@ -136,7 +136,9 @@
 (setq projectile-project-search-path '("~/Code/" "~/Language/" "~/Code/Forks" "~/Notes"))
 ;; open dired on root folder after opening project with projectile (perhaps not working) https://docs.projectile.mx/projectile/configuration.html
 ;(setq projectile-switch-project-action #'projectile-dired)
-;
+; the following is a work-around per
+; https://github.com/bbatsov/projectile/issues/1302#issuecomment-433894379
+(setq projectile-git-submodule-command nil)
 
 ;; ----------------
 ;; Persp-mode
@@ -674,6 +676,8 @@
 ; ----------------------
 ;
 
+;(flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
+
 (use-package! tide
   :after flycheck
   :config
@@ -682,8 +686,22 @@
    'javascript-eslint)
 )
 
-; put node executable path inside EMACSPATH env
-; ~/.nvm/versions/node/v14.15.4/bin
+;(getenv "EMACSPATH")
+;(getenv "PATH")
+;(let ((PATHS (concat ":" (concat (getenv "EMACSPATH") ":/Applications/SuperCollider.app/Contents/MacOS"))))
+;  (setenv "PATH" (concat (getenv "PATH") PATHS)))
+;  (setq exec-path (append exec-path PATHS))
+;)
+;(shell-command "node -v")
+
+;(setenv "PATH" (concat (getenv "PATH")
+;                       ":~/.nvm/versions/node/v14.15.4/lib/node_modules:/Applications/SuperCollider.app/Contents/MacOS"
+;                       ))
+;(setq exec-path (append exec-path '(
+;                                    ":~/.nvm/versions/node/v14.15.4/lib/node_modules:/Applications/SuperCollider.app/Contents/MacOS"
+;                                    )))
+;(setenv "PATH" (concat (getenv "PATH") ":~/.nvm/versions"))
+;(setq exec-path (append exec-path '(":~/.nvm/versions")))
 
 (defun setup-tide-mode ()
   (interactive)

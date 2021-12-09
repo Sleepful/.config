@@ -6,6 +6,18 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 rm ~/.zshrc
 cfg restore .zshrc
 
+# Font
+brew tap homebrew/cask-fonts
+brew install --cask font-iosevka
+# To search for other variants:
+# brew search font-iosevka
+# Example download:
+# brew install --cask font-iosevka-curly-slab
+
+# Doom requisites
+brew install ripgrep
+brew install findutils
+brew install coreutils
 # Emacs
 brew install --no-quarantine emacs --HEAD
 /usr/bin/tic -x -o ~/.terminfo ~/.bin/install/config/terminfo-custom.src

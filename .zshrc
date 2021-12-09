@@ -12,9 +12,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     realpath "$1" | pbcopy
   }
   #MACOS configs
-  # gnu coreutils from `brew install coreutils`
-  export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
-  export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
   #postgres path
   export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
   #redis path
@@ -31,6 +28,11 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   export BASH_SILENCE_DEPRECATION_WARNING=1
   export ASDF_DATA_DIR=`brew --prefix asdf`/
   source $ASDF_DATA_DIR/asdf.sh
+
+  # GNU find
+  # gnu coreutils from `brew install coreutils`
+  export PATH="`brew --prefix`/opt/findutils/libexec/gnubin:$PATH"
+  export MANPATH="`brew --prefix`/opt/coreutils/libexec/gnuman:${MANPATH}"
 else
   echo "Unknown OS: $OSTYPE"
 fi
@@ -166,6 +168,14 @@ export LANG=en_US.UTF-8
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-PROMPT="%{$fg_bold[blue]%}%* %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+# with unicode arrow:
+# PROMPT="%{$fg_bold[blue]%}%* %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+# with multiple chars arrow:
+PROMPT="%{$fg_bold[blue]%}%* %(?:%{$fg_bold[green]%}|> :%{$fg_bold[red]%}>: )"
 RPROMPT='${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} %{$reset_color%}'
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Remove OMZ
+# Add config with vim thingy that moves each way
+# update clock time upon hitting enter
+# display total time elapsed per command
