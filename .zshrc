@@ -25,7 +25,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   #NVM
   export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-  eval "nvm use --lts"
   # necessary for doom emacs to work with macports
   export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
   # tell mac to shut its hole
@@ -160,3 +159,4 @@ export LANG=en_US.UTF-8
 
 PROMPT="%{$fg_bold[blue]%}%* %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
 RPROMPT='${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} %{$reset_color%}'
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
