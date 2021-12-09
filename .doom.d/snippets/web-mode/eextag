@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: eex tag
+# uuid: <%=%>
+# key: et
+# condition: t
+# --
+<%= $0 %>
