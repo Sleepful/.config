@@ -33,3 +33,5 @@
 	user = Sleepful
 [pull]
 	rebase = false
+[init]
+	defaultBranch = main

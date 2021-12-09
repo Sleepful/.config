@@ -173,7 +173,7 @@
 ;; Forge : Magit Integration with Ghub
 ;; ----------------
 ;
-(use-package! forge :after magit)
+;(use-package! forge :after magit)
 (setq auth-sources '("~/.authinfo.gpg"))
 
 ;; ----------------
@@ -407,7 +407,7 @@
 ;; Code edit
 ;; ----------------
 ;
-(map! :i "TAB" #'+web/indent-or-yas-or-emmet-expand)
+(map! :map emmet-mode-keymap :i "TAB" #'+web/indent-or-yas-or-emmet-expand)
 ; for above to work nicely, below does stuff:
 ; https://github.com/smihica/emmet-mode/issues/64
 (use-package! yasnippet
@@ -422,34 +422,42 @@
   )
 
 (defmacro keybindings ()
-  `(map! (:prefix-map ("g" . "shortcuts")
-      :i
+  `(map! (:prefix-map (";" . "shortcuts")
+      :iro
       ,@(mapcan (lambda (pair)
           (list (car pair)
                 `(insertchar ,@(cdr pair))))
         map-keybindings))))
-
 (defconst
   map-keybindings '(
-                    ("g" ?g)
                     ("j" ?\()
                     ("k" ?\))
                     ("i" ?\[)
                     ("o" ?\])
                     ("n" ?\{)
                     ("m" ?\})
-                    ("c" ?,)
+                    ("x" ?<)
+                    ("c" ?>)
                     ("d" ?.)
                     ("a" ?\*)
                     ("b" ?\\)
+                    ("g" ?\/)
                     ("q" ?\?)
                     ("y" ?\&)
                     ("u" ?\|)
+                    ("s" ?\")
+                    ("v" ?\')
+                    ("f" ?\`)
+                    (";" ?\;)
+                    ("3" ?\#)
                     ))
 
-; put all the 'map-keybindings behind the prefix defined in (keybindings)
+; put all the 'map-keybindings behind the
+; prefix defined in (keybindings)
 (keybindings)
 
+; to reset a key:
+; (map! :i "g" (insertchar ?\g))
 
 ; Example of the keybindings macro expansion:
 ;(map!
@@ -605,7 +613,7 @@
   :hook
   (elixir-mode . lsp)
   :init
-  (add-to-list 'exec-path "~/Code/elixir-ls-1.12")
+  (add-to-list 'exec-path "~/Code/GitBuilds/elixir-ls-1.13")
   )
 (after! lsp-mode (add-to-list
    'lsp-language-id-configuration
