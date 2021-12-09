@@ -8,8 +8,16 @@ cfg restore .zshrc
 
 # Emacs
 brew install --no-quarantine emacs --HEAD
-tic -x -o ~/.terminfo terminfo-custom.src
+/usr/bin/tic -x -o ~/.terminfo ~/.bin/install/config/terminfo-custom.src
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+~/.emacs.d/bin/doom install
 
 # node
 brew install nvm
+mkdir ~/.nvm
+
+# elixir
+brew install asdf
+
+# create some dirs
 source ./dirs.sh
