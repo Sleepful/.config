@@ -2,4 +2,5 @@
 
 DIR=~/Code/GitBuilds
 
-git clone --depth 1 git@github.com:dexpota/kitty-themes.git $DIR
+cd $DIR
+git clone --depth 1 git@github.com:dexpota/kitty-themes.git
