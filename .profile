@@ -1,6 +1,7 @@
 
 # MacPorts Installer addition on 2020-11-05_at_09:38:36: adding an appropriate PATH variable for use with MacPorts.
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+
 # Finished adapting your PATH environment variable for use with MacPorts.
 
 export PATH=~/.emacs.d/bin:$PATH
@@ -10,6 +11,7 @@ alias cfgsetup='cfg config status.showuntrackedfiles no'
 alias g='git'
 
 alias sprc='source ~/.profile'
+alias szrc='source ~/.zshrc'
 alias ssecret='source ~/.secret'
 # cds
 alias code='cd ~/Code'
@@ -79,7 +81,7 @@ function es(){
 function ek(){
   emacsclient -n $@ && ec $_
 }
-alias pke="pkill emacs"
+alias pke="pkill -i emacs"
 alias zrc='ec ~/.zshrc'
 alias prc='ec ~/.profile'
 alias secret='ec ~/.secret'
@@ -117,12 +119,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init --path)"
 fi
 
-if ! ps -e -o args | grep -i 'emacs' | grep -q 'daemon'; then
-  emacs --daemon
-else
-  echo "Emacs server Online"
-fi
-
 alias org='cd ~/Code/orgzly'
 alias ngdav='ngrok http 80 -subdomain=orgzlying'
 function npmdav(){
@@ -137,4 +133,3 @@ function npmdav(){
 }
 alias webdav='ngdav > /dev/null & npmdav'
 alias kbg="pgrep -P $$ | head -n -2 | sudo xargs kill && fg"
-

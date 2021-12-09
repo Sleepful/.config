@@ -674,8 +674,6 @@
 ; ----------------------
 ;
 
-;(flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
-
 (use-package! tide
   :after flycheck
   :config
@@ -684,14 +682,8 @@
    'javascript-eslint)
 )
 
-(setenv "PATH" (concat (getenv "PATH")
-                       ":~/.nvm/versions/node/v14.15.4/lib/node_modules:/Applications/SuperCollider.app/Contents/MacOS"
-                       ))
-(setq exec-path (append exec-path '(
-                                    ":~/.nvm/versions/node/v14.15.4/lib/node_modules:/Applications/SuperCollider.app/Contents/MacOS"
-                                    )))
-;(setenv "PATH" (concat (getenv "PATH") ":~/.nvm/versions"))
-;(setq exec-path (append exec-path '(":~/.nvm/versions")))
+; put node executable path inside EMACSPATH env
+; ~/.nvm/versions/node/v14.15.4/bin
 
 (defun setup-tide-mode ()
   (interactive)

@@ -36,7 +36,16 @@ else
 fi
 
 # NPM
-export NODE_PATH=$NODE_PATH:`npm root -g`
+export NODE_PATH=`npm root -g`
+
+# for emacs
+export EMACSPATH=$(dirname `nvm which node`)
+
+if ! ps -e -o args | grep -i 'emacs' | grep -q 'daemon'; then
+  emacs --daemon
+else
+  echo "Emacs server Online"
+fi
 
 ## oh-my-zsh config:
 
