@@ -117,7 +117,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init --path)"
 fi
 
-if ! ps -e -o args | grep -q '^emacs --daemon$'; then
+if ! ps -e -o args | grep -i 'emacs' | grep -q 'daemon'; then
   emacs --daemon
 else
   echo "Emacs server Online"
