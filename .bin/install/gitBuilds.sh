@@ -1,6 +1,6 @@
 #!/bin/bash
 EmacsDIR=~/Code/GitBuilds/emacs
-git clone --depth 1 --branch emacs-27 https://git.savannah.gnu.org/emacs.git $EmacsDIR
+git clone --depth 1 --branch emacs-27 https://git.savannah.gnu.org/git/emacs.git $EmacsDIR
 # apt-get build-dep might need to uncomment some repo source things
 sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
 sudo apt-get update
