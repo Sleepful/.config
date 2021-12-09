@@ -1,4 +1,5 @@
 #!/bin/bash
+# this is for linux
 EmacsDIR=~/Code/GitBuilds/emacs
 git clone --depth 1 --branch emacs-27 https://git.savannah.gnu.org/git/emacs.git $EmacsDIR
 # apt-get build-dep might need to uncomment some repo source things
