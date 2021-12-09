@@ -20,8 +20,7 @@ echo ".cfg" >> .gitignore
 
 git clone --bare <git-repo-url> $HOME/.cfg
 git clone --bare git@github.com:Sleepful/.config.git $HOME/.cfg
-git clone --bare https://github.com/Sleepful/.config.git
- $HOME/.cfg
+git clone --bare https://github.com/Sleepful/.config.git $HOME/.cfg
 
 alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 cfg checkout
