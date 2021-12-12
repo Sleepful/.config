@@ -615,6 +615,7 @@
   :hook
   (elixir-mode . lsp)
   :init
+  ; update elixir version if needed:
   (add-to-list 'exec-path "~/Code/GitBuilds/elixir-ls-1.13")
   )
 (after! lsp-mode (add-to-list
@@ -685,23 +686,6 @@
    'typescript-tide
    'javascript-eslint)
 )
-
-;(getenv "EMACSPATH")
-;(getenv "PATH")
-;(let ((PATHS (concat ":" (concat (getenv "EMACSPATH") ":/Applications/SuperCollider.app/Contents/MacOS"))))
-;  (setenv "PATH" (concat (getenv "PATH") PATHS)))
-;  (setq exec-path (append exec-path PATHS))
-;)
-;(shell-command "node -v")
-
-;(setenv "PATH" (concat (getenv "PATH")
-;                       ":~/.nvm/versions/node/v14.15.4/lib/node_modules:/Applications/SuperCollider.app/Contents/MacOS"
-;                       ))
-;(setq exec-path (append exec-path '(
-;                                    ":~/.nvm/versions/node/v14.15.4/lib/node_modules:/Applications/SuperCollider.app/Contents/MacOS"
-;                                    )))
-;(setenv "PATH" (concat (getenv "PATH") ":~/.nvm/versions"))
-;(setq exec-path (append exec-path '(":~/.nvm/versions")))
 
 (defun setup-tide-mode ()
   (interactive)

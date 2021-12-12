@@ -7,6 +7,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   # LINUX configs
   export PATH="$(yarn global bin):$PATH"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
+
   echo "MACOS detected"
   rpb(){ # copy path from file into clipboard
     realpath "$1" | pbcopy
@@ -20,8 +21,18 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   export PATH="/Applications/SuperCollider.app/Contents/MacOS:$PATH"
 
   #NVM
-  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+  # old veresion of loading NVM is too slow (and the NVM_DIR doesn't make sense):
+  # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+  # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  # new version per https://github.com/nvm-sh/nvm/issues/1978
+  if [ -s "$HOME/.nvm/nvm.sh" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  nvm_cmds=(nvm node npm yarn)
+  for cmd in $nvm_cmds ; do
+    alias $cmd="unalias $nvm_cmds && unset nvm_cmds && . $NVM_DIR/nvm.sh && $cmd"
+  done
+  fi
+
   # necessary for doom emacs to work with macports
   export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
   # tell mac to shut its hole
@@ -36,12 +47,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 else
   echo "Unknown OS: $OSTYPE"
 fi
-
-# NPM
-export NODE_PATH=`npm root -g`
-
-# for emacs
-export EMACSPATH=$(dirname `nvm which node`)
 
 if ! ps -e -o args | grep -i 'emacs' | grep -q 'daemon'; then
   emacs --daemon

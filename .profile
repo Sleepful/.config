@@ -86,6 +86,7 @@ alias zrc='ec ~/.zshrc'
 alias prc='ec ~/.profile'
 alias secret='ec ~/.secret'
 alias krc='ec ~/.config/kitty/kitty.conf'
+alias grc='ec ~/.gitconfig'
 # used for emacsclient..i think? *doubt*
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -nw"                  # $EDITOR opens in terminal
@@ -133,3 +134,4 @@ function npmdav(){
 }
 alias webdav='ngdav > /dev/null & npmdav'
 alias kbg="pgrep -P $$ | head -n -2 | sudo xargs kill && fg"
+alias gha="act -P ubuntu-latest=catthehacker/ubuntu:js-latest-dev"

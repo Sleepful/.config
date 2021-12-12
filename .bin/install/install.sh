@@ -25,8 +25,8 @@ brew install --no-quarantine emacs --HEAD
 rm -rf ~/.emacs.d
 git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 ~/.emacs.d/bin/doom install
-
 # Delete pre-push and pre-commit from ~/.githooks if still there
+# (doom bug?)
 
 # Karabiner
 brew install --cask karabiner-elements
@@ -40,6 +40,8 @@ export NVM_DIR="$HOME/.nvm"
 nvm install 14
 # nvm alias default 14
 nvm use node
+npm install --global prettier
+npm install --global yarn
 
 # elixir
 brew install asdf
@@ -56,3 +58,6 @@ asdf global elixir latest
 
 # create some dirs
 source ./dirs.sh
+
+# generate ENV variables for Doom
+zsh -c "doom env"
