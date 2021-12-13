@@ -67,6 +67,13 @@ fi
 source $HOME/.config/zsh/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 
+# https://github.com/jeffreytse/zsh-vi-mode/issues/79
+# The plugin will auto execute this zvm_after_init function
+function zvm_after_init() {
+  zvm_bindkey viins 'jk' zvm_exit_insert_mode
+  zvm_bindkey viins 'kj' zvm_exit_insert_mode
+}
+
 ## oh-my-zsh config:
 
 # If you come from bash you might have to change your $PATH.
@@ -288,11 +295,14 @@ function ddate(){
   done
   echo
 
+  # uncomment for testing
   days=(Sun Mon Tue Wed Thu Fri Sat)
   current_day_number=`gdate +%-d` # 1..31
+  #current_day_number=1
   current_weekday=`gdate +%a` # Mon...Sun
   weekday_index=$((`gdate +%w`+1)) # 1...7 => Sunday is 1
   total_days_month=`gdate -d "-$(($current_day_number-1)) days +1 months -1 days" +%d` # 29,30,31
+  #total_days_month=`gdate -d "-$(($(gdate +%-d)-1)) days +1 months -1 days" +%d` # 29,30,31
   for ((i = 1; i <= $#days; i++)); do
   day=$days[i]
   if [[ $current_weekday == $day ]]
