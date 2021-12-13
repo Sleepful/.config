@@ -52,6 +52,13 @@ asdf install elixir latest
 asdf global erlang latest
 asdf global elixir latest
 
+# python
+brew install pyenv
+# install python through pyenv, pick the version
+pyenv install 3.10.0
+pyenv global 3.10.0
+pip install termdown
+
 # psql
 # install postgresql
 # install from postgres.app for osx
@@ -61,3 +68,9 @@ source ./dirs.sh
 
 # generate ENV variables for Doom
 zsh -c "doom env"
+
+# Zsh vi plugin
+git clone https://github.com/jeffreytse/zsh-vi-mode.git $HOME/.config/zsh/.zsh-vi-mode
+
+# eye care
+brew install --cask flux

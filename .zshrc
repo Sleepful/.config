@@ -1,3 +1,5 @@
+# comment out to avoid timer on first prompt:
+# timer=$(gdate +%s%3N)
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile && source ~/.secret'
 
 alias sorc='source ~/.zshrc'
@@ -8,7 +10,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   export PATH="$(yarn global bin):$PATH"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 
-  echo "MACOS detected"
+  # echo "MACOS detected"
   rpb(){ # copy path from file into clipboard
     realpath "$1" | pbcopy
   }
@@ -33,6 +35,9 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   done
   fi
 
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
   # necessary for doom emacs to work with macports
   export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
   # tell mac to shut its hole
@@ -49,10 +54,18 @@ else
 fi
 
 if ! ps -e -o args | grep -i 'emacs' | grep -q 'daemon'; then
+  echo "Emacs is loading"
   emacs --daemon
 else
-  echo "Emacs server Online"
+  # echo "Emacs server Online"
 fi
+
+
+
+# vim mode
+# https://github.com/jeffreytse/zsh-vi-mode
+source $HOME/.config/zsh/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 
 ## oh-my-zsh config:
 
@@ -129,10 +142,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-         #git
-         vi-mode
-        )
+# plugins=()
 
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 #MODE_INDICATOR="%F{yellow}+%f"
@@ -172,21 +182,61 @@ export LANG=en_US.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# ➜
+SUCCESS_COLOR_NORMAL="%{$fg_bold[cyan]%}"
+SUCCESS_COLOR_INSERT="%{$fg_bold[green]%}"
+SUCCESS_COLOR=$SUCCESS_COLOR_NORMAL
+FAIL_COLOR_NORMAL="%{$fg_bold[yellow]%}"
+FAIL_COLOR_INSERT="%{$fg_bold[red]%}"
+FAIL_COLOR=$FAIL_COLOR_NORMAL
+INSERT_SYMBOL="|>"
+NORMAL_SYMBOL="<|"
+PROMPT_SYMBOL=$NORMAL_SYMBOL
+SUCCESS_PROMPT=$SUCCESS_COLOR$PROMPT_SYMBOL
+FAIL_PROMPT=$FAIL_COLOR$PROMPT_SYMBOL
 
-# with unicode arrow:
-# PROMPT="%{$fg_bold[blue]%}%* %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
-# with multiple chars arrow:
-PROMPT="%{$fg_bold[blue]%}%* %(?:%{$fg_bold[green]%}|> :%{$fg_bold[red]%}>: )"
 RPROMPT='${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} %{$reset_color%}'
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# The plugin will auto execute this zvm_after_select_vi_mode function
+function zvm_after_select_vi_mode() {
+  case $ZVM_MODE in
+    $ZVM_MODE_NORMAL)
+      PROMPT_SYMBOL=$NORMAL_SYMBOL
+      FAIL_COLOR=$FAIL_COLOR_NORMAL
+      SUCCESS_COLOR=$SUCCESS_COLOR_NORMAL
+      prompt
+      ;;
+    $ZVM_MODE_INSERT)
+      PROMPT_SYMBOL=$INSERT_SYMBOL
+      FAIL_COLOR=$FAIL_COLOR_INSERT
+      SUCCESS_COLOR=$SUCCESS_COLOR_INSERT
+      prompt
+    ;;
+  esac
+}
+
+# sets the time to the left prompt only once
+function prompt_date(){
+  local date=`gdate +%-H:%M:%S`
+  local color="{$fg_bold[blue]%}"
+  DATE=$color$date
+}
+
+prompt_date
+
+function prompt(){
+  SUCCESS_PROMPT=$SUCCESS_COLOR$PROMPT_SYMBOL
+  FAIL_PROMPT=$FAIL_COLOR$PROMPT_SYMBOL
+  PROMPT="%$DATE %(?:$SUCCESS_PROMPT:$FAIL_PROMPT) %{$fg_no_bold[default]%}%"
+}
+
+prompt
+
+# TODO:
 # Remove OMZ
-# Add config with vim thingy that moves each way
-
-# Timer stolen from:
-# https://gist.github.com/knadh/123bca5cfdae8645db750bfb49cb44b0#gistcomment-3424463
 
 function preexec() {
+  prompt_date
   timer=$(gdate +%s%3N)
 }
 
@@ -207,7 +257,65 @@ function precmd() {
     fi
 
     # Overrides the RPROMPT above
-    RPROMPT='%F{cyan}${elapsed} %{$reset_color%}${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} %{$reset_color%}'
+    RPROMPT=' %{$reset_color%}${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}${elapsed} %c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} %{$reset_color%}'
     unset timer
   fi
 }
+
+
+# TODO:
+# some indicator of weeks in month and the day where month changes
+# for example:
+# month with 4 weeks, 1st falls on Mon and last day on Tue
+# [ M X X T ]
+function ddate(){
+  DEF_COLOR="$fg_bold[black]"
+  HI_COLOR="$fg_bold[white]"
+  MED_COLOR="$fg_no_bold[blue]"
+
+  months=(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
+
+  echo -n $DEF_COLOR
+  current_month_number=`gdate +%-m`
+  for ((i = 1; i <= $#months; i++)); do
+    if [[ $current_month_number == $((i)) ]]
+  then
+    echo -n $HI_COLOR`gdate "+%h"`$DEF_COLOR
+    else
+      echo -n ${months[$i]}
+    fi
+    echo -n " "
+  done
+  echo
+
+  days=(Sun Mon Tue Wed Thu Fri Sat)
+  current_day_number=`gdate +%-d` # 1..31
+  current_weekday=`gdate +%a` # Mon...Sun
+  weekday_index=$((`gdate +%w`+1)) # 1...7 => Sunday is 1
+  total_days_month=`gdate -d "-$(($current_day_number-1)) days +1 months -1 days" +%d` # 29,30,31
+  for ((i = 1; i <= $#days; i++)); do
+  day=$days[i]
+  if [[ $current_weekday == $day ]]
+  then
+    local day=`echo $day | cut -c1`
+    local print_day=$HI_COLOR$day$DEF_COLOR
+  else
+    local day=`echo $day | cut -c1`
+    local print_day=$day
+  fi
+  echo -n "$print_day "
+  local prev_month_change=$((i-weekday_index+current_day_number))
+  if (( $prev_month_change == 0 ))
+  then
+    echo -n "$MED_COLOR|$DEF_COLOR "
+  fi
+  local next_month_change=$((prev_month_change-total_days_month))
+  if (( $next_month_change == 0 ))
+  then
+    echo -n "$MED_COLOR|$DEF_COLOR "
+  fi
+  done
+
+  echo  "$HI_COLOR$current_day_number$MED_COLOR/$total_days_month"
+}
+ddate

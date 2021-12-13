@@ -610,7 +610,9 @@
 ;
 (use-package! lsp-mode
   :commands lsp
-  :ensure t
+  ; on startup:
+  ; Ignoring ’:ensure t’ in ’lsp-mode’ config
+  ;:ensure t
   :diminish lsp-mode
   :hook
   (elixir-mode . lsp)
