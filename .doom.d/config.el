@@ -120,6 +120,8 @@
       ;evil-insert-state-cursor '(bar    "turquoise")
       ;evil-visual-state-cursor '(hollow "turquoise"))
 
+;(setq evil-insert-state-cursor '(bar))
+
 ;; ----------------
 ;; Layout
 ;; ----------------
@@ -127,6 +129,10 @@
 
 (use-package! uniquify
   :config (setq uniquify-buffer-name-style 'forward))
+
+;; highlight-indent-guides only for yaml
+(remove-hook! '(prog-mode-hook text-mode-hook conf-mode-hook) #'highlight-indent-guides-mode)
+(add-hook 'yaml-mode-hook #'highlight-indent-guides-mode)
 
 ;; ----------------
 ;; projectile
@@ -403,6 +409,7 @@
 (map! ;switch mark set and mark travel
  :n "m" #'evil-goto-mark
  :n "M" #'evil-set-marker
+ :n "C-m" #'evil-set-marker
  :n "`" #'evil-set-marker)
 
 ;; ----------------

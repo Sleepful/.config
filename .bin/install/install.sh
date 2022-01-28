@@ -18,6 +18,7 @@ brew install --cask font-iosevka
 brew install ripgrep
 brew install findutils
 brew install coreutils
+brew install gnu-sed
 # Emacs
 brew install --no-quarantine emacs --HEAD
 /usr/bin/tic -x -o ~/.terminfo ~/.bin/install/config/terminfo-custom.src
@@ -74,3 +75,13 @@ git clone https://github.com/jeffreytse/zsh-vi-mode.git $HOME/.config/zsh/.zsh-v
 
 # eye care
 brew install --cask flux
+
+# Others
+# On OSX there are some shortcuts to be removed
+# they are removed by replacing them with impossible shortcuts
+# Preferences -> Keyboard -> Shortcuts -> +
+# Add the following:
+# Ctrl+M on terminal
+# Hide kitty : random shortcut that will never get triggered
+# Ctrl+H on every app
+# Minimize   : random shortcut that will never get triggered

@@ -1,8 +1,8 @@
 {
-  "title": "Prevent unintended command-h hide window (rev 2)",
+  "title": "Prevent unintended command-h hide window (rev 3)",
   "rules": [
     {
-      "description": "Disable Cmd+H Hide (rev 2)",
+      "description": "Disable Cmd+H Hide (rev 3)",
       "manipulators": [
         {
           "type": "basic",
@@ -12,6 +12,11 @@
             "modifiers": {
               "mandatory": ["command"]
             }
+          },
+          "to": {
+            "key_code": "H",
+            "modifiers":
+              ["left_shift", "command"]
           }
         }
       ]
