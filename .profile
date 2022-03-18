@@ -59,7 +59,7 @@ alias stageall=$'eval $(heroku config --remote staging | tail -n +2 | sed "s/\:[
 # alias bfstaging2='eval $(heroku config --remote staging | tail -n +2 | sed "s/\:[[:blank:]]*\(.*\)/='\''\1'\''/g" | tr "\n" " ")'
 alias proddb='DATABASE_URL=$(echo "`heroku pg:credentials:url --remote production | grep postgres | sed "s: ::g" | tr -s \\n `?ssl=no-verify")'
 alias prodredis='REDIS_URL=`heroku redis:credentials --remote production`'
-alias prodall=$'eval $(heroku config --remote staging | tail -n +2 | sed "s/\:[[:blank:]]*\\(.*\\)/=\'\\1\'/g" | tr "\n" " ")' #"
+alias prodall=$'eval $(heroku config --remote production | tail -n +2 | sed "s/\:[[:blank:]]*\\(.*\\)/=\'\\1\'/g" | tr "\n" " ")' #"
 
 alias localredis='REDIS_URL=redis://localhost:6379/0'
 alias herokus='TERM=ansi heroku run -r staging -- bash'
