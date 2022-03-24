@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name:  function
+# key: foo
+# --
+
+function $0($2): $1{
+  return
+}

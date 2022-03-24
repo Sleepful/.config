@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name:  async function
+# key: asf
+# --
+
+const $0 = async ($2): Promise<$1> => {
+  return
+}
