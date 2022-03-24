@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: js in string
+# key: js
+# --
+\${$0}

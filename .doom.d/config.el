@@ -416,6 +416,31 @@
 ;; Code edit
 ;; ----------------
 ;
+(after! web-mode
+  :config
+  ;; Rewriting the default +web/indent-or-yas-or-emmet-expand function:
+  (defun +web/indent-or-yas-or-emmet-expand ()
+    "Do-what-I-mean on TAB.
+Invokes `indent-for-tab-command' if at or before text bol, `yas-expand' if on a
+snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
+`yas-minor-mode' is enabled or not."
+    (interactive)
+    (call-interactively
+     (if (yas--templates-for-key-at-point)
+         #'yas-expand
+       (cond ((or (<= (current-column) (current-indentation))
+                  (not (eolp))
+                  (not (or (memq (char-after) (list ?\n ?\s ?\t))
+                           (eobp))))
+              #'indent-for-tab-command)
+             ((featurep! :editor snippets)
+              (require 'yasnippet)
+              (if (yas--templates-for-key-at-point)
+                  #'yas-expand
+                #'emmet-expand-yas))
+             (#'emmet-expand-line))))))
+
+
 (map! :map emmet-mode-keymap :i "TAB" #'+web/indent-or-yas-or-emmet-expand)
 ; for above to work nicely, below does stuff:
 ; https://github.com/smihica/emmet-mode/issues/64
@@ -660,7 +685,11 @@
   :custom
   (web-mode-markup-indent-offset 2)
   (web-mode-css-indent-offset 2)
-  (web-mode-code-indent-offset 2))
+  (web-mode-code-indent-offset 2)
+
+
+
+  )
 
 (setq web-mode-content-types-alist
   '(("json" . "\\.api\\'")

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: const variable
+# key: c
+# --
+
+const $1 = $0
