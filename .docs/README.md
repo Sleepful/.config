@@ -7,7 +7,7 @@ creation:
 ```
 git init --bare $HOME/.cfg
 alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-cfg cfg --local status.showUntrackedFiles no
+cfg config --local status.showUntrackedFiles no
 echo "alias jfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> $HOME/.bashrc
 
 ```
