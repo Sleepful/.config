@@ -4,6 +4,7 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
 # Finished adapting your PATH environment variable for use with MacPorts.
 
+export PATH="/opt/homebrew/bin:$PATH"
 export PATH=~/.emacs.d/bin:$PATH
 export PATH="$HOME/.bin:$PATH"
 alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
@@ -135,3 +136,6 @@ function npmdav(){
 alias webdav='ngdav > /dev/null & npmdav'
 alias kbg="pgrep -P $$ | head -n -2 | sudo xargs kill && fg"
 alias gha="act -P ubuntu-latest=catthehacker/ubuntu:js-latest-dev"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
