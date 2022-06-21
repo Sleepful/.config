@@ -39,15 +39,6 @@ nvm use node
 npm install --global prettier
 npm install --global yarn
 
-# elixir
-brew install asdf
-asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
-asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
-asdf install erlang latest
-asdf install elixir latest
-asdf global erlang latest
-asdf global elixir latest
-
 # python
 brew install pyenv
 # install python through pyenv, pick the version
