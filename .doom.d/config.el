@@ -448,6 +448,10 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
   :config
   (setq yas-snippet-revival nil))
 
+(use-package! evil-snipe
+  :config
+  (setq evil-snipe-spillover-scope 'whole-buffer))
+
 ; helpful macros for map-keybindings and keybindings:
 (defmacro insertchar (char)
   `(lambda ()

@@ -329,3 +329,7 @@ function ddate(){
   echo  "$HI_COLOR$current_day_number$MED_COLOR/$total_days_month"
 }
 ddate
+
+# Java?
+# export PATH="$HOME/.jenv/bin:$PATH"
+# eval "$(jenv init -)"
