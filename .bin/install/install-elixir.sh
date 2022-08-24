@@ -14,6 +14,7 @@ asdf install erlang latest
 asdf install elixir latest
 asdf global erlang latest
 asdf global elixir latest
+asdf plugin-add rebar https://github.com/Stratus3D/asdf-rebar.git
 
 # must do something like:
 # echo "erlang 25.0.1" >> .tool-versions

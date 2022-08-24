@@ -17,6 +17,7 @@
 	logo = log --oneline
 	fetcha = fetch --all
 	pulla = pull --all
+	clonesub = clone --recurse-submodules -j8
 	# checkout new branch with commit message:
 	# conew BRANCHNAME commit-msg
 	conew = "!conew(){ git checkout -b \"$1\" && git commit --allow-empty -m \"$2\" && git push -u origin HEAD; }; conew"
@@ -35,3 +36,5 @@
 	rebase = false
 [init]
 	defaultBranch = main
+[status]
+	submoduleSummary = true

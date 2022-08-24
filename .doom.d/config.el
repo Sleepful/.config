@@ -320,9 +320,14 @@
       "M-'" #'+workspace/switch-right   ; rm abbrev-prefix-mark
       )
 (map! "M-;" #'+workspace/switch-left    ; rm comment-dwim
-      :n
-      "M-." #'+workspace/switch-left    ; rm evil-repeat-pop-next
       )
+(map! :leader
+      "]" #'+workspace/switch-right
+      "[" #'+workspace/switch-left)
+(map! :n
+      "}" #'+workspace/switch-right
+      :n
+      "{" #'+workspace/switch-left)
 (map! :leader
       :desc "Swap left" "TAB j"
       #'+workspace/swap-left)
@@ -460,7 +465,7 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
   )
 
 (defmacro keybindings ()
-  `(map! (:prefix-map (";" . "shortcuts")
+  `(map! (:prefix-map ("'" . "shortcuts")
       :iro
       ,@(mapcan (lambda (pair)
           (list (car pair)
@@ -486,7 +491,8 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
                     ("s" ?\")
                     ("v" ?\')
                     ("f" ?\`)
-                    (";" ?\;)
+                    ("'" ?\')
+                   ; (";" ?\;)
                     ("3" ?\#)
                     ))
 
@@ -655,6 +661,7 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
   :init
   ; update elixir version if needed:
   (add-to-list 'exec-path "~/Code/GitBuilds/elixir-ls-1.13")
+  ;(add-to-list 'exec-path "~/Code/GitBuilds/elixir-ls-1.13" "~/go/bin/gopls")
   )
 (after! lsp-mode (add-to-list
    'lsp-language-id-configuration
@@ -771,3 +778,6 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
        ))
      "'")))
 
+
+(add-hook 'emacs-lisp-mode 'parinfer-rust-mode)
+(add-hook 'clojure-mode 'parinfer-rust-mode)

@@ -71,3 +71,9 @@ brew install --cask flux
 # Hide kitty : random shortcut that will never get triggered
 # Ctrl+H on every app
 # Minimize   : random shortcut that will never get triggered
+
+# Go
+brew install go
+# Go lsp server
+go install golang.org/x/tools/gopls@latest
+# go env GOPATH

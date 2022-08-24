@@ -12,3 +12,4 @@ cfg restore .zshrc
 
 #kitty
 brew install --cask kitty
+
