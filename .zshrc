@@ -3,6 +3,7 @@
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile && source ~/.secret'
 
 alias sorc='source ~/.zshrc'
+autoload zmv
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   echo "linux detected"

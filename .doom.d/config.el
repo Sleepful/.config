@@ -100,7 +100,9 @@
   ;:config (setq ccm-recenter-at-end-of-file t)) ; this is useful for `master' branch of package, not `dev' branch
   )
 
+
 ; face
+;; (font-lock-add-keywords nil '(("\\(\n\\)" 1 font-lock-warning-face t)))
 ;(custom-set-faces!
   ;'(hl-line :underline "light slate blue"
             ;;:background nil
@@ -641,7 +643,7 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
 (add-to-list 'auto-mode-alist '("\\.js\\'"  . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'"  . typescript-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-tsx-mode))
 ;(add-hook 'js-jsx-mode-hook 'lsp!)
 ;(add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "typescriptreact"))
 ;(add-hook 'js-jsx-mode-hook 'lsp-mode)
@@ -715,7 +717,8 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
   :config
   (flycheck-add-mode 'javascript-eslint 'web-mode)) ; allow flycheck to be enabled on web-mode with javascript-eslint checker)
 
-;(add-hook 'after-init-hook #'global-prettier-mode) DEPRACATED, instead add to web-mode-hook and typescript-mode-hook
+(use-package! whitespace
+  :config (setq whitespace-style '(newline-mark newline)) (global-whitespace-mode))
 
 ;; Emmet mode
 ; ----------------------

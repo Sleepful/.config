@@ -142,3 +142,8 @@ alias gha="act -P ubuntu-latest=catthehacker/ubuntu:js-latest-dev"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Per homebrew guile installation info:
+export GUILE_LOAD_PATH="/opt/homebrew/share/guile/site/3.0"
+export GUILE_LOAD_COMPILED_PATH="/opt/homebrew/lib/guile/3.0/site-ccache"
+export GUILE_SYSTEM_EXTENSIONS_PATH="/opt/homebrew/lib/guile/3.0/extensions"
