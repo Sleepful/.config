@@ -719,6 +719,8 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
 
 (use-package! whitespace
   :config (setq whitespace-style '(newline-mark newline)) (global-whitespace-mode))
+(use-package! highlight-indent-guides
+  :config (setq highlight-indent-guides-method 'column))
 
 ;; Emmet mode
 ; ----------------------
