@@ -132,9 +132,17 @@
 (use-package! uniquify
   :config (setq uniquify-buffer-name-style 'forward))
 
+(use-package! whitespace
+  :config (setq whitespace-style '(newline-mark newline)) (global-whitespace-mode))
+;; (use-package! highlight-indent-guides
+;;     :config (setq highlight-indent-guides-method 'column)
+;;     (load-theme 'doom-one t)
+;;     )
+(defun set-indent-method () (setq highlight-indent-guides-method 'column))
+(add-hook 'doom-load-theme-hook 'set-indent-method 10)
 ;; highlight-indent-guides only for yaml
-(remove-hook! '(prog-mode-hook text-mode-hook conf-mode-hook) #'highlight-indent-guides-mode)
-(add-hook 'yaml-mode-hook #'highlight-indent-guides-mode)
+;;(remove-hook! '(prog-mode-hook text-mode-hook conf-mode-hook) #'highlight-indent-guides-mode)
+;;(add-hook 'yaml-mode-hook #'highlight-indent-guides-mode)
 
 ;; ----------------
 ;; projectile
@@ -717,10 +725,6 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
   :config
   (flycheck-add-mode 'javascript-eslint 'web-mode)) ; allow flycheck to be enabled on web-mode with javascript-eslint checker)
 
-(use-package! whitespace
-  :config (setq whitespace-style '(newline-mark newline)) (global-whitespace-mode))
-(use-package! highlight-indent-guides
-  :config (setq highlight-indent-guides-method 'column))
 
 ;; Emmet mode
 ; ----------------------
