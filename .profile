@@ -25,6 +25,7 @@ alias kdir='cd ~/Code/GitBuilds/kitty'
 alias ktdir='cd ~/Code/GitBuilds/kitty-themes/themes'
 alias gbs='cd ~/Code/GitBuilds'
 # macOs
+alias rmDS='find . -name ".DS_Store" -delete'
 # anki
 alias ankicm='cd ~/Library/Application\ Support/Anki2/User\ 1/collection.media'
 alias anki='cd ~/Documents/Anki'
