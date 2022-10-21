@@ -90,6 +90,12 @@
 ;; ----------------
 ;; Layout
 ;; ----------------
+
+(toggle-uniquify-buffer-names)
+(setq-default frame-title-format '("%b > %f"))
+(use-package doom-modeline
+  :config
+  (setq doom-modeline-buffer-file-name-style 'truncate-with-project))
 (setq-default truncate-lines 'nil) ;; wrap lines by default
 ; emojify
 ;(add-hook 'after-init-hook #'global-emojify-mode)
@@ -143,6 +149,9 @@
 ;; highlight-indent-guides only for yaml
 ;;(remove-hook! '(prog-mode-hook text-mode-hook conf-mode-hook) #'highlight-indent-guides-mode)
 ;;(add-hook 'yaml-mode-hook #'highlight-indent-guides-mode)
+
+;; source: https://github.com/doomemacs/doomemacs/issues/4206#issuecomment-734414502
+(remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
 ;; ----------------
 ;; projectile
