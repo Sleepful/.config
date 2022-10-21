@@ -92,7 +92,7 @@
 ;; ----------------
 
 (toggle-uniquify-buffer-names)
-(setq-default frame-title-format '("%b > %f"))
+(setq-default frame-title-format '("%b ___> %f"))
 (use-package doom-modeline
   :config
   (setq doom-modeline-buffer-file-name-style 'truncate-with-project))
