@@ -34,8 +34,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-; (setq display-line-numbers-type t)
-(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type 'nil)
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -91,12 +90,18 @@
 ;; Layout
 ;; ----------------
 
-(toggle-uniquify-buffer-names)
 (setq-default frame-title-format '("%b ___> %f"))
 (use-package doom-modeline
   :config
   (setq doom-modeline-buffer-file-name-style 'truncate-with-project))
-(setq-default truncate-lines 'nil) ;; wrap lines by default
+;; (setq-default truncate-lines 'nil)
+;; wrap lines by default
+
+;; enable word-wrap (almost) everywhere
+;; https://docs.doomemacs.org/latest/modules/editor/word-wrap/
+(+global-word-wrap-mode +1)
+(setq +word-wrap-extra-indent 'single)
+
 ; emojify
 ;(add-hook 'after-init-hook #'global-emojify-mode)
 ; centered cursor
@@ -135,8 +140,12 @@
 ;; ----------------
 ;
 
-(use-package! uniquify
-  :config (setq uniquify-buffer-name-style 'forward))
+;; (use-package! uniquify
+;; ;;   :config (setq uniquify-buffer-name-style 'forward))
+;; (require 'uniquify)
+
+;; https://github.com/doomemacs/doomemacs/issues/6205
+(setq-hook! 'persp-mode-hook uniquify-buffer-name-style 'forward)
 
 (use-package! whitespace
   :config (setq whitespace-style '(newline-mark newline)) (global-whitespace-mode))
@@ -144,7 +153,7 @@
 ;;     :config (setq highlight-indent-guides-method 'column)
 ;;     (load-theme 'doom-one t)
 ;;     )
-(defun set-indent-method () (setq highlight-indent-guides-method 'column))
+(defun set-indent-method () (setq highlight-indent-guides-method 'character))
 (add-hook 'doom-load-theme-hook 'set-indent-method 10)
 ;; highlight-indent-guides only for yaml
 ;;(remove-hook! '(prog-mode-hook text-mode-hook conf-mode-hook) #'highlight-indent-guides-mode)
@@ -158,7 +167,7 @@
 ;; ----------------
 ;
 ;; search for projects here
-(setq projectile-project-search-path '("~/Code/" "~/Language/" "~/Code/Forks" "~/Notes"))
+(setq projectile-project-search-path '(("~/Code/" . 2) "~/Language/" "~/Code/Forks" "~/Notes"))
 ;; open dired on root folder after opening project with projectile (perhaps not working) https://docs.projectile.mx/projectile/configuration.html
 ;(setq projectile-switch-project-action #'projectile-dired)
 ; the following is a work-around per
@@ -222,6 +231,16 @@
 ;; General
 ;; ----------------
 ;
+
+(map! :leader :desc "avy" :n "z"
+      #'(lambda ()
+          (interactive)
+          (evil-avy-goto-char-2)))
+
+(map! :desc "avy" :n "g s z"
+      #'(lambda ()
+          (interactive)
+          (evil-avy-goto-char-2)))
 
 ; this one kinda is kinda lame
 (map! :leader :desc "Search home directory" "s h"
@@ -541,10 +560,11 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
 ;
 ;; The following snippet will make Evil treat an Emacs symbol as a word, useful for 'w' movements
 ;; in words with special symbols like 'foo-bar'
-(with-eval-after-load 'evil
-    (defalias #'forward-evil-word #'forward-evil-symbol)
-    ;; make evil-search-word look for symbol rather than word boundaries
-    (setq-default evil-symbol-word-search t))
+;; 
+; (with-eval-after-load 'evil
+;     (defalias #'forward-evil-word #'forward-evil-symbol)
+;     ;; make evil-search-word look for symbol rather than word boundaries
+;     (setq-default evil-symbol-word-search t))
 
 ; by default `evil-show-marks' (SPC-s-r) opens `counsel-mark-ring' (because of doom remapping)
 ; instead we want to open `counsel-evil-marks'
@@ -673,13 +693,13 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
   :commands lsp
   ; on startup:
   ; Ignoring ’:ensure t’ in ’lsp-mode’ config
-  ;:ensure t
+  :ensure t
   :diminish lsp-mode
   :hook
   (elixir-mode . lsp)
   :init
   ; update elixir version if needed:
-  (add-to-list 'exec-path "~/Code/GitBuilds/elixir-ls-1.13")
+  (add-to-list 'exec-path "~/Code/GitBuilds/elixir-ls-local-build")
   ;(add-to-list 'exec-path "~/Code/GitBuilds/elixir-ls-1.13" "~/go/bin/gopls")
   )
 (after! lsp-mode (add-to-list
@@ -698,7 +718,7 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
 ; ----------------------
 ;
 ;(add-hook 'web-mode-hook 'lsp!)
-(add-hook 'web-mode-hook 'setup-tide-mode)
+;; (add-hook 'web-mode-hook 'setup-tide-mode)
 
 
 ;; Eglot
@@ -768,12 +788,15 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
 (setq company-tooltip-align-annotations t)
 
 ;; formats the buffer before saving
-;(add-hook 'before-save-hook 'tide-format-before-save) ; removed because I'm using prettier and it generates conflict
+(add-hook 'before-save-hook 'format-all-buffer) ; removed because I'm using prettier and it generates conflict
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (add-hook 'typescript-mode-hook #'emmet-mode)
 ;(add-hook 'js-jsx-mode-hook #'setup-tide-mode)
 (add-hook 'typescript-mode-hook #'prettier-mode)
-(add-hook 'web-mode-hook #'prettier-mode)
+(add-hook 'typescript-tsx-mode-hook #'prettier-mode)
+(add-hook 'typescript-tsx-mode-hook #'emmet-mode)
+(add-hook 'typescript-tsx-mode-hook #'setup-tide-mode)
+;(add-hook 'web-mode-hook #'prettier-mode)
 ; for .js files (ts-mode won't launch)
 (add-hook 'rjsx-mode-hook #'prettier-mode)
 
@@ -796,6 +819,7 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
        ))
      "'")))
 
-
-(add-hook 'emacs-lisp-mode 'parinfer-rust-mode)
-(add-hook 'clojure-mode 'parinfer-rust-mode)
+;(use-package parinfer-rust-mode
+;  :hook emacs-lisp-mode)
+;(add-hook 'emacs-lisp-mode 'parinfer-rust-mode)
+;(add-hook 'clojure-mode 'parinfer-rust-mode)
