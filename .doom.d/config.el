@@ -242,6 +242,17 @@
           (interactive)
           (evil-avy-goto-char-2)))
 
+;; overwrites the "repeat action" from vim
+(map! :desc "avy" :n "."
+      #'(lambda ()
+          (interactive)
+          (evil-avy-goto-char-2)))
+
+(map! :desc "repeat" :n "g ."
+      #'(lambda ()
+          (interactive)
+          (evil-repeat 1)))
+
 ; this one kinda is kinda lame
 (map! :leader :desc "Search home directory" "s h"
       #'(lambda ()
@@ -691,16 +702,20 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
 ;
 (use-package! lsp-mode
   :commands lsp
-  ; on startup:
-  ; Ignoring ’:ensure t’ in ’lsp-mode’ config
+                                        ; on startup:
+                                        ; Ignoring ’:ensure t’ in ’lsp-mode’ config
   :ensure t
   :diminish lsp-mode
   :hook
   (elixir-mode . lsp)
-  :init
-  ; update elixir version if needed:
-  (add-to-list 'exec-path "~/Code/GitBuilds/elixir-ls-local-build")
-  ;(add-to-list 'exec-path "~/Code/GitBuilds/elixir-ls-1.13" "~/go/bin/gopls")
+  :init ; update elixir version if needed:
+  ; (add-to-list 'exec-path "~/Code/GitBuilds/elixir-ls-local-build")
+  (add-to-list 'exec-path "~/Code/lexical/_build/prod/rel/lexical")
+  :config
+  (setq lsp-elixir-local-server-command "~/Code/lexical/_build/prod/rel/lexical/start_lexical.sh")
+  (setq lsp-elixir-server-command '("start_lexical.sh"))
+  (setq lsp-lens-enable nil)
+  (setq lsp-enable-suggest-server-download nil);(add-to-list 'exec-path "~/Code/GitBuilds/elixir-ls-1.13" "~/go/bin/gopls")
   )
 (after! lsp-mode (add-to-list
    'lsp-language-id-configuration

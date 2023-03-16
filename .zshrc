@@ -44,7 +44,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   # tell mac to shut its hole
   export BASH_SILENCE_DEPRECATION_WARNING=1
   export ASDF_DATA_DIR=`brew --prefix asdf`/
-  source $ASDF_DATA_DIR/asdf.sh
+  source $ASDF_DATA_DIR/libexec/asdf.sh
 
   # GNU find
   # gnu coreutils from `brew install coreutils`
@@ -61,7 +61,8 @@ else
   # echo "Emacs server Online"
 fi
 
-
+# direnv
+eval "$(direnv hook zsh)"
 
 # vim mode
 # https://github.com/jeffreytse/zsh-vi-mode

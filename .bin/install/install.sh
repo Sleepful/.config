@@ -13,3 +13,7 @@ cfg restore .zshrc
 #kitty
 brew install --cask kitty
 
+brew install ripgrep
+brew install fd
+
+
