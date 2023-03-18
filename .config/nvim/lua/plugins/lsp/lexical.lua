@@ -1,17 +1,23 @@
+local root_dir = function(fname)
+  local lspconfig = require("lspconfig")
+  local root = lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+  return root
+end
+
 local custom_attach = function()
-  print("Lexical has started.")
+  -- local buf_name = vim.fn.expand("%") (does not include directory, only filename)
+  local buf_name = vim.api.nvim_buf_get_name(0)
+  local root = root_dir(buf_name)
+  print("In:", buf_name) -- won't display cuz of other msg
+  print("Lexical:", root)
 end
 
 local lexical = {
   filetypes = { "elixir", "eelixir", "heex", "surface" },
   cmd = { "/Users/jose/Code/lexical/_build/dev/rel/lexical/start_lexical.sh" },
-  root_dir = function(fname)
-    local lspconfig = require("lspconfig")
-    local root = lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
-    print("Root dir:", root)
-    return root
-  end,
+  root_dir = root_dir,
 }
+
 return {
   "neovim/nvim-lspconfig",
   opts = {
@@ -33,6 +39,7 @@ return {
             filetypes = lexical.filetypes,
             cmd = lexical.cmd,
             root_dir = lexical.root_dir,
+            autostart = false,
           },
         }
         -- returns false to use the set-up from lazy.vim with lspconfig
