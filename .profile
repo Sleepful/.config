@@ -22,6 +22,7 @@ alias lang='cd ~/Language'
 alias vrc='vim ~/.vimrc'
 alias vim='~/local/nvim/bin/nvim'
 alias nvim='vim'
+alias vimconf='cd ~/.config/nvim'
 # alias vim='vim -S ~/.vimrc' # necessary only if using neovim, as neovim reads the config from somewhere else
 alias kdir='cd ~/Code/GitBuilds/kitty'
 alias ktdir='cd ~/Code/GitBuilds/kitty-themes/themes'

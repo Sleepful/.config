@@ -1,6 +1,6 @@
 local root_dir = function(fname)
   local lspconfig = require("lspconfig")
-  local root = lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+  local root = lspconfig.util.root_pattern(".git")(fname) or vim.loop.os_homedir()
   return root
 end
 
