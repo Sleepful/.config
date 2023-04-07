@@ -13,7 +13,7 @@ local custom_attach = function()
 end
 
 local lexical = {
-  filetypes = { "elixir", "eelixir", "heex", "surface" },
+  filetypes = { "elixir", "eelixir", "surface" }, -- "heex",
   cmd = { "/Users/jose/Code/lexical/_build/dev/rel/lexical/start_lexical.sh" },
   root_dir = root_dir,
 }
@@ -26,6 +26,7 @@ return {
         mason = false, -- do not set up with mason
         filetypes = lexical.filetypes,
         on_attach = custom_attach,
+        autostart = true,
       },
     },
     setup = {
@@ -39,7 +40,7 @@ return {
             filetypes = lexical.filetypes,
             cmd = lexical.cmd,
             root_dir = lexical.root_dir,
-            autostart = false,
+            autostart = true,
           },
         }
         -- returns false to use the set-up from lazy.vim with lspconfig

@@ -710,9 +710,9 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
   (elixir-mode . lsp)
   :init ; update elixir version if needed:
   ; (add-to-list 'exec-path "~/Code/GitBuilds/elixir-ls-local-build")
-  (add-to-list 'exec-path "~/Code/lexical/_build/prod/rel/lexical")
+  (add-to-list 'exec-path "~/Code/lexical/_build/dev/rel/lexical")
   :config
-  (setq lsp-elixir-local-server-command "~/Code/lexical/_build/prod/rel/lexical/start_lexical.sh")
+  (setq lsp-elixir-local-server-command "~/Code/lexical/_build/dev/rel/lexical/start_lexical.sh")
   (setq lsp-elixir-server-command '("start_lexical.sh"))
   (setq lsp-lens-enable nil)
   (setq lsp-enable-suggest-server-download nil);(add-to-list 'exec-path "~/Code/GitBuilds/elixir-ls-1.13" "~/go/bin/gopls")
