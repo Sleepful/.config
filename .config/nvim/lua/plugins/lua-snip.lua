@@ -39,6 +39,19 @@ local snips = function()
       i(3, "else"),
     }),
   })
+
+  ls.add_snippets("all", {
+    -- review DOC.md for LuaSnip
+    -- EXAMPLE:
+    s("fn", {
+      -- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
+      t("fn "),
+      i(1, "x"),
+      t(" -> "),
+      i(2, "x"),
+      t(" end"),
+    }),
+  })
 end
 
 -- NOTE: abort Cmp completion with <C-e> to use <Tab> with LuaSnip
