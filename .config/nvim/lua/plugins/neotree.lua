@@ -31,6 +31,11 @@ return {
           highlight = "NeoTreeFileIcon",
         },
       },
+      window = {
+        mappings = {
+          ["/"] = "noop",
+        },
+      },
     },
   },
 }
