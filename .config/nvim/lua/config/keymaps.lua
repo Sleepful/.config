@@ -18,3 +18,10 @@ map("n", "<S-h>", "40zh", { desc = "Scroll left" })
 map("n", "<S-l>", "40zl", { desc = "Scroll right" })
 map("n", "<C-p>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 map("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+
+local Util = require("lazyvim.util")
+-- override default line number toggle because I want to
+-- toggle between "no number" and "normal number"
+map("n", "<leader>ul", function()
+  Util.toggle("number")
+end, { desc = "Toggle Line Numbers" })
