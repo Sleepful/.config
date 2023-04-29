@@ -55,7 +55,6 @@ return {
           local focusable_windows_on_tabpage = vim.tbl_filter(function(win)
             return vim.api.nvim_win_get_config(win).focusable
           end, vim.api.nvim_tabpage_list_wins(0))
-          -- table.insert(focusable_windows_on_tabpage, current_window)
           require("leap").leap({ target_windows = focusable_windows_on_tabpage })
         end,
         mode = { "n", "x", "o" },
