@@ -61,6 +61,9 @@ return {
     keys = function()
       return {}
     end,
+    opts = {
+      region_check_events = "InsertEnter",
+    },
     config = function(LazyPlugin, opts)
       -- set up opts, then use
       require("luasnip").setup(opts)

@@ -65,7 +65,7 @@ return {
     },
   },
   {
-    "ggandor/flit.nvim",
+    "ggandor/flit.nvim", -- included with lazyvim, but this is default config for flit:
     opts = {
       -- from docs:
       keys = { f = "f", F = "F", t = "t", T = "T" },
