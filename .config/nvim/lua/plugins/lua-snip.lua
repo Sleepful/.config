@@ -40,16 +40,20 @@ local snips = function()
     }),
   })
 
-  ls.add_snippets("all", {
-    -- review DOC.md for LuaSnip
-    -- EXAMPLE:
+  ls.add_snippets("elixir", {
     s("fn", {
-      -- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
       t("fn "),
       i(1, "x"),
       t(" -> "),
       i(2, "x"),
       t(" end"),
+    }),
+    s("insp", {
+      t("IO.inspect("),
+      i(1, "x"),
+      t(', label: "'),
+      i(2, "label"),
+      t('")'),
     }),
   })
 end
@@ -58,16 +62,25 @@ end
 return {
   {
     "L3MON4D3/LuaSnip",
-    keys = function()
-      return {}
-    end,
+    keys = {
+      {
+        "<leader>S",
+        desc = "LuaSnip",
+      },
+      {
+        "<leader>SS",
+        function()
+          require("luasnip.loaders").edit_snippet_files(nil)
+        end,
+        desc = "List all marks!",
+      },
+    },
     opts = {
       region_check_events = "InsertEnter",
     },
     config = function(LazyPlugin, opts)
-      -- set up opts, then use
       require("luasnip").setup(opts)
-      snips()
+      require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/plugins/snippets" })
     end,
   },
   -- grabbed this from LAZYVIM examples:
