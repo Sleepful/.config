@@ -30,7 +30,7 @@ return {
     dependencies = {
       "hrsh7th/cmp-emoji",
       "mattn/emmet-vim",
-      "sleepful/cmp-emmet-vim",
+      "dcampos/cmp-emmet-vim",
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -73,8 +73,22 @@ return {
               {
                 name = "emmet_vim",
                 option = {
-                  -- elixir because Heex sometimes doesn't ID the HTML under cursor
-                  filetypes = { "elixir" },
+                  filetypes = {
+                    -- elixir because Heex sometimes doesn't ID the HTML under cursor
+                    "elixir",
+                    -- the rest are defaults from emmet-cmp
+                    "html",
+                    "xml",
+                    "typescriptreact",
+                    "javascriptreact",
+                    "css",
+                    "sass",
+                    "scss",
+                    "less",
+                    "heex",
+                    "tsx",
+                    "jsx",
+                  },
                 },
               },
             },
