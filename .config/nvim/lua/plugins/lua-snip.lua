@@ -1,63 +1,3 @@
--- all the requires and stuff from luasnip docs:
-local snips = function()
-  local ls = require("luasnip")
-  local s = ls.snippet
-  local sn = ls.snippet_node
-  local isn = ls.indent_snippet_node
-  local t = ls.text_node
-  local i = ls.insert_node
-  local f = ls.function_node
-  local c = ls.choice_node
-  local d = ls.dynamic_node
-  local r = ls.restore_node
-  local events = require("luasnip.util.events")
-  local ai = require("luasnip.nodes.absolute_indexer")
-  local extras = require("luasnip.extras")
-  local l = extras.lambda
-  local rep = extras.rep
-  local p = extras.partial
-  local m = extras.match
-  local n = extras.nonempty
-  local dl = extras.dynamic_lambda
-  local fmt = require("luasnip.extras.fmt").fmt
-  local fmta = require("luasnip.extras.fmt").fmta
-  local conds = require("luasnip.extras.expand_conditions")
-  local postfix = require("luasnip.extras.postfix").postfix
-  local types = require("luasnip.util.types")
-  local parse = require("luasnip.util.parser").parse_snippet
-  local ms = ls.multi_snippet
-
-  ls.add_snippets("all", {
-    -- review DOC.md for LuaSnip
-    -- EXAMPLE:
-    s("ternary", {
-      -- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
-      i(1, "cond"),
-      t(" ? "),
-      i(2, "then"),
-      t(" : "),
-      i(3, "else"),
-    }),
-  })
-
-  ls.add_snippets("elixir", {
-    s("fn", {
-      t("fn "),
-      i(1, "x"),
-      t(" -> "),
-      i(2, "x"),
-      t(" end"),
-    }),
-    s("insp", {
-      t("IO.inspect("),
-      i(1, "x"),
-      t(', label: "'),
-      i(2, "label"),
-      t('")'),
-    }),
-  })
-end
-
 -- NOTE: abort Cmp completion with <C-e> to use <Tab> with LuaSnip
 return {
   {
@@ -70,7 +10,7 @@ return {
       {
         "<leader>SS",
         function()
-          require("luasnip.loaders").edit_snippet_files(nil)
+          require("luasnip.loaders").edit_snippet_files({})
         end,
         desc = "List all marks!",
       },
@@ -103,11 +43,6 @@ return {
       local luasnip = require("luasnip")
       local cmp = require("cmp")
 
-      -- Add Emmet from dcampos/cmp-emmet-vim
-      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-        { name = "emmet_vim" },
-      }))
-
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
@@ -131,6 +66,20 @@ return {
             fallback()
           end
         end, { "i", "s" }),
+        ["<C-l>"] = cmp.mapping.complete({
+          config = {
+            sources = {
+              -- Add Emmet from dcampos/cmp-emmet-vim
+              {
+                name = "emmet_vim",
+                option = {
+                  -- elixir because Heex sometimes doesn't ID the HTML under cursor
+                  filetypes = { "elixir" },
+                },
+              },
+            },
+          },
+        }),
       })
     end,
   },
