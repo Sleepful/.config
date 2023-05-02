@@ -6,6 +6,13 @@ return {
   { "shaunsingh/moonlight.nvim" },
   { "peterlvilim/solarized.nvim" },
   { "Shatur/neovim-ayu" },
+  -- lazy = false -- because otherwise it doesn't display in uC color picker :S
+  { "folke/tokyonight.nvim", lazy = false, opts = { style = "moon" } },
+  {
+    "catppuccin/nvim",
+    lazy = false,
+    name = "catppuccin",
+  },
   -- has bad colors in dark mode, comment for now:
   -- { "shaunsingh/solarized.nvim" },
   -- Configure LazyVim to load gruvbox

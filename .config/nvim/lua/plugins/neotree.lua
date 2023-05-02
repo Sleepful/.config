@@ -34,6 +34,7 @@ return {
       window = {
         mappings = {
           ["/"] = "noop",
+          ["Z"] = "expand_all_nodes",
         },
       },
     },
