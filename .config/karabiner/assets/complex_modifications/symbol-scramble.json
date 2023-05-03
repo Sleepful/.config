@@ -1,0 +1,40 @@
+{
+  "title": "swap symbols",
+  "rules": [
+    {
+      "description": "swap quote with double quote",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "quote",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "quote"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "quote"
+          },
+          "to": [
+            {
+              "key_code": "quote",
+              "modifiers": [
+                "shift"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
