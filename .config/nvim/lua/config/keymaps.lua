@@ -23,6 +23,11 @@ map("n", "(", "{", { desc = "Normal mode movement in paragraph" })
 map("n", ")", "}", { desc = "Normal mode movement in paragraph" })
 map("n", "{", "$", { desc = "Normal mode movement" })
 map("n", "}", "%", { desc = "Normal mode movement" })
+-- repeat for visual mode:
+map("v", "(", "{", { desc = "Normal mode movement in paragraph" })
+map("v", ")", "}", { desc = "Normal mode movement in paragraph" })
+map("v", "{", "$", { desc = "Normal mode movement" })
+map("v", "}", "%", { desc = "Normal mode movement" })
 
 local Util = require("lazyvim.util")
 -- override default line number toggle because I want to
