@@ -1018,6 +1018,76 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "swap quote with double quote",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "quote",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "quote"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "quote"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "quote",
+                                        "modifiers": [
+                                            "shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "swap hyphen and underscore",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "hyphen",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "hyphen"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "hyphen"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "hyphen",
+                                        "modifiers": [
+                                            "shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
@@ -1121,6 +1191,48 @@
                         "is_pointing_device": false,
                         "product_id": 34304,
                         "vendor_id": 1452
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": true,
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": false,
+                        "product_id": 49284,
+                        "vendor_id": 1133
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": true,
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": false,
+                        "is_pointing_device": true,
+                        "product_id": 49284,
+                        "vendor_id": 1133
+                    },
+                    "ignore": true,
+                    "manipulate_caps_lock_led": false,
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": false,
+                        "product_id": 519,
+                        "vendor_id": 1241
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
