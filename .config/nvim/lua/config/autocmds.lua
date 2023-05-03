@@ -9,6 +9,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("sync_last_yank_with_l_register"),
   callback = function()
     local last_yank = vim.fn.getreg("0")
-    vim.fn.setreg("l", last_yank)
+    vim.fn.setreg("p", last_yank)
   end,
 })
