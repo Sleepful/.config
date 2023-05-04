@@ -19,6 +19,8 @@ map("n", "<S-l>", "40zl", { desc = "Scroll right" })
 map("n", "<C-p>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 map("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
+-- make it so that {} works as $% under normal mode and movements
+-- note: this matches some karabiner config where $% are swaped in place for {}
 map({ "n", "x", "o" }, "(", "{", { desc = "Normal mode movement in paragraph" })
 map({ "n", "x", "o" }, ")", "}", { desc = "Normal mode movement in paragraph" })
 map({ "n", "x", "o" }, "{", "$", { desc = "Normal mode movement" })
