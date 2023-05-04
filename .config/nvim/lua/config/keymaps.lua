@@ -19,15 +19,10 @@ map("n", "<S-l>", "40zl", { desc = "Scroll right" })
 map("n", "<C-p>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 map("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
-map("n", "(", "{", { desc = "Normal mode movement in paragraph" })
-map("n", ")", "}", { desc = "Normal mode movement in paragraph" })
-map("n", "{", "$", { desc = "Normal mode movement" })
-map("n", "}", "%", { desc = "Normal mode movement" })
--- repeat for visual mode:
-map("v", "(", "{", { desc = "Normal mode movement in paragraph" })
-map("v", ")", "}", { desc = "Normal mode movement in paragraph" })
-map("v", "{", "$", { desc = "Normal mode movement" })
-map("v", "}", "%", { desc = "Normal mode movement" })
+map({ "n", "x", "o" }, "(", "{", { desc = "Normal mode movement in paragraph" })
+map({ "n", "x", "o" }, ")", "}", { desc = "Normal mode movement in paragraph" })
+map({ "n", "x", "o" }, "{", "$", { desc = "Normal mode movement" })
+map({ "n", "x", "o" }, "}", "%", { desc = "Normal mode movement" })
 
 local Util = require("lazyvim.util")
 -- override default line number toggle because I want to
