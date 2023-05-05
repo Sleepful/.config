@@ -22,6 +22,16 @@
                 "shift"
               ]
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -41,6 +51,16 @@
                 "shift"
               ]
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -55,6 +75,16 @@
                 "shift"
               ]
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -68,6 +98,16 @@
               "modifiers": [
                 "shift"
               ]
+            }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
             }
           ]
         }
@@ -90,6 +130,16 @@
             {
               "key_code": "semicolon"
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -103,6 +153,16 @@
               "modifiers": [
                 "shift"
               ]
+            }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
             }
           ]
         }
@@ -123,6 +183,16 @@
                 "shift"
               ]
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -139,6 +209,16 @@
             {
               "key_code": "backslash"
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -149,6 +229,16 @@
           "to": [
             {
               "key_code": "quote"
+            }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
             }
           ]
         }
@@ -171,6 +261,16 @@
             {
               "key_code": "hyphen"
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -184,6 +284,16 @@
               "modifiers": [
                 "shift"
               ]
+            }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
             }
           ]
         }

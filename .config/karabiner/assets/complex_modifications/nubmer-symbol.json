@@ -18,6 +18,16 @@
             {
               "key_code": "1"
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -31,6 +41,16 @@
               "modifiers": [
                 "shift"
               ]
+            }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
             }
           ]
         },
@@ -48,6 +68,16 @@
             {
               "key_code": "2"
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -61,6 +91,16 @@
               "modifiers": [
                 "shift"
               ]
+            }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
             }
           ]
         },
@@ -78,6 +118,16 @@
             {
               "key_code": "3"
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -91,6 +141,16 @@
               "modifiers": [
                 "shift"
               ]
+            }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
             }
           ]
         },
@@ -108,6 +168,16 @@
             {
               "key_code": "4"
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -121,6 +191,16 @@
               "modifiers": [
                 "shift"
               ]
+            }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
             }
           ]
         },
@@ -138,6 +218,16 @@
             {
               "key_code": "5"
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -151,6 +241,16 @@
               "modifiers": [
                 "shift"
               ]
+            }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
             }
           ]
         },
@@ -168,6 +268,16 @@
             {
               "key_code": "6"
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -181,6 +291,16 @@
               "modifiers": [
                 "shift"
               ]
+            }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
             }
           ]
         },
@@ -198,6 +318,16 @@
             {
               "key_code": "7"
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -211,6 +341,16 @@
               "modifiers": [
                 "shift"
               ]
+            }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
             }
           ]
         },
@@ -228,6 +368,16 @@
             {
               "key_code": "8"
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -241,6 +391,16 @@
               "modifiers": [
                 "shift"
               ]
+            }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
             }
           ]
         },
@@ -258,6 +418,16 @@
             {
               "key_code": "9"
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -271,6 +441,16 @@
               "modifiers": [
                 "shift"
               ]
+            }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
             }
           ]
         },
@@ -288,6 +468,16 @@
             {
               "key_code": "0"
             }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
+            }
           ]
         },
         {
@@ -301,6 +491,16 @@
               "modifiers": [
                 "shift"
               ]
+            }
+          ],
+          "conditions": [
+            {
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ],
+              "type": "input_source_if"
             }
           ]
         }
