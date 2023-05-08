@@ -23,23 +23,27 @@ return {
   {
     "MattesGroeger/vim-bookmarks",
     dependencies = {
-      "MattesGroeger/vim-bookmarks",
       "nvim-telescope/telescope.nvim",
       "tom-anders/telescope-vim-bookmarks.nvim",
     },
     lazy = false,
-    config = function()
-      -- Commented out, bookmarks per working dir:
-      -- vim.g.bookmark_save_per_working_dir = 1
-      -- vim.cmd(vim_bookmarks_fun)
+    init = function()
       vim.g.bookmark_manage_per_buffer = 1
       vim.g.bookmark_auto_save = 1
+      vim.cmd(vim_bookmarks_fun)
       require("telescope").load_extension("vim_bookmarks")
     end,
-    keys = { {
-      "ml",
-      "<cmd>Telescope vim_bookmarks all<cr>",
-      desc = "Telescope bookmarks",
-    } },
+    keys = {
+      {
+        "ml",
+        "<cmd>Telescope vim_bookmarks current_file<cr>",
+        desc = "Telescope bookmarks",
+      },
+      {
+        "ms",
+        "<cmd>Telescope vim_bookmarks all<cr>",
+        desc = "Telescope bookmarks everywhere",
+      },
+    },
   },
 }
