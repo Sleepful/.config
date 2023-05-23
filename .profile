@@ -1,4 +1,3 @@
-
 # MacPorts Installer addition on 2020-11-05_at_09:38:36: adding an appropriate PATH variable for use with MacPorts.
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
@@ -16,13 +15,15 @@ alias szrc='source ~/.zshrc'
 alias ssecret='source ~/.secret'
 # cds
 alias code='cd ~/Code'
+alias oa='cd ~/Code/OA'
 alias wb='cd ~/Code/WordDatabase/phx'
 alias conf='cd ~/.config'
 alias notes='cd ~/Notes'
 alias lang='cd ~/Language'
-alias vrc='vim ~/.vimrc'
-alias vim='~/local/nvim/bin/nvim'
-alias nvim='vim'
+# neovim
+export PATH="$HOME/local/nvim/bin:$PATH"
+alias vim='nvim'
+alias vrc='nvim ~/.vimrc'
 alias vimconf='cd ~/.config/nvim'
 # alias vim='vim -S ~/.vimrc' # necessary only if using neovim, as neovim reads the config from somewhere else
 alias kdir='cd ~/Code/GitBuilds/kitty'
@@ -34,25 +35,25 @@ alias rmDS='find . -name ".DS_Store" -delete'
 alias ankicm='cd ~/Library/Application\ Support/Anki2/User\ 1/collection.media'
 alias anki='cd ~/Documents/Anki'
 # termdown
-function pomo(){
-  termdown "$@" && tput bel && terminal-notifier -message "$@ pomo complete"
+function pomo() {
+	termdown "$@" && tput bel && terminal-notifier -message "$@ pomo complete"
 }
 
 # git
-function gcorb(){
-  git checkout -b release/`date +%+4Y.%m.%d`-r$@
+function gcorb() {
+	git checkout -b release/$(date +%+4Y.%m.%d)-r$@
 }
-function gcr(){
- git commit -m "prepare release `date +%+4Y.%m.%d`-r$@"
+function gcr() {
+	git commit -m "prepare release $(date +%+4Y.%m.%d)-r$@"
 }
-function gtr(){
- git tag `date +%+4Y.%m.%d`-r$@
+function gtr() {
+	git tag $(date +%+4Y.%m.%d)-r$@
 }
 alias gpt='git push --tags'
 # Postgres MACOS stuff
 alias clearpgpid='pkill postgres && rm ~/Library/Application Support/Postgres/var-13/postmaster.pid'
 # Npm/Yarn MACOS stuff
-alias fixgyp="sudo rm -r -f `xcode-select --print-path` \
+alias fixgyp="sudo rm -r -f $(xcode-select --print-path) \
   && xcode-select --install"
 
 alias psf='ps aux | grep -i'
@@ -81,21 +82,22 @@ alias emak='TERM=xterm-emacs emacs -nw'
 alias emac='TERM=xterm-emacs-kitty emacs -nw'
 alias ec='TERM=xterm-emacs-kitty emacsclient -nw'
 alias ee='ec -e "(progn (+workspace:delete)(+workspace/switch-to-final))"'
-function es(){
-  emacsclient -n $@
+function es() {
+	emacsclient -n $@
 }
-function ek(){
-  emacsclient -n $@ && ec $_
+function ek() {
+	emacsclient -n $@ && ec $_
 }
-alias pke="pkill -i emacs"
-alias zrc='ec ~/.zshrc'
-alias prc='ec ~/.profile'
-alias secret='ec ~/.secret'
-alias krc='ec ~/.config/kitty/kitty.conf'
-alias grc='ec ~/.gitconfig'
+alias pke='pkill -i emacs'
+alias zrc='$EDITOR ~/.zshrc'
+alias prc='$EDITOR ~/.profile'
+alias secret='$EDITOR ~/.secret'
+alias krc='$EDITOR ~/.config/kitty/kitty.conf'
+alias grc='$EDITOR ~/.gitconfig'
 # used for emacsclient..i think? *doubt*
-export ALTERNATE_EDITOR=""
-export EDITOR="emacsclient -nw"                  # $EDITOR opens in terminal
+# export ALTERNATE_EDITOR=""
+# export EDITOR="emacsclient -nw"                  # $EDITOR opens in terminal
+export EDITOR="nvim" # $EDITOR opens in terminal
 # used in emacs .config
 alias jslsp='node ~/Code/Forks/javascript-typescript-langserver/lib/language-server-stdio'
 
@@ -103,50 +105,50 @@ alias jslsp='node ~/Code/Forks/javascript-typescript-langserver/lib/language-ser
 alias py='python3'
 alias lsbin='ls ~/.bin'
 alias bin='cd ~/.bin'
-function prcg(){
-  # Stolen version does work
-  more ~/.profile | grep -b1 -a4 $1
-  # My version does not work
-  # grep -A 4 -B 1 -- "$@" ~/.profile
+function prcg() {
+	# Stolen version does work
+	more ~/.profile | grep -b1 -a4 $1
+	# My version does not work
+	# grep -A 4 -B 1 -- "$@" ~/.profile
 }
-
 
 # elixir
 alias xie='iex -S mix'
 # miex: opens iex in context of project in directory
 # (root directory of the project i think)
-
+# persistent history for IEx
+export ERL_AFLAGS="-kernel shell_history enabled"
 
 ### scripty
 
 # go, for LSP
-export  PATH="$(go env GOPATH)/bin:$PATH"
+export PATH="$(go env GOPATH)/bin:$PATH"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init --path)"
+	eval "$(pyenv init --path)"
 fi
 
 alias org='cd ~/Code/orgzly'
 alias ngdav='ngrok http 80 -subdomain=orgzlying'
-function npmdav(){
-  sudo echo -n "WebDav Password: "
-  read -s password
-  echo
-  if [ -z "$password" ]; then
-     echo "Password cannot be empty..."
-  else
-    sudo npx webdav-cli --port 80 --username admin --password $password
-  fi
+function npmdav() {
+	sudo echo -n "WebDav Password: "
+	read -s password
+	echo
+	if [ -z "$password" ]; then
+		echo "Password cannot be empty..."
+	else
+		sudo npx webdav-cli --port 80 --username admin --password $password
+	fi
 }
 alias webdav='ngdav > /dev/null & npmdav'
 alias kbg="pgrep -P $$ | head -n -2 | sudo xargs kill && fg"
 alias gha="act -P ubuntu-latest=catthehacker/ubuntu:js-latest-dev"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # Per homebrew guile installation info:
 export GUILE_LOAD_PATH="/opt/homebrew/share/guile/site/3.0"
