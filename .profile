@@ -29,6 +29,27 @@ alias vimconf='cd ~/.config/nvim'
 alias kdir='cd ~/Code/GitBuilds/kitty'
 alias ktdir='cd ~/Code/GitBuilds/kitty-themes/themes'
 alias gbs='cd ~/Code/GitBuilds'
+
+# tmux
+alias tm='tmux'
+alias tmrc='vim ~/.tmux.conf'
+
+jump() {
+	# switch session and kill previous one
+	session_to_discard=$(tmux display -p '#S')
+	tm detach -E "tmux attach -t $1"
+	tm kill-session -t $current_session
+}
+
+switch() {
+	# switch session
+	tm detach -E "tmux attach -t $1"
+}
+
+pws() {
+	# prints current session
+	echo $(tmux display -p '#S')
+}
 # macOs
 alias rmDS='find . -name ".DS_Store" -delete'
 # anki
@@ -113,7 +134,8 @@ function prcg() {
 }
 
 # elixir
-alias xie='iex -S mix'
+alias xie='rlwrap --always-readline iex -S mix'
+alias iex='rlwrap --always-readline iex'
 # miex: opens iex in context of project in directory
 # (root directory of the project i think)
 # persistent history for IEx
@@ -147,10 +169,16 @@ alias webdav='ngdav > /dev/null & npmdav'
 alias kbg="pgrep -P $$ | head -n -2 | sudo xargs kill && fg"
 alias gha="act -P ubuntu-latest=catthehacker/ubuntu:js-latest-dev"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # Per homebrew guile installation info:
 export GUILE_LOAD_PATH="/opt/homebrew/share/guile/site/3.0"
 export GUILE_LOAD_COMPILED_PATH="/opt/homebrew/lib/guile/3.0/site-ccache"
 export GUILE_SYSTEM_EXTENSIONS_PATH="/opt/homebrew/lib/guile/3.0/extensions"
+
+# always tmuxify my shell :)
+# https://unix.stackexchange.com/a/113768/235506
+if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+	exec tmux
+fi

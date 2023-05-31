@@ -21,10 +21,35 @@ map("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
 -- make it so that {} works as $% under normal mode and movements
 -- note: this matches some karabiner config where $% are swaped in place for {}
-map({ "n", "x", "o" }, "(", "{", { desc = "Normal mode movement in paragraph" })
-map({ "n", "x", "o" }, ")", "}", { desc = "Normal mode movement in paragraph" })
-map({ "n", "x", "o" }, "{", "$", { desc = "Normal mode movement" })
-map({ "n", "x", "o" }, "}", "%", { desc = "Normal mode movement" })
+-- map({ "n", "x", "o" }, "(", "{", { desc = "Normal mode movement in paragraph" })
+-- map({ "n", "x", "o" }, ")", "}", { desc = "Normal mode movement in paragraph" })
+-- map({ "n", "x", "o" }, "{", "$", { desc = "Normal mode movement" })
+-- map({ "n", "x", "o" }, "}", "%", { desc = "Normal mode movement" })
+
+-- numbers to ops
+map({ "n", "x", "o" }, "1", "!", { desc = "numbers As symbols" })
+map({ "n", "x", "o" }, "2", "@", { desc = "numbers As symbols" })
+map({ "n", "x", "o" }, "3", "#", { desc = "numbers As symbols" })
+map({ "n", "x", "o" }, "4", "$", { desc = "numbers As symbols" })
+map({ "n", "x", "o" }, "5", "%", { desc = "numbers As symbols" })
+map({ "n", "x", "o" }, "6", "^", { desc = "numbers As symbols" })
+map({ "n", "x", "o" }, "7", "&", { desc = "numbers As symbols" })
+map({ "n", "x", "o" }, "8", "%", { desc = "numbers As symbols" })
+map({ "n", "x", "o" }, "9", "{", { desc = "numbers As symbols" })
+map({ "n", "x", "o" }, "0", "}", { desc = "numbers As symbols" })
+map({ "n", "x", "o" }, "!", "1", { desc = "symbols As numbers" })
+map({ "n", "x", "o" }, "@", "2", { desc = "symbols As numbers" })
+map({ "n", "x", "o" }, "#", "3", { desc = "symbols As numbers" })
+map({ "n", "x", "o" }, "$", "4", { desc = "symbols As numbers" })
+map({ "n", "x", "o" }, "%", "5", { desc = "symbols As numbers" })
+map({ "n", "x", "o" }, "^", "6", { desc = "symbols As numbers" })
+map({ "n", "x", "o" }, "&", "7", { desc = "symbols As numbers" })
+map({ "n", "x", "o" }, "%", "8", { desc = "symbols As numbers" })
+map({ "n", "x", "o" }, "{", "9", { desc = "symbols As numbers" })
+map({ "n", "x", "o" }, "}", "0", { desc = "symbols As numbers" })
+
+map({ "n", "x", "o" }, "<C-b>", "<C-a>", { desc = "Increment number, avoid clash with tmux prefix" })
+map({ "n", "x", "o" }, "g<C-b>", "g<C-a>", { desc = "Increment number, avoid clash with tmux prefix" })
 
 local Util = require("lazyvim.util")
 -- override default line number toggle because I want to
@@ -32,3 +57,6 @@ local Util = require("lazyvim.util")
 map("n", "<leader>ul", function()
   Util.toggle("number")
 end, { desc = "Toggle Line Numbers" })
+
+-- enter Normal mode in Term mode with <C-n>
+map({ "t" }, "<C-n>", "<C-\\><C-n>", { desc = "Enter Normal mode in Term mode with <C-n>" })

@@ -6,17 +6,21 @@
 [alias]
 	br = !git for-each-ref --sort=committerdate refs/heads --format='%(color:bold)%(align:15)%(HEAD)%(color:yellow)%(refname:short)%(end)%(align:20)%(color:bold green)%(committerdate:relative)%(end)%(color:magenta)%(authorname)\n%(color:blue)%(subject)\n%(color:reset)' --color=always|column -ts'|'
 	amend = commit --amend -m
+	p = push
 	pushb = push -u origin HEAD
+	a = add
 	aa = add -A .
 	cm = commit -m
 	st = status
 	unstage = restore --staged
 	co = checkout
+	cob = checkout -b
 	logf = log --stat
 	logl = log -p
 	logo = log --oneline
 	fetcha = fetch --all
 	pulla = pull --all
+  cls = "!cls(){ git check-ignore $(ls); }; cls"
 	clonesub = clone --recurse-submodules -j8
 	# checkout new branch with commit message:
 	# conew BRANCHNAME commit-msg

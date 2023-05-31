@@ -28,23 +28,21 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
   # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   # new version per https://github.com/nvm-sh/nvm/issues/1978
-  if [ -s "$HOME/.nvm/nvm.sh" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  nvm_cmds=(nvm node npm yarn)
-  for cmd in $nvm_cmds ; do
-    alias $cmd="unalias $nvm_cmds && unset nvm_cmds && . $NVM_DIR/nvm.sh && $cmd"
-  done
-  fi
-
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#  if [ -s "$HOME/.nvm/nvm.sh" ]; then
+#  export NVM_DIR="$HOME/.nvm"
+#  nvm_cmds=(nvm node npm yarn)
+#  for cmd in $nvm_cmds ; do
+#    alias $cmd="unalias $nvm_cmds && unset nvm_cmds && . $NVM_DIR/nvm.sh && $cmd"
+#  done
+#  fi
+#
+#  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
   # necessary for doom emacs to work with macports
   export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
   # tell mac to shut its hole
   export BASH_SILENCE_DEPRECATION_WARNING=1
-  export ASDF_DATA_DIR=`brew --prefix asdf`/
-  source $ASDF_DATA_DIR/libexec/asdf.sh
 
   # GNU find
   # gnu coreutils from `brew install coreutils`
@@ -61,13 +59,90 @@ else
   # echo "Emacs server Online"
 fi
 
-# direnv
-eval "$(direnv hook zsh)"
-
 # vim mode
 # https://github.com/jeffreytse/zsh-vi-mode
 source $HOME/.config/zsh/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+
+# god sent code to have clipboard available inside the vi mode plugin
+# https://github.com/jeffreytse/zsh-vi-mode/issues/19#issuecomment-1268057812
+
+my_zvm_vi_yank() {
+  zvm_vi_yank
+  echo -en "${CUTBUFFER}" | cbread
+}
+
+my_zvm_vi_delete() {
+  zvm_vi_delete
+  echo -en "${CUTBUFFER}" | cbread
+}
+
+my_zvm_vi_change() {
+  zvm_vi_change
+  echo -en "${CUTBUFFER}" | cbread
+}
+
+my_zvm_vi_change_eol() {
+  zvm_vi_change_eol
+  echo -en "${CUTBUFFER}" | cbread
+}
+
+my_zvm_vi_put_after() {
+  CUTBUFFER=$(cbprint)
+  zvm_vi_put_after
+  zvm_highlight clear # zvm_vi_put_after introduces weird highlighting for me
+}
+
+my_zvm_vi_put_before() {
+  CUTBUFFER=$(cbprint)
+  zvm_vi_put_before
+  zvm_highlight clear # zvm_vi_put_before introduces weird highlighting for me
+}
+
+zvm_after_lazy_keybindings() {
+  zvm_define_widget my_zvm_vi_yank
+  zvm_define_widget my_zvm_vi_delete
+  zvm_define_widget my_zvm_vi_change
+  zvm_define_widget my_zvm_vi_change_eol
+  zvm_define_widget my_zvm_vi_put_after
+  zvm_define_widget my_zvm_vi_put_before
+
+  zvm_bindkey visual 'y' my_zvm_vi_yank
+  zvm_bindkey visual 'd' my_zvm_vi_delete
+  zvm_bindkey visual 'x' my_zvm_vi_delete
+  zvm_bindkey vicmd  'C' my_zvm_vi_change_eol
+  zvm_bindkey visual 'c' my_zvm_vi_change
+  zvm_bindkey vicmd  'p' my_zvm_vi_put_after
+  zvm_bindkey vicmd  'P' my_zvm_vi_put_before
+}
+
+if [[ $(uname) = "Darwin" ]]; then
+  on_mac_os=0
+else
+  on_mac_os=1
+fi
+
+cbread() {
+  if [[ $on_mac_os -eq 0 ]]; then
+    pbcopy
+  else
+    xclip -selection primary -i -f | xclip -selection secondary -i -f | xclip -selection clipboard -i
+  fi
+}
+
+cbprint() {
+  if [[ $on_mac_os -eq 0 ]]; then
+    pbpaste
+  else
+    if   x=$(xclip -o -selection clipboard 2> /dev/null); then
+      echo -n $x
+    elif x=$(xclip -o -selection primary   2> /dev/null); then
+      echo -n $x
+    elif x=$(xclip -o -selection secondary 2> /dev/null); then
+      echo -n $x
+    fi
+  fi
+}
 
 # https://github.com/jeffreytse/zsh-vi-mode/issues/79
 # The plugin will auto execute this zvm_after_init function
@@ -335,3 +410,10 @@ ddate
 # Java?
 # export PATH="$HOME/.jenv/bin:$PATH"
 # eval "$(jenv init -)"
+# source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+# asdf
+. "$HOME/.asdf/asdf.sh"
+. "$HOME/.asdf/completions/asdf.bash"
+
+eval "$(direnv hook zsh)"
+
