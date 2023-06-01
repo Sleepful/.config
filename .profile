@@ -39,9 +39,17 @@ alias tmrc='vim ~/.tmux.conf'
 
 jump() {
 	# switch session and kill previous one
-	session_to_discard=$(tmux display -p '#S')
+	session_to_discard=tmux display -p '#S'
 	tm detach -E "tmux attach -t $1"
 	tm kill-session -t $current_session
+}
+
+clean() {
+	# switch session and kill previous one
+	session_to_discard=tmux display -p '#S'
+	new_session=tm list-windows -F '#{window_index}' -f '#{!=:#{window_index},#{active_window_index}}' | xargs shuf -n1 -e
+	tm detach -E "tmux attach -t $new_session"
+	tm kill-session -t $session_to_discard
 }
 
 switch() {
