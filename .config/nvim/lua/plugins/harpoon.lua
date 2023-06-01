@@ -26,61 +26,61 @@ return {
         end,
       },
       {
-        "<F22>",
+        "<S-F10>",
         function()
           require("harpoon.mark").add_file()
         end,
       },
       {
-        "<F13>",
+        "<S-F1>",
         function()
           require("harpoon.ui").nav_file(1)
         end,
       },
       {
-        "<F14>",
+        "<S-F2>",
         function()
           require("harpoon.ui").nav_file(2)
         end,
       },
       {
-        "<F15>",
+        "<S-F3>",
         function()
           require("harpoon.ui").nav_file(3)
         end,
       },
       {
-        "<F16>",
+        "<S-F4>",
         function()
           require("harpoon.ui").nav_file(4)
         end,
       },
       {
-        "<F17>",
+        "<S-F5>",
         function()
           require("harpoon.ui").nav_file(5)
         end,
       },
       {
-        "<F18>",
+        "<S-F6>",
         function()
           require("harpoon.ui").nav_file(6)
         end,
       },
       {
-        "<F19>",
+        "<S-F7>",
         function()
           require("harpoon.ui").nav_file(7)
         end,
       },
       {
-        "<F20>",
+        "<S-F8>",
         function()
           require("harpoon.ui").nav_file(8)
         end,
       },
       {
-        "<F21>",
+        "<S-F9>",
         function()
           require("harpoon.ui").nav_file(9)
         end,

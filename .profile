@@ -25,7 +25,10 @@ export PATH="$HOME/local/nvim/bin:$PATH"
 alias vim='nvim'
 alias vrc='nvim ~/.vimrc'
 alias vimconf='cd ~/.config/nvim'
-# alias vim='vim -S ~/.vimrc' # necessary only if using neovim, as neovim reads the config from somewhere else
+alias vimf='vim $(`fc -ln -1`)'
+alias vimr='vim README.md'
+
+# some dirs?
 alias kdir='cd ~/Code/GitBuilds/kitty'
 alias ktdir='cd ~/Code/GitBuilds/kitty-themes/themes'
 alias gbs='cd ~/Code/GitBuilds'
