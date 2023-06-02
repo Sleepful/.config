@@ -10,7 +10,7 @@ local function map(mode, lhs, rhs, opts)
   if not keys.active[keys.parse({ lhs, mode = mode }).id] then
     opts = opts or {}
     opts.silent = opts.silent ~= false
-    opts.remap = opts.remap or false
+    opts.noremap = true
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 end
@@ -21,14 +21,18 @@ map("n", "<C-p>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 map("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
 -- <p> move with parens
-map({ "n", "x", "o" }, "(", "{", { desc = "Normal mode movement in paragraph" })
-map({ "n", "x", "o" }, ")", "}", { desc = "Normal mode movement in paragraph" })
+map({ "n", "x", "o" }, "(", "{", { desc = "Prefer paragraph movement" })
+map({ "n", "x", "o" }, ")", "}", { desc = "Prefer paragraph movement" })
+-- these match with kitty config:
+map({ "n", "x", "o" }, "{", "$", { desc = "Prefer end of line movement" })
+map({ "n", "x", "o" }, "}", "%", { desc = "Prefer match symbols movement" })
 
 -- when adding text, the curly braces are a lot more common than the dollar & percent
-map({ "i" }, "$", "{")
-map({ "i" }, "%", "}")
-map({ "i" }, "{", "$")
-map({ "i" }, "}", "%")
+-- but only inside vim, when writing on the CLI the
+-- map({ "i" }, "$", "{")
+-- map({ "i" }, "%", "}")
+-- map({ "i" }, "{", "$")
+-- map({ "i" }, "}", "%")
 
 map({ "n", "x", "o" }, "<C-b>", "<C-a>", { desc = "Increment number, avoid clash with tmux prefix" })
 map({ "n", "x", "o" }, "g<C-b>", "g<C-a>", { desc = "Increment number, avoid clash with tmux prefix" })
