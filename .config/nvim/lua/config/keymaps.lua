@@ -20,10 +20,15 @@ map("n", "<S-l>", "40zl", { desc = "Scroll right" })
 map("n", "<C-p>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 map("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
--- make it so that {} works as $% under normal mode and movements
--- note: this matches some karabiner config where $% are swaped in place for {}
+-- <p> move with parens
 map({ "n", "x", "o" }, "(", "{", { desc = "Normal mode movement in paragraph" })
 map({ "n", "x", "o" }, ")", "}", { desc = "Normal mode movement in paragraph" })
+
+-- when adding text, the curly braces are a lot more common than the dollar & percent
+map({ "i" }, "$", "{")
+map({ "i" }, "%", "}")
+map({ "i" }, "{", "$")
+map({ "i" }, "}", "%")
 
 map({ "n", "x", "o" }, "<C-b>", "<C-a>", { desc = "Increment number, avoid clash with tmux prefix" })
 map({ "n", "x", "o" }, "g<C-b>", "g<C-a>", { desc = "Increment number, avoid clash with tmux prefix" })
