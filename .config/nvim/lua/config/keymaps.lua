@@ -27,13 +27,6 @@ map({ "n", "x", "o" }, ")", "}", { desc = "Prefer paragraph movement" })
 map({ "n", "x", "o" }, "{", "$", { desc = "Prefer end of line movement" })
 map({ "n", "x", "o" }, "}", "%", { desc = "Prefer match symbols movement" })
 
--- when adding text, the curly braces are a lot more common than the dollar & percent
--- but only inside vim, when writing on the CLI the
--- map({ "i" }, "$", "{")
--- map({ "i" }, "%", "}")
--- map({ "i" }, "{", "$")
--- map({ "i" }, "}", "%")
-
 map({ "n", "x", "o" }, "<C-b>", "<C-a>", { desc = "Increment number, avoid clash with tmux prefix" })
 map({ "n", "x", "o" }, "g<C-b>", "g<C-a>", { desc = "Increment number, avoid clash with tmux prefix" })
 
