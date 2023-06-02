@@ -16,6 +16,7 @@ alias ssecret='source ~/.secret'
 # cds
 alias code='cd ~/Code'
 alias oa='cd ~/Code/OA'
+alias lx='cd ~/Code/Lexical'
 alias wb='cd ~/Code/WordDatabase/phx'
 alias conf='cd ~/.config'
 alias notes='cd ~/Notes'
@@ -147,9 +148,10 @@ function prcg() {
 # elixir
 alias xie='rlwrap --always-readline iex -S mix'
 alias iex='rlwrap --always-readline iex'
-# miex: opens iex in context of project in directory
+# xie: opens iex in context of project in directory
 # (root directory of the project i think)
-# persistent history for IEx
+
+# ERL_AFLAGS: persistent history for IEx between sessions
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 ### scripty

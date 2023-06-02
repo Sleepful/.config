@@ -22,33 +22,8 @@ map("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
 -- make it so that {} works as $% under normal mode and movements
 -- note: this matches some karabiner config where $% are swaped in place for {}
--- map({ "n", "x", "o" }, "(", "{", { desc = "Normal mode movement in paragraph" })
--- map({ "n", "x", "o" }, ")", "}", { desc = "Normal mode movement in paragraph" })
--- map({ "n", "x", "o" }, "{", "$", { desc = "Normal mode movement" })
--- map({ "n", "x", "o" }, "}", "%", { desc = "Normal mode movement" })
-
--- numbers to ops
-map({ "n", "x", "o", "c" }, "1", "!", { desc = "numbers As symbols" })
-map({ "n", "x", "o", "c" }, "2", "@", { desc = "numbers As symbols" })
-map({ "n", "x", "o", "c" }, "3", "#", { desc = "numbers As symbols" })
-map({ "n", "x", "o", "c" }, "4", "$", { desc = "numbers As symbols" })
-map({ "n", "x", "o", "c" }, "5", "%", { desc = "numbers As symbols" })
-map({ "n", "x", "o", "c" }, "6", "^", { desc = "numbers As symbols" })
-map({ "n", "x", "o", "c" }, "7", "&", { desc = "numbers As symbols" })
-map({ "n", "x", "o", "c" }, "8", "*", { desc = "numbers As symbols" })
-map({ "n", "x", "o", "c" }, "9", "(", { desc = "numbers As symbols" })
-map({ "n", "x", "o", "c" }, "0", ")", { desc = "numbers As symbols" })
-
-map({ "n", "x", "o", "c" }, "!", "1", { desc = "symbols As numbers" })
-map({ "n", "x", "o", "c" }, "@", "2", { desc = "symbols As numbers" })
-map({ "n", "x", "o", "c" }, "#", "3", { desc = "symbols As numbers" })
-map({ "n", "x", "o", "c" }, "$", "4", { desc = "symbols As numbers" })
-map({ "n", "x", "o", "c" }, "%", "5", { desc = "symbols As numbers" })
-map({ "n", "x", "o", "c" }, "^", "6", { desc = "symbols As numbers" })
-map({ "n", "x", "o", "c" }, "&", "7", { desc = "symbols As numbers" })
-map({ "n", "x", "o", "c" }, "%", "8", { desc = "symbols As numbers" })
-map({ "n", "x", "o", "c" }, "(", "9", { desc = "symbols As numbers" })
-map({ "n", "x", "o", "c" }, ")", "0", { desc = "symbols As numbers" })
+map({ "n", "x", "o" }, "(", "{", { desc = "Normal mode movement in paragraph" })
+map({ "n", "x", "o" }, ")", "}", { desc = "Normal mode movement in paragraph" })
 
 map({ "n", "x", "o" }, "<C-b>", "<C-a>", { desc = "Increment number, avoid clash with tmux prefix" })
 map({ "n", "x", "o" }, "g<C-b>", "g<C-a>", { desc = "Increment number, avoid clash with tmux prefix" })

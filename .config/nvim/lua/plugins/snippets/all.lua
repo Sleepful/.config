@@ -7,4 +7,5 @@ return {
   s("smap", { t("%"), i(1), t("{"), i(2), t("} ") }),
   s("todo", t("TODO: ")),
   s("note", t("NOTE: ")),
+  s("coauthor", { t("Co-authored-by: "), i(1, "NAME"), t(" <"), i(2, "EMAIL"), t(">") }),
 }

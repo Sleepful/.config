@@ -12,10 +12,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.fn.setreg("p", last_yank)
   end,
 })
-
-vim.api.nvim_create_autocmd("BufEnter", {
-  group = augroup("mbyte_keymaps"),
-  callback = function()
-    vim.bo.keymap = "keymaps"
-  end,
-})
