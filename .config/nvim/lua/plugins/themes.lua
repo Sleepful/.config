@@ -17,6 +17,10 @@ return {
   -- { "shaunsingh/solarized.nvim" },
   -- Configure LazyVim to load gruvbox
   {
+    "RRethy/nvim-base16",
+    lazy = false,
+  },
+  {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "nord",

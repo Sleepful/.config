@@ -207,27 +207,6 @@
           },
           "to": [
             {
-              "key_code": "backslash"
-            }
-          ],
-          "conditions": [
-            {
-              "input_sources": [
-                {
-                  "language": "en"
-                }
-              ],
-              "type": "input_source_if"
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "backslash"
-          },
-          "to": [
-            {
               "key_code": "quote"
             }
           ],

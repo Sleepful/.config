@@ -38,11 +38,22 @@ alias gbs='cd ~/Code/GitBuilds'
 alias tm='tmux'
 alias tmrc='vim ~/.tmux.conf'
 
+tmux-join() {
+	if pgrep tmux; then
+		# join tmux existing session
+		new_session=tmux ls | sort | awk '{print $1}' | tr -d ':' | xargs shuf -n1 -e
+		tmux attach -t $new_session
+	else
+		# begin new session
+		tmux
+	fi
+}
+
 jump() {
 	# switch session and kill previous one
 	session_to_discard=tmux display -p '#S'
 	tm detach -E "tmux attach -t $1"
-	tm kill-session -t $current_session
+	tm kill-session -t $session_to_discard
 }
 
 clean() {
@@ -193,5 +204,9 @@ export GUILE_SYSTEM_EXTENSIONS_PATH="/opt/homebrew/lib/guile/3.0/extensions"
 # always tmuxify my shell :)
 # https://unix.stackexchange.com/a/113768/235506
 if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-	exec tmux
+	# `exec` with `export`, otherwise exec fails and terminal exits as soon as it opens
+	# https://unix.stackexchange.com/questions/50692/executing-user-defined-function-in-a-find-exec-call
+	exec bash -c $(
+		$(export -f tmux-join)
+	)
 fi

@@ -8,8 +8,10 @@
 	amend = commit --amend -m
 	p = push
 	pushb = push -u origin HEAD
+  pushf = push --force-with-lease
 	a = add
 	aa = add -A .
+	c = commit
 	cm = commit -m
 	st = status
 	unstage = restore --staged
@@ -29,9 +31,15 @@
 	# delbr BRANCHNAME
 	delbr = "!delbr(){ git branch -D \"$1\" && git push -d origin \"$1\"; }; delbr"
 	fixup = commit --fixup=HEAD
+  # HEAD is going to get squashed
+  # HEAD~ is the one that gets squashed into
+  # HEAD~~ is the base for the rebase, the non_inclusive limit to the rebase 
 	refixup = rebase --autosquash -i HEAD~~
+	refu = -c sequence.editor=: rebase --autosquash -i HEAD~~
 	uncommit = reset --soft HEAD~
 	tracked = ls-tree --full-tree -r --name-only HEAD
+  # used to look at SHAs, e.g. g parse HEAD^
+  parse = rev-parse
 [core]
 	hooksPath = ~/.githooks/
 [github]
