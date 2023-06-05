@@ -1,0 +1,18 @@
+# Commands go through bash
+# shell = "bash -c '{}'"
+
+[[items]]
+file = "~/.config/kitty/flavours.conf"
+template = "kitty"
+# Kitty uses a separate color file, so we can safely rewrite the whole file
+rewrite = true
+hook = 'for SOCKET in $(ls /tmp/kitty-*); do kitty @ --to "unix:${SOCKET}" set-colors --all --configured ~/.config/kitty/flavours.conf; done'
+subtemplate = "default-256"
+
+[[items]]
+# to figure out the directory of the nvim sockets, run this neovim:
+# :echo v:servername
+hook = 'fd -t s nvim /var/folders | xargs -n1 nvim --remote-send "<C-\><C-N>:ReloadColors<CR>" --server'
+file = "~/.config/nvim/lua/plugins/base16/colors.lua"
+template = "nvim"
+rewrite = true

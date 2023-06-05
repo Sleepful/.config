@@ -6,9 +6,11 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH=~/.emacs.d/bin:$PATH
 export PATH="$HOME/.bin:$PATH"
+# rust cargo
+export PATH="$HOME/.cargo/bin:$PATH"
+
 alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias cfgsetup='cfg config status.showuntrackedfiles no'
-alias g='git'
 
 alias sprc='source ~/.profile'
 alias szrc='source ~/.zshrc'
@@ -23,6 +25,7 @@ alias notes='cd ~/Notes'
 alias lang='cd ~/Language'
 # neovim
 export PATH="$HOME/local/nvim/bin:$PATH"
+# alias nvim='nvim --listen /tmp/nvimsocket'
 alias vim='nvim'
 alias vrc='nvim ~/.vimrc'
 alias vimconf='cd ~/.config/nvim'
@@ -83,7 +86,11 @@ function pomo() {
 	termdown "$@" && tput bel && terminal-notifier -message "$@ pomo complete"
 }
 
-# git
+# git, as function to export to subshells
+function g() {
+	git "$@"
+}
+
 function gcorb() {
 	git checkout -b release/$(date +%+4Y.%m.%d)-r$@
 }
@@ -95,7 +102,7 @@ function gtr() {
 }
 alias gpt='git push --tags'
 # Postgres MACOS stuff
-alias clearpgpid='pkill postgres && rm ~/Library/Application Support/Postgres/var-13/postmaster.pid'
+alias clearpgpid='pkill postgres && rm ~/Library/Application\ Support/Postgres/var-14/postmaster.pid'
 # Npm/Yarn MACOS stuff
 alias fixgyp="sudo rm -r -f $(xcode-select --print-path) \
   && xcode-select --install"
@@ -157,10 +164,11 @@ function prcg() {
 }
 
 # elixir
-alias xie='rlwrap --always-readline iex -S mix'
-alias iex='rlwrap --always-readline iex'
 # xie: opens iex in context of project in directory
 # (root directory of the project i think)
+alias xie='iex -S mix'
+# rlwrap necessary for kitty, but not for tmux
+# alias iex='rlwrap --always-readline iex'
 
 # ERL_AFLAGS: persistent history for IEx between sessions
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -193,6 +201,19 @@ alias webdav='ngdav > /dev/null & npmdav'
 alias kbg="pgrep -P $$ | head -n -2 | sudo xargs kill && fg"
 alias gha="act -P ubuntu-latest=catthehacker/ubuntu:js-latest-dev"
 
+# flavours
+alias flavour="flavours --config ~/.config/flavours/config.toml apply "
+alias fl="flavour && flavours current"
+# E.g:
+# fl nord
+# fl tango
+alias theme='flavour `flavours list | sed "s/ /\n/g" | sed "/^$/d" | fzf`'
+
+# fzf
+export FZF_DEFAULT_OPTS='--height 60% --min-height 12 --reverse --border --multi --tiebreak="length,end" --info=inline --pointer="->" --marker="<>" --tabstop=2 
+--color bg+:0,hl:2,hl+:2,prompt:6,pointer:6,fg+:6,marker:6,info:3,info:bold,hl+:underline,fg+:underline,hl:italic,spinner:2
+--bind="ctrl-u:half-page-up,ctrl-d:half-page-down,change:first,ctrl-w:backward-kill-word,ctrl-b:backward-word,alt-bs:clear-query,ctrl-l:forward-char,ctrl-h:backward-char,ctrl-f:forward-word,alt-j:preview-down,alt-k:preview-up,alt-u:preview-half-page-up,alt-d:preview-half-page-down,ctrl-y:execute-silent(echo {} | xclip -sel clip)"'
+
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
@@ -209,4 +230,12 @@ if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && 
 	exec bash -c $(
 		$(export -f tmux-join)
 	)
+fi
+
+# export the g()/git function to subshells
+# lvl 2 is a subshell when using an interactive zsh shell inside tmux
+# -gt is greater_than
+# so the fnuction is exported only when the SHLVL is greater than 2
+if [[ $SHLVL -gt '2' ]]; then
+	export -f g
 fi

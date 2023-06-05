@@ -52,12 +52,15 @@ else
   echo "Unknown OS: $OSTYPE"
 fi
 
-if ! ps -e -o args | grep -i 'emacs' | grep -q 'daemon'; then
-  echo "Emacs is loading"
-  emacs --daemon
-else
-  # echo "Emacs server Online"
-fi
+
+# Uncomment to turn on Emacs!
+
+# if ! ps -e -o args | grep -i 'emacs' | grep -q 'daemon'; then
+#   echo "Emacs is loading"
+#   emacs --daemon
+# else
+#   # echo "Emacs server Online"
+# fi
 
 # vim mode
 # https://github.com/jeffreytse/zsh-vi-mode
