@@ -54,6 +54,7 @@ return {
           -- base16 based on RRethy base16:
           -- https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md#base16
           theme = "base16",
+          globalstatus = true,
         },
         sections = {
           lualine_a = {
@@ -80,10 +81,16 @@ return {
               cond = function()
                 return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
               end,
+              separator = { left = "", right = "" },
             },
+            { "searchcount" },
           },
           lualine_z = {
-            { "progress", separator = " ", padding = { left = 1, right = 0 } },
+            {
+              "location",
+              padding = { left = 1, right = 1 },
+            },
+            { "progress", separator = " ", padding = { left = 0, right = 1 } },
           },
         },
         extensions = { "neo-tree", "lazy" },

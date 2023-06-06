@@ -35,7 +35,10 @@ return {
         mappings = {
           ["/"] = "noop",
           ["Z"] = "expand_all_nodes",
-          ["<C-g>g"] = "expand_all_nodes", -- live grep "here"
+          ["<C-g>g"] = function(state)
+            local node = state.tree:get_node()
+            require("telescope.builtin").live_grep({ cwd = node._parent_id })
+          end, -- TODO: live grep "here"
         },
       },
     },
