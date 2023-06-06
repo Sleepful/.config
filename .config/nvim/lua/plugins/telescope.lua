@@ -22,14 +22,20 @@ return {
       },
     },
     keys = {
+      -- {
+      --   "<leader>t",
+      --   desc = "Telescope",
+      -- },
+      -- currently a lot inside the `s` key
       {
+        -- this one includes parent dir, unlike <leader>fF which does not
         "<leader>ff",
         function()
           require("telescope.builtin").find_files({
             cwd = require("telescope.utils").buffer_dir(),
           })
         end,
-        desc = "Find Files (cwd)",
+        desc = "Find Files (cwd/..)",
       },
       { "<leader>/", Util.telescope("live_grep"), desc = "Find in Files (Grep)" },
       {

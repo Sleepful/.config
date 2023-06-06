@@ -30,8 +30,8 @@ defmodule AC do
         "\e[G",
         :light_magenta,
         # plain string
-        "🧪 iex",
-        ">",
+        "%counter 🧪",
+        " ",
         :white,
         :reset
       ]

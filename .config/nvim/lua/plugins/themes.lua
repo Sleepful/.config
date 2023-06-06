@@ -1,11 +1,28 @@
 local allow_reload = true
+
 local toggle_reload = function()
   allow_reload = not allow_reload
 end
 
+local current_flavour = function()
+  local flavour = require("util").cmd("flavours current")
+  return flavour
+end
+
+local set_flavour = function()
+  local flavour = current_flavour()
+  vim.cmd("colorscheme base16-" .. flavour)
+end
+
 local reload = function()
   if allow_reload then
-    vim.api.nvim_command("source ~/.config/nvim/lua/plugins/base16/colors.lua")
+    -- set_flavour works better for lua_line because lua_line
+    -- has its own version of known base16 color schemes,
+    -- this way also keeps the icon colors and all sorts of things very nicely colored
+    set_flavour()
+    -- this other option might work better for base16 that are not available
+    -- in the RRethy/nvim-base16 repo, in which case the above set_flavours() fails.
+    -- vim.api.nvim_command("source ~/.config/nvim/lua/plugins/base16/colors.lua")
   end
 end
 
@@ -19,11 +36,9 @@ return {
   { "shaunsingh/moonlight.nvim" },
   { "peterlvilim/solarized.nvim" },
   { "Shatur/neovim-ayu" },
-  -- lazy = false -- because otherwise it doesn't display in uC color picker :S
   { "folke/tokyonight.nvim", lazy = false, opts = { style = "moon" } },
   {
     "catppuccin/nvim",
-    -- lazy = false,
     name = "catppuccin",
   },
   {
@@ -31,7 +46,52 @@ return {
     event = "VeryLazy",
     dependencies = {
       "RRethy/nvim-base16",
+      "LazyVim/LazyVim",
     },
+    opts = function()
+      return {
+        options = {
+          -- base16 based on RRethy base16:
+          -- https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md#base16
+          theme = "base16",
+        },
+        sections = {
+          lualine_a = {
+            {
+              "mode",
+              fmt = function(str)
+                return str:sub(1, 1)
+              end,
+            },
+            {
+              "filename",
+              path = 1,
+              symbols = { modified = "📖", readonly = "🔑", unnamed = "🧸" },
+            },
+          },
+          lualine_b = { { "branch" } },
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {
+            {
+              function()
+                return require("nvim-navic").get_location()
+              end,
+              cond = function()
+                return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+              end,
+            },
+          },
+          lualine_z = {
+            { "progress", separator = " ", padding = { left = 1, right = 0 } },
+          },
+        },
+        extensions = { "neo-tree", "lazy" },
+      }
+    end,
+    config = function(LazyVim, opts)
+      require("lualine").setup(opts)
+    end,
   },
   -- has bad colors in dark mode, comment for now:
   -- { "shaunsingh/solarized.nvim" },
@@ -40,41 +100,18 @@ return {
     "RRethy/nvim-base16",
     config = function(LazyPlugin, opts)
       -- requires some default theme for the setup, otherwise funny behavior
-      require("base16-colorscheme").setup({
-        base00 = "#16161D",
-        base01 = "#2c313c",
-        base02 = "#3e4451",
-        base03 = "#6c7891",
-        base04 = "#565c64",
-        base05 = "#abb2bf",
-        base06 = "#9a9bb3",
-        base07 = "#c5c8e6",
-        base08 = "#e06c75",
-        base09 = "#d19a66",
-        base0A = "#e5c07b",
-        base0B = "#98c379",
-        base0C = "#56b6c2",
-        base0D = "#0184bc",
-        base0E = "#c678dd",
-        base0F = "#a06949",
-      })
-      reload()
+      set_flavour()
     end,
-    -- lazy = false,
     keys = {
       {
-        "<leader>t",
-        desc = "Theme",
-      },
-      {
-        "<leader>tr",
+        "<leader>ut",
         function()
           reload()
         end,
         desc = "Reload theme",
       },
       {
-        "<leader>tt",
+        "<leader>uR",
         function()
           toggle_reload()
         end,
@@ -87,8 +124,13 @@ return {
   },
   {
     "LazyVim/LazyVim",
+    dependencies = {
+      "RRethy/nvim-base16",
+    },
     opts = {
-      colorscheme = "nord",
+      colorscheme = function()
+        reload()
+      end,
     },
   },
 }

@@ -35,6 +35,7 @@ return {
         mappings = {
           ["/"] = "noop",
           ["Z"] = "expand_all_nodes",
+          ["<C-g>g"] = "expand_all_nodes", -- live grep "here"
         },
       },
     },

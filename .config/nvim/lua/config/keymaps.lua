@@ -39,3 +39,16 @@ end, { desc = "Toggle Line Numbers" })
 
 -- enter Normal mode in Term mode with <C-n>
 map({ "t" }, "<C-n>", "<C-\\><C-n>", { desc = "Enter Normal mode in Term mode with <C-n>" })
+
+-- Yank filename of current buffer and display as message
+map("n", "<leader>fy", function()
+  vim.cmd("let @+=@%")
+  vim.cmd("echo getreg('+')")
+end, { desc = "Yank filename" })
+
+-- Yank git branch
+map("n", "<leader>gy", function()
+  local branch = require("util").cmd("git branch --show-current")
+  vim.fn.setreg("+", branch)
+  print(branch)
+end, { desc = "Yank git branch" })
