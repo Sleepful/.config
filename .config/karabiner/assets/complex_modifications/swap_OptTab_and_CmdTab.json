@@ -1,0 +1,32 @@
+{
+  "title": "Make Option+Tab the same as Command+Tab",
+  "rules": [
+    {
+      "description": "Change Option+Tab to Command+Tab",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "tab",
+            "modifiers": {
+              "mandatory": [
+                "option"
+              ],
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "tab",
+              "modifiers": [
+                "command"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}

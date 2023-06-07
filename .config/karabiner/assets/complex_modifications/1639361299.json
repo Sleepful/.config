@@ -74,7 +74,7 @@
       ]
     },
     {
-      "description": "Quit application by holding command-q",
+      "description": "Quit application by holding command-q, except kitty term",
       "manipulators": [
         {
           "type": "basic",
@@ -96,6 +96,14 @@
                 "left_command"
               ],
               "repeat": false
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^net\\.kovidgoyal\\.kitty$"
+              ]
             }
           ]
         }

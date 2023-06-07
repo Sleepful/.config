@@ -22,6 +22,7 @@
 	logo = log --oneline
 	fetcha = fetch --all
 	pulla = pull --all
+  pwd = branch --show-current
   cls = "!cls(){ git check-ignore $(ls); }; cls"
 	clonesub = clone --recurse-submodules -j8
 	# checkout new branch with commit message:

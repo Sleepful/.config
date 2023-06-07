@@ -1047,6 +1047,14 @@
                         "description": "Quit application by holding command-q",
                         "manipulators": [
                             {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^net\\.kovidgoyal\\.kitty$"
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "q",
                                     "modifiers": {

@@ -38,7 +38,9 @@ return {
           ["<C-g>g"] = function(state)
             local node = state.tree:get_node()
             require("telescope.builtin").live_grep({ cwd = node._parent_id })
-          end, -- TODO: live grep "here"
+          end,
+          -- TODO: live grep with args?
+          -- https://github.com/nvim-telescope/telescope-live-grep-args.nvim
         },
       },
     },

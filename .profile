@@ -16,6 +16,7 @@ alias sprc='source ~/.profile'
 alias szrc='source ~/.zshrc'
 alias ssecret='source ~/.secret'
 # cds
+alias home='cd ~/'
 alias code='cd ~/Code'
 alias oa='cd ~/Code/OA'
 alias lx='cd ~/Code/Lexical'
@@ -109,7 +110,6 @@ alias fixgyp="sudo rm -r -f $(xcode-select --print-path) \
 
 alias psf='ps aux | grep -i'
 # others
-alias h='echo "head .git/HEAD" | pbcopy'
 alias localdb='DATABASE_URL=postgres://postgres:postgres@localhost:5432/brightflow_development'
 alias stagedb='DATABASE_URL=$(echo "`heroku pg:credentials:url --remote staging | grep postgres | sed "s: ::g" | tr -s \\n `?ssl=no-verify")'
 alias stageredis='REDIS_URL=`heroku redis:credentials --remote staging`'
@@ -214,6 +214,8 @@ export FZF_DEFAULT_OPTS='--height 60% --min-height 12 --reverse --border --multi
 --color bg+:0,hl:2,hl+:2,prompt:6,pointer:6,fg+:6,marker:6,info:3,info:bold,hl+:underline,fg+:underline,hl:italic,spinner:2
 --bind="ctrl-u:half-page-up,ctrl-d:half-page-down,change:first,ctrl-w:backward-kill-word,ctrl-b:backward-word,alt-bs:clear-query,ctrl-l:forward-char,ctrl-h:backward-char,ctrl-f:forward-word,alt-j:preview-down,alt-k:preview-up,alt-u:preview-half-page-up,alt-d:preview-half-page-down,ctrl-y:execute-silent(echo {} | xclip -sel clip)"'
 
+alias branch='git checkout `git branch | gsed "s/\* /\*/g"|  xargs -n1 echo  | sort | gsed "s/\*//g" | fzf`'
+
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
@@ -238,4 +240,5 @@ fi
 # so the fnuction is exported only when the SHLVL is greater than 2
 if [[ $SHLVL -gt '2' ]]; then
 	export -f g
+	export -f jump
 fi

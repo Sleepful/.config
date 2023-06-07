@@ -47,7 +47,7 @@ map("n", "<leader>fy", function()
 end, { desc = "Yank filename" })
 
 -- Yank git branch
-map("n", "<leader>gy", function()
+map("n", "<leader>gY", function()
   local branch = require("util").cmd("git branch --show-current")
   vim.fn.setreg("+", branch)
   print(branch)
