@@ -39,6 +39,7 @@
 	refu = -c sequence.editor=: rebase --autosquash -i HEAD~~
 	uncommit = reset --soft HEAD~
 	tracked = ls-tree --full-tree -r --name-only HEAD
+	rebaseprev = rebase --autosquash -i HEAD~~
   # used to look at SHAs, e.g. g parse HEAD^
   parse = rev-parse
   # useful to edit with vimf

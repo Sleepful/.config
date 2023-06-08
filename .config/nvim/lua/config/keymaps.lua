@@ -52,3 +52,10 @@ map("n", "<leader>gY", function()
   vim.fn.setreg("+", branch)
   print(branch)
 end, { desc = "Yank git branch" })
+
+-- Neoclip
+map("i", "<C-p>", "<cmd>Telescope neoclip plus<cr>", { desc = "Neoclip" })
+
+-- Classic pasting
+map("n", "[p", "O<esc>p", { desc = "Paste above" })
+map("n", "]p", "o<esc>p", { desc = "Paste below" })

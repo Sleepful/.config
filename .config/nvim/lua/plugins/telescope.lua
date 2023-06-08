@@ -14,10 +14,32 @@ local Util = require("lazyvim.util")
 -- https://github.com/nvim-pack/nvim-spectre#custom-functions
 
 return {
+  { "kkharji/sqlite.lua" },
+  { "brookhong/telescope-pathogen.nvim" },
+  { "nvim-telescope/telescope-symbols.nvim" },
+  {
+    "AckslD/nvim-neoclip.lua",
+    config = function(LazyV, opts)
+      require("neoclip").setup(opts)
+    end,
+    opts = {
+      enable_persistent_history = true,
+      continuous_sync = true,
+    },
+  },
   {
     "nvim-telescope/telescope.nvim",
-    config = function()
+    dependencies = {
+      { "telescope-pathogen.nvim" },
+      { "telescope-symbols.nvim" },
+      { "AckslD/nvim-neoclip.lua" },
+    },
+    config = function(LazyPlugin, opts)
+      require("telescope").setup(opts)
       require("telescope").load_extension("harpoon")
+      require("telescope").load_extension("neoclip")
+      require("telescope").load_extension("pathogen")
+      vim.keymap.set("v", "<space>g", require("telescope").extensions["pathogen"].grep_string)
     end,
     opts = {
       defaults = {
@@ -35,20 +57,66 @@ return {
         },
         sorting_strategy = "ascending",
         winblend = 0,
+        scroll_strategy = "limit",
+        mappings = {
+          i = {
+            ["<C-u>"] = require("telescope.actions").results_scrolling_up,
+            ["<C-d>"] = require("telescope.actions").results_scrolling_down,
+            ["<C-f>"] = require("telescope.actions").preview_scrolling_up,
+            ["<C-b>"] = require("telescope.actions").preview_scrolling_down,
+            ["<C-j>"] = require("telescope.actions").move_selection_next,
+            ["<C-k>"] = require("telescope.actions").move_selection_previous,
+          },
+          n = {
+            ["<C-u>"] = require("telescope.actions").results_scrolling_up,
+            ["<C-d>"] = require("telescope.actions").results_scrolling_down,
+            ["<C-f>"] = require("telescope.actions").preview_scrolling_up,
+            ["<C-b>"] = require("telescope.actions").preview_scrolling_down,
+          },
+        },
       },
     },
-    keys = {
+    key = {
       {
-        "<leader>sh",
-        "<cmd>Telescope harpoon marks<cr>",
-        desc = "~ Harpoon files",
+        "gy",
+      },
+      {
+        "<leader>y",
+        "<cmd>Telescope neoclip plus<cr>",
+        desc = "👻 Neoclip",
+      },
+      {
+        "gy",
+        "<cmd>Telescope neoclip plus<cr>",
+        desc = "👻 Neoclip",
       },
       {
         -- help pages, moved from `leader sh`
         "<leader>smh",
-        "<cmd>telescope help_tags<cr>",
+        "<cmd>Telescope help_tags<cr>",
         desc = "help pages",
       },
+      {
+        "<leader>sms",
+        "<cmd>Telescope symbols<cr>",
+        desc = "Symbols 🤪",
+      },
+      -- search
+      { "<leader>sa" },
+      { "<leader>sma", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
+      { "<leader>sC", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      { "<leader>smc", "<cmd>Telescope commands<cr>", desc = "Commands" },
+      { "<leader>sH" },
+      { "<leader>smH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
+      { "<leader>sk" },
+      { "<leader>smk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+      { "<leader>sM" },
+      { "<leader>smM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+      { "<leader>sm" },
+      { "<leader>smj", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+      { "<leader>so" },
+      { "<leader>smo", "<cmd>Telescope vim_options<cr>", desc = "Options" },
+      { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
       -- {
       --   "<leader>t",
       --   desc = "Telescope",
@@ -67,13 +135,13 @@ return {
         -- - [ ] and add another hotkey to traverse into the directory structure for good measure, this one requires an arg, how to?
         --  - perhaps the arg to this one is currently selected file, derive the 1 level traversal from there
         -- - [ ] and for extra good measure, add a hotkey that resets the traversal to the leaf directory of currently highlit file
-        "<leader>fF",
+        "<leader>ff",
         function()
           require("telescope.builtin").find_files({
             cwd = require("telescope.utils").buffer_dir(),
           })
         end,
-        desc = "~ Find Files (cwd)",
+        desc = "🔎 Find Files (cwd)",
       },
       {
         -- this one includes parent dir, unlike <leader>ff which does not
@@ -83,7 +151,7 @@ return {
             cwd = vim.fs.dirname(vim.fn.expand("%:p:h")),
           })
         end,
-        desc = "~ Find Files (parent dir)",
+        desc = "🔎 Find Files (parent dir)",
       },
       -- TODO: also replace
       -- - [x] "<leader>sg", -> real live_grep cwd
@@ -95,31 +163,69 @@ return {
       -- TODO: Add a `live_grep` inside open buffers
       -- - [x] <leader>sb
       {
-        "<leader>sg",
+        "<leader>ss",
         function()
           require("telescope.builtin").live_grep({
             cwd = require("telescope.utils").buffer_dir(),
           })
         end,
-        desc = "~ Live Grep (cwd)",
+        desc = "🔍 Live Grep (cwd)",
       },
       {
         "<leader>sG", -- just delete default binding, useless
       },
       {
         -- changes from default <leader>sb binding
-        "<leader>sB",
+        "<leader>sc",
         "<cmd>Telescope current_buffer_fuzzy_find<cr>",
-        desc = "~ Fuzzy search current buffer",
+        desc = "🔍 Fuzzy search (current buffer)",
       },
       {
-        "<leader>sb",
+        "<leader>so",
         function()
           require("telescope.builtin").live_grep({
             grep_open_files = true,
           })
         end,
-        desc = "~ Live Grep (open buffers)",
+        desc = "🔍 Live Grep (open buffers)",
+      },
+      { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
+      {
+        "<leader>sls",
+        Util.telescope("lsp_document_symbols", {
+          symbols = {
+            "Class",
+            "Function",
+            "Method",
+            "Constructor",
+            "Interface",
+            "Module",
+            "Struct",
+            "Trait",
+            "Field",
+            "Property",
+          },
+        }),
+        desc = "Goto Symbol",
+      },
+      { "<leader>sS" },
+      {
+        "<leader>slS",
+        Util.telescope("lsp_dynamic_workspace_symbols", {
+          symbols = {
+            "Class",
+            "Function",
+            "Method",
+            "Constructor",
+            "Interface",
+            "Module",
+            "Struct",
+            "Trait",
+            "Field",
+            "Property",
+          },
+        }),
+        desc = "Goto Symbol (Workspace)",
       },
       -- NOTE: the same as default lazy vim afaik
       -- TODO: replace with live_grep_args plugin for telescope, or add a hotkey that upgrades a live_grep to live_grep_args?

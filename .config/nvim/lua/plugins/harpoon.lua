@@ -1,7 +1,36 @@
+local function prepare_harpoon_results()
+  local list = require("harpoon").get_mark_config().marks
+  local next = {}
+  for idx = 1, #list do
+    if list[idx].filename ~= "" then
+      local path = vim.loop.cwd() .. "/" .. list[idx].filename
+      table.insert(next, path)
+      print(path)
+    end
+  end
+  return next
+end
+
+local live_grep_harpoon_files = function()
+  require("telescope.builtin").live_grep({
+    search_dirs = prepare_harpoon_results(),
+  })
+end
+
 return {
   {
     "ThePrimeagen/harpoon",
     keys = {
+      {
+        "<leader>hs",
+        live_grep_harpoon_files,
+        desc = "🐡 Big one incoming!",
+      },
+      {
+        "<leader>hf",
+        "<cmd>Telescope harpoon marks<cr>",
+        desc = "🎣 Where is my fishing rod?",
+      },
       {
         "<leader>h",
         desc = "Harpoon",
@@ -11,8 +40,16 @@ return {
         function()
           require("harpoon.ui").toggle_quick_menu()
         end,
-        desc = "List harpoons",
+        desc = "🐟 Give them to me!",
       },
+      {
+        "<C-g>h",
+        function()
+          require("harpoon.ui").toggle_quick_menu()
+        end,
+        desc = "🐟 Give them to me!",
+      },
+
       {
         "",
         function()
