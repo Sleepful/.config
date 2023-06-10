@@ -15,6 +15,10 @@ return {
         end,
         desc = "Explorer NeoTree (buffers)",
       },
+      {
+        "<C-g>g",
+        desc = "🌳 RG at neotree!",
+      },
     },
     opts = {
       default_component_configs = {
@@ -39,7 +43,6 @@ return {
             local node = state.tree:get_node()
             require("telescope.builtin").live_grep({ cwd = node._parent_id })
           end,
-          desc = "Live Grep the directory at the current node",
           -- TODO: live grep with args?
           -- https://github.com/nvim-telescope/telescope-live-grep-args.nvim
         },

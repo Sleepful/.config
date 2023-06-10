@@ -15,9 +15,11 @@ local Util = require("lazyvim.util")
 
 return {
   { "kkharji/sqlite.lua" },
-  { "brookhong/telescope-pathogen.nvim" },
+  { "sleepful/telescope-pathogen.nvim" },
   { "nvim-telescope/telescope-symbols.nvim" },
   {
+    -- TODO: neoclip needs better sorting on its results
+    -- has weird keybindgs for now (C-p in insert, leader+y in normal)
     "AckslD/nvim-neoclip.lua",
     config = function(LazyV, opts)
       require("neoclip").setup(opts)
@@ -39,7 +41,6 @@ return {
       require("telescope").load_extension("harpoon")
       require("telescope").load_extension("neoclip")
       require("telescope").load_extension("pathogen")
-      vim.keymap.set("v", "<space>g", require("telescope").extensions["pathogen"].grep_string)
     end,
     opts = {
       defaults = {
@@ -76,20 +77,26 @@ return {
         },
       },
     },
-    key = {
-      {
-        "gy",
+    keys = {
+
+      { -- same as <leader>sw
+        "<leader>?",
+        Util.telescope("grep_string"),
+        desc = "Fuzzy Word (root dir)",
       },
-      {
-        "<leader>y",
-        "<cmd>Telescope neoclip plus<cr>",
-        desc = "👻 Neoclip",
-      },
-      {
-        "gy",
-        "<cmd>Telescope neoclip plus<cr>",
-        desc = "👻 Neoclip",
-      },
+      --- <C-g> keymaps
+      require("plugins.telescope.C-g-keymaps").neoclip,
+      require("plugins.telescope.C-g-keymaps").pathogen_fuzzy,
+      require("plugins.telescope.C-g-keymaps").pathogen_grep,
+      require("plugins.telescope.C-g-keymaps").fuzzy_current_buffer,
+      require("plugins.telescope.C-g-keymaps").grep_open_buffers,
+      require("plugins.telescope.C-g-keymaps").fuzzy_open_buffers,
+      require("plugins.telescope.C-g-keymaps").grep_current_buffer,
+
+      require("plugins.telescope.C-g-keymaps").grep_harpoon_filenames,
+      require("plugins.telescope.C-g-keymaps").harpoon_menu,
+      require("plugins.telescope.C-g-keymaps").grep_harpoon_files,
+      -- Custom keymaps
       {
         -- help pages, moved from `leader sh`
         "<leader>smh",
@@ -97,9 +104,23 @@ return {
         desc = "help pages",
       },
       {
-        "<leader>sms",
+        "<leader>sR",
         "<cmd>Telescope symbols<cr>",
-        desc = "Symbols 🤪",
+        desc = "Symbols",
+      },
+      {
+        "<leader>se",
+        function()
+          require("telescope.builtin").symbols({ sources = { "emoji" } })
+        end,
+        desc = "Emojis 🤪",
+      },
+      {
+        "<leader>sk",
+        function()
+          require("telescope.builtin").symbols({ sources = { "kaomoji", "gitmoji" } })
+        end,
+        desc = "GitKao moji ⚗️ ",
       },
       -- search
       { "<leader>sa" },
@@ -108,7 +129,6 @@ return {
       { "<leader>smc", "<cmd>Telescope commands<cr>", desc = "Commands" },
       { "<leader>sH" },
       { "<leader>smH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
-      { "<leader>sk" },
       { "<leader>smk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
       { "<leader>sM" },
       { "<leader>smM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
@@ -116,80 +136,10 @@ return {
       { "<leader>smj", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
       { "<leader>so" },
       { "<leader>smo", "<cmd>Telescope vim_options<cr>", desc = "Options" },
-      { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
-      -- {
-      --   "<leader>t",
-      --   desc = "Telescope",
-      -- },
-      -- currently a lot inside the `s` key
-      -- default search/find functionality from lazy vim always goes to `root_dir`,
-      -- it looks like `cwd` defaults to `root_dir`
-      -- not sure if I misunderstand the `cwd` or whut, but lets overwrite them
-      -- probably due to the pick between git_files and find_files
+      { "<leader>ss", "<cmd>Telescope resume<cr>", desc = "Resume" },
       {
-        -- TODO: override "<leader>ff" because there is also "<leader><space>", redundant
-        -- - [ ] also add a hotkey to update the CWD to traverse up the directory structure
-        -- ADVANCED:
-        -- - [ ] add hotkey that sends files to live_grep
-        --  - marked files or all? maybe both like quickfix list
-        -- - [ ] and add another hotkey to traverse into the directory structure for good measure, this one requires an arg, how to?
-        --  - perhaps the arg to this one is currently selected file, derive the 1 level traversal from there
-        -- - [ ] and for extra good measure, add a hotkey that resets the traversal to the leaf directory of currently highlit file
-        "<leader>ff",
-        function()
-          require("telescope.builtin").find_files({
-            cwd = require("telescope.utils").buffer_dir(),
-          })
-        end,
-        desc = "🔎 Find Files (cwd)",
+        "<leader>sG",
       },
-      {
-        -- this one includes parent dir, unlike <leader>ff which does not
-        "<leader>fp",
-        function()
-          require("telescope.builtin").find_files({
-            cwd = vim.fs.dirname(vim.fn.expand("%:p:h")),
-          })
-        end,
-        desc = "🔎 Find Files (parent dir)",
-      },
-      -- TODO: also replace
-      -- - [x] "<leader>sg", -> real live_grep cwd
-      -- because they all do a grep on root dir, one of them says CWD but fails :shrug:
-      -- because they are redundant and all do the same as "<leader>/"
-      -- add:
-      -- - [ ] live_grep on files in harpoon list
-      --
-      -- TODO: Add a `live_grep` inside open buffers
-      -- - [x] <leader>sb
-      {
-        "<leader>ss",
-        function()
-          require("telescope.builtin").live_grep({
-            cwd = require("telescope.utils").buffer_dir(),
-          })
-        end,
-        desc = "🔍 Live Grep (cwd)",
-      },
-      {
-        "<leader>sG", -- just delete default binding, useless
-      },
-      {
-        -- changes from default <leader>sb binding
-        "<leader>sc",
-        "<cmd>Telescope current_buffer_fuzzy_find<cr>",
-        desc = "🔍 Fuzzy search (current buffer)",
-      },
-      {
-        "<leader>so",
-        function()
-          require("telescope.builtin").live_grep({
-            grep_open_files = true,
-          })
-        end,
-        desc = "🔍 Live Grep (open buffers)",
-      },
-      { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
       {
         "<leader>sls",
         Util.telescope("lsp_document_symbols", {

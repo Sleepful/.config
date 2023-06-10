@@ -43,14 +43,6 @@ return {
         desc = "🐟 Give them to me!",
       },
       {
-        "<C-g>h",
-        function()
-          require("harpoon.ui").toggle_quick_menu()
-        end,
-        desc = "🐟 Give them to me!",
-      },
-
-      {
         "",
         function()
           require("harpoon.ui").nav_prev()

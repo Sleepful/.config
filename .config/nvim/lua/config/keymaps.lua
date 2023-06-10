@@ -41,21 +41,39 @@ end, { desc = "Toggle Line Numbers" })
 map({ "t" }, "<C-n>", "<C-\\><C-n>", { desc = "Enter Normal mode in Term mode with <C-n>" })
 
 -- Yank filename of current buffer and display as message
-map("n", "<leader>fy", function()
-  vim.cmd("let @+=@%")
+map("n", "<leader>yf", function()
+  vim.fn.setreg("+", vim.fn.expand("%:t"))
   vim.cmd("echo getreg('+')")
-end, { desc = "Yank filename" })
+end, { desc = "Filename" })
+
+map("n", "<leader>yr", function()
+  vim.fn.setreg("+", vim.fn.fnamemodify(vim.fn.expand("%"), ":."))
+  vim.cmd("echo getreg('+')")
+end, { desc = "Relative path" })
+
+map("n", "<leader>ya", function()
+  vim.fn.setreg("+", vim.fn.expand("%:p"))
+  vim.cmd("echo getreg('+')")
+end, { desc = "Absolute path" })
 
 -- Yank git branch
-map("n", "<leader>gY", function()
+map("n", "<leader>yb", function()
   local branch = require("util").cmd("git branch --show-current")
   vim.fn.setreg("+", branch)
   print(branch)
-end, { desc = "Yank git branch" })
+end, { desc = "Git branch name" })
 
 -- Neoclip
+-- TODO: make it so that it inserts the selected yank into the current insert thing
 map("i", "<C-p>", "<cmd>Telescope neoclip plus<cr>", { desc = "Neoclip" })
 
 -- Classic pasting
 map("n", "[p", "O<esc>p", { desc = "Paste above" })
 map("n", "]p", "o<esc>p", { desc = "Paste below" })
+
+-- Start interactive EasyAlign in visual mode (e.g. vipga)
+vim.cmd("xmap ga <Plug>(EasyAlign)")
+
+-- Start interactive EasyAlign for a motion/text object (e.g. gaip)
+vim.cmd("xmap ga <Plug>(EasyAlign)")
+vim.cmd("nmap ga <Plug>(EasyAlign)")

@@ -1,32 +1,109 @@
+local bufferline_opts = function()
+  return {
+    options = {
+      close_command = function(n)
+        require("mini.bufremove").delete(n, false)
+      end,
+      right_mouse_command = function(n)
+        require("mini.bufremove").delete(n, false)
+      end,
+      diagnostics = "nvim_lsp",
+      always_show_bufferline = false,
+      diagnostics_indicator = function(_, _, diag)
+        local icons = require("lazyvim.config").icons.diagnostics
+        local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+          .. (diag.warning and icons.Warn .. diag.warning or "")
+        return vim.trim(ret)
+      end,
+      offsets = {
+        {
+          filetype = "neo-tree",
+          text = "Neo-tree",
+          highlight = "Directory",
+          text_align = "left",
+        },
+      },
+    },
+  }
+end
+local lualine_opts = function()
+  return {
+    options = {
+      -- base16 based on RRethy base16:
+      -- https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md#base16
+      theme = "base16",
+      globalstatus = true,
+    },
+    sections = {
+      lualine_a = {
+        {
+          "mode",
+          fmt = function(str)
+            return str:sub(1, 1)
+          end,
+        },
+        {
+          "filename",
+          path = 1,
+          symbols = { modified = "📖", readonly = "🔑", unnamed = "🧸" },
+        },
+      },
+      lualine_b = { { "branch" } },
+      lualine_c = {},
+      lualine_x = {},
+      lualine_y = {
+        {
+          function()
+            return require("nvim-navic").get_location()
+          end,
+          cond = function()
+            return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+          end,
+          separator = { left = "", right = "" },
+        },
+        { "searchcount" },
+      },
+      lualine_z = {
+        {
+          "location",
+          padding = { left = 1, right = 1 },
+        },
+        { "progress", separator = " ", padding = { left = 0, right = 1 } },
+      },
+    },
+    extensions = { "neo-tree", "lazy" },
+  }
+end
+
 local allow_reload = true
 
 local toggle_reload = function()
   allow_reload = not allow_reload
 end
 
-local current_flavour = function()
-  local flavour = require("util").cmd("flavours current")
-  return flavour
+local source_flavour = function()
+  local config = "$XDG_CONFIG_HOME"
+  local path = "/nvim/colors/flavours.lua"
+  vim.cmd("source " .. config .. path)
 end
 
-local set_flavour = function()
-  local flavour = current_flavour()
-  vim.cmd("colorscheme base16-" .. flavour)
+local set_flavours = function()
+  source_flavour()
+  require("lualine").setup(lualine_opts())
 end
 
-local reload = function()
+local setup_RRethy = function()
+  source_flavour()
+  require("lualine").setup(lualine_opts())
+end
+
+local reload_flavour = function()
   if allow_reload then
-    -- set_flavour works better for lua_line because lua_line
-    -- has its own version of known base16 color schemes,
-    -- this way also keeps the icon colors and all sorts of things very nicely colored
-    set_flavour()
-    -- this other option might work better for base16 that are not available
-    -- in the RRethy/nvim-base16 repo, in which case the above set_flavours() fails.
-    -- vim.api.nvim_command("source ~/.config/nvim/lua/plugins/base16/colors.lua")
+    set_flavours()
   end
 end
 
-vim.api.nvim_create_user_command("ReloadColors", reload, {})
+vim.api.nvim_create_user_command("Recolor", reload_flavour, {})
 
 return {
   -- add gruvbox
@@ -48,72 +125,18 @@ return {
       "RRethy/nvim-base16",
       "LazyVim/LazyVim",
     },
-    opts = function()
-      return {
-        options = {
-          -- base16 based on RRethy base16:
-          -- https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md#base16
-          theme = "base16",
-          globalstatus = true,
-        },
-        sections = {
-          lualine_a = {
-            {
-              "mode",
-              fmt = function(str)
-                return str:sub(1, 1)
-              end,
-            },
-            {
-              "filename",
-              path = 1,
-              symbols = { modified = "📖", readonly = "🔑", unnamed = "🧸" },
-            },
-          },
-          lualine_b = { { "branch" } },
-          lualine_c = {},
-          lualine_x = {},
-          lualine_y = {
-            {
-              function()
-                return require("nvim-navic").get_location()
-              end,
-              cond = function()
-                return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-              end,
-              separator = { left = "", right = "" },
-            },
-            { "searchcount" },
-          },
-          lualine_z = {
-            {
-              "location",
-              padding = { left = 1, right = 1 },
-            },
-            { "progress", separator = " ", padding = { left = 0, right = 1 } },
-          },
-        },
-        extensions = { "neo-tree", "lazy" },
-      }
-    end,
+    opts = lualine_opts,
     config = function(LazyVim, opts)
       require("lualine").setup(opts)
     end,
   },
-  -- has bad colors in dark mode, comment for now:
-  -- { "shaunsingh/solarized.nvim" },
-  -- Configure LazyVim to load gruvbox
   {
     "RRethy/nvim-base16",
-    config = function(LazyPlugin, opts)
-      -- requires some default theme for the setup, otherwise funny behavior
-      set_flavour()
-    end,
     keys = {
       {
         "<leader>ut",
         function()
-          reload()
+          reload_flavour()
         end,
         desc = "Reload theme",
       },
@@ -135,9 +158,41 @@ return {
       "RRethy/nvim-base16",
     },
     opts = {
-      colorscheme = function()
-        reload()
-      end,
+      colorscheme = "flavours",
+    },
+  },
+  {
+    "akinsho/bufferline.nvim",
+    event = "VeryLazy",
+    keys = {
+      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
+      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+    },
+    opts = {
+      options = {
+        close_command = function(n)
+          require("mini.bufremove").delete(n, false)
+        end,
+        right_mouse_command = function(n)
+          require("mini.bufremove").delete(n, false)
+        end,
+        diagnostics = "nvim_lsp",
+        always_show_bufferline = false,
+        diagnostics_indicator = function(_, _, diag)
+          local icons = require("lazyvim.config").icons.diagnostics
+          local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+            .. (diag.warning and icons.Warn .. diag.warning or "")
+          return vim.trim(ret)
+        end,
+        offsets = {
+          {
+            filetype = "neo-tree",
+            text = "Neo-tree",
+            highlight = "Directory",
+            text_align = "left",
+          },
+        },
+      },
     },
   },
 }

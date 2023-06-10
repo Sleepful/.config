@@ -1,3 +1,7 @@
+export XDG_CONFIG_HOME=~/.config
+export XDG_DATA_HOME=~/.local/share
+export FLAVOURS_DATA_DIRECTORY="$XDG_DATA_HOME/flavours"
+export FLAVOURS_CONFIG_FILE="$XDG_CONFIG_HOME/flavours/config.toml"
 # MacPorts Installer addition on 2020-11-05_at_09:38:36: adding an appropriate PATH variable for use with MacPorts.
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
@@ -234,7 +238,10 @@ if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && 
 	)
 fi
 
-# export the g()/git function to subshells
+# cannot call GH from non-iteractive shell such as neovim cmd
+# exits with 128, probably due to auth
+alias ghpr='gh pr view --web || gh pr create --web'
+
 # lvl 2 is a subshell when using an interactive zsh shell inside tmux
 # -gt is greater_than
 # so the fnuction is exported only when the SHLVL is greater than 2

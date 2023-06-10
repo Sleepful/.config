@@ -1,6 +1,11 @@
 # Commands go through bash
 # shell = "bash -c '{}'"
 
+# Remember to use this on OSX to read custom themes:
+# ln -s ~/.config/flavours ~/Library/Preferences/flavours 
+# due to:
+# https://github.com/Misterio77/flavours/issues/80
+
 [[items]]
 file = "~/.config/kitty/flavours.conf"
 template = "kitty"
@@ -12,7 +17,9 @@ subtemplate = "default-256"
 [[items]]
 # to figure out the directory of the nvim sockets, run this neovim:
 # :echo v:servername
-hook = 'fd -t s nvim /var/folders | xargs -n1 nvim --remote-send "<C-\><C-N>:ReloadColors<CR>" --server'
-file = "~/.config/nvim/lua/plugins/base16/colors.lua"
+hook = 'fd -t s nvim /var/folders | xargs -n1 nvim --remote-send ":Recolor<CR>" --server'
+file = "~/.config/nvim/colors/flavours.lua"
 template = "nvim"
-rewrite = true
+rewrite = false
+start= "-- Start flavours"
+end = "-- End flavours"
