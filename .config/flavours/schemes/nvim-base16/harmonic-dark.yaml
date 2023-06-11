@@ -1,0 +1,18 @@
+scheme: "harmonic-dark"
+author: "(https://github.com/RRethy/nvim-base16/blob/master/colors)"
+
+base04: "aabcce"
+base05: "cbd6e2"
+base06: "e5ebf1"
+base07: "f7f9fb"
+
+base08: "bf8b56"
+base09: "bfbf56"
+base0A: "8bbf56"
+base0B: "56bf8b"
+
+base0C: "568bbf"
+base0D: "8b56bf"
+base0E: "bf568b"
+base0F: "bf5656"
+
