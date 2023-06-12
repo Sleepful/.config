@@ -110,3 +110,10 @@ map("i", "<C-l>", "<Right>")
 map("n", "<leader>uq", "<cmd>QuickScopeToggle<cr>", {
   desc = "Toggle QuickScope",
 })
+
+-- find the next non-alpha character
+map({ "n", "x", "o" }, "<C-l>", "/[^a-zA-Z_]<CR>:noh<CR>", { desc = " " })
+-- same as above, but backwards. Also a positive look behind is used in order to
+-- get the character to the right of the match, this way we can do backwards delete
+-- movements without deleting the non-alpha character
+map({ "n", "x", "o" }, "<C-h>", "?\\([^a-zA-Z_]\\)\\@<=.<CR>:noh<CR>", { desc = " " })
