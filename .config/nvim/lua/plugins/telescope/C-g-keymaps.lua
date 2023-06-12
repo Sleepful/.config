@@ -19,9 +19,9 @@ end
 
 return {
   neoclip = {
-    "<C-g>n",
+    "<C-g>c",
     "<cmd>Telescope neoclip plus<cr>",
-    desc = "👻 Neoclip",
+    desc = "👻 neoClip",
   },
   fuzzy_current_buffer = {
     "<C-g>p",

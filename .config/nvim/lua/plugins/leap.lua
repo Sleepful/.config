@@ -1,6 +1,9 @@
+-- Functions based on Leap examples:
+-- https://github.com/ggandor/leap.nvim#calling-leap-with-custom-arguments
 local function get_line_starts(winid)
   local wininfo = vim.fn.getwininfo(winid)[1]
   local cur_line = vim.fn.line(".")
+  local cur_col = vim.fn.virtcol(".")
 
   -- Get targets.
   local targets = {}
@@ -12,7 +15,17 @@ local function get_line_starts(winid)
       lnum = fold_end + 1
     else
       if lnum ~= cur_line then
-        table.insert(targets, { pos = { lnum, 1 } })
+        -- table.insert(targets, { pos = { lnum, 1 } })
+        local line = vim.fn.getline(lnum)
+        local max_col = string.len(line)
+        local col_pos = nil
+        if max_col < cur_col then
+          col_pos = max_col
+        else
+          col_pos = cur_col
+        end
+        print(line)
+        table.insert(targets, { pos = { lnum, col_pos } })
       end
       lnum = lnum + 1
     end

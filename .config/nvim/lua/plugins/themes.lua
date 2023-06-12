@@ -39,7 +39,21 @@ local lualine_opts = function()
         {
           "mode",
           fmt = function(str)
-            return str:sub(1, 1)
+            local letter = str:sub(1, 1)
+            local symbol = letter
+            if letter == "N" then
+              symbol = "🛸"
+            end
+            if letter == "I" then
+              symbol = "🛹"
+            end
+            if letter == "V" then
+              symbol = "⛸️"
+            end
+            if letter == "C" then
+              symbol = "🪄"
+            end
+            return symbol
           end,
         },
         {
@@ -54,7 +68,7 @@ local lualine_opts = function()
       lualine_y = {
         {
           function()
-            return require("nvim-navic").get_location()
+            return require("nvim-navic").get_location({ reverse_order = true })
           end,
           cond = function()
             return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
@@ -65,7 +79,11 @@ local lualine_opts = function()
       },
       lualine_z = {
         {
-          "location",
+          function()
+            local line = vim.fn.line(".")
+            local col = vim.fn.virtcol(".")
+            return string.format("%3d💫%-2d", line, col)
+          end,
           padding = { left = 1, right = 1 },
         },
         { "progress", separator = " ", padding = { left = 0, right = 1 } },

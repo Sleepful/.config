@@ -101,3 +101,7 @@ map(
   ":call QuickFixOpenAll()<CR>",
   { noremap = true, silent = false, desc = "🧙 open Quickfix files" }
 )
+
+-- Classic moves in insert mode
+map("i", "<C-h>", "<Left>")
+map("i", "<C-l>", "<Right>")

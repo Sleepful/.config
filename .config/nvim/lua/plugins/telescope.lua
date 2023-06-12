@@ -123,10 +123,16 @@ return {
         end,
         desc = "GitKao moji ⚗️ ",
       },
+      -- more
+      { "<leader>smn", "<cmd>Telescope notify<cr>", desc = "Notify messages" },
       -- search
       { "<leader>sa" },
       { "<leader>sma", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
-      { "<leader>sC", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      {
+        "<leader>sC",
+        -- remove default "Commands"
+      },
+      { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
       { "<leader>smc", "<cmd>Telescope commands<cr>", desc = "Commands" },
       { "<leader>sH" },
       { "<leader>smH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },

@@ -44,6 +44,10 @@
   parse = rev-parse
   # useful to edit with vimf
   m = ls-files -m
+  # changed files from last commit
+  prev = !git --no-pager diff --name-only HEAD^ 
+  ignore-file = update-index --skip-worktree
+  unignore-file = update-index --no-skip-worktree
 [core]
 	hooksPath = ~/.githooks/
 [github]
