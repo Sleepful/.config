@@ -24,8 +24,8 @@ return {
         ["<leader>u"] = { name = "+ui" },
         ["<leader>w"] = { name = "+windows" },
         ["<leader>x"] = { name = "+diagnostics/quickfix" },
-        ["<leader>p"] = { name = "+pathogen" },
         ["<leader>y"] = { name = "+yank" },
+        ["<C-g>r"] = { name = "🚃 Railway" },
       },
     },
     config = function(_, opts)

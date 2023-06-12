@@ -86,8 +86,9 @@ return {
       },
       --- <C-g> keymaps
       require("plugins.telescope.C-g-keymaps").neoclip,
-      require("plugins.telescope.C-g-keymaps").pathogen_fuzzy,
-      require("plugins.telescope.C-g-keymaps").pathogen_grep,
+      require("plugins.telescope.C-g-keymaps").pathogen.fuzzy,
+      require("plugins.telescope.C-g-keymaps").pathogen.grep,
+      require("plugins.telescope.C-g-keymaps").pathogen.files,
       require("plugins.telescope.C-g-keymaps").fuzzy_current_buffer,
       require("plugins.telescope.C-g-keymaps").grep_open_buffers,
       require("plugins.telescope.C-g-keymaps").fuzzy_open_buffers,

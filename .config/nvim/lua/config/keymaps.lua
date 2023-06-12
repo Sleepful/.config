@@ -77,3 +77,27 @@ vim.cmd("xmap ga <Plug>(EasyAlign)")
 -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
 vim.cmd("xmap ga <Plug>(EasyAlign)")
 vim.cmd("nmap ga <Plug>(EasyAlign)")
+
+-- Open files from a quickfix list into buffers
+vim.cmd([[
+function!   QuickFixOpenAll()
+    if empty(getqflist())
+        return
+    endif
+    let s:prev_val = ""
+    for d in getqflist()
+        let s:curr_val = bufname(d.bufnr)
+        if (s:curr_val != s:prev_val)
+            exec "edit " . s:curr_val
+        endif
+        let s:prev_val = s:curr_val
+    endfor
+endfunction
+]])
+
+map(
+  "n",
+  "<C-g><C-q>",
+  ":call QuickFixOpenAll()<CR>",
+  { noremap = true, silent = false, desc = "🧙 open Quickfix files" }
+)

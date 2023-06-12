@@ -8,8 +8,8 @@ local custom_attach = function()
   -- local buf_name = vim.fn.expand("%") (does not include directory, only filename)
   local buf_name = vim.api.nvim_buf_get_name(0)
   local root = root_dir(buf_name)
-  print("In:", buf_name) -- won't display cuz of other msg
-  print("Lexical:", root)
+  -- print("In:", buf_name) -- won't display cuz of other msg
+  -- print("Lexical:", root)
 end
 
 local lexical = {

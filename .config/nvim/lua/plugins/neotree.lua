@@ -15,10 +15,7 @@ return {
         end,
         desc = "Explorer NeoTree (buffers)",
       },
-      {
-        "<C-g>g",
-        desc = "🌳 RG at neotree!",
-      },
+      require("plugins.telescope.C-g-keymaps").neotree.rg,
     },
     opts = {
       default_component_configs = {

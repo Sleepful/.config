@@ -34,16 +34,8 @@ return {
       require("telescope").load_extension("vim_bookmarks")
     end,
     keys = {
-      {
-        "ml",
-        "<cmd>Telescope vim_bookmarks current_file<cr>",
-        desc = "Telescope bookmarks",
-      },
-      {
-        "ms",
-        "<cmd>Telescope vim_bookmarks all<cr>",
-        desc = "Telescope bookmarks everywhere",
-      },
+      require("plugins.telescope.C-g-keymaps").vim_bookmarks.all,
+      require("plugins.telescope.C-g-keymaps").vim_bookmarks.page,
     },
   },
 }

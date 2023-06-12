@@ -19,70 +19,49 @@ end
 
 return {
   neoclip = {
-    "<C-g>y",
+    "<C-g>n",
     "<cmd>Telescope neoclip plus<cr>",
     desc = "👻 Neoclip",
   },
-  pathogen_fuzzy = {
-    "<C-g>w",
-    function()
-      local opts = {
-        cwd = require("telescope.utils").buffer_dir(),
-      }
-      require("telescope").extensions["pathogen"].grep_string(opts)
-    end,
-    "<cmd>Telescope pathogen live_grep<cr>",
-    desc = "⚡️ Pathogen Fuzzy",
-  },
-  pathogen_grep = {
-    "<C-g>r",
-    function()
-      local opts = {
-        cwd = require("telescope.utils").buffer_dir(),
-      }
-      require("telescope").extensions["pathogen"].live_grep(opts)
-    end,
-    desc = "⚡️ Pathogen Grep",
-  },
   fuzzy_current_buffer = {
-    "<C-g>z",
+    "<C-g>p",
     "<cmd>Telescope current_buffer_fuzzy_find<cr>",
-    desc = "🔍 Fuzzy here",
+    desc = "💤 lazy Page",
   },
   fuzzy_open_buffers = {
-    "<C-g><C-z>",
+    "<C-g>o",
     function()
       require("telescope.builtin").grep_string({
         grep_open_files = true,
       })
     end,
-    desc = "🔍 Fuzzy buffers",
+    desc = "💤 lazy Open buffers",
   },
   grep_open_buffers = {
-    "<C-g>b",
+    "<C-g><C-o>",
     function()
       require("telescope.builtin").live_grep({
         grep_open_files = true,
       })
     end,
-    desc = "🔍 Grep buffers",
+    desc = "🪄 grep Open buffers",
   },
   grep_current_buffer = {
-    "<C-g><C-b>",
+    "<C-g><C-p>",
     function()
       require("telescope.builtin").live_grep({
         search_dirs = { vim.fn.expand("%:p") },
       })
     end,
-    desc = "🔍 Grep here",
+    desc = "🪄 grep Page",
   },
   grep_harpoon_filenames = {
-    "<C-g>f",
+    "<C-g>q",
     "<cmd>Telescope harpoon marks<cr>",
-    desc = "🎣 Files",
+    desc = "🎣 Quick menu",
   },
   harpoon_menu = {
-    "<C-g>h",
+    "<C-g>m",
     function()
       require("harpoon.ui").toggle_quick_menu()
     end,
@@ -91,7 +70,58 @@ return {
   grep_harpoon_files = {
     "<C-g>s",
     live_grep_harpoon_files,
-    desc = "🎣 Grep",
+    desc = "🎣 Shark grep",
+  },
+  vim_bookmarks = {
+    page = {
+      "<C-g>b",
+      "<cmd>Telescope vim_bookmarks current_file<cr>",
+      desc = "📘 Bookmarks ",
+    },
+    all = {
+      "<C-g>a",
+      "<cmd>Telescope vim_bookmarks all<cr>",
+      desc = "📚 All bookmarks",
+    },
+  },
+  neotree = {
+    rg = {
+      "<C-g><C-t>",
+      desc = "🌳 grep Tree!",
+    },
+  },
+  pathogen = {
+    fuzzy = {
+      "<C-g>rl",
+      function()
+        local opts = {
+          cwd = require("telescope.utils").buffer_dir(),
+        }
+        require("telescope").extensions["pathogen"].grep_string(opts)
+      end,
+      "<cmd>Telescope pathogen live_grep<cr>",
+      desc = "⚡️ Pathogen Lazy",
+    },
+    grep = {
+      "<C-g>rg",
+      function()
+        local opts = {
+          cwd = require("telescope.utils").buffer_dir(),
+        }
+        require("telescope").extensions["pathogen"].live_grep(opts)
+      end,
+      desc = "⚡️ Pathogen Grep",
+    },
+    files = {
+      "<C-g>rf",
+      function()
+        local opts = {
+          cwd = require("telescope.utils").buffer_dir(),
+        }
+        require("telescope").extensions["pathogen"].find_files(opts)
+      end,
+      desc = "⚡️ Pathogen Files",
+    },
   },
   obsolete = {
     {
