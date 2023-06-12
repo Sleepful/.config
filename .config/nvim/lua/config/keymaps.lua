@@ -105,3 +105,8 @@ map(
 -- Classic moves in insert mode
 map("i", "<C-h>", "<Left>")
 map("i", "<C-l>", "<Right>")
+
+-- vim-quickscope
+map("n", "<leader>uq", "<cmd>QuickScopeToggle<cr>", {
+  desc = "Toggle QuickScope",
+})

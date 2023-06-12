@@ -12,3 +12,37 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.fn.setreg("p", last_yank)
   end,
 })
+
+return {
+  quick_scope = {
+    auto = "ColorScheme",
+    opts = {
+      group = augroup("qs_colors"),
+      callback = function()
+        local flavour = "flavour-" .. require("util").cmd("flavours current")
+        local colors = require("base16-colorscheme").colorschemes[flavour]
+        local primary_color = colors.base06
+        local secondary_color = colors.base0A
+        local primary_bg = colors.base06
+        local secondary_bg = colors.base07
+        local param = function(name, value)
+          return " " .. name .. "='" .. value .. "' "
+        end
+        local fg_primary = param("guifg", primary_color)
+        local fg_scondary = param("guifg", secondary_color)
+        local bg_primary = param("guibg", primary_bg)
+        local bg_scondary = param("guibg", primary_bg)
+        vim.cmd(
+          "highlight QuickScopePrimary" .. fg_primary .. "gui=underdouble ctermfg=155 cterm=underline"
+          -- "highlight QuickScopePrimary" .. fg_primary .. bg_primary .. "gui=underdouble ctermfg=155 cterm=underline"
+        )
+        vim.cmd(
+          -- "highlight QuickScopeSecondary" .. fg_scondary .. bg_scondary .. "gui=underline ctermfg=81 cterm=underline"
+          "highlight QuickScopeSecondary"
+            .. fg_scondary
+            .. "gui=underline ctermfg=81 cterm=underline"
+        )
+      end,
+    },
+  },
+}

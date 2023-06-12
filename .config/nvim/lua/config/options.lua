@@ -8,3 +8,5 @@ vim.opt.scrolloff = 40 -- keep cursor in the middle
 vim.opt.number = false -- no line numbers
 vim.opt.relativenumber = false -- no line numbers
 vim.lsp.set_log_level("debug")
+-- set cursor column highlighting
+vim.opt.cuc = true
