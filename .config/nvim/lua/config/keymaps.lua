@@ -103,17 +103,28 @@ map(
 )
 
 -- Classic moves in insert mode
-map("i", "<C-h>", "<Left>")
-map("i", "<C-l>", "<Right>")
+map("i", "<C-h>", "<Left>", { desc = "Insert mode move left" })
+map("i", "<C-l>", "<Right>", { desc = "Insert mode move right" })
 
 -- vim-quickscope
 map("n", "<leader>uq", "<cmd>QuickScopeToggle<cr>", {
   desc = "Toggle QuickScope",
 })
 
--- find the next non-alpha character
-map({ "n", "x", "o" }, "<C-l>", "/[^a-zA-Z_]<CR>:noh<CR>", { desc = " " })
+-- find the next non-alpha/underscore character
+map({ "n" }, "<C-l>", [[/[^a-zA-Z_\-\.]<CR>:noh<CR>]], { desc = "Quick move right" })
+map({ "o" }, "<C-l>", [[/[^a-zA-Z_\-\.]<CR><ESC>:noh<CR>li]], { desc = "Quick move right" })
+-- for visual mode the key sequence is a bit different to preserve the
+-- visual highlighting without creating text highlights (:noh)
+map({ "x" }, "<C-l>", [[/[^a-zA-Z_\-\.]<CR><ESC>:noh<CR>gv]], { desc = "Quick move right" })
 -- same as above, but backwards. Also a positive look behind is used in order to
 -- get the character to the right of the match, this way we can do backwards delete
--- movements without deleting the non-alpha character
-map({ "n", "x", "o" }, "<C-h>", "?\\([^a-zA-Z_]\\)\\@<=.<CR>:noh<CR>", { desc = " " })
+-- movements without deleting the non-alpha/underscore character
+map({ "n" }, "<C-h>", [[?\([^a-zA-Z_\-\.]\)\@<=.<CR>:noh<CR>]], { desc = "Quick move left" })
+map({ "o" }, "<C-h>", [[?\([^a-zA-Z_\-\.]\)\@<=.<CR><ESC>:noh<CR>li]], { desc = "Quick move left" })
+map({ "x" }, "<C-h>", [[?\([^a-zA-Z_\-\.]\)\@<=.<CR><ESC>:noh<CR>gv]], { desc = "Quick move left" })
+
+-- e motion
+map({ "n" }, "<C-e>", [[/.\([^a-zA-Z_\-\.]\)\@=<CR>:noh<CR>]], { desc = "Quick move left" })
+map({ "o" }, "<C-e>", [[/.\([^a-zA-Z_\-\.]\)\@=<CR><ESC>:noh<CR>li]], { desc = "Quick move left" })
+map({ "x" }, "<C-e>", [[/.\([^a-zA-Z_\-\.]\)\@=<CR><ESC>:noh<CR>gv]], { desc = "Quick move left" })
