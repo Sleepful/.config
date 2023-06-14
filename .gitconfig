@@ -10,6 +10,7 @@
 	pushb = push -u origin HEAD
   pushf = push --force-with-lease
 	a = add
+	au = add -u
 	aa = add -A .
 	c = commit
 	cm = commit -m

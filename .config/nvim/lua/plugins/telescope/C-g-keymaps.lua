@@ -33,6 +33,7 @@ return {
     function()
       require("telescope.builtin").grep_string({
         grep_open_files = true,
+        { additional_args = { "--ignore-case" } },
       })
     end,
     desc = "💤 lazy Open buffers",
@@ -96,6 +97,7 @@ return {
       function()
         local opts = {
           cwd = require("telescope.utils").buffer_dir(),
+          additional_args = { "--ignore-case" },
         }
         require("telescope").extensions["pathogen"].grep_string(opts)
       end,

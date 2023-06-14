@@ -111,6 +111,7 @@ map("n", "<leader>uq", "<cmd>QuickScopeToggle<cr>", {
   desc = "Toggle QuickScope",
 })
 
+-- QUICK MOVES
 -- find the next non-alpha/underscore character
 map({ "n" }, "<C-l>", [[/[^a-zA-Z_\-\.]<CR>:noh<CR>]], { desc = "Quick move right" })
 map({ "o" }, "<C-l>", [[/[^a-zA-Z_\-\.]<CR><ESC>:noh<CR>li]], { desc = "Quick move right" })
@@ -128,3 +129,12 @@ map({ "x" }, "<C-h>", [[?\([^a-zA-Z_\-\.]\)\@<=.<CR><ESC>:noh<CR>gv]], { desc = 
 map({ "n" }, "<C-e>", [[/.\([^a-zA-Z_\-\.]\)\@=<CR>:noh<CR>]], { desc = "Quick move left" })
 map({ "o" }, "<C-e>", [[/.\([^a-zA-Z_\-\.]\)\@=<CR><ESC>:noh<CR>li]], { desc = "Quick move left" })
 map({ "x" }, "<C-e>", [[/.\([^a-zA-Z_\-\.]\)\@=<CR><ESC>:noh<CR>gv]], { desc = "Quick move left" })
+
+-- UI modes
+-- TODO:
+-- Stream mode: line numbers, line highlight
+map({ "n" }, "<leader>uus", "", { desc = "Stream mode" })
+-- Laser mode: line highlight, column highlight
+map({ "n" }, "<leader>uul", "", { desc = "Laser mode" })
+-- Minimal mode: line highlight,
+map({ "n" }, "<leader>uum", "", { desc = "Minimal mode" })

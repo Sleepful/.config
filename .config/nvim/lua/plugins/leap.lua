@@ -25,6 +25,7 @@ return {
       },
       {
         "<C-k>",
+        mode = { "n", "x", "o" },
         function()
           require("plugins.leap.word")("upwards")
         end,
@@ -32,6 +33,7 @@ return {
       },
       {
         "<C-j>",
+        mode = { "n", "x", "o" },
         function()
           require("plugins.leap.word")("downwards")
         end,
@@ -53,7 +55,7 @@ return {
     "ggandor/flit.nvim", -- included with lazyvim, but this is default config for flit:
     opts = {
       -- from docs:
-      keys = { f = "f", F = "F", t = "t", T = "T" },
+      keys = { f = "find flit", F = "Find flit", t = "til flit", T = "Til flit" },
       -- A string like "nv", "nvo", "o", etc.
       labeled_modes = "nv",
       multiline = true,
@@ -62,4 +64,5 @@ return {
       opts = {},
     },
   },
+  { "ggandor/leap-spooky.nvim", dependencies = "ggandor/leap.nvim", opts = {} },
 }

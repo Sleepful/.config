@@ -43,13 +43,15 @@ local function get_targets(winid, char, direction)
       lnum = fold_end + 1
     else
       local line = vim.fn.getline(lnum)
-      -- Trim the columns that are not visible on the screen
-      local current_line = string.sub(line, first_col, width)
+      -- this works fine with columns that are outside of the screen to the left
+      -- does not work fine with columns that are outside of the screen to the right
+      -- I think this is because of the way leap works and errors with "col out of range", need to confirm
+      local current_line = line
       local col = first_col
       while col <= last_col do
         -- shift current_line with whitespace to match easily with pattern even the first character
         current_line = " " .. current_line
-        local pattern = "%W" .. char .. "[%w_%.-]*[%W]*"
+        local pattern = "%W" .. char .. "[%w_-]*[%W]*"
         local start_pos, end_pos = string.find(current_line, pattern)
         if start_pos == nil then
           break
@@ -86,15 +88,16 @@ return function(direction)
   print("Search word with letter:")
   local char = get_input()
   if char == nil then
+    print("Canceled")
     return
   end
   local winid = vim.api.nvim_get_current_win()
   local targets = get_targets(winid, char, direction)
   if targets ~= nil then
+    print("Match found")
     require("leap").leap({
       target_windows = { winid },
       targets = targets,
-      -- offset = -1,
     })
   else
     print("No matches")

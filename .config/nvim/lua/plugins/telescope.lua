@@ -67,12 +67,18 @@ return {
             ["<C-b>"] = require("telescope.actions").preview_scrolling_down,
             ["<C-j>"] = require("telescope.actions").move_selection_next,
             ["<C-k>"] = require("telescope.actions").move_selection_previous,
+            -- need to use lowercase c so that it properly
+            -- overrides the default mapping in lazyvim
+            ["<c-t>"] = require("telescope.actions").to_fuzzy_refine,
           },
           n = {
             ["<C-u>"] = require("telescope.actions").results_scrolling_up,
             ["<C-d>"] = require("telescope.actions").results_scrolling_down,
             ["<C-f>"] = require("telescope.actions").preview_scrolling_up,
             ["<C-b>"] = require("telescope.actions").preview_scrolling_down,
+            -- need to use lowercase c so that it properly
+            -- overrides the default mapping in lazyvim
+            ["<c-t>"] = require("telescope.actions").to_fuzzy_refine,
           },
         },
       },
@@ -81,7 +87,7 @@ return {
 
       { -- same as <leader>sw
         "<leader>?",
-        Util.telescope("grep_string"),
+        Util.telescope("grep_string", { additional_args = { "--ignore-case" } }),
         desc = "Fuzzy Word (root dir)",
       },
       --- <C-g> keymaps

@@ -26,6 +26,7 @@ return {
         ["<leader>x"] = { name = "+diagnostics/quickfix" },
         ["<leader>y"] = { name = "+yank" },
         ["<leader>h"] = { name = "+harpoon" },
+        ["<leader>um"] = { name = "+modes" },
         ["<C-g>r"] = { name = "🚃 Railway" },
       },
     },
