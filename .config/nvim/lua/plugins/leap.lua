@@ -53,11 +53,12 @@ return {
   },
   {
     "ggandor/flit.nvim", -- included with lazyvim, but this is default config for flit:
+    dependencies = "ggandor/leap.nvim",
     opts = {
       -- from docs:
-      keys = { f = "find flit", F = "Find flit", t = "til flit", T = "Til flit" },
+      keys = { f = "f", F = "F", t = "t", T = "T" },
       -- A string like "nv", "nvo", "o", etc.
-      labeled_modes = "nv",
+      labeled_modes = "nvo",
       multiline = true,
       -- Like `leap`s similar argument (call-specific overrides).
       -- E.g.: opts = { equivalence_classes = {} }
