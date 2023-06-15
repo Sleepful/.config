@@ -87,7 +87,7 @@ return {
 
       { -- same as <leader>sw
         "<leader>?",
-        Util.telescope("grep_string", { additional_args = { "--ignore-case" } }),
+        Util.telescope("grep_string", { additional_args = { "--ignore-case", "--pcre2" } }),
         desc = "Fuzzy Word (root dir)",
       },
       --- <C-g> keymaps
@@ -192,7 +192,11 @@ return {
       },
       -- NOTE: the same as default lazy vim afaik
       -- TODO: replace with live_grep_args plugin for telescope, or add a hotkey that upgrades a live_grep to live_grep_args?
-      { "<leader>/", Util.telescope("live_grep"), desc = "Live Grep (root)" },
+      {
+        "<leader>/",
+        Util.telescope("live_grep", { additional_args = { "--ignore-case", "--pcre2" } }),
+        desc = "Live Grep (root)",
+      },
       {
         "<leader>uC",
         function()

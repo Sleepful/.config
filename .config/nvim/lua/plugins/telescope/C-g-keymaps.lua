@@ -25,7 +25,23 @@ return {
   },
   fuzzy_current_buffer = {
     "<C-g>p",
-    "<cmd>Telescope current_buffer_fuzzy_find<cr>",
+    function()
+      require("telescope.builtin").current_buffer_fuzzy_find({
+        -- function from
+        -- https://github.com/nvim-telescope/telescope.nvim/pull/1401#issuecomment-957234973
+        tiebreak = function(entry1, entry2, prompt)
+          local start_pos1, _ = entry1.ordinal:find(prompt)
+          if start_pos1 then
+            local start_pos2, _ = entry2.ordinal:find(prompt)
+            if start_pos2 then
+              return start_pos1 < start_pos2
+            end
+          end
+          return false
+        end,
+        additional_args = { "--ignore-case", "--pcre2" },
+      })
+    end,
     desc = "💤 lazy Page",
   },
   fuzzy_open_buffers = {
@@ -33,7 +49,7 @@ return {
     function()
       require("telescope.builtin").grep_string({
         grep_open_files = true,
-        { additional_args = { "--ignore-case" } },
+        additional_args = { "--ignore-case", "--pcre2" },
       })
     end,
     desc = "💤 lazy Open buffers",
@@ -43,6 +59,7 @@ return {
     function()
       require("telescope.builtin").live_grep({
         grep_open_files = true,
+        additional_args = { "--ignore-case", "--pcre2" },
       })
     end,
     desc = "🪄 grep Open buffers",
@@ -97,7 +114,7 @@ return {
       function()
         local opts = {
           cwd = require("telescope.utils").buffer_dir(),
-          additional_args = { "--ignore-case" },
+          additional_args = { "--ignore-case", "--pcre2" },
         }
         require("telescope").extensions["pathogen"].grep_string(opts)
       end,
