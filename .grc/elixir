@@ -1,0 +1,29 @@
+# time
+regexp=(\d\d):(\d\d):(\d\d)
+colour=yellow
+-
+# info
+regexp=\[info\]
+colour=green
+-
+# warn
+regexp=\[warn\]
+colour=yellow
+-
+# error
+regexp=\[error\]
+colour=red
+-
+# messges like:
+#    (elixir 1.14.3)
+#    (server 0.1.0)
+regexp=\s{4}\([a-z]+\s[\d\.]+\)
+colour=blue
+-
+# line numbers with extension
+regexp=exs?:\d+
+colour=yellow
+-
+# filenames
+regexp=\/[a-z_]+\.exs?
+colour=blue

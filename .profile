@@ -148,7 +148,7 @@ alias zrc='$EDITOR ~/.zshrc'
 alias prc='$EDITOR ~/.profile'
 alias secret='$EDITOR ~/.secret'
 alias krc='$EDITOR ~/.config/kitty/kitty.conf'
-alias grc='$EDITOR ~/.gitconfig'
+alias girc='$EDITOR ~/.gitconfig'
 # used for emacsclient..i think? *doubt*
 # export ALTERNATE_EDITOR=""
 # export EDITOR="emacsclient -nw"                  # $EDITOR opens in terminal
