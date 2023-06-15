@@ -51,7 +51,12 @@ local function get_targets(winid, char, direction)
       while col <= last_col do
         -- shift current_line with whitespace to match easily with pattern even the first character
         current_line = " " .. current_line
-        local pattern = "%W" .. char .. "[%w_-]*[%W]*"
+        local lower_char = string.lower(char)
+        local upper_char = string.upper(char)
+        -- Case sensitive pattern:
+        -- local pattern = "%W" .. char .. "[%w_-]*[%W]*"
+        -- Ignore case pattern:
+        local pattern = "%W[" .. lower_char .. upper_char .. "][%w_-]*[%W]*"
         local start_pos, end_pos = string.find(current_line, pattern)
         if start_pos == nil then
           break

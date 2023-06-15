@@ -25,18 +25,18 @@ return {
       },
       {
         "<C-k>",
-        mode = { "n", "x", "o" },
         function()
           require("plugins.leap.word")("upwards")
         end,
+        mode = { "n", "x", "o" },
         desc = "Leap by word upwards",
       },
       {
         "<C-j>",
-        mode = { "n", "x", "o" },
         function()
           require("plugins.leap.word")("downwards")
         end,
+        mode = { "n", "x", "o" },
         desc = "Leap by word downwards",
       },
       {

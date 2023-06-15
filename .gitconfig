@@ -49,6 +49,8 @@
   prev = !git --no-pager diff --name-only HEAD^ 
   ignore-file = update-index --skip-worktree
   unignore-file = update-index --no-skip-worktree
+  diffc = diff --cached
+  diffprev = diff HEAD^ HEAD
 [core]
 	hooksPath = ~/.githooks/
 [github]

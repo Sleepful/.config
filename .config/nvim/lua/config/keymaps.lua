@@ -138,3 +138,12 @@ map({ "n" }, "<leader>uus", "", { desc = "Stream mode" })
 map({ "n" }, "<leader>uul", "", { desc = "Laser mode" })
 -- Minimal mode: line highlight,
 map({ "n" }, "<leader>uum", "", { desc = "Minimal mode" })
+
+-- WordWise leap movements, can not seem to override the "move window" keys from lazy vim for all modes
+
+map({ "n", "x", "o" }, "<C-k>", function()
+  require("plugins.leap.word")("upwards")
+end, { desc = "Leap by word upwards" })
+map({ "n", "x", "o" }, "<C-j>", function()
+  require("plugins.leap.word")("downwards")
+end, { desc = "Leap by word downwards" })

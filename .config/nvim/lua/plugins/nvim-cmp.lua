@@ -1,3 +1,7 @@
+-- TODO:: add keybinds to show only LSP suggetions or others,
+-- e.g. show only Text suggestions or show only Snippet suggestions
+-- Example: <C-l> in lua-snip to show only emmet snips
+--
 -- config from lazy vim, few changes
 return {
   {
