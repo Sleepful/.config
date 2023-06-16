@@ -20,8 +20,13 @@ local function get_targets(winid, char, direction)
   local lnum = wininfo.topline
   local botline = wininfo.botline
   local width = wininfo.width
-  local first_col = wininfo.wincol
+  -- this "first_col" refers to the position of the window,
+  -- the window's columns are actually always 1 to "width"
+  --
+  -- local first_col = wininfo.wincol
+  local first_col = 1
   local last_col = wininfo.width - first_col
+  print("first_col:" .. first_col .. " last_col:" .. last_col)
   local targets = {}
   local cursor_line = vim.fn.line(".")
   local begin = nil
@@ -44,11 +49,14 @@ local function get_targets(winid, char, direction)
     else
       local line = vim.fn.getline(lnum)
       -- this works fine with columns that are outside of the screen to the left
-      -- does not work fine with columns that are outside of the screen to the right
-      -- I think this is because of the way leap works and errors with "col out of range", need to confirm
+      -- it also works fine with columns that are outside of the screen to the right
+      -- BUT leap does not display labels for targets that are beyond the right border,
+      -- although it does display labels for targets that are beyond the left border
       local current_line = line
+      print(" current_line:" .. current_line)
       local col = first_col
-      while col <= last_col do
+      -- while col <= last_col do
+      while true do -- search beyond last column
         -- shift current_line with whitespace to match easily with pattern even the first character
         current_line = " " .. current_line
         local lower_char = string.lower(char)
@@ -69,6 +77,7 @@ local function get_targets(winid, char, direction)
         local match_col = col + start_pos
         -- increase end_pos by 1 because otherwise we are including last character from prev match
         current_line = string.sub(current_line, end_pos + 1)
+        print("Match, line:" .. lnum .. " col:" .. match_col)
         table.insert(targets, { pos = { lnum, match_col } })
         col = col + end_pos
       end

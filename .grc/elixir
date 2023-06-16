@@ -27,3 +27,48 @@ colour=yellow
 # filenames
 regexp=\/[a-z_]+\.exs?
 colour=blue
+-
+# error names
+regexp=\([A-Za-z]*Error\)
+colour=red
+-
+# structs
+regexp=\%[A-Za-z\.]+{
+colour=underline yellow
+-
+regexp=}
+colour=bold blue
+-
+regexp={
+colour=bold blue
+-
+regexp=\%
+colour=bold blue
+-
+# Module names (root + last part)
+regexp=([A-Z][A-Za-z]*\.)+([A-Z][A-Za-z]*)?
+colour=black on_white
+-
+# Module name root
+regexp=([A-Z][A-Za-z]*\.)+
+colour=default
+-
+# Last part in a module name + function signature
+regexp=([A-Z][A-Za-z]*\.)[a-z_]+\/\d
+colour=black on_white
+-
+# Last part in a module name + function call
+regexp=([A-Z][A-Za-z]*\.)\.[a-z_]+\(
+colour=black on_white
+-
+# function signatures (uncolor the dot)
+regexp=\.[a-z_]+\/\d
+colour=default
+-
+# function signatures
+regexp=[a-z_]+\/\d
+colour=underline green
+-
+# function calls
+regexp=\.[a-z_]+\(
+colour=green
