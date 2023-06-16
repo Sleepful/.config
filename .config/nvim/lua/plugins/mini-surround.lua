@@ -21,7 +21,8 @@ return {
     end,
     opts = {
       mappings = {
-        add = "<C-x><C-x>", -- Add surrounding in Normal and Visual modes
+        -- M-Bslash = C-Bslash
+        add = "<M-Bslash>", -- Add surrounding in Normal and Visual modes
         delete = "<C-x>d", -- Delete surrounding
         find = "<C-x>f", -- Find surrounding (to the right)
         find_left = "<C-x>F", -- Find surrounding (to the left)
