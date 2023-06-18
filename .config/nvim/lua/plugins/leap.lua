@@ -49,6 +49,12 @@ return {
         require("plugins.leap.window"),
         desc = "Leap to window",
       },
+      {
+        "<C-e>",
+        mode = { "i" },
+        require("plugins.leap.window"),
+        desc = "Leap to window",
+      },
     },
   },
   {

@@ -21,14 +21,13 @@ return {
     end,
     opts = {
       mappings = {
-        -- M-Bslash = C-Bslash
-        add = "<M-Bslash>", -- Add surrounding in Normal and Visual modes
-        delete = "<C-x>d", -- Delete surrounding
-        find = "<C-x>f", -- Find surrounding (to the right)
-        find_left = "<C-x>F", -- Find surrounding (to the left)
-        highlight = "<C-x>h", -- Highlight surrounding
-        replace = "<C-x>r", -- Replace surrounding
-        update_n_lines = "<C-x>n", -- Update `n_lines`
+        add = "\\", -- Add surrounding in Normal and Visual modes,
+        delete = "<M-Bslash>d", -- Delete surrounding
+        find = "<M-Bslash>f", -- Find surrounding (to the right)
+        find_left = "<M-Bslash>F", -- Find surrounding (to the left)
+        highlight = "<M-Bslash>h", -- Highlight surrounding
+        replace = "<M-Bslash>r", -- Replace surrounding
+        update_n_lines = "<M-Bslash>n", -- Update `n_lines`
         suffix_last = "",
         suffix_next = "",
       },

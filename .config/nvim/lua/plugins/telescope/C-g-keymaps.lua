@@ -122,7 +122,7 @@ return {
       desc = "⚡️ Pathogen Lazy",
     },
     grep = {
-      "<C-g>rg",
+      "<C-g>r/",
       function()
         local opts = {
           cwd = require("telescope.utils").buffer_dir(),
