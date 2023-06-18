@@ -66,7 +66,6 @@ return {
             fallback()
           end
         end, { "i", "s" }),
-        -- TODO: conflicts with Quick moves in keymaps.lua
         ["<C-l>"] = cmp.mapping.complete({
           config = {
             sources = {

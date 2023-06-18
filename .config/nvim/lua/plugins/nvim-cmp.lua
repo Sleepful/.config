@@ -43,9 +43,21 @@ return {
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<F2>"] = cmp.mapping.confirm({ select = true }),
-          -- ["<CR>"] = cmp.mapping.abort(), --vim.NIL,
-          ["<C-l>"] = vim.NIL, -- NOTE: this was changed from default config
-          -- ["<C-n>"] = vim.NIL,
+          -- ["<C-l>"] = vim.NIL, -- NOTE: this was changed from default config
+          ["<C-l>"] = cmp.mapping.complete({
+            config = {
+              sources = {
+                { name = "nvim_lsp" },
+              },
+            },
+          }),
+          ["<C-s>"] = cmp.mapping.complete({
+            config = {
+              sources = {
+                { name = "luasnip" },
+              },
+            },
+          }),
           ["<C-t>"] = function(fallback)
             -- TODO:
             -- [ ] - does not work great with snippets yet
