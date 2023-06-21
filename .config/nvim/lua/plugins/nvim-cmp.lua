@@ -1,4 +1,4 @@
--- TODO:: add keybinds to show only LSP suggetions or others,
+-- TODO:: add keybinds to show only LSP suggetions oconfirm after close r others,
 -- e.g. show only Text suggestions or show only Snippet suggestions
 -- Example: <C-l> in lua-snip to show only emmet snips
 --
@@ -19,7 +19,6 @@ return {
       return {
         completion = {
           completeopt = "menu,menuone,noinsert,preview",
-          -- autocomplete = false,
         },
         window = {
           completion = cmp.config.window.bordered(),
@@ -67,6 +66,9 @@ return {
               -- https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/core.lua#L355
               -- https://github.com/nvim-telescope/telescope.nvim/blob/master/developers.md#replacing-actions
               local entries = cmp.get_entries()
+              local utils = require("plugins.cmp.utils")
+              cmp.close()
+
               local pickers = require("telescope.pickers")
               local finders = require("telescope.finders")
               local conf = require("telescope.config").values
@@ -131,27 +133,17 @@ return {
                         actions.close(prompt_bufnr)
                         local selection = action_state.get_selected_entry()
                         local e = selection.value
-                        print(vim.inspect(e.completion_item))
+                        utils.set_entry(e)
                         vim.schedule(function()
-                          vim.cmd([[silent! undojoin]])
-                          -- This logic must be used nvim_buf_set_text.
-                          -- If not used, the snippet engine's placeholder wil be broken.
-                          local context = require("cmp.context")
-                          local ctx = context.new()
-                          vim.api.nvim_buf_set_text(
-                            0,
-                            e.context.cursor.row - 1,
-                            e:get_offset() - 1,
-                            ctx.cursor.row - 1,
-                            ctx.cursor.col,
-                            {
-                              e.completion_item.label,
-                            }
-                          )
-                          vim.cmd("startinsert")
-                          vim.api.nvim_win_set_cursor(
-                            0,
-                            { e.context.cursor.row, e:get_offset() + string.len(e.completion_item.label) - 1 }
+                          -- feedkeys necessary
+                          -- https://github.com/hrsh7th/nvim-cmp/discussions/1629
+                          vim.fn.feedkeys(
+                            vim.api.nvim_replace_termcodes(
+                              'a<Cmd>lua require("plugins.cmp.utils").confirm()<CR>',
+                              true,
+                              true,
+                              true
+                            )
                           )
                         end)
                       end)
@@ -160,7 +152,10 @@ return {
                   })
                   :find()
               end
+
               telescope_cmp()
+
+              return true
             else
               fallback()
             end
