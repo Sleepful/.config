@@ -2,7 +2,7 @@
 --- https://github.com/nvim-lualine/lualine.nvim/issues/225#issuecomment-974744156
 --- @param trunc_width number trunctates component when screen width is less then trunc_width
 --- @param trunc_len number truncates component to trunc_len number of chars
---- @param hide_width number hides component when window width is smaller then hide_width
+--- @param hide_width number | nil hides component when window width is smaller then hide_width
 --- @param no_ellipsis boolean whether to disable adding '...' at end after truncation
 --- return function that can format the component accordingly
 local function trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
@@ -17,34 +17,6 @@ local function trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
   end
 end
 
-local bufferline_opts = function()
-  return {
-    options = {
-      close_command = function(n)
-        require("mini.bufremove").delete(n, false)
-      end,
-      right_mouse_command = function(n)
-        require("mini.bufremove").delete(n, false)
-      end,
-      diagnostics = "nvim_lsp",
-      always_show_bufferline = false,
-      diagnostics_indicator = function(_, _, diag)
-        local icons = require("lazyvim.config").icons.diagnostics
-        local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-          .. (diag.warning and icons.Warn .. diag.warning or "")
-        return vim.trim(ret)
-      end,
-      offsets = {
-        {
-          filetype = "neo-tree",
-          text = "Neo-tree",
-          highlight = "Directory",
-          text_align = "left",
-        },
-      },
-    },
-  }
-end
 local lualine_opts = function()
   return {
     options = {
@@ -196,40 +168,6 @@ return {
     },
     opts = {
       colorscheme = "flavours",
-    },
-  },
-  {
-    "akinsho/bufferline.nvim",
-    event = "VeryLazy",
-    keys = {
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
-      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
-    },
-    opts = {
-      options = {
-        close_command = function(n)
-          require("mini.bufremove").delete(n, false)
-        end,
-        right_mouse_command = function(n)
-          require("mini.bufremove").delete(n, false)
-        end,
-        diagnostics = "nvim_lsp",
-        always_show_bufferline = false,
-        diagnostics_indicator = function(_, _, diag)
-          local icons = require("lazyvim.config").icons.diagnostics
-          local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-            .. (diag.warning and icons.Warn .. diag.warning or "")
-          return vim.trim(ret)
-        end,
-        offsets = {
-          {
-            filetype = "neo-tree",
-            text = "Neo-tree",
-            highlight = "Directory",
-            text_align = "left",
-          },
-        },
-      },
     },
   },
 }

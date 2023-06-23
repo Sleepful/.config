@@ -9,3 +9,8 @@ cd ~/.tmux/plugins/tmux-thumbs
 cargo build --release
 ```
 
+prettierd for prettier formatting in web files in nvim
+```
+brew install fsouza/prettierd/prettierd
+```
+
