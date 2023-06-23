@@ -1,3 +1,7 @@
+# Example uses: 
+# tail -F .lexical/lexical.log | grcat elixir
+# cat .lexical/project.log | grcat elixir
+# 
 # time
 regexp=(\d\d):(\d\d):(\d\d)
 colour=yellow

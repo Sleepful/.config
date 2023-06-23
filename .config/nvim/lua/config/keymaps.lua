@@ -27,8 +27,10 @@ map({ "n", "x", "o" }, ")", "}", { desc = "Prefer paragraph movement" })
 map({ "n", "x", "o" }, "{", "$", { desc = "Prefer end of line movement" })
 map({ "n", "x", "o" }, "}", "%", { desc = "Prefer match symbols movement" })
 
-map({ "n", "x", "o" }, "<C-b>", "<C-a>", { desc = "Increment number, avoid clash with tmux prefix" })
-map({ "n", "x", "o" }, "g<C-b>", "g<C-a>", { desc = "Increment number, avoid clash with tmux prefix" })
+map({ "n", "x", "o" }, "<C-x>i", "<C-a>", { desc = "Increment number" })
+map({ "n", "x", "o" }, "g<C-x>i", "g<C-a>", { desc = "Increment number" })
+map({ "n", "x", "o" }, "<C-x>d", "<C-a>", { desc = "Decrement number" })
+map({ "n", "x", "o" }, "g<C-x>d", "g<C-a>", { desc = "Decrement number" })
 
 local Util = require("lazyvim.util")
 -- override default line number toggle because I want to
