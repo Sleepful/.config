@@ -23,8 +23,8 @@ colour=red
 # messges like:
 #    (elixir 1.14.3)
 #    (server 0.1.0)
-regexp=\([a-z]+\s[\d\.]+\)
-colour=blue
+regexp=\([a-z_]+\s[\d\.]+\)
+colour=cyan
 -
 # line numbers with extension
 regexp=exs?:\d+
