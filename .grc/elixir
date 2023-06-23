@@ -1,6 +1,8 @@
 # Example uses: 
 # tail -F .lexical/lexical.log | grcat elixir
 # cat .lexical/project.log | grcat elixir
+#
+# The regexp lower in the file override the colors on the regexp higher in the file
 # 
 # time
 regexp=(\d\d):(\d\d):(\d\d)
