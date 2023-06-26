@@ -54,6 +54,9 @@
   unignore-file = update-index --no-skip-worktree
   diffc = diff --cached
   diffprev = diff HEAD^ HEAD
+  # rebase branch with merge commits into a single commit:
+  # git reset `g merge-base origin/main @`
+  # git commit
 [core]
 	hooksPath = ~/.githooks/
 [github]

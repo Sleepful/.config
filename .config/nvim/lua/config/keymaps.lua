@@ -17,8 +17,6 @@ end
 
 map("n", "<S-h>", "40zh", { desc = "Scroll left" })
 map("n", "<S-l>", "40zl", { desc = "Scroll right" })
-map("n", "<C-p>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-map("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
 -- <p> move with parens
 map({ "n", "x", "o" }, "(", "{", { desc = "Prefer paragraph movement" })
@@ -130,3 +128,10 @@ end, { desc = "Leap by word upwards" })
 map({ "n", "x", "o" }, "<C-j>", function()
   require("plugins.leap.word")("downwards")
 end, { desc = "Leap by word downwards" })
+
+-- Bufferline oveerrides, again, cannot seem to override the "move window" keys from lazy vim for n mode
+map({ "n" }, "<C-n>", "<Cmd>BufferLineMoveNext<CR>", { desc = "Move buffer right" })
+map({ "n" }, "<C-p>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Move buffer left" })
+
+map({ "n" }, "<C-l>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
+map({ "n" }, "<C-h>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })

@@ -43,7 +43,7 @@ return {
           ["<C-e>"] = cmp.mapping.abort(),
           ["<F2>"] = cmp.mapping.confirm({ select = true }),
           -- ["<C-l>"] = vim.NIL, -- NOTE: this was changed from default config
-          ["<C-l>"] = cmp.mapping.complete({
+          ["<C-y>"] = cmp.mapping.complete({
             config = {
               sources = {
                 { name = "nvim_lsp" },

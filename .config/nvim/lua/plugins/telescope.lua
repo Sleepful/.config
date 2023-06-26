@@ -63,8 +63,8 @@ return {
           i = {
             ["<C-u>"] = require("telescope.actions").results_scrolling_up,
             ["<C-d>"] = require("telescope.actions").results_scrolling_down,
-            ["<C-f>"] = require("telescope.actions").preview_scrolling_up,
-            ["<C-b>"] = require("telescope.actions").preview_scrolling_down,
+            ["<C-b>"] = require("telescope.actions").preview_scrolling_up,
+            ["<C-f>"] = require("telescope.actions").preview_scrolling_down,
             ["<C-j>"] = require("telescope.actions").move_selection_next,
             ["<C-k>"] = require("telescope.actions").move_selection_previous,
             -- need to use lowercase c so that it properly
@@ -74,8 +74,8 @@ return {
           n = {
             ["<C-u>"] = require("telescope.actions").results_scrolling_up,
             ["<C-d>"] = require("telescope.actions").results_scrolling_down,
-            ["<C-f>"] = require("telescope.actions").preview_scrolling_up,
-            ["<C-b>"] = require("telescope.actions").preview_scrolling_down,
+            ["<C-b>"] = require("telescope.actions").preview_scrolling_up,
+            ["<C-f>"] = require("telescope.actions").preview_scrolling_down,
             -- need to use lowercase c so that it properly
             -- overrides the default mapping in lazyvim
             ["<c-t>"] = require("telescope.actions").to_fuzzy_refine,
@@ -85,7 +85,8 @@ return {
     },
     keys = {
 
-      { -- same as <leader>sw
+      {
+        -- same as <leader>sw
         "<leader>?",
         Util.telescope("grep_string", { additional_args = { "--ignore-case", "--pcre2" } }),
         desc = "Fuzzy Word (root dir)",
@@ -99,7 +100,6 @@ return {
       require("plugins.telescope.C-g-keymaps").grep_open_buffers,
       require("plugins.telescope.C-g-keymaps").fuzzy_open_buffers,
       require("plugins.telescope.C-g-keymaps").grep_current_buffer,
-
       require("plugins.telescope.C-g-keymaps").grep_harpoon_filenames,
       require("plugins.telescope.C-g-keymaps").harpoon_menu,
       require("plugins.telescope.C-g-keymaps").grep_harpoon_files,
