@@ -52,7 +52,7 @@ local function search_buffers()
           entry_maker = function(entry)
             return {
               value = entry,
-              ordinal = groups[entry.group].string_name or groups[entry.group].name .. " " .. entry.name,
+              ordinal = (groups[entry.group].string_name or groups[entry.group].name) .. " " .. entry.name,
               display = function(e)
                 return displayer({
                   groups[e.value.group].string_name or groups[entry.group].name,
@@ -260,9 +260,21 @@ return {
             },
             require("bufferline.groups").builtin.ungrouped,
             {
-              name = "Dot", -- Mandatory
-              string_name = "Dot",
+              name = "📚D",
+              string_name = "Docs",
+              auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
+              matcher = function(buf)
+                return buf.path:match("%.md") or buf.path:match("%.txt")
+              end,
+              separator = {
+                -- style = require("bufferline.groups").separator.tab,
+              },
+            },
+            {
+              name = "⚙️R", -- Mandatory
+              string_name = "Rc",
               separator = {},
+              auto_close = true,
               matcher = function(buf) -- Mandatory
                 local name = buf.name:match("^%..+$")
                 if name == nil then
@@ -272,17 +284,20 @@ return {
               end,
               highlight = {},
             },
-            -- {
-            --   name = "Docs",
-            --   highlight = { undercurl = true, sp = "green" },
-            --   auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
-            --   matcher = function(buf)
-            --     return buf.filename:match("%.md") or buf.filename:match("%.txt")
-            --   end,
-            --   separator = { -- Optional
-            --     style = require("bufferline.groups").separator.tab,
-            --   },
-            -- },
+            {
+              name = "?", -- Mandatory
+              string_name = "Unnamed",
+              auto_close = true,
+              separator = {},
+              matcher = function(buf) -- Mandatory
+                local name = buf.name:match("^%[No Name%]$")
+                if name == nil then
+                  return false
+                end
+                return true
+              end,
+              highlight = {},
+            },
           },
         },
         show_buffer_icons = false,
