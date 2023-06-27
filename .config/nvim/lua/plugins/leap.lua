@@ -71,5 +71,33 @@ return {
       opts = {},
     },
   },
-  { "ggandor/leap-spooky.nvim", dependencies = "ggandor/leap.nvim", opts = {} },
+  {
+    "ggandor/leap-spooky.nvim",
+    dependencies = "ggandor/leap.nvim",
+    commit = "b9dcc30866e6b916b2d8f3e2f3d6a2c207fffd73",
+    config = function()
+      require("leap-spooky").setup({
+        affixes = {
+          -- Mappings will be generated corresponding to all native text objects,
+          -- like: (ir|ar|iR|aR|im|am|iM|aM){obj}.
+
+          -- Special line objects will also be added, by repeating the affixes.
+          -- E.g. `yrr<leap>` and `ymm<leap>` will yank a line in the current
+          -- window.
+
+          -- The cursor moves to the targeted object, and stays there.
+          magnetic = { window = "m", cross_window = "M" },
+          -- The operation is executed seemingly remotely (the cursor boomerangs
+          -- back afterwards).
+          remote = { window = "r", cross_window = "R" },
+        },
+        -- Defines text objects like `riw`, `raw`, etc., instead of
+        -- targets.vim-style `irw`, `arw`.
+        prefix = false,
+        -- The yanked text will automatically be pasted at the cursor position
+        -- if the unnamed register is in use.
+        paste_on_remote_yank = false,
+      })
+    end,
+  },
 }

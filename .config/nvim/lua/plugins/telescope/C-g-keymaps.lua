@@ -27,7 +27,7 @@ return {
     "<C-g>p",
     function()
       require("telescope.builtin").current_buffer_fuzzy_find({
-        -- function from
+        -- tiebreak function from
         -- https://github.com/nvim-telescope/telescope.nvim/pull/1401#issuecomment-957234973
         tiebreak = function(entry1, entry2, prompt)
           local start_pos1, _ = entry1.ordinal:find(prompt)

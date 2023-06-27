@@ -36,6 +36,8 @@ return {
     keys = {
       require("plugins.telescope.C-g-keymaps").vim_bookmarks.all,
       require("plugins.telescope.C-g-keymaps").vim_bookmarks.page,
+      { "mk", "<cmd>BookmarkMoveUp<CR>", mode = "n" },
+      { "mj", "<cmd>BookmarkMoveDown<CR>", mode = "n" },
     },
   },
 }
