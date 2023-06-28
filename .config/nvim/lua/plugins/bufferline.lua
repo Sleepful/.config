@@ -21,15 +21,19 @@ local function sort_by_groups(components)
 end
 
 -- sort_by_recently_visited
--- sorts the bufferse by most recently visited
+-- sorts the buffers by most recently visited
+local function sort_by_recently_sorter(a, b)
+  -- last_visited is created on autocmd "buffer_metadata"
+  local a_time = vim.fn.getbufinfo(a.id)[1].variables.last_visited or 0
+  local b_time = vim.fn.getbufinfo(b.id)[1].variables.last_visited or 0
+  return a_time > b_time
+end
+
 local function sort_by_recently_visited(components)
   -- print(vim.inspect(require("bufferline").groups.get_all()))
   -- print(vim.inspect(require("bufferline.buffers").get_components(require("bufferline.state"))))
   local bufferline = require("bufferline")
-  table.sort(components, function(a, b)
-    -- taken from: https://github.com/nvim-telescope/telescope.nvim/pull/1028/files
-    return vim.fn.getbufinfo(a.id)[1].lastused > vim.fn.getbufinfo(b.id)[1].lastused
-  end)
+  table.sort(components, sort_by_recently_sorter)
   return components
 end
 
@@ -243,7 +247,7 @@ return {
       {
         "<leader>bsr",
         function()
-          require("bufferline").sort_by(sort_by_modified)
+          require("bufferline").sort_by(sort_by_recently_sorter)
         end,
         desc = "Sort by recently visited buffer",
       },

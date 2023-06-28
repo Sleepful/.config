@@ -13,6 +13,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = augroup("buffer_metadata"),
+  callback = function()
+    local value = vim.fn.localtime()
+    local buffer = vim.api.nvim_get_current_buf()
+    local var_name = "last_visited"
+    vim.api.nvim_buf_set_var(buffer, var_name, value)
+  end,
+})
+
 return {
   quick_scope = {
     auto = "ColorScheme",

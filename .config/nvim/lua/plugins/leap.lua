@@ -6,7 +6,7 @@ return {
     end,
     keys = {
       {
-        "s",
+        "S",
         function()
           -- all windows search (includes bidirectional search) per docs
           local focusable_windows_on_tabpage = vim.tbl_filter(function(win)
@@ -18,7 +18,7 @@ return {
         desc = "Leap forward to",
       },
       {
-        "S",
+        "s",
         require("plugins.leap.vertical"),
         mode = { "n", "x", "o" },
         desc = "Leap vertical to",
