@@ -1,5 +1,3 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
 -- function taken from lazyvim's default keymaps
@@ -135,3 +133,30 @@ map({ "n" }, "<C-p>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Move buffer left"
 
 map({ "n" }, "<C-l>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
 map({ "n" }, "<C-h>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
+
+-- `set jump` and `save jump` taken from:
+-- https://vi.stackexchange.com/questions/31197/add-current-position-to-the-jump-list-the-first-time-c-u-or-c-d-is-pressed
+local save_jump = [[function! SaveJump(motion)
+  if exists('#SaveJump#CursorMoved')
+    autocmd! SaveJump
+  else
+    normal! m'
+  endif
+  let m = a:motion
+  if v:count
+    let m = v:count.m
+  endif
+  execute 'normal!' m
+endfunction]]
+vim.cmd(save_jump)
+
+local set_jump = [[function! SetJump()
+  augroup SaveJump
+    autocmd!
+    autocmd CursorMoved * autocmd! SaveJump
+  augroup END
+endfunction]]
+vim.cmd(set_jump)
+
+map({ "n" }, "<C-u>", [[:<C-u>call SaveJump("\<lt>C-u>")<CR>:call SetJump()<CR>]], { desc = "C-u/C-d with jumplist" })
+map({ "n" }, "<C-d>", [[:<C-u>call SaveJump("\<lt>C-d>")<CR>:call SetJump()<CR>]], { desc = "C-u/C-d with jumplist" })

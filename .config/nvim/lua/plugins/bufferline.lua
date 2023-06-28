@@ -1,9 +1,11 @@
--- Todo:
+-- TODO: :
 -- add shortcut to search, to mark buffers for deletion? should be easy with:
 -- actions.delete_buffer({prompt_bufnr})      *telescope.actions.delete_buffer()*
 -- https://github.com/nvim-telescope/telescope.nvim/blob/master/doc/telescope.txt
 -- > can also create a shortcut for the inverse
 
+-- sort_by_groups
+-- sorts the results in the same order as naturally displayed in the bufferline
 local function sort_by_groups(components)
   -- print(vim.inspect(require("bufferline").groups.get_all()))
   -- print(vim.inspect(require("bufferline.buffers").get_components(require("bufferline.state"))))
@@ -18,7 +20,20 @@ local function sort_by_groups(components)
   return components
 end
 
-local function search_buffers()
+-- sort_by_recently_visited
+-- sorts the bufferse by most recently visited
+local function sort_by_recently_visited(components)
+  -- print(vim.inspect(require("bufferline").groups.get_all()))
+  -- print(vim.inspect(require("bufferline.buffers").get_components(require("bufferline.state"))))
+  local bufferline = require("bufferline")
+  table.sort(components, function(a, b)
+    -- taken from: https://github.com/nvim-telescope/telescope.nvim/pull/1028/files
+    return vim.fn.getbufinfo(a.id)[1].lastused > vim.fn.getbufinfo(b.id)[1].lastused
+  end)
+  return components
+end
+
+local function search_buffers(sort_entries_callback)
   local pickers = require("telescope.pickers")
   local finders = require("telescope.finders")
   local sorters = require("telescope.sorters")
@@ -38,7 +53,7 @@ local function search_buffers()
   local bufline = require("bufferline")
 
   local bufs = require("bufferline.buffers").get_components(require("bufferline.state"))
-  local entries = sort_by_groups(bufs)
+  local entries = sort_entries_callback(bufs)
 
   local groups = bufline.groups.get_all()
 
@@ -225,13 +240,33 @@ return {
         end,
         desc = "Sort by last time the file was modified",
       },
+      {
+        "<leader>bsr",
+        function()
+          require("bufferline").sort_by(sort_by_modified)
+        end,
+        desc = "Sort by recently visited buffer",
+      },
+      { "<leader>bi", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "Travel to first buffer" },
+      { "<leader>bo", "<Cmd>BufferLineGoToBuffer -1<CR>", desc = "Travel to last buffer" },
       { "<leader>bgh", hide_all_groups, desc = "Hide all groups" },
       { "<leader>bgc", close_all_groups, desc = "Close all groups" },
       { "<leader>bge", expand_all_groups, desc = "Expand all groups" },
       { "<leader>bgt", toggle_group_by_search, desc = "Toggle group (search)" },
-      { "<leader>bf", search_buffers, desc = "Find buffer" },
-      { "<leader>bi", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "Travel to first buffer" },
-      { "<leader>bo", "<Cmd>BufferLineGoToBuffer -1<CR>", desc = "Travel to last buffer" },
+      {
+        "<leader>bf",
+        function()
+          search_buffers(sort_by_groups)
+        end,
+        desc = "Find buffer",
+      },
+      {
+        "<leader>br",
+        function()
+          search_buffers(sort_by_recently_visited)
+        end,
+        desc = "Find buffer (recently visited)",
+      },
     },
     opts = {
       options = {

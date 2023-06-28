@@ -1,4 +1,5 @@
 -- function to have bookmarks per workdir per buffer
+-- taken from official docs iirc
 local vim_bookmarks_fun = [[
 " Finds the Git super-project directory based on the file passed as an argument.
 function! g:BMBufferFileLocation(file)

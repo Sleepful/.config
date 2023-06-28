@@ -10,3 +10,5 @@ vim.opt.relativenumber = false -- no line numbers
 vim.lsp.set_log_level("debug")
 -- set cursor column highlighting
 vim.opt.cuc = true
+-- overwrite jumps when moving after jumping back
+vim.opt.jumpoptions = "stack"
