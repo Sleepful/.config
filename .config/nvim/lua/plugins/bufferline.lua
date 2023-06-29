@@ -210,8 +210,8 @@ local function fmt(buf)
     -- the file has no extension, so just return the name
     name = buf.name
   end
-  local max_len = 10
-  local trailing_chars = 3
+  local max_len = 11
+  local trailing_chars = 4
   if string.len(name) > max_len + 1 then
     local trim = max_len - trailing_chars - 1
     local first = string.sub(name, 1, trim)

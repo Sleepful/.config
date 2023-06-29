@@ -1,7 +1,7 @@
 #!/bin/bash
 
 session="uso_serve"
-if [[ $(tmux has-session uso_serve) == 1 ]]; then
+if [[ $(tmux has-session $session) == 1 ]]; then
 	jump $session
 else
 	tmux new-session -d -s $session
