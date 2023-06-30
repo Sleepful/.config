@@ -49,7 +49,7 @@ local function search_buffers(sort_entries_callback)
       -- group | buffer name | a bit of dir path (?)
       -- if it is closed or open !
       { width = 12 },
-      -- { width = 6 },
+      { width = 12 },
       { remaining = true },
     },
   })
@@ -69,13 +69,19 @@ local function search_buffers(sort_entries_callback)
         finder = finders.new_table({
           results = entries,
           entry_maker = function(entry)
+            print(vim.inspect(entry))
             return {
               value = entry,
-              ordinal = (groups[entry.group].string_name or groups[entry.group].name) .. " " .. entry.name,
+              ordinal = (groups[entry.group].string_name or groups[entry.group].name)
+                .. " "
+                .. entry.name
+                .. " "
+                .. entry.path,
               display = function(e)
                 return displayer({
                   groups[e.value.group].string_name or groups[entry.group].name,
                   e.value.name,
+                  vim.fn.fnamemodify(e.value.path, ":."),
                 })
               end,
             }
@@ -140,7 +146,7 @@ local function toggle_group_by_search()
     separator = "▏",
     items = {
       { width = 12 },
-      { width = 6 },
+      { width = 12 },
       { remaining = true },
     },
   })
