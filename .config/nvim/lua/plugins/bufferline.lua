@@ -69,7 +69,6 @@ local function search_buffers(sort_entries_callback)
         finder = finders.new_table({
           results = entries,
           entry_maker = function(entry)
-            print(vim.inspect(entry))
             return {
               value = entry,
               ordinal = (groups[entry.group].string_name or groups[entry.group].name)
