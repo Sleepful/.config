@@ -34,6 +34,7 @@ alias vimconf='cd ~/.config/nvim'
 alias important='cd ~/Important'
 alias txt='cd ~/Important/Txt'
 alias cloud='cd ~/Documents/Cloud-Drive'
+alias park='cd ~/Documents/Cloud-Drive/PARK'
 
 # Build dirs
 alias kdir='cd ~/Code/GitBuilds/kitty'

@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd("FileType", {
     map("i", "[[", function()
       require("telekasten").insert_link()
     end)
-    map("i", "##", function()
+    map("i", "#?", function()
       require("telekasten").show_tags()
     end)
   end,

@@ -210,10 +210,17 @@ local function sort_by_modified(buffer_a, buffer_b)
 end
 
 local function fmt(buf)
+  local separator = "💧"
   local name = buf.name:match("(.+)%..+$")
   if name == nil then
     -- the file has no extension, so just return the name
     name = buf.name
+  end
+  local starts_with_numbers = name:match("^(%d+)")
+  if starts_with_numbers ~= nil then
+    local new_name = name:match("^%d+.(.+)$")
+    separator = "☔"
+    name = new_name
   end
   local max_len = 11
   local trailing_chars = 4
@@ -221,7 +228,7 @@ local function fmt(buf)
     local trim = max_len - trailing_chars - 1
     local first = string.sub(name, 1, trim)
     local last = string.sub(name, -trailing_chars)
-    name = first .. "💧" .. last
+    name = first .. separator .. last
   end
   return name
 end
