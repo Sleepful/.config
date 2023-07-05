@@ -36,11 +36,8 @@ local function generate_vault_dirs()
     local name = item.space .. "_" .. item.subdir
     vaults[name] = { home = home }
   end
-  print(vim.inspect(vaults))
   return vaults
 end
-
--- local vaults = generate_vault_dirs()
 
 return {
   -- NOTE: for peek had to run:
@@ -52,12 +49,10 @@ return {
     "renerocksai/telekasten.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
     opts = {
-      home = PARA_root,
-      -- vaults = vaults,
+      home = PARA_root .. "Inbox",
       vaults = generate_vault_dirs(),
     },
     keys = {
-      { "<leader>G", generate_vault_dirs, desc = "test" },
       { "<leader>t", "<Cmd>Telekasten panel<CR>", desc = "Telekasten" },
       { "<leader>tp", "<Cmd>Telekasten panel<CR>" },
       { "<leader>tf", "<cmd>Telekasten find_notes<CR>" },
@@ -70,8 +65,16 @@ return {
       { "<leader>tI", "<cmd>Telekasten insert_img_link<CR>" },
       { "<leader>tt", "<cmd>Telekasten toggle_todo<CR>" },
       { "<leader>ts", "<cmd>Telekasten switch_vault<CR>" },
-      { "[[", "<cmd>Telekasten insert_link<CR>", mode = "i" },
-      { "##", "<cmd>Telekasten show_tags<CR>", mode = "i" },
+      {
+        "<leader>tc",
+        function()
+          local dirs = vim.split(require("telekasten").Cfg.home, "/")
+          local last = dirs[#dirs]
+          local prev_last = dirs[#dirs - 1]
+          print(prev_last .. "/" .. last)
+        end,
+        desc = "Current vault",
+      },
     },
   },
 }
