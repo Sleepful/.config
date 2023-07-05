@@ -270,6 +270,13 @@ return {
         desc = "Find buffer",
       },
       {
+        "<leader>,",
+        function()
+          search_buffers(sort_by_groups)
+        end,
+        desc = "Switch buffer (bufferline)",
+      },
+      {
         "<leader>br",
         function()
           search_buffers(sort_by_recently_visited)

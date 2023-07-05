@@ -5,6 +5,19 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
 
+-- function taken from lazyvim's default keymaps
+local function map(mode, lhs, rhs, opts)
+  local keys = require("lazy.core.handler").handlers.keys
+  ---@cast keys LazyKeysHandler
+  -- do not create the keymap if a lazy keys handler exists
+  if not keys.active[keys.parse({ lhs, mode = mode }).id] then
+    opts = opts or {}
+    opts.silent = opts.silent ~= false
+    opts.noremap = true
+    vim.keymap.set(mode, lhs, rhs, opts)
+  end
+end
+
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("sync_last_yank_with_l_register"),
   callback = function()
@@ -21,6 +34,20 @@ vim.api.nvim_create_autocmd("BufEnter", {
     local var_name = "last_visited"
     vim.api.nvim_buf_set_var(buffer, var_name, value)
   end,
+})
+
+-- keybinds local to a filetype
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("file_type_bindings"),
+  callback = function()
+    map("n", "<leader>cp", function()
+      require("peek").open()
+    end, { desc = "Peek open" })
+    map("n", "<leader>cc", function()
+      require("peek").close()
+    end, { desc = "Peek close" })
+  end,
+  pattern = "markdown",
 })
 
 return {

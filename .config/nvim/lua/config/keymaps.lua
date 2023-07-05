@@ -63,7 +63,7 @@ end, { desc = "Git branch name" })
 
 -- Neoclip
 -- TODO: make it so that it inserts the selected yank into the current insert thing
-map("i", "<C-n>", "<cmd>Telescope neoclip plus<cr>", { desc = "Neoclip" })
+map("i", "<C-x>", "<cmd>Telescope neoclip plus<cr>", { desc = "Neoclip" })
 
 -- Classic pasting
 map("n", "[p", "O<esc>p", { desc = "Paste above" })

@@ -14,3 +14,4 @@ prettierd for prettier formatting in web files in nvim
 brew install fsouza/prettierd/prettierd
 ```
 
+brew install fzf

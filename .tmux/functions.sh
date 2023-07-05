@@ -13,3 +13,9 @@ function move_windows() {
 function session_picker() {
 	tmux list-sessions -F '#{session_attached} #{session_name}' | sort -r | awk '{print $2}' | fzf-tmux -p | xargs tmux switchc -t
 }
+
+close_session() {
+	# switch session and kill previous one
+	session_to_discard=$(tmux display -p '#S')
+	tmux detach -E "tmux kill-session -t $session_to_discard && tmux attach"
+}

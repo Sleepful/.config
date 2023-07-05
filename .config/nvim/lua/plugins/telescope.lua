@@ -195,7 +195,7 @@ return {
       {
         "<leader>/",
         Util.telescope("live_grep", { additional_args = { "--ignore-case", "--pcre2" } }),
-        desc = "Live Grep (root)",
+        desc = "Live Grep (telescope)",
       },
       {
         "<leader>uC",
