@@ -19,7 +19,8 @@ alias cfgsetup='cfg config status.showuntrackedfiles no'
 alias sprc='source ~/.profile'
 alias szrc='source ~/.zshrc'
 alias ssecret='source ~/.secret'
-# cds
+
+# Begin CDs
 alias home='cd ~/'
 alias code='cd ~/Code'
 alias oa='cd ~/Code/OA'
@@ -29,19 +30,23 @@ alias wb='cd ~/Code/WordDatabase/phx'
 alias conf='cd ~/.config'
 alias notes='cd ~/Notes'
 alias lang='cd ~/Language'
+alias vimconf='cd ~/.config/nvim'
+alias important='cd ~/Important'
+alias txt='cd ~/Important/Txt'
+alias cloud='cd ~/Documents/Cloud-Drive'
+
+# Build dirs
+alias kdir='cd ~/Code/GitBuilds/kitty'
+alias gbs='cd ~/Code/GitBuilds'
+
+# end of CDs
+
 # neovim
 export PATH="$HOME/local/nvim/bin:$PATH"
-# alias nvim='nvim --listen /tmp/nvimsocket'
 alias vim='nvim'
 alias vrc='nvim ~/.vimrc'
-alias vimconf='cd ~/.config/nvim'
 alias vimf='vim $(`fc -ln -1`)'
 alias vimr='vim README.md'
-
-# some dirs?
-alias kdir='cd ~/Code/GitBuilds/kitty'
-alias ktdir='cd ~/Code/GitBuilds/kitty-themes/themes'
-alias gbs='cd ~/Code/GitBuilds'
 
 # tmux
 alias tm='tmux'
@@ -61,6 +66,7 @@ tmux-join() {
 jump() {
 	# switch session and kill previous one
 	session_to_discard=tmux display -p '#S'
+	echo $session_to_discard
 	tm detach -E "tmux attach -t $1"
 	tm kill-session -t $session_to_discard
 }
@@ -250,3 +256,22 @@ if [[ $SHLVL -gt '2' ]]; then
 	export -f g
 	export -f jump
 fi
+
+# fh - repeat history
+fh() {
+	print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
+}
+
+# fkill - kill processes - list only the ones you can kill. Modified the earlier script.
+fkill() {
+	local pid
+	if [ "$UID" != "0" ]; then
+		pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+	else
+		pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+	fi
+
+	if [ "x$pid" != "x" ]; then
+		echo $pid | xargs kill -${1:-9}
+	fi
+}
