@@ -13,6 +13,8 @@ export PATH="$HOME/.bin:$PATH"
 # rust cargo
 export PATH="$HOME/.cargo/bin:$PATH"
 
+export TERM="xterm-kitty"
+
 alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias cfgsetup='cfg config status.showuntrackedfiles no'
 

@@ -11,6 +11,7 @@ return {
         "fennel",
         "rust",
         "sql",
+        "markdown",
       })
     end,
   },
