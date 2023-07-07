@@ -6,6 +6,12 @@ defmodule R do
     Application.start(Mix.Project.config()[:app], :permanent)
   end
 end
+import R
+
+defmodule CustomIEXHelpers do
+  def iex(n), do: IEx.Helpers.v(n)
+end
+import CustomIEXHelpers
 
 defmodule AC do
   IEx.configure(
@@ -30,8 +36,9 @@ defmodule AC do
         "\e[G",
         :light_magenta,
         # plain string
-        "%counter 🧪",
-        " ",
+        # "%counter 🧪",
+        "%prefix(%counter)",
+        " 🧪 ",
         :white,
         :reset
       ]

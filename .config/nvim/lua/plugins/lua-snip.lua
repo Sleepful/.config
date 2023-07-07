@@ -21,6 +21,8 @@ return {
     config = function(LazyPlugin, opts)
       require("luasnip").setup(opts)
       require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/plugins/snippets" })
+      -- add "markdown" snippets to "telekasten" filetype
+      require("luasnip").filetype_extend("telekasten", { "markdown" })
     end,
   },
   -- grabbed this from LAZYVIM examples:

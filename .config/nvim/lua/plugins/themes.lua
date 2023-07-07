@@ -25,7 +25,8 @@ local lualine_opts = function()
       theme = "base16",
       globalstatus = true,
     },
-    sections = {
+    -- sections = {},
+    winbar = {
       lualine_a = {
         {
           "mode",
@@ -137,6 +138,10 @@ return {
     opts = lualine_opts,
     config = function(LazyVim, opts)
       require("lualine").setup(opts)
+      require("lualine").hide({
+        place = { "statusline" }, -- The segment this change applies to.
+        unhide = false, -- whether to re-enable lualine again/
+      })
     end,
   },
   {

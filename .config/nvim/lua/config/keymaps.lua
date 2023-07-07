@@ -128,8 +128,11 @@ map({ "n", "x", "o" }, "<C-j>", function()
 end, { desc = "Leap by word downwards" })
 
 -- Bufferline oveerrides, again, cannot seem to override the "move window" keys from lazy vim for n mode
-map({ "n" }, "<C-n>", "<Cmd>BufferLineMoveNext<CR>", { desc = "Move buffer right" })
-map({ "n" }, "<C-p>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Move buffer left" })
+-- testing these changes:
+-- C-n -> <M-l>
+-- C-p -> <M-h>
+map({ "n" }, "<M-l>", "<Cmd>BufferLineMoveNext<CR>", { desc = "Move buffer right" })
+map({ "n" }, "<M-h>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Move buffer left" })
 
 map({ "n" }, "<C-l>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
 map({ "n" }, "<C-h>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
@@ -160,3 +163,17 @@ vim.cmd(set_jump)
 
 map({ "n" }, "<C-u>", [[:<C-u>call SaveJump("\<lt>C-u>")<CR>:call SetJump()<CR>]], { desc = "C-u/C-d with jumplist" })
 map({ "n" }, "<C-d>", [[:<C-u>call SaveJump("\<lt>C-d>")<CR>:call SetJump()<CR>]], { desc = "C-u/C-d with jumplist" })
+
+-- tabs
+map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
+map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "<leader><tab>n", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "<leader><tab><tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<leader><tab>l", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<leader><tab>h", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+map("n", "<tab><tab>", "<cmd>tabnext #<cr>", { desc = "Last Tab" })
+map("n", "<tab>n", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "<tab>l", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<tab>h", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })

@@ -31,11 +31,13 @@ local global_config = {
   new_note_location = "prefer_home",
   uuid_type = "%Y%m%d%H%M",
   uuid_sep = "-",
-  filename_space_subst = "_",
+  -- filename_space_subst = "_",
+  filename_space_subst = "/",
   template_new_note = vim.fn.expand(PARK_root .. "Templates/new_note.md"),
   template_new_daily = vim.fn.expand(PARK_root .. "Templates/daily_note.md"),
   template_new_weekly = vim.fn.expand(PARK_root .. "Templates/weekly_note.md"),
   templates = vim.fn.expand(PARK_root .. "Templates/"),
+  insert_after_inserting = false,
 }
 
 local function generate_vault_dirs()
@@ -68,7 +70,7 @@ local function append_global_config(opts)
 end
 
 return {
-  -- NOTE: for peek had to run:
+  -- NOTE: for peek.nvim to work/build I had to run:
   -- cd ~/.local/share/nvim/lazy/peek.nvim && deno task build:debug
   -- https://github.com/toppair/peek.nvim/issues/11#issuecomment-1491297809
   {
@@ -78,7 +80,9 @@ return {
   },
   { "renerocksai/calendar-vim" },
   {
+    -- "sleepful/telekasten.nvim",
     "renerocksai/telekasten.nvim",
+    dev = true,
     dependencies = { "nvim-telescope/telescope.nvim" },
     opts = append_global_config({
       home = vim.fn.expand(PARK_root .. "Inbox"),
@@ -88,33 +92,33 @@ return {
     }),
     keys = {
       -- { "<leader>t", "<Cmd>Telekasten panel<CR>", desc = "Telekasten" },
-      { "<leader>t", desc = "Telekasten" },
-      { "<leader>tp", "<Cmd>Telekasten panel<CR>" },
-      { "<leader>tf", "<cmd>Telekasten find_notes<CR>" },
-      { "<leader>tg", "<cmd>Telekasten search_notes<CR>" },
-      { "<leader>td", "<cmd>Telekasten goto_today<CR>" },
-      { "<leader>tw", "<cmd>Telekasten goto_thisweek<CR>" },
-      { "<leader>tz", "<cmd>Telekasten follow_link<CR>" },
-      { "<leader>tn", "<cmd>Telekasten new_note<CR>" },
-      { "<leader>ty", "<cmd>Telekasten yank_notelink<CR>" },
-      { "<leader>tc", "<cmd>Telekasten show_calendar<CR>" },
-      { "<leader>tb", "<cmd>Telekasten show_backlinks<CR>" },
-      { "<leader>tB", "<cmd>Telekasten find_friends<CR>" },
-      { "<leader>tr", "<cmd>Telekasten rename_note<CR>" },
-      { "<leader>t#", "<cmd>Telekasten show_tags<CR>" },
-      { "<leader>tI", "<cmd>Telekasten insert_img_link<CR>" },
-      { "<leader>tl", "<cmd>Telekasten insert_link<CR>" },
+      { "<leader>k", desc = "Telekasten" },
+      { "<leader>kp", "<Cmd>Telekasten panel<CR>" },
+      { "<leader>ks", "<cmd>Telekasten find_notes<CR>" },
+      { "<leader>kg", "<cmd>Telekasten search_notes<CR>" },
+      { "<leader>kd", "<cmd>Telekasten goto_today<CR>" },
+      { "<leader>kw", "<cmd>Telekasten goto_thisweek<CR>" },
+      { "<leader>kz", "<cmd>Telekasten follow_link<CR>" },
+      { "<leader>kn", "<cmd>Telekasten new_note<CR>" },
+      { "<leader>ky", "<cmd>Telekasten yank_notelink<CR>" },
+      { "<leader>kc", "<cmd>Telekasten show_calendar<CR>" },
+      { "<leader>kb", "<cmd>Telekasten show_backlinks<CR>" },
+      { "<leader>kB", "<cmd>Telekasten find_friends<CR>" },
+      { "<leader>kr", "<cmd>Telekasten rename_note<CR>" },
+      { "<leader>k#", "<cmd>Telekasten show_tags<CR>" },
+      { "<leader>kI", "<cmd>Telekasten insert_img_link<CR>" },
+      { "<leader>kl", "<cmd>Telekasten insert_link<CR>" },
       {
-        "<leader>tt",
+        "<leader>kt",
         function()
           require("telekasten").toggle_todo({ v = true })
         end,
         mode = { "n", "v" },
         desc = "Toggle todo",
       },
-      { "<leader>ts", "<cmd>Telekasten switch_vault<CR>" },
+      { "<leader>kv", "<cmd>Telekasten switch_vault<CR>" },
       {
-        "<leader>tc",
+        "<leader>kc",
         function()
           local dirs = vim.split(require("telekasten").Cfg.home, "/")
           local last = dirs[#dirs]

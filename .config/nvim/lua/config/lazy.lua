@@ -45,4 +45,8 @@ require("lazy").setup({
       },
     },
   },
+  dev = {
+    path = "~/Code/Forks",
+    fallback = false,
+  },
 })

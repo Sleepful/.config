@@ -16,6 +16,7 @@
 	cm = commit -m
 	st = status
 	unstage = restore --staged
+	r = restore --staged
 	co = checkout
 	cob = checkout -b
 	logf = log --stat
