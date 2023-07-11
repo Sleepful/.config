@@ -15,3 +15,9 @@ brew install fsouza/prettierd/prettierd
 ```
 
 brew install fzf
+
+--
+
+Nix from official nix site, then:
+nix-env -i nixops
+

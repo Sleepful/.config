@@ -6,11 +6,13 @@ defmodule R do
     Application.start(Mix.Project.config()[:app], :permanent)
   end
 end
+
 import R
 
 defmodule CustomIEXHelpers do
   def iex(n), do: IEx.Helpers.v(n)
 end
+
 import CustomIEXHelpers
 
 defmodule AC do

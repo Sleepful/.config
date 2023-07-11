@@ -94,7 +94,7 @@ return {
       -- { "<leader>t", "<Cmd>Telekasten panel<CR>", desc = "Telekasten" },
       { "<leader>k", desc = "Telekasten" },
       { "<leader>kp", "<Cmd>Telekasten panel<CR>" },
-      { "<leader>ks", "<cmd>Telekasten find_notes<CR>" },
+      { "<leader>kf", "<cmd>Telekasten find_notes<CR>" },
       { "<leader>kg", "<cmd>Telekasten search_notes<CR>" },
       { "<leader>kd", "<cmd>Telekasten goto_today<CR>" },
       { "<leader>kw", "<cmd>Telekasten goto_thisweek<CR>" },

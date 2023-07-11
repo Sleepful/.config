@@ -246,6 +246,7 @@ return {
       { "<leader>bI", "<Cmd>BufferLineCloseLeft<CR>" },
       { "<leader>ba", "<Cmd>BufferLinePick<CR>" },
       { "<leader>bW", "<Cmd>BufferLinePickClose<CR>" },
+      { "<leader>bK", "<Cmd>%bd<CR>", desc = "Kill all buffers" },
       -- some bindings in keymaps.lua
       { "<leader>bse", "<Cmd>BufferLineSortByExtension<CR>" },
       { "<leader>bsd", "<Cmd>BufferLineSortByDirectory<CR>" },

@@ -1,6 +1,8 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
+    enabled = false, -- sad :( but it is giving me annoying issues when opening a note with telekasten
+    -- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/1046
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
       {
