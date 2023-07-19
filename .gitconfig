@@ -58,6 +58,12 @@
   # rebase branch with merge commits into a single commit:
   # git reset `g merge-base origin/main @`
   # git commit
+ 
+  # git reflog show --no-abbrev <branch name>
+  logbranch = reflog show --no-abbrev
+  loghere = "!loghere(){ git reflog show --no-abbrev `git rev-parse --abbrev-ref HEAD`; }; loghere"
+  base = merge-base main HEAD
+ 
 [core]
 	hooksPath = ~/.githooks/
 [github]

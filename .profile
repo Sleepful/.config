@@ -36,7 +36,8 @@ alias vimconf='cd ~/.config/nvim'
 alias important='cd ~/Important'
 alias txt='cd ~/Important/Txt'
 alias cloud='cd ~/Documents/Cloud-Drive'
-alias park='cd ~/Documents/Cloud-Drive/PARK'
+alias park='cd ~/Sync/PARK'
+alias st='cd ~/Sync'
 
 # Build dirs
 alias kdir='cd ~/Code/GitBuilds/kitty'
@@ -229,6 +230,7 @@ export FZF_DEFAULT_OPTS='--height 60% --min-height 12 --reverse --border --multi
 --bind="ctrl-u:half-page-up,ctrl-d:half-page-down,change:first,ctrl-w:backward-kill-word,ctrl-b:backward-word,alt-bs:clear-query,ctrl-l:forward-char,ctrl-h:backward-char,ctrl-f:forward-word,alt-j:preview-down,alt-k:preview-up,alt-u:preview-half-page-up,alt-d:preview-half-page-down,ctrl-y:execute-silent(echo {} | xclip -sel clip)"'
 
 alias branch='git checkout `git branch | gsed "s/\* /\*/g"|  xargs -n1 echo  | sort | gsed "s/\*//g" | fzf`'
+alias quicksave='git --no-pager diff > ~/Documents/Cloud-Drive/work.diff'
 
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

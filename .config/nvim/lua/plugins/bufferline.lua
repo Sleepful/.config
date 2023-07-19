@@ -291,6 +291,66 @@ return {
         end,
         desc = "Find buffer (recently visited)",
       },
+      {
+        "<F13>",
+        function()
+          require("bufferline").go_to(1, true)
+        end,
+      },
+      {
+        "<F14>",
+        function()
+          require("bufferline").go_to(2, true)
+        end,
+      },
+      {
+        "<F15>",
+        function()
+          require("bufferline").go_to(3, true)
+        end,
+      },
+      {
+        "<F16>",
+        function()
+          require("bufferline").go_to(4, true)
+        end,
+      },
+      {
+        "<F17>",
+        function()
+          require("bufferline").go_to(5, true)
+        end,
+      },
+      {
+        "<F18>",
+        function()
+          require("bufferline").go_to(6, true)
+        end,
+      },
+      {
+        "<F19>",
+        function()
+          require("bufferline").go_to(7, true)
+        end,
+      },
+      {
+        "<F20>",
+        function()
+          require("bufferline").go_to(8, true)
+        end,
+      },
+      {
+        "<F21>",
+        function()
+          require("bufferline").go_to(9, true)
+        end,
+      },
+      {
+        "<F21>",
+        function()
+          require("bufferline").go_to(10, true)
+        end,
+      },
     },
     opts = {
       options = {

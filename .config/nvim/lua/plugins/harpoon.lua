@@ -42,78 +42,79 @@ return {
         end,
         desc = "🐟 Give them to me!",
       },
-      {
-        "",
-        function()
-          require("harpoon.ui").nav_prev()
-        end,
-      },
-      {
-        "",
-        function()
-          require("harpoon.ui").nav_next()
-        end,
-      },
-      {
-        "<S-F10>",
-        function()
-          require("harpoon.mark").add_file()
-        end,
-      },
-      {
-        "<S-F1>",
-        function()
-          require("harpoon.ui").nav_file(1)
-        end,
-      },
-      {
-        "<S-F2>",
-        function()
-          require("harpoon.ui").nav_file(2)
-        end,
-      },
-      {
-        "<S-F3>",
-        function()
-          require("harpoon.ui").nav_file(3)
-        end,
-      },
-      {
-        "<S-F4>",
-        function()
-          require("harpoon.ui").nav_file(4)
-        end,
-      },
-      {
-        "<S-F5>",
-        function()
-          require("harpoon.ui").nav_file(5)
-        end,
-      },
-      {
-        "<S-F6>",
-        function()
-          require("harpoon.ui").nav_file(6)
-        end,
-      },
-      {
-        "<S-F7>",
-        function()
-          require("harpoon.ui").nav_file(7)
-        end,
-      },
-      {
-        "<S-F8>",
-        function()
-          require("harpoon.ui").nav_file(8)
-        end,
-      },
-      {
-        "<S-F9>",
-        function()
-          require("harpoon.ui").nav_file(9)
-        end,
-      },
+      -- NOTE: commented out over preference for bufferline keys
+      -- {
+      --   "",
+      --   function()
+      --     require("harpoon.ui").nav_prev()
+      --   end,
+      -- },
+      -- {
+      --   "",
+      --   function()
+      --     require("harpoon.ui").nav_next()
+      --   end,
+      -- },
+      -- {
+      --   "<S-F10>",
+      --   function()
+      --     require("harpoon.mark").add_file()
+      --   end,
+      -- },
+      -- {
+      --   "<S-F1>",
+      --   function()
+      --     require("harpoon.ui").nav_file(1)
+      --   end,
+      -- },
+      -- {
+      --   "<S-F2>",
+      --   function()
+      --     require("harpoon.ui").nav_file(2)
+      --   end,
+      -- },
+      -- {
+      --   "<S-F3>",
+      --   function()
+      --     require("harpoon.ui").nav_file(3)
+      --   end,
+      -- },
+      -- {
+      --   "<S-F4>",
+      --   function()
+      --     require("harpoon.ui").nav_file(4)
+      --   end,
+      -- },
+      -- {
+      --   "<S-F5>",
+      --   function()
+      --     require("harpoon.ui").nav_file(5)
+      --   end,
+      -- },
+      -- {
+      --   "<S-F6>",
+      --   function()
+      --     require("harpoon.ui").nav_file(6)
+      --   end,
+      -- },
+      -- {
+      --   "<S-F7>",
+      --   function()
+      --     require("harpoon.ui").nav_file(7)
+      --   end,
+      -- },
+      -- {
+      --   "<S-F8>",
+      --   function()
+      --     require("harpoon.ui").nav_file(8)
+      --   end,
+      -- },
+      -- {
+      --   "<S-F9>",
+      --   function()
+      --     require("harpoon.ui").nav_file(9)
+      --   end,
+      -- },
     },
   },
 }

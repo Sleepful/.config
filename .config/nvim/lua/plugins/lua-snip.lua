@@ -20,7 +20,12 @@ return {
     },
     config = function(LazyPlugin, opts)
       require("luasnip").setup(opts)
-      require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/plugins/snippets" })
+      require("luasnip.loaders.from_lua").load({
+        paths = "~/.config/nvim/lua/plugins/snippets",
+        -- not working to override friendly_snippes, probably because of CMP sorting:
+        override_priority = 100000,
+        default_priority = 100000,
+      })
       -- add "markdown" snippets to "telekasten" filetype
       require("luasnip").filetype_extend("telekasten", { "markdown" })
     end,

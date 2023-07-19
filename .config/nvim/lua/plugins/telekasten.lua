@@ -24,8 +24,22 @@ local function subdirs(root)
   end
 end
 
--- TODO: make the Cloud-Drive directory an ENV Var
-local PARK_root = "~/Documents/Cloud-Drive/PARK/"
+-- TODO: make the root directory an ENV Var
+local PARK_root = "~/Sync/PARK/"
+
+local function make_template_path(root, template)
+  if template ~= nil then
+    return vim.fn.expand(root .. "Templates/" .. template .. ".md")
+  else
+    return vim.fn.expand(root .. "Templates/")
+  end
+end
+
+local default_template_new_note = make_template_path(PARK_root, "new_note")
+local default_template_new_daily = make_template_path(PARK_root, "daily_note")
+local default_template_new_weekly = make_template_path(PARK_root, "weekly_note")
+local default_templates_dir = make_template_path(PARK_root, nil)
+
 local global_config = {
   new_note_filename = "uuid-title",
   new_note_location = "prefer_home",
@@ -33,12 +47,35 @@ local global_config = {
   uuid_sep = "-",
   -- filename_space_subst = "_",
   filename_space_subst = "/",
-  template_new_note = vim.fn.expand(PARK_root .. "Templates/new_note.md"),
-  template_new_daily = vim.fn.expand(PARK_root .. "Templates/daily_note.md"),
-  template_new_weekly = vim.fn.expand(PARK_root .. "Templates/weekly_note.md"),
-  templates = vim.fn.expand(PARK_root .. "Templates/"),
+  template_new_note = default_template_new_note,
+  template_new_daily = default_template_new_daily,
+  template_new_weekly = default_template_new_weekly,
+  templates = default_templates_dir,
   insert_after_inserting = false,
 }
+
+-- returns boolean
+local function check_file_exists(path)
+  local Path = require("plenary.path")
+  return Path:new(path):exists()
+end
+
+local function get_vault_template_dir(root, note_name, default_value)
+  -- use default dirs unless vault-specific file exists
+  local template_path = make_template_path(root, note_name)
+  if check_file_exists(template_path) then
+    return template_path
+  else
+    return default_value
+  end
+end
+
+local function add_template_dirs_to_config(config, root)
+  config.template_new_note = get_vault_template_dir(root, "new_note", default_template_new_note)
+  config.template_new_daily = get_vault_template_dir(root, "daily_note", default_template_new_daily)
+  config.template_new_weekly = get_vault_template_dir(root, "weekly_note", default_template_new_weekly)
+  config.templates = get_vault_template_dir(root, nil, default_templates_dir)
+end
 
 local function generate_vault_dirs()
   local root = PARK_root
@@ -49,10 +86,13 @@ local function generate_vault_dirs()
     for key, value in pairs(global_config) do
       config[key] = value
     end
-    config.home = vim.fn.expand(root .. item.space .. "/" .. item.subdir)
-    config.dailies = vim.fn.expand(root .. item.space .. "/" .. item.subdir .. "/daily")
-    config.weeklies = vim.fn.expand(root .. item.space .. "/" .. item.subdir .. "/weekly")
+    local vault_root = root .. item.space .. "/" .. item.subdir
+    config.home = vim.fn.expand(vault_root)
+    config.dailies = vim.fn.expand(vault_root .. "/daily")
+    config.weeklies = vim.fn.expand(vault_root .. "/weekly")
     local name = item.space .. "_" .. item.subdir
+    add_template_dirs_to_config(config, vault_root .. "/")
+    -- print(vim.inspect(config))
     vaults[name] = config
   end
   return vaults
