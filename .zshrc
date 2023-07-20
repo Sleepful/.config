@@ -356,8 +356,8 @@ function precmd() {
 # month with 4 weeks, 1st falls on Mon and last day on Tue
 # [ M X X T ]
 function ddate(){
-  DEF_COLOR="$fg_bold[black]"
-  HI_COLOR="$fg_bold[white]"
+  DEF_COLOR="$fg_bold[white]"
+  HI_COLOR="$fg_bold[green]"
   MED_COLOR="$fg_no_bold[blue]"
 
   months=(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
