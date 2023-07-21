@@ -26,10 +26,11 @@ function open_notes() {
 	notes=$(ls -d1 $PARK*/*/)
 	notes_without_root=$(echo "$notes" | sed -E 's|.+/([A-Za-z]+/[A-Za-z]+)/$|\1|g')
 	# pass the notes_without_root, and then echo the root
-	selection=$(echo $PARK$(echo "$notes_without_root" | fzf-tmux -p))
-	if [[ -z $selection ]]; then
+	selection_without_root=$(echo "$notes_without_root" | fzf-tmux -p)
+	if [[ -z $selection_without_root ]]; then
 		return
 	fi
+	selection=$(echo $PARK$selection_without_root)
 	leaf=$(echo $selection | sed -E 's|.+/(.+)$|\1|g')
 	session=notes
 	window=1
