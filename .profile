@@ -22,6 +22,11 @@ alias sprc='source ~/.profile'
 alias szrc='source ~/.zshrc'
 alias ssecret='source ~/.secret'
 
+export CLOUD=~/Documents/Cloud-Drive
+
+source ~/.profile.subshell
+alias prcs='vim ~/.profile.subshell'
+
 # Begin CDs
 alias home='cd ~/'
 alias code='cd ~/Code'
@@ -35,8 +40,8 @@ alias lang='cd ~/Language'
 alias vimconf='cd ~/.config/nvim'
 alias important='cd ~/Important'
 alias txt='cd ~/Important/Txt'
-alias cloud='cd ~/Documents/Cloud-Drive'
-alias park='cd ~/Sync/PARK'
+alias cloud='cd $CLOUD'
+alias park='cd $PARK'
 alias st='cd ~/Sync'
 
 # Build dirs
