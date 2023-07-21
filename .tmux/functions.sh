@@ -30,7 +30,7 @@ function open_notes() {
 	if [[ -z $selection ]]; then
 		return
 	fi
-	leaf=$(echo $selection | sed -E 's|.+/([A-Za-z]+)$|\1|g')
+	leaf=$(echo $selection | sed -E 's|.+/(.+)$|\1|g')
 	session=notes
 	window=1
 	if [[ $(pgrep -f "nvim.*$selection") ]]; then
@@ -51,10 +51,10 @@ function open_notes() {
 		# finally, lets switch to the already-existing nvim instance
 		tmux switch-client -t $pane_id
 	else
-		if [[ $(tmux has-session -t $session) ]]; then
+		if tmux has-session -t $session; then
 			# switch to session and create a new window
-			tmux switch-client -t $session
 			tmux new-window -bt $session:$window -n $leaf
+			tmux switch-client -t $session
 		else
 			# create new session and use default window
 			tmux new-session -s $session -d
