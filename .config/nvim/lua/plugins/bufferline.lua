@@ -49,7 +49,8 @@ local function search_buffers(sort_entries_callback)
       -- group | buffer name | a bit of dir path (?)
       -- if it is closed or open !
       { width = 12 },
-      { width = 12 },
+      { width = 5 },
+      { width = 20 },
       { remaining = true },
     },
   })
@@ -64,41 +65,42 @@ local function search_buffers(sort_entries_callback)
   local function telescope_bufline_buffers(opts)
     opts = opts or {}
     pickers
-      .new(opts, {
-        prompt_title = "Search bufline",
-        finder = finders.new_table({
-          results = entries,
-          entry_maker = function(entry)
-            return {
-              value = entry,
-              ordinal = (groups[entry.group].string_name or groups[entry.group].name)
-                .. " "
-                .. entry.name
-                .. " "
-                .. entry.path,
-              display = function(e)
-                return displayer({
-                  groups[e.value.group].string_name or groups[entry.group].name,
-                  e.value.name,
-                  vim.fn.fnamemodify(e.value.path, ":."),
-                })
-              end,
-            }
+        .new(opts, {
+          prompt_title = "Search bufline",
+          finder = finders.new_table({
+            results = entries,
+            entry_maker = function(entry)
+              return {
+                value = entry,
+                ordinal = (groups[entry.group].string_name or groups[entry.group].name)
+                    .. " "
+                    .. entry.name
+                    .. " "
+                    .. entry.path,
+                display = function(e)
+                  return displayer({
+                    groups[e.value.group].string_name or groups[entry.group].name,
+                    e.value.name,
+                    vim.fn.fnamemodify(e.value.path, ":t"),
+                    vim.fn.fnamemodify(e.value.path, ":."),
+                  })
+                end,
+              }
+            end,
+          }),
+          sorter = sorters.fuzzy_with_index_bias(opts),
+          attach_mappings = function(prompt_bufnr, map)
+            actions.select_default:replace(function()
+              actions.close(prompt_bufnr)
+              local selection = action_state.get_selected_entry()
+              if selection and vim.api.nvim_buf_is_valid(selection.value.id) then
+                vim.api.nvim_set_current_buf(selection.value.id)
+              end
+            end)
+            return true
           end,
-        }),
-        sorter = sorters.fuzzy_with_index_bias(opts),
-        attach_mappings = function(prompt_bufnr, map)
-          actions.select_default:replace(function()
-            actions.close(prompt_bufnr)
-            local selection = action_state.get_selected_entry()
-            if selection and vim.api.nvim_buf_is_valid(selection.value.id) then
-              vim.api.nvim_set_current_buf(selection.value.id)
-            end
-          end)
-          return true
-        end,
-      })
-      :find()
+        })
+        :find()
   end
   telescope_bufline_buffers()
 end
@@ -161,38 +163,38 @@ local function toggle_group_by_search()
   local telescope_groups = function(opts)
     opts = opts or {}
     pickers
-      .new(opts, {
-        prompt_title = "Toggle groups",
-        finder = finders.new_table({
-          results = entries,
-          entry_maker = function(entry)
-            return {
-              value = entry,
-              ordinal = entry.string_name,
-              display = function(e)
-                return displayer({
-                  e.value.hidden and "Hidden" or "Visible",
-                  e.value.name,
-                  e.value.string_name,
-                })
-              end,
-            }
+        .new(opts, {
+          prompt_title = "Toggle groups",
+          finder = finders.new_table({
+            results = entries,
+            entry_maker = function(entry)
+              return {
+                value = entry,
+                ordinal = entry.string_name,
+                display = function(e)
+                  return displayer({
+                    e.value.hidden and "Hidden" or "Visible",
+                    e.value.name,
+                    e.value.string_name,
+                  })
+                end,
+              }
+            end,
+          }),
+          sorter = conf.generic_sorter(opts),
+          attach_mappings = function(prompt_bufnr, map)
+            actions.select_default:replace(function()
+              actions.close(prompt_bufnr)
+              local selection = action_state.get_selected_entry()
+              if selection then
+                local e = selection.value
+                bufline.groups.action(e.name, "toggle")
+              end
+            end)
+            return true
           end,
-        }),
-        sorter = conf.generic_sorter(opts),
-        attach_mappings = function(prompt_bufnr, map)
-          actions.select_default:replace(function()
-            actions.close(prompt_bufnr)
-            local selection = action_state.get_selected_entry()
-            if selection then
-              local e = selection.value
-              bufline.groups.action(e.name, "toggle")
-            end
-          end)
-          return true
-        end,
-      })
-      :find()
+        })
+        :find()
   end
 
   telescope_groups()
@@ -222,13 +224,19 @@ local function fmt(buf)
     separator = "☔"
     name = new_name
   end
-  local max_len = 11
-  local trailing_chars = 4
+  -- local max_len = 11
+  -- local trailing_chars = 4
+  local max_len = 4
+  local trailing_chars = 0
   if string.len(name) > max_len + 1 then
     local trim = max_len - trailing_chars - 1
     local first = string.sub(name, 1, trim)
-    local last = string.sub(name, -trailing_chars)
-    name = first .. separator .. last
+    if trailing_chars ~= 0 then
+      local last = string.sub(name, -trailing_chars)
+      name = first .. separator .. last
+    else
+      name = first
+    end
   end
   return name
 end
@@ -238,15 +246,18 @@ return {
     "akinsho/bufferline.nvim",
     dependencies = { "RRethy/nvim-base16", "LazyVim/LazyVim" },
     event = "VeryLazy",
+    config = function(LazyPlugin, opts)
+      require("bufferline").setup(opts)
+    end,
     keys = {
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
-      { "<leader>bQ", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+      { "<leader>bp",  "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
+      { "<leader>bQ",  "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
       { "<leader>bP" },
-      { "<leader>bO", "<Cmd>BufferLineCloseRight<CR>" },
-      { "<leader>bI", "<Cmd>BufferLineCloseLeft<CR>" },
-      { "<leader>ba", "<Cmd>BufferLinePick<CR>" },
-      { "<leader>bW", "<Cmd>BufferLinePickClose<CR>" },
-      { "<leader>bK", "<Cmd>%bd<CR>", desc = "Kill all buffers" },
+      { "<leader>bO",  "<Cmd>BufferLineCloseRight<CR>" },
+      { "<leader>bI",  "<Cmd>BufferLineCloseLeft<CR>" },
+      { "<leader>ba",  "<Cmd>BufferLinePick<CR>" },
+      { "<leader>bW",  "<Cmd>BufferLinePickClose<CR>" },
+      { "<leader>bK",  "<Cmd>%bd<CR>",                            desc = "Kill all buffers" },
       -- some bindings in keymaps.lua
       { "<leader>bse", "<Cmd>BufferLineSortByExtension<CR>" },
       { "<leader>bsd", "<Cmd>BufferLineSortByDirectory<CR>" },
@@ -258,18 +269,25 @@ return {
         desc = "Sort by last time the file was modified",
       },
       {
+        "gR",
+        function()
+          require("bufferline").sort_by(sort_by_recently_sorter)
+        end,
+        desc = "Sort by recently visited buffer",
+      },
+      {
         "<leader>bsr",
         function()
           require("bufferline").sort_by(sort_by_recently_sorter)
         end,
         desc = "Sort by recently visited buffer",
       },
-      { "<leader>bi", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "Travel to first buffer" },
-      { "<leader>bo", "<Cmd>BufferLineGoToBuffer -1<CR>", desc = "Travel to last buffer" },
-      { "<leader>bgh", hide_all_groups, desc = "Hide all groups" },
-      { "<leader>bgc", close_all_groups, desc = "Close all groups" },
-      { "<leader>bge", expand_all_groups, desc = "Expand all groups" },
-      { "<leader>bgt", toggle_group_by_search, desc = "Toggle group (search)" },
+      { "<leader>bi",  "<Cmd>BufferLineGoToBuffer 1<CR>",  desc = "Travel to first buffer" },
+      { "<leader>bo",  "<Cmd>BufferLineGoToBuffer -1<CR>", desc = "Travel to last buffer" },
+      { "<leader>bgh", hide_all_groups,                    desc = "Hide all groups" },
+      { "<leader>bgc", close_all_groups,                   desc = "Close all groups" },
+      { "<leader>bge", expand_all_groups,                  desc = "Expand all groups" },
+      { "<leader>bgt", toggle_group_by_search,             desc = "Toggle group (search)" },
       {
         "<leader>bf",
         function()
@@ -434,7 +452,7 @@ return {
         diagnostics_indicator = function(_, _, diag)
           local icons = require("lazyvim.config").icons.diagnostics
           local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-            .. (diag.warning and icons.Warn .. diag.warning or "")
+              .. (diag.warning and icons.Warn .. diag.warning or "")
           return vim.trim(ret)
         end,
         separator_style = "slope",

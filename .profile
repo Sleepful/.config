@@ -11,7 +11,6 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH=~/.emacs.d/bin:$PATH
 export PATH="$HOME/.bin:$PATH"
 # rust cargo
-export PATH="$HOME/.cargo/bin:$PATH"
 
 export TERM="xterm-kitty"
 
@@ -229,6 +228,9 @@ alias fl="flavour && flavours current"
 # fl tango
 alias theme='flavour `flavours list | sed "s/ /\n/g" | sed "/^$/d" | fzf`'
 
+alias dir='cd `fd -t d | fzf || echo .`'
+# alias undir for traveling up?
+
 # fzf
 export FZF_DEFAULT_OPTS='--height 60% --min-height 12 --reverse --border --multi --tiebreak="length,end" --info=inline --pointer="->" --marker="<>" --tabstop=2
 --color bg+:0,hl:2,hl+:2,prompt:6,pointer:6,fg+:6,marker:6,info:3,info:bold,hl+:underline,fg+:underline,hl:italic,spinner:2
@@ -285,3 +287,4 @@ fkill() {
 		echo $pid | xargs kill -${1:-9}
 	fi
 }
+. "$HOME/.cargo/env"

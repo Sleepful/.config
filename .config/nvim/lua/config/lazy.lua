@@ -12,7 +12,7 @@ require("lazy").setup({
   commit = "9387ab3",
   spec = {
     -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    { "LazyVim/LazyVim",                              dev = true, import = "lazyvim.plugins" },
     { import = "lazyvim.plugins.extras.lang.tailwind" },
     -- import any extras modules here
     { import = "lazyvim.plugins.extras.editor.leap" },
@@ -20,6 +20,7 @@ require("lazy").setup({
     -- { import = "lazyvim.plugins.extras.lang.json" },
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
     -- import/override with your plugins
+    -- { import = "lazyvim.plugins.extras.lang.rust" },
     { import = "plugins" },
   },
   defaults = {

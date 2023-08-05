@@ -110,7 +110,7 @@ return {
   },
   pathogen = {
     fuzzy = {
-      "<C-g>rl",
+      "<C-g>l",
       function()
         local opts = {
           cwd = require("telescope.utils").buffer_dir(),
@@ -122,7 +122,7 @@ return {
       desc = "⚡️ Pathogen Lazy",
     },
     grep = {
-      "<C-g>r/",
+      "<C-g>/",
       function()
         local opts = {
           cwd = require("telescope.utils").buffer_dir(),
@@ -132,7 +132,7 @@ return {
       desc = "⚡️ Pathogen Grep",
     },
     files = {
-      "<C-g>rf",
+      "<C-g>f",
       function()
         local opts = {
           cwd = require("telescope.utils").buffer_dir(),

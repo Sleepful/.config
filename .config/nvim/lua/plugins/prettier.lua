@@ -1,6 +1,7 @@
 return {
   {
     "MunifTanjim/prettier.nvim",
+    dependencies = { "jose-elias-alvarez/null-ls.nvim", "neovim/nvim-lspconfig" },
     opts = {
       bin = "prettierd", -- or `'prettierd'` (v0.23.3+)
       filetypes = {
