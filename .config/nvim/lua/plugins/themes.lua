@@ -98,6 +98,10 @@ local source_flavour = function()
 end
 
 local setup_lualine = function()
+  -- seems like `hide` should be called before
+  -- `setup` in order to avoid a weird statusline
+  -- blank line when reloading lualine with `setup`
+  require("lualine").hide()
   require("lualine").setup(lualine_opts())
   require("lualine").hide({
     place = { "statusline" }, -- The segment this change applies to.
