@@ -389,7 +389,7 @@ return {
               -- auto_close = true,
               matcher = function(buf) -- Mandatory
                 -- print(vim.inspect(buf))
-                return buf.path:match("%test") or buf.path:match("%spec")
+                return buf.path:match("test") or buf.path:match("spec")
               end,
               highlight = {
                 -- empty, colors set in flavours.lua

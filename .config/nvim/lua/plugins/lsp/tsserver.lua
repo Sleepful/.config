@@ -5,6 +5,8 @@ return {
       tsserver = {
         -- mason = false, -- do not set up with mason
         -- setup = true,
+        root_dir = require("lspconfig").util.root_pattern("package.json"),
+        single_file_support = false,
       },
     },
     setup = {

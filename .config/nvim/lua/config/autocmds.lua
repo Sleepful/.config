@@ -52,6 +52,7 @@ vim.api.nvim_create_autocmd("FileType", {
     map("i", "#?", function()
       require("telekasten").show_tags()
     end)
+    -- vim.cmd("set formatoptions+=a")
   end,
   pattern = "markdown",
 })
@@ -77,13 +78,13 @@ return {
         local bg_scondary = param("guibg", primary_bg)
         vim.cmd(
           "highlight QuickScopePrimary" .. fg_primary .. "gui=underdouble ctermfg=155 cterm=underline"
-          -- "highlight QuickScopePrimary" .. fg_primary .. bg_primary .. "gui=underdouble ctermfg=155 cterm=underline"
+        -- "highlight QuickScopePrimary" .. fg_primary .. bg_primary .. "gui=underdouble ctermfg=155 cterm=underline"
         )
         vim.cmd(
-          -- "highlight QuickScopeSecondary" .. fg_scondary .. bg_scondary .. "gui=underline ctermfg=81 cterm=underline"
+        -- "highlight QuickScopeSecondary" .. fg_scondary .. bg_scondary .. "gui=underline ctermfg=81 cterm=underline"
           "highlight QuickScopeSecondary"
-            .. fg_scondary
-            .. "gui=underline ctermfg=81 cterm=underline"
+          .. fg_scondary
+          .. "gui=underline ctermfg=81 cterm=underline"
         )
       end,
     },

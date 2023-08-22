@@ -97,14 +97,22 @@ local source_flavour = function()
   vim.cmd("source " .. config .. path)
 end
 
+local setup_lualine = function()
+  require("lualine").setup(lualine_opts())
+  require("lualine").hide({
+    place = { "statusline" }, -- The segment this change applies to.
+    unhide = false,           -- whether to re-enable lualine again/
+  })
+end
+
 local set_flavours = function()
   source_flavour()
-  require("lualine").setup(lualine_opts())
+  setup_lualine()
 end
 
 local setup_RRethy = function()
   source_flavour()
-  require("lualine").setup(lualine_opts())
+  setup_lualine()
 end
 
 local reload_flavour = function()
@@ -123,7 +131,7 @@ return {
   { "shaunsingh/moonlight.nvim" },
   { "peterlvilim/solarized.nvim" },
   { "Shatur/neovim-ayu" },
-  { "folke/tokyonight.nvim", lazy = false, opts = { style = "moon" } },
+  { "folke/tokyonight.nvim",     lazy = false, opts = { style = "moon" } },
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -135,13 +143,8 @@ return {
       "RRethy/nvim-base16",
       "LazyVim/LazyVim",
     },
-    opts = lualine_opts,
     config = function(LazyVim, opts)
-      require("lualine").setup(opts)
-      require("lualine").hide({
-        place = { "statusline" }, -- The segment this change applies to.
-        unhide = false, -- whether to re-enable lualine again/
-      })
+      setup_lualine()
     end,
   },
   {
