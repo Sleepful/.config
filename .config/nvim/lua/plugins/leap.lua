@@ -5,18 +5,18 @@ return {
       -- empty config is necessary for `keys` to work (???)
     end,
     keys = {
-      {
-        "S",
-        function()
-          -- all windows search (includes bidirectional search) per docs
-          local focusable_windows_on_tabpage = vim.tbl_filter(function(win)
-            return vim.api.nvim_win_get_config(win).focusable
-          end, vim.api.nvim_tabpage_list_wins(0))
-          require("leap").leap({ target_windows = focusable_windows_on_tabpage })
-        end,
-        mode = { "n", "x", "o" },
-        desc = "Leap forward to",
-      },
+      -- {
+      --   "S",
+      --   function()
+      --     -- all windows search (includes bidirectional search) per docs
+      --     local focusable_windows_on_tabpage = vim.tbl_filter(function(win)
+      --       return vim.api.nvim_win_get_config(win).focusable
+      --     end, vim.api.nvim_tabpage_list_wins(0))
+      --     require("leap").leap({ target_windows = focusable_windows_on_tabpage })
+      --   end,
+      --   mode = { "n", "x", "o" },
+      --   desc = "Leap forward to",
+      -- },
       {
         "s",
         require("plugins.leap.vertical"),
@@ -24,21 +24,29 @@ return {
         desc = "Leap vertical to",
       },
       {
-        "<C-k>",
+        "S",
         function()
-          require("plugins.leap.word")("upwards")
+          require("plugins.leap.word")("both")
         end,
         mode = { "n", "x", "o" },
-        desc = "Leap by word upwards",
+        desc = "Leap by word first letter",
       },
-      {
-        "<C-j>",
-        function()
-          require("plugins.leap.word")("downwards")
-        end,
-        mode = { "n", "x", "o" },
-        desc = "Leap by word downwards",
-      },
+      -- {
+      --   "<C-k>",
+      --   function()
+      --     require("plugins.leap.word")("upwards")
+      --   end,
+      --   mode = { "n", "x", "o" },
+      --   desc = "Leap by word upwards",
+      -- },
+      -- {
+      --   "<C-j>",
+      --   function()
+      --     require("plugins.leap.word")("downwards")
+      --   end,
+      --   mode = { "n", "x", "o" },
+      --   desc = "Leap by word downwards",
+      -- },
       {
         "<C-w>e",
         require("plugins.leap.window"),
