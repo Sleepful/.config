@@ -14,7 +14,7 @@ end
 
 local lexical = {
   filetypes = { "elixir", "eelixir", "surface" }, -- "heex",
-  cmd = { "/Users/jose/Code/lexical/_build/dev/rel/lexical/start_lexical.sh" },
+  cmd = { "/Users/jose/Code/lexical/_build/dev/package/lexical/bin/start_lexical.sh" },
   root_dir = root_dir,
 }
 

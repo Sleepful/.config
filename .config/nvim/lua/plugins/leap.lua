@@ -18,13 +18,13 @@ return {
       --   desc = "Leap forward to",
       -- },
       {
-        "s",
+        "z", -- removes the folding key, meh (create folds, etc)
         require("plugins.leap.vertical"),
         mode = { "n", "x", "o" },
         desc = "Leap vertical to",
       },
       {
-        "S",
+        "s",
         function()
           require("plugins.leap.word")("both")
         end,
