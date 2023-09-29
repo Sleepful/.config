@@ -8,7 +8,7 @@ local function map(mode, lhs, rhs, opts)
   if not keys.active[keys.parse({ lhs, mode = mode }).id] then
     opts = opts or {}
     opts.silent = opts.silent ~= false
-    opts.noremap = true
+    opts.noremap = opts.noremap ~= true
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 end
@@ -65,9 +65,15 @@ end, { desc = "Git branch name" })
 -- TODO: make it so that it inserts the selected yank into the current insert thing
 map("i", "<C-x>", "<cmd>Telescope neoclip plus<cr>", { desc = "Neoclip" })
 
+-- Use the 0 register by default when using Put,
+-- 0 is the "yank" register, which will contain the last yank
+-- unlike the default register ["], which contains cuts and overwritten text
+map({ "n", "x", "v" }, "p", [["0p]], { desc = "Paste yank" })
+map({ "n", "x", "v" }, "P", [["0P]], { desc = "Paste yank" })
+
 -- Classic pasting
-map("n", "[p", "O<esc>p", { desc = "Paste above" })
-map("n", "]p", "o<esc>p", { desc = "Paste below" })
+map("n", "[p", "O<esc>p", { desc = "Paste above", remap = true })
+map("n", "]p", "o<esc>p", { desc = "Paste below", remap = true })
 
 -- Start interactive EasyAlign in visual mode (e.g. vipga)
 vim.cmd("xmap ga <Plug>(EasyAlign)")
