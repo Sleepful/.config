@@ -63,13 +63,13 @@ end, { desc = "Git branch name" })
 
 -- Neoclip
 -- TODO: make it so that it inserts the selected yank into the current insert thing
-map("i", "<C-x>", "<cmd>Telescope neoclip plus<cr>", { desc = "Neoclip" })
+map("i", "<C-x>", "<cmd>Telescope neoclip plus extra=0<cr>", { desc = "Neoclip" })
 
 -- Use the 0 register by default when using Put,
 -- 0 is the "yank" register, which will contain the last yank
 -- unlike the default register ["], which contains cuts and overwritten text
-map({ "n", "x", "v" }, "p", [["0p]], { desc = "Paste yank" })
-map({ "n", "x", "v" }, "P", [["0P]], { desc = "Paste yank" })
+map({ "n", "v" }, "p", [["0p]], { desc = "Paste yank" })
+map({ "n", "v" }, "P", [["0P]], { desc = "Paste yank" })
 
 -- Classic pasting
 map("n", "[p", "O<esc>p", { desc = "Paste above", remap = true })
@@ -185,3 +185,6 @@ map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 -- map("n", "<tab>l", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 -- map("n", "<tab>h", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 -- map("n", "<tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+
+-- TODO:
+-- map <M-C-Up> and <M-C-Down> to increase/decrease window height, like the way that <M-C-Left> curently works

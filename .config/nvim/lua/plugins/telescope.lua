@@ -27,6 +27,18 @@ return {
     opts = {
       enable_persistent_history = true,
       continuous_sync = true,
+      keys = {
+        telescope = {
+          n = {
+            paste_behind = "<C-b>",
+            paste = "<C-p>",
+          },
+          i = {
+            paste_behind = "<C-b>",
+            paste = "<C-p>",
+          },
+        },
+      },
     },
   },
   {
@@ -130,7 +142,7 @@ return {
         desc = "GitKao moji ⚗️ ",
       },
       -- more
-      { "<leader>smn", "<cmd>Telescope notify<cr>", desc = "Notify messages" },
+      { "<leader>smn", "<cmd>Telescope notify<cr>",       desc = "Notify messages" },
       -- search
       { "<leader>sa" },
       { "<leader>sma", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
@@ -138,18 +150,18 @@ return {
         "<leader>sC",
         -- remove default "Commands"
       },
-      { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      { "<leader>smc", "<cmd>Telescope commands<cr>", desc = "Commands" },
+      { "<leader>sc",  "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      { "<leader>smc", "<cmd>Telescope commands<cr>",        desc = "Commands" },
       { "<leader>sH" },
-      { "<leader>smH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
-      { "<leader>smk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+      { "<leader>smH", "<cmd>Telescope highlights<cr>",      desc = "Search Highlight Groups" },
+      { "<leader>smk", "<cmd>Telescope keymaps<cr>",         desc = "Key Maps" },
       { "<leader>sM" },
-      { "<leader>smM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+      { "<leader>smM", "<cmd>Telescope man_pages<cr>",       desc = "Man Pages" },
       { "<leader>sm" },
-      { "<leader>smj", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+      { "<leader>smj", "<cmd>Telescope marks<cr>",           desc = "Jump to Mark" },
       { "<leader>so" },
-      { "<leader>smo", "<cmd>Telescope vim_options<cr>", desc = "Options" },
-      { "<leader>ss", "<cmd>Telescope resume<cr>", desc = "Resume" },
+      { "<leader>smo", "<cmd>Telescope vim_options<cr>",     desc = "Options" },
+      { "<leader>ss",  "<cmd>Telescope resume<cr>",          desc = "Resume" },
       {
         "<leader>sG",
       },
