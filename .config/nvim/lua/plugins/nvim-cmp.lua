@@ -37,8 +37,8 @@ return {
           -- page up and page down for menu
           ["<C-d>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select, count = 6 }),
           ["<C-u>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select, count = 6 }),
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<F2>"] = cmp.mapping.confirm({ select = true }),
@@ -54,6 +54,34 @@ return {
             config = {
               sources = {
                 { name = "luasnip" },
+              },
+            },
+          }),
+          ["<C-b>"] = cmp.mapping.complete({
+            config = {
+              sources = {
+                -- Add Emmet from dcampos/cmp-emmet-vim
+                {
+                  name = "emmet_vim",
+                  option = {
+                    filetypes = {
+                      -- elixir because Heex sometimes doesn't ID the HTML under cursor
+                      "elixir",
+                      -- the rest are defaults from emmet-cmp
+                      "html",
+                      "xml",
+                      "typescriptreact",
+                      "javascriptreact",
+                      "css",
+                      "sass",
+                      "scss",
+                      "less",
+                      "heex",
+                      "tsx",
+                      "jsx",
+                    },
+                  },
+                },
               },
             },
           }),
@@ -107,50 +135,50 @@ return {
               local telescope_cmp = function(opts)
                 opts = opts or {}
                 pickers
-                  .new(opts, {
-                    prompt_title = "Auto CMP",
-                    finder = finders.new_table({
-                      results = entries,
-                      entry_maker = function(entry)
-                        return {
-                          value = entry,
-                          ordinal = fmt_source_name(entry.source.name) .. " " .. fmt_source_kind(
-                            entry.completion_item.kind
-                          ) .. " " .. entry.completion_item.label,
-                          display = function(e)
-                            return displayer({
-                              fmt_source_name(e.value.source.name),
-                              fmt_source_kind(e.value.completion_item.kind),
-                              e.value.completion_item.label,
-                            })
-                          end,
-                        }
-                      end,
-                    }),
-                    sorter = conf.generic_sorter(opts),
-                    attach_mappings = function(prompt_bufnr, map)
-                      actions.select_default:replace(function()
-                        actions.close(prompt_bufnr)
-                        local selection = action_state.get_selected_entry()
-                        local e = selection.value
-                        utils.set_entry(e)
-                        vim.schedule(function()
-                          -- feedkeys necessary
-                          -- https://github.com/hrsh7th/nvim-cmp/discussions/1629
-                          vim.fn.feedkeys(
-                            vim.api.nvim_replace_termcodes(
-                              'a<Cmd>lua require("plugins.cmp.utils").confirm()<CR>',
-                              true,
-                              true,
-                              true
+                    .new(opts, {
+                      prompt_title = "Auto CMP",
+                      finder = finders.new_table({
+                        results = entries,
+                        entry_maker = function(entry)
+                          return {
+                            value = entry,
+                            ordinal = fmt_source_name(entry.source.name) .. " " .. fmt_source_kind(
+                              entry.completion_item.kind
+                            ) .. " " .. entry.completion_item.label,
+                            display = function(e)
+                              return displayer({
+                                fmt_source_name(e.value.source.name),
+                                fmt_source_kind(e.value.completion_item.kind),
+                                e.value.completion_item.label,
+                              })
+                            end,
+                          }
+                        end,
+                      }),
+                      sorter = conf.generic_sorter(opts),
+                      attach_mappings = function(prompt_bufnr, map)
+                        actions.select_default:replace(function()
+                          actions.close(prompt_bufnr)
+                          local selection = action_state.get_selected_entry()
+                          local e = selection.value
+                          utils.set_entry(e)
+                          vim.schedule(function()
+                            -- feedkeys necessary
+                            -- https://github.com/hrsh7th/nvim-cmp/discussions/1629
+                            vim.fn.feedkeys(
+                              vim.api.nvim_replace_termcodes(
+                                'a<Cmd>lua require("plugins.cmp.utils").confirm()<CR>',
+                                true,
+                                true,
+                                true
+                              )
                             )
-                          )
+                          end)
                         end)
-                      end)
-                      return true
-                    end,
-                  })
-                  :find()
+                        return true
+                      end,
+                    })
+                    :find()
               end
 
               telescope_cmp()

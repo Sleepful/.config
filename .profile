@@ -29,7 +29,7 @@ alias prcs='vim ~/.profile.subshell'
 # Begin CDs
 alias home='cd ~/'
 alias code='cd ~/Code'
-alias oa='cd ~/Code/OA'
+alias auto='cd ~/Code/autokroma'
 alias lx='cd ~/Code/Lexical'
 alias notif='cd ~/Code/notifs'
 alias wb='cd ~/Code/WordDatabase/phx'

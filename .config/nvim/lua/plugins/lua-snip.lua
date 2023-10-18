@@ -73,34 +73,6 @@ return {
             fallback()
           end
         end, { "i", "s" }),
-        ["<C-l>"] = cmp.mapping.complete({
-          config = {
-            sources = {
-              -- Add Emmet from dcampos/cmp-emmet-vim
-              {
-                name = "emmet_vim",
-                option = {
-                  filetypes = {
-                    -- elixir because Heex sometimes doesn't ID the HTML under cursor
-                    "elixir",
-                    -- the rest are defaults from emmet-cmp
-                    "html",
-                    "xml",
-                    "typescriptreact",
-                    "javascriptreact",
-                    "css",
-                    "sass",
-                    "scss",
-                    "less",
-                    "heex",
-                    "tsx",
-                    "jsx",
-                  },
-                },
-              },
-            },
-          },
-        }),
       })
     end,
   },
