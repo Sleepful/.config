@@ -4,28 +4,25 @@ local lexical = require("plugins.lsp.lexical")
 local marksman = require("plugins.lsp.marksman")
 local rust = require("plugins.lsp.rust")
 return {
-  elixirls,
-  tsserver,
-  lexical,
-  marksman,
-  rust,
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      -- remove autoformat because it is using lsp autoformat instead of prettier
-      -- for tsserver, ????
-      -- autoformat = false,
-      autoformat = true,
-    },
+    config = function()
+      local lspconfig = require('lspconfig')
+      tsserver.setup()
+
+      lspconfig.denols.setup({
+        root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
+        on_attach = function()
+          -- I guess this works because tsserver setup is called first
+          -- so stop tsserver if we are attaching deno-ls, avoid conflicts
+          vim.cmd("LspStop tsserver")
+        end
+      })
+    end
   },
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        denols = {
-          root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
-        },
-      },
-    },
-  },
+  -- elixirls,
+  -- tsserver,
+  -- lexical,
+  -- marksman,
+  -- rust,
 }
