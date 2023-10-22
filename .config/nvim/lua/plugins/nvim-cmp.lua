@@ -38,7 +38,7 @@ return {
           -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = cmp.mapping.abort(),
+          -- ["<C-e>"] = cmp.mapping.abort(),
           ["<F2>"] = cmp.mapping.confirm({ select = true }),
           -- ["<C-l>"] = vim.NIL, -- NOTE: this was changed from default config
           ["<C-y>"] = cmp.mapping.complete({
@@ -55,7 +55,7 @@ return {
               },
             },
           }),
-          ["<C-b>"] = cmp.mapping.complete({
+          ["<C-e>"] = cmp.mapping.complete({
             config = {
               sources = {
                 -- Add Emmet from dcampos/cmp-emmet-vim
