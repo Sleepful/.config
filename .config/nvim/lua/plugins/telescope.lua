@@ -13,6 +13,32 @@ local Util = require("util")
 -- example: [ ] - spectre search by directory
 -- https://github.com/nvim-pack/nvim-spectre#custom-functions
 
+local pathogenFilesRoot = function()
+  -- replaces the old Util.telescope("files")
+  local opts = {
+    cwd = Util.get_root(),
+  }
+  require("telescope").extensions["pathogen"].find_files(opts)
+end
+
+local pathogenGrepRoot = function()
+  -- replaces the old 
+  -- Util.telescope("live_grep", { additional_args = { "--ignore-case", "--pcre2" } }),
+  local opts = {
+    cwd = Util.get_root(),
+    additional_args = { "--ignore-case", "--pcre2" },
+  }
+  require("telescope").extensions["pathogen"].live_grep(opts)
+end
+
+local pathogenGrepCwd = function()
+  local opts = {
+    cwd = require("telescope.utils").buffer_dir(),
+    additional_args = { "--ignore-case", "--pcre2" },
+  }
+  require("telescope").extensions["pathogen"].live_grep(opts)
+end
+
 return {
   { "kkharji/sqlite.lua" },
   { "sleepful/telescope-pathogen.nvim" },
@@ -55,15 +81,22 @@ return {
       require("telescope").load_extension("pathogen")
     end,
     opts = function()
-      local find_files_no_ignore = function()
+      local find_hidden_files = function()
         local action_state = require("telescope.actions.state")
         local line = action_state.get_current_line()
-        Util.telescope("find_files", { no_ignore = true, default_text = line })()
+        Util.telescope("find_files", { 
+          hidden = true, 
+          no_ignore_parent = true, 
+          no_ignore = false, 
+          default_text = line })()
       end
-      local find_files_with_hidden = function()
+      local find_all_files = function()
         local action_state = require("telescope.actions.state")
         local line = action_state.get_current_line()
-        Util.telescope("find_files", { hidden = true, default_text = line })()
+        Util.telescope("find_files", { 
+          no_ignore = true, 
+          hidden = true, 
+          default_text = line })()
       end
 
       return {
@@ -87,8 +120,8 @@ return {
             i = {
               -- ["<C-q>"] = open_results_in_quickfix_list,
               -- ["<M-q>"] = open_results_in_quickfix_list,
-              ["<M-k>"] = find_files_no_ignore,
-              ["<M-j>"] = find_files_with_hidden,
+              ["<M-k>"] = find_hidden_files,
+              ["<M-j>"] = find_all_files,
               ["<C-u>"] = require("telescope.actions").results_scrolling_up,
               ["<C-d>"] = require("telescope.actions").results_scrolling_down,
               ["<C-b>"] = require("telescope.actions").preview_scrolling_up,
@@ -111,10 +144,15 @@ return {
     keys = {
 
       { "<leader>:",       "<cmd>Telescope command_history<cr>", desc = "[:] Command History" },
-      { "<leader><space>", Util.telescope("files"),              desc = "[ ] Find Files (root dir)" },
+      { "<leader><space>", pathogenFilesRoot, desc = "[ ] Find Files (root dir)" },
+      {
+        "<leader>>",
+        pathogenGrepCwd,
+        desc = "[>] Grep (cwd dir)",
+      },
       {
         "<leader>.",
-        Util.telescope("live_grep", { additional_args = { "--ignore-case", "--pcre2" } }),
+        pathogenGrepRoot,
         desc = "[.] Grep (root dir)",
       },
       {

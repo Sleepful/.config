@@ -15,7 +15,7 @@ return {
         on_attach = function()
           -- I guess this works because tsserver setup is called first
           -- so stop tsserver if we are attaching deno-ls, avoid conflicts
-          vim.cmd("LspStop tsserver")
+          vim.defer_fn(vim.cmd("LspStop tsserver"), 0)
         end
       })
     end

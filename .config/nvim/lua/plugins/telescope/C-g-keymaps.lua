@@ -118,7 +118,6 @@ return {
         }
         require("telescope").extensions["pathogen"].grep_string(opts)
       end,
-      "<cmd>Telescope pathogen live_grep<cr>",
       desc = "⚡️ Pathogen Lazy",
     },
     grep = {
