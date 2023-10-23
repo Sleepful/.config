@@ -8,14 +8,14 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
       local lspconfig = require('lspconfig')
-      tsserver.setup()
+      -- tsserver.setup()
 
       lspconfig.denols.setup({
         root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
         on_attach = function()
           -- I guess this works because tsserver setup is called first
           -- so stop tsserver if we are attaching deno-ls, avoid conflicts
-          vim.defer_fn(vim.cmd("LspStop tsserver"), 0)
+          -- vim.defer_fn(vim.cmd("LspStop tsserver"), 0)
         end
       })
     end

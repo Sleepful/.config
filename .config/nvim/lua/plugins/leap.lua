@@ -1,52 +1,29 @@
 return {
   {
+    "Sleepful/leap-by-word.nvim",
+    dependencies = { "ggandor/leap.nvim"},
+    keys = { {
+        "s",
+        function()
+          -- require("plugins.leap.word")("both")
+          require("leap-by-word")()
+        end,
+        mode = { "n", "x", "o" },
+        desc = "Leap by word first letter",
+      } }
+  },
+  {
     "ggandor/leap.nvim",
     config = function()
       -- empty config is necessary for `keys` to work (???)
     end,
     keys = {
-      -- {
-      --   "S",
-      --   function()
-      --     -- all windows search (includes bidirectional search) per docs
-      --     local focusable_windows_on_tabpage = vim.tbl_filter(function(win)
-      --       return vim.api.nvim_win_get_config(win).focusable
-      --     end, vim.api.nvim_tabpage_list_wins(0))
-      --     require("leap").leap({ target_windows = focusable_windows_on_tabpage })
-      --   end,
-      --   mode = { "n", "x", "o" },
-      --   desc = "Leap forward to",
-      -- },
       {
         "z", -- removes the folding key, meh (create folds, etc)
         require("plugins.leap.vertical"),
         mode = { "n", "x", "o" },
         desc = "Leap vertical to",
       },
-      {
-        "s",
-        function()
-          require("plugins.leap.word")("both")
-        end,
-        mode = { "n", "x", "o" },
-        desc = "Leap by word first letter",
-      },
-      -- {
-      --   "<C-k>",
-      --   function()
-      --     require("plugins.leap.word")("upwards")
-      --   end,
-      --   mode = { "n", "x", "o" },
-      --   desc = "Leap by word upwards",
-      -- },
-      -- {
-      --   "<C-j>",
-      --   function()
-      --     require("plugins.leap.word")("downwards")
-      --   end,
-      --   mode = { "n", "x", "o" },
-      --   desc = "Leap by word downwards",
-      -- },
       {
         "<C-w>e",
         require("plugins.leap.window"),
