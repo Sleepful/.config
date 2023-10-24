@@ -95,22 +95,6 @@ require('lazy').setup({
     },
   },
 
-  -- {
-  --   -- Autocompletion
-  --   'hrsh7th/nvim-cmp',
-  --   dependencies = {
-  --     -- Snippet Engine & its associated nvim-cmp source
-  --     'L3MON4D3/LuaSnip',
-  --     'saadparwaiz1/cmp_luasnip',
-  --
-  --     -- Adds LSP completion capabilities
-  --     'hrsh7th/cmp-nvim-lsp',
-  --
-  --     -- Adds a number of user-friendly snippets
-  --     'rafamadriz/friendly-snippets',
-  --   },
-  -- },
-
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
   {
@@ -220,7 +204,7 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  require 'kickstart.plugins.autoformat',
+  -- require 'kickstart.plugins.autoformat',
   require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -499,8 +483,8 @@ local servers = {
 require('neodev').setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
