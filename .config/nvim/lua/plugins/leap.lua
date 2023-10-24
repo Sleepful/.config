@@ -1,16 +1,23 @@
 return {
   {
     "Sleepful/leap-by-word.nvim",
-    dependencies = { "ggandor/leap.nvim"},
-    keys = { {
+    dependencies = { "ggandor/leap.nvim", "ggandor/leap-spooky.nvim"},
+    dev = true,
+    keys = {{
         "s",
         function()
-          -- require("plugins.leap.word")("both")
-          require("leap-by-word")()
+          require("leap-by-word").leap()
         end,
-        mode = { "n", "x", "o" },
+        mode = { "x", "n" },
         desc = "Leap by word first letter",
-      } }
+      }, {
+        "s",
+        function()
+          require("leap-by-word").EXPERIMENTAL_spooky_leap()
+        end,
+        mode = { "o" },
+        desc = "Spooki",
+      }}
   },
   {
     "ggandor/leap.nvim",
@@ -59,7 +66,6 @@ return {
   {
     "ggandor/leap-spooky.nvim",
     dependencies = "ggandor/leap.nvim",
-    commit = "b9dcc30866e6b916b2d8f3e2f3d6a2c207fffd73",
     config = function()
       require("leap-spooky").setup({
         affixes = {

@@ -65,6 +65,8 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
+  -- JOSE
+  "akinsho/bufferline.nvim",
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
@@ -215,10 +217,6 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
-  -- JOSE
-  "akinsho/bufferline.nvim",
-  -- "RRethy/nvim-base16",
-
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -232,7 +230,7 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'plugins' },
-}, {})
+}, { dev = { path = "~/Code/nvim"}})
 
 -- [[ Setting options ]]
 -- See `:help vim.o`

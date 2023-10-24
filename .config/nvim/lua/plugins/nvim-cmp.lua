@@ -10,7 +10,11 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
+      "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
+      "rafamadriz/friendly-snippets",
+      "mattn/emmet-vim",
+      "dcampos/cmp-emmet-vim",
     },
     opts = function()
       local cmp = require("cmp")
@@ -27,7 +31,7 @@ return {
             require("luasnip").lsp_expand(args.body)
           end,
         },
-        mapping = cmp.mapping.preset.insert({
+        mapping = {
           -- set behavior to "Select", I do not like the "Insert" behavior, I prefer
           -- selecting the items explicitly `cmp.mapping.confirm` before the text is inserted
           ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
@@ -37,10 +41,8 @@ return {
           ["<C-u>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select, count = 6 }),
           -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping.complete(),
           -- ["<C-e>"] = cmp.mapping.abort(),
           ["<F2>"] = cmp.mapping.confirm({ select = true }),
-          -- ["<C-l>"] = vim.NIL, -- NOTE: this was changed from default config
           ["<C-y>"] = cmp.mapping.complete({
             config = {
               sources = {
@@ -186,7 +188,7 @@ return {
               fallback()
             end
           end,
-        }),
+        },
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" },
