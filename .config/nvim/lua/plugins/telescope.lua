@@ -105,9 +105,15 @@ return {
 
       return {
         defaults = {
-          layout_strategy = "vertical",
+          preview = { hide_on_startup = true },
+          layout_strategy = "horizontal",
           enable_preview = true,
           layout_config = {
+            bottom_pane = {
+              height = 25,
+              preview_cutoff = 12,
+              prompt_position = "top",
+            },
             mirror = true,
             prompt_position = "top",
             vertical = {
@@ -115,6 +121,12 @@ return {
               height = { padding = 0 },
               preview_cutoff = 2,
               preview_height = 5,
+            },
+            horizontal = {
+              width = { padding = 0 },
+              height = { padding = 0 },
+              preview_cutoff = 2,
+              preview_width = 80,
             },
           },
           sorting_strategy = "ascending",
@@ -127,6 +139,7 @@ return {
             i = {
               -- ["<C-q>"] = open_results_in_quickfix_list,
               -- ["<M-q>"] = open_results_in_quickfix_list,
+              ["<C-p>"] = require("telescope.actions.layout").toggle_preview,
               ["<M-k>"] = find_hidden_files,
               ["<M-j>"] = find_all_files,
               ["<C-u>"] = require("telescope.actions").results_scrolling_up,
