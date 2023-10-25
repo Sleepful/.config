@@ -210,7 +210,7 @@ return {
         desc = "Symbols",
       },
       {
-        "<leader>sb",
+        "<C-b><C-b>",
         function()
           require("telescope.builtin").buffers()
         end,
