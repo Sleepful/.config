@@ -210,6 +210,13 @@ return {
         desc = "Symbols",
       },
       {
+        "<leader>sb",
+        function()
+          require("telescope.builtin").buffers()
+        end,
+        desc = "Buffers",
+      },
+      {
         "<leader>se",
         function()
           require("telescope.builtin").symbols({ sources = { "emoji" } })

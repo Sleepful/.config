@@ -1,23 +1,23 @@
 return {
   {
     "Sleepful/leap-by-word.nvim",
-    dependencies = { "ggandor/leap.nvim", "ggandor/leap-spooky.nvim"},
+    dependencies = { "ggandor/leap.nvim", "ggandor/leap-spooky.nvim" },
     dev = true,
-    keys = {{
-        "s",
-        function()
-          require("leap-by-word").leap()
-        end,
-        mode = { "x", "n" },
-        desc = "Leap by word first letter",
-      }, {
-        "s",
-        function()
-          require("leap-by-word").EXPERIMENTAL_spooky_leap()
-        end,
-        mode = { "o" },
-        desc = "Spooki",
-      }}
+    keys = { {
+      "s",
+      function()
+        require("leap-by-word").leap()
+      end,
+      mode = { "x", "n" },
+      desc = "Leap by word first letter",
+    }, {
+      "s",
+      function()
+        require("leap-by-word").EXPERIMENTAL_spooky_leap()
+      end,
+      mode = { "o" },
+      desc = "Spooki",
+    } }
   },
   {
     "ggandor/leap.nvim",
@@ -41,12 +41,6 @@ return {
         require("plugins.leap.window"),
         desc = "Leap to window",
       },
-      -- {
-      --   "<C-e>",
-      --   mode = { "i" },
-      --   require("plugins.leap.window"),
-      --   desc = "Leap to window",
-      -- },
     },
   },
   {
