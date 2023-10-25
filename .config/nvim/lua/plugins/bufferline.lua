@@ -249,6 +249,8 @@ local function bufferline_ungrouped()
   return groups.builtin.ungrouped
 end
 
+local buffer_leader = "<C-b>"
+
 return {
   {
     "akinsho/bufferline.nvim",
@@ -258,39 +260,39 @@ return {
       require("bufferline").setup(opts)
     end,
     keys = {
-      { "<M-b>p",  "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
-      { "<M-b>Q",  "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
-      { "<M-b>P" },
-      { "<M-b>O",  "<Cmd>BufferLineCloseRight<CR>" },
-      { "<M-b>I",  "<Cmd>BufferLineCloseLeft<CR>" },
-      { "<M-b>a",  "<Cmd>BufferLinePick<CR>" },
-      { "<M-b>W",  "<Cmd>BufferLinePickClose<CR>" },
-      { "<M-b>K",  "<Cmd>%bd<CR>",                            desc = "Kill all buffers" },
+      { buffer_leader .. "p",  "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
+      { buffer_leader .. "Q",  "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+      { buffer_leader .. "P" },
+      { buffer_leader .. "O",  "<Cmd>BufferLineCloseRight<CR>" },
+      { buffer_leader .. "I",  "<Cmd>BufferLineCloseLeft<CR>" },
+      { buffer_leader .. "a",  "<Cmd>BufferLinePick<CR>" },
+      { buffer_leader .. "W",  "<Cmd>BufferLinePickClose<CR>" },
+      { buffer_leader .. "K",  "<Cmd>%bd<CR>",                            desc = "Kill all buffers" },
       -- some bindings in keymaps.lua
-      { "<M-b>se", "<Cmd>BufferLineSortByExtension<CR>" },
-      { "<M-b>sd", "<Cmd>BufferLineSortByDirectory<CR>" },
+      { buffer_leader .. "se", "<Cmd>BufferLineSortByExtension<CR>" },
+      { buffer_leader .. "sd", "<Cmd>BufferLineSortByDirectory<CR>" },
       {
-        "<M-b>sm",
+        buffer_leader .. "sm",
         function()
           require("bufferline").sort_by(sort_by_modified)
         end,
         desc = "Sort by last time the file was modified",
       },
       {
-        "<M-b>r",
+        buffer_leader .. "r",
         function()
           require("bufferline").sort_by(sort_by_recently_sorter)
         end,
         desc = "Sort by recently visited buffer",
       },
-      { "<M-b>i",  "<Cmd>BufferLineGoToBuffer 1<CR>",  desc = "Travel to first buffer" },
-      { "<M-b>o",  "<Cmd>BufferLineGoToBuffer -1<CR>", desc = "Travel to last buffer" },
-      { "<M-b>gh", hide_all_groups,                    desc = "Hide all groups" },
-      { "<M-b>gc", close_all_groups,                   desc = "Close all groups" },
-      { "<M-b>ge", expand_all_groups,                  desc = "Expand all groups" },
-      { "<M-b>gt", toggle_group_by_search,             desc = "Toggle group (search)" },
+      { buffer_leader .. "i",  "<Cmd>BufferLineGoToBuffer 1<CR>",  desc = "Travel to first buffer" },
+      { buffer_leader .. "o",  "<Cmd>BufferLineGoToBuffer -1<CR>", desc = "Travel to last buffer" },
+      { buffer_leader .. "gh", hide_all_groups,                    desc = "Hide all groups" },
+      { buffer_leader .. "gc", close_all_groups,                   desc = "Close all groups" },
+      { buffer_leader .. "ge", expand_all_groups,                  desc = "Expand all groups" },
+      { buffer_leader .. "gt", toggle_group_by_search,             desc = "Toggle group (search)" },
       {
-        "<M-b>f",
+        buffer_leader .. "f",
         function()
           search_buffers(sort_by_groups)
         end,
@@ -304,7 +306,7 @@ return {
         desc = "[,] Switch buffer (bufferline)",
       },
       {
-        "<M-b>r",
+        buffer_leader .. "r",
         function()
           search_buffers(sort_by_recently_visited)
         end,

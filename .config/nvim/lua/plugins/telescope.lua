@@ -22,7 +22,7 @@ local pathogenFilesRoot = function()
 end
 
 local pathogenGrepRoot = function()
-  -- replaces the old 
+  -- replaces the old
   -- Util.telescope("live_grep", { additional_args = { "--ignore-case", "--pcre2" } }),
   local opts = {
     cwd = Util.get_root(),
@@ -73,30 +73,34 @@ return {
       { "telescope-pathogen.nvim" },
       { "telescope-symbols.nvim" },
       { "AckslD/nvim-neoclip.lua" },
+      { "nvim-telescope/telescope-hop.nvim" },
     },
     config = function(LazyPlugin, opts)
       require("telescope").setup(opts)
       require("telescope").load_extension("harpoon")
       require("telescope").load_extension("neoclip")
       require("telescope").load_extension("pathogen")
+      require("telescope").load_extension("hop")
     end,
     opts = function()
       local find_hidden_files = function()
         local action_state = require("telescope.actions.state")
         local line = action_state.get_current_line()
-        Util.telescope("find_files", { 
-          hidden = true, 
-          no_ignore_parent = true, 
-          no_ignore = false, 
-          default_text = line })()
+        Util.telescope("find_files", {
+          hidden = true,
+          no_ignore_parent = true,
+          no_ignore = false,
+          default_text = line
+        })()
       end
       local find_all_files = function()
         local action_state = require("telescope.actions.state")
         local line = action_state.get_current_line()
-        Util.telescope("find_files", { 
-          no_ignore = true, 
-          hidden = true, 
-          default_text = line })()
+        Util.telescope("find_files", {
+          no_ignore = true,
+          hidden = true,
+          default_text = line
+        })()
       end
 
       return {
@@ -116,6 +120,9 @@ return {
           sorting_strategy = "ascending",
           winblend = 0,
           scroll_strategy = "limit",
+          extensions = {
+            hop = {}
+          },
           mappings = {
             i = {
               -- ["<C-q>"] = open_results_in_quickfix_list,
@@ -129,6 +136,10 @@ return {
               ["<C-j>"] = require("telescope.actions").move_selection_next,
               ["<C-k>"] = require("telescope.actions").move_selection_previous,
               ["<C-r>"] = require("telescope.actions").to_fuzzy_refine,
+              ["<C-s>"] = function(prompt_bufnr)
+                require 'telescope'.extensions.hop._hop(prompt_bufnr,
+                  { callback = require("telescope.actions").select_default })
+              end,
             },
             n = {
               ["<C-u>"] = require("telescope.actions").results_scrolling_up,
@@ -144,7 +155,7 @@ return {
     keys = {
 
       { "<leader>:",       "<cmd>Telescope command_history<cr>", desc = "[:] Command History" },
-      { "<leader><space>", pathogenFilesRoot, desc = "[ ] Find Files (root dir)" },
+      { "<leader><space>", pathogenFilesRoot,                    desc = "[ ] Find Files (root dir)" },
       {
         "<leader>>",
         pathogenGrepCwd,
