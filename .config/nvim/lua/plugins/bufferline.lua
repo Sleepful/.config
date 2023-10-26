@@ -249,9 +249,21 @@ local function bufferline_ungrouped()
   return groups.builtin.ungrouped
 end
 
-local buffer_leader = "<C-b>"
+local buffer_leader = "<M-b>"
 
 return {
+  {
+    "nvim-telescope/telescope.nvim",
+    keys = {
+      {
+        buffer_leader .. buffer_leader,
+        function()
+          require("telescope.builtin").buffers()
+        end,
+        desc = "Buffers",
+      },
+    }
+  },
   {
     "akinsho/bufferline.nvim",
     dependencies = { "RRethy/nvim-base16" },
@@ -260,6 +272,8 @@ return {
       require("bufferline").setup(opts)
     end,
     keys = {
+
+      { buffer_leader .. "u",  "<Cmd>set bufhidden=hide<CR>",             desc = "Unhide buffer" },
       { buffer_leader .. "p",  "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
       { buffer_leader .. "Q",  "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
       { buffer_leader .. "P" },

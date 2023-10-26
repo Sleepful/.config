@@ -123,6 +123,7 @@ return {
               preview_height = 5,
             },
             horizontal = {
+              preview = { hide_on_startup = true },
               width = { padding = 0 },
               height = { padding = 0 },
               preview_cutoff = 2,
@@ -208,13 +209,6 @@ return {
         "<leader>sR",
         "<cmd>Telescope symbols<cr>",
         desc = "Symbols",
-      },
-      {
-        "<C-b><C-b>",
-        function()
-          require("telescope.builtin").buffers()
-        end,
-        desc = "Buffers",
       },
       {
         "<leader>se",
