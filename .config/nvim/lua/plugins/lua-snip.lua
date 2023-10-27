@@ -17,6 +17,18 @@ return {
         end,
         desc = "List all marks!",
       },
+      {
+        "<C-N>",
+        "<Esc><cmd>lua require('luasnip').jump(1)<Cr>",
+        desc = "Jump to next snippet section",
+        mode = { "n", "i" }
+      },
+      {
+        "<C-P>",
+        "<Esc><cmd>lua require('luasnip').jump(-1)<Cr>",
+        desc = "Jump to previous snippet section",
+        mode = { "n", "i" }
+      }
     },
     opts = {
       region_check_events = "InsertEnter",
