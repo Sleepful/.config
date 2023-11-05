@@ -112,6 +112,9 @@ map({ "n" }, "<M-h>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Move buffer left"
 map({ "n" }, "<C-l>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
 map({ "n" }, "<C-h>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
 
+map("i", "<F21>", "()<Left>", { desc = "Insert closed parens ()" })
+map("i", "<F22>", ")<Left>", { desc = "Insert closing parens to the right" })
+
 -- `set jump` and `save jump` taken from:
 -- https://vi.stackexchange.com/questions/31197/add-current-position-to-the-jump-list-the-first-time-c-u-or-c-d-is-pressed
 local save_jump = [[function! SaveJump(motion)
@@ -157,3 +160,5 @@ map({ "n" }, "<C-d>", [[:<C-u>call SaveJump("\<lt>C-d>")<CR>:call SetJump()<CR>]
 
 -- TODO:
 -- map <M-C-Up> and <M-C-Down> to increase/decrease window height, like the way that <M-C-Left> curently works
+
+map("t", "<C-N><C-N>", "<C-\\><C-n>", { desc = "Exit terminal mode" })

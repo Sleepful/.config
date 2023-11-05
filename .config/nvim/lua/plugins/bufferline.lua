@@ -273,7 +273,8 @@ return {
     end,
     keys = {
 
-      { buffer_leader .. "u",  "<Cmd>set bufhidden=hide<CR>",             desc = "Unhide buffer" },
+      { buffer_leader .. "U",  "<Cmd>set bufhidden=hide<CR>",             desc = "Unhide buffer" },
+      { buffer_leader .. "L",  "<Cmd>set buflisted<CR>",                  desc = "List buffer" },
       { buffer_leader .. "p",  "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
       { buffer_leader .. "Q",  "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
       { buffer_leader .. "P" },

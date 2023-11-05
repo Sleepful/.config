@@ -5,6 +5,7 @@ local marksman = require("plugins.lsp.marksman")
 local deno = require("plugins.lsp.deno")
 local rust = require("plugins.lsp.rust")
 local lua = require("plugins.lsp.lua-ls")
+local clojure = require("plugins.lsp.clojure")
 local autoformat = require("plugins.lsp.autoformat")
 return {
   {
@@ -14,6 +15,7 @@ return {
       marksman.setup()
       deno.setup()
       lua.setup()
+      clojure.setup()
       autoformat.autoformat()
     end
   },

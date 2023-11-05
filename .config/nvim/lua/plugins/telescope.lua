@@ -136,17 +136,22 @@ return {
           extensions = {
             hop = {}
           },
+          -- mappings
           mappings = {
             i = {
               -- ["<C-q>"] = open_results_in_quickfix_list,
-              -- ["<M-q>"] = open_results_in_quickfix_list,
+              ["<C-q>"] = function(bufnr)
+                require("telescope.actions").smart_send_to_qflist(bufnr)
+                require("telescope.actions").open_qflist(bufnr)
+              end,
               ["<C-p>"] = require("telescope.actions.layout").toggle_preview,
               -- ["<M-k>"] = find_hidden_files,
-              ["<C-h>"] = find_all_files,
+              ["<M-a>"] = find_all_files,
               ["<C-u>"] = require("telescope.actions").results_scrolling_up,
               ["<C-d>"] = require("telescope.actions").results_scrolling_down,
               ["<M-k>"] = require("telescope.actions").preview_scrolling_up,
               ["<M-j>"] = require("telescope.actions").preview_scrolling_down,
+              -- ["<C-l>"] = "<Right>",
               ["<C-j>"] = require("telescope.actions").move_selection_next,
               ["<C-k>"] = require("telescope.actions").move_selection_previous,
               ["<C-r>"] = require("telescope.actions").to_fuzzy_refine,

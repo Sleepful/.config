@@ -214,7 +214,7 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'plugins' },
-}, { dev = { path = "~/Code/nvim"}})
+}, { dev = { path = "~/Code/nvim" } })
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -324,7 +324,7 @@ vim.defer_fn(function()
       'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx',
       'javascript', 'typescript', 'vimdoc', 'vim', 'bash',
       "elixir", "eex", "heex", "erlang", "css", "fennel",
-      "sql", "markdown",
+      "sql", "markdown", "clojure"
     },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
