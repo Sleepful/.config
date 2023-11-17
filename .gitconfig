@@ -5,9 +5,10 @@
 	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
 [alias]
 	br = !git for-each-ref --sort=committerdate refs/heads --format='%(color:bold)%(align:15)%(HEAD)%(color:yellow)%(refname:short)%(end)%(align:20)%(color:bold green)%(committerdate:relative)%(end)%(color:magenta)%(authorname)\n%(color:blue)%(subject)\n%(color:reset)' --color=always|column -ts'|'
-	amend = commit --amend -m
+	amend = commit --amend
 	p = push
 	pushb = push -u origin HEAD
+	pusht = push --tags
   pushf = push --force-with-lease
 	a = add
 	au = add -u
