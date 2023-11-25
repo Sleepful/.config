@@ -14,6 +14,7 @@ local k = "<C-n>"
 return {
   {
     "neovim/nvim-lspconfig",
+    dependencies = { { "nvim-telescope/telescope.nvim" } },
     config = function()
       -- tsserver.setup()
       marksman.setup()
@@ -23,12 +24,22 @@ return {
       autoformat.autoformat()
     end,
     keys = {
-      { k .. "d", vim.lsp.buf.declaration,    desc = "Declaration" },
-      { k .. "D", vim.lsp.buf.definition,     desc = "Definition" },
-      { k .. "K", vim.lsp.buf.hover,          desc = "Hover" },
-      { k .. "i", vim.lsp.buf.implementation, desc = "Implementation" },
-      { k .. "R", vim.lsp.buf.rename,         desc = "Rename" },
-      { k .. "r", vim.lsp.buf.references,     desc = "References" },
+      { k .. "d", vim.lsp.buf.declaration,                                    desc = "Declaration" },
+      { k .. "D", vim.lsp.buf.definition,                                     desc = "Definition" },
+      -- use hover.nvim for this
+      -- { k .. "K", vim.lsp.buf.hover,                                          desc = "Hover" },
+      { k .. "i", vim.lsp.buf.implementation,                                 desc = "Implementation" },
+      { k .. "R", vim.lsp.buf.rename,                                         desc = "Rename" },
+      { k .. "r", vim.lsp.buf.references,                                     desc = "References" },
+      -- { k .. "S", vim.lsp.buf.document_symbol, desc = "Symbols" },
+      { k .. "S", require("telescope.builtin").lsp_dynamic_workspace_symbols, desc = "Symbols" },
+      {
+        k .. "s",
+        function()
+          require("telescope.builtin").lsp_dynamic_workspace_symbols()
+        end,
+        desc = "Symbols"
+      },
       {
         k .. "f",
         function()
@@ -72,4 +83,30 @@ return {
   -- elixirls,
   -- lexical,
   -- rust,
+  {
+    -- https://clojure-lsp.io/features/#code-lenses-showing-symbol-references
+    -- not working?? apparently zero lenses available in most files :l
+    -- lua print(vim.inspect(vim.lsp.codelens.get()))
+    'VidocqH/lsp-lens.nvim',
+    config = function()
+      local SymbolKind = vim.lsp.protocol.SymbolKind
+      require 'lsp-lens'.setup({
+        enable = true,
+        include_declaration = false, -- Reference include declaration
+        sections = {                 -- Enable / Disable specific request
+          definition = false,
+          references = true,
+          implements = true,
+        },
+        ignore_filetype = {
+          -- "prisma",
+        },
+        -- Target Symbol Kinds to show lens information
+        target_symbol_kinds = { SymbolKind.Function, SymbolKind.Method, SymbolKind.Interface },
+        -- Symbol Kinds that may have target symbol kinds as children
+        wrapper_symbol_kinds = { SymbolKind.Class, SymbolKind.Struct },
+      })
+    end,
+  },
+
 }

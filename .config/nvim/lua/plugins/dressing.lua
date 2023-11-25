@@ -1,4 +1,5 @@
 return {
+  { "hiphish/rainbow-delimiters.nvim" },
   {
     -- enabled = false, -- to see if I miss it
     "stevearc/dressing.nvim",
