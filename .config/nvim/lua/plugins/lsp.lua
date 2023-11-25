@@ -31,12 +31,12 @@ return {
       { k .. "i", vim.lsp.buf.implementation,                                 desc = "Implementation" },
       { k .. "R", vim.lsp.buf.rename,                                         desc = "Rename" },
       { k .. "r", vim.lsp.buf.references,                                     desc = "References" },
-      -- { k .. "S", vim.lsp.buf.document_symbol, desc = "Symbols" },
-      { k .. "S", require("telescope.builtin").lsp_dynamic_workspace_symbols, desc = "Symbols" },
+      { k .. "S", require("telescope.builtin").lsp_dynamic_workspace_symbols, desc = "Workspace Symbols" },
+      { k .. "!", vim.lsp.buf.document_symbol,                                desc = "Document Symbols" },
       {
         k .. "s",
         function()
-          require("telescope.builtin").lsp_dynamic_workspace_symbols()
+          require("telescope.builtin").lsp_document_symbols()
         end,
         desc = "Symbols"
       },
