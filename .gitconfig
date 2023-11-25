@@ -9,7 +9,7 @@
 	p = push
 	pushb = push -u origin HEAD
 	pusht = push --tags
-  pushf = push --force-with-lease
+	pushf = push --force-with-lease
 	a = add
 	au = add -u
 	aa = add -A .

@@ -40,6 +40,7 @@ local pathogenGrepCwd = function()
 end
 
 return {
+  { 'nvim-telescope/telescope-ui-select.nvim' },
   { "kkharji/sqlite.lua" },
   { "sleepful/telescope-pathogen.nvim" },
   { "nvim-telescope/telescope-symbols.nvim" },
@@ -74,6 +75,7 @@ return {
       { "telescope-symbols.nvim" },
       { "AckslD/nvim-neoclip.lua" },
       { "nvim-telescope/telescope-hop.nvim" },
+      { 'nvim-telescope/telescope-ui-select.nvim' },
     },
     config = function(LazyPlugin, opts)
       require("telescope").setup(opts)
@@ -81,6 +83,7 @@ return {
       require("telescope").load_extension("neoclip")
       require("telescope").load_extension("pathogen")
       require("telescope").load_extension("hop")
+      -- require("telescope").load_extension("ui-select")
     end,
     opts = function()
       local find_hidden_files = function()
@@ -134,7 +137,10 @@ return {
           winblend = 0,
           scroll_strategy = "limit",
           extensions = {
-            hop = {}
+            hop = {},
+            -- ["ui-select"] = {
+            --   codeactions = false,
+            -- }
           },
           -- mappings
           mappings = {

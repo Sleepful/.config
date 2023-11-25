@@ -1,6 +1,6 @@
 return {
   {
-    enabled = false, -- to see if I miss it
+    -- enabled = false, -- to see if I miss it
     "stevearc/dressing.nvim",
     -- enabled = false,
     -- lazy = true,
