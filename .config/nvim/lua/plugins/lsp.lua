@@ -28,7 +28,6 @@ return {
       { k .. "K", vim.lsp.buf.hover,          desc = "Hover" },
       { k .. "i", vim.lsp.buf.implementation, desc = "Implementation" },
       { k .. "R", vim.lsp.buf.rename,         desc = "Rename" },
-      { k .. k,   vim.lsp.buf.code_action,    desc = "Code action" },
       { k .. "r", vim.lsp.buf.references,     desc = "References" },
       {
         k .. "f",
@@ -37,6 +36,37 @@ return {
         end,
         desc = "Format"
       },
+      {
+        k .. k,
+        function()
+          vim.lsp.buf.code_action()
+        end,
+        desc = "Code action"
+      },
+      {
+        "<C-j>",
+        function()
+          vim.lsp.buf.code_action({
+            filter = function(action)
+              return action.command.command == "drag-forward"
+            end,
+            apply = true
+          })
+        end,
+        desc = "Drag Forward"
+      },
+      {
+        "<C-k>",
+        function()
+          vim.lsp.buf.code_action({
+            filter = function(action)
+              return action.command.command == "drag-backward"
+            end,
+            apply = true
+          })
+        end,
+        desc = "Drag Backwards"
+      }
     },
   },
   -- elixirls,

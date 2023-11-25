@@ -43,7 +43,7 @@ return {
           -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
           -- ["<C-e>"] = cmp.mapping.abort(),
           ["<F2>"] = cmp.mapping.confirm({ select = true }),
-          ["<C-l>"] = cmp.mapping.complete({
+          ["<C-b>"] = cmp.mapping.complete({
             config = {
               sources = {
                 { name = "nvim_lsp" },
@@ -57,6 +57,7 @@ return {
               },
             },
           }),
+          -- could change this to "if filetype" and then add more functionality
           ["<C-e>"] = cmp.mapping.complete({
             config = {
               sources = {
