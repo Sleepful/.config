@@ -24,8 +24,8 @@ return {
       autoformat.autoformat()
     end,
     keys = {
-      { k .. "d", vim.lsp.buf.declaration,                                    desc = "Declaration" },
-      { k .. "D", vim.lsp.buf.definition,                                     desc = "Definition" },
+      { k .. "e", vim.lsp.buf.declaration,                                    desc = "Declaration" },
+      { k .. "d", vim.lsp.buf.definition,                                     desc = "Definition" },
       -- use hover.nvim for this
       -- { k .. "K", vim.lsp.buf.hover,                                          desc = "Hover" },
       { k .. "i", vim.lsp.buf.implementation,                                 desc = "Implementation" },
