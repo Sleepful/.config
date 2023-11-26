@@ -40,10 +40,10 @@ local pathogenGrepCwd = function()
 end
 
 return {
-  { 'nvim-telescope/telescope-ui-select.nvim' },
+  { 'nvim-telescope/telescope-ui-select.nvim' }, -- delete maybe?
   { "kkharji/sqlite.lua" },
   { "sleepful/telescope-pathogen.nvim" },
-  { "nvim-telescope/telescope-symbols.nvim" },
+  { "nvim-telescope/telescope-symbols.nvim" }, -- delete maybe?
   {
     -- TODO: neoclip needs better sorting on its results
     -- has weird keybindgs for now (C-p in insert, leader+y in normal)

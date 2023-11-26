@@ -74,7 +74,20 @@ return {
       vim.cmd("let g:conjure#mapping#doc_word = v:false")
       -- we remove this conjure option because it overwrites the LSP `K` hover
       -- and replaces it with `(doc <name>)`, which is less than ideal
-    end
+      vim.cmd("let g:conjure#mapping#eval_root_form = \"eo\"")
+    end,
+    keys = {
+      {
+        "<leader>er",
+        "<cmd>ConjureEval (dev/reset)<cr>",
+        desc = "(reset)"
+      },
+      {
+        "<leader>eR",
+        "<cmd>ConjureEval (clojure.tools.namespace.repl/refresh)<cr>",
+        desc = "(tools.namespace refresh)"
+      }
+    }
   },
   { "tpope/vim-dispatch",            ft = clojure_filetype },
   { "radenling/vim-dispatch-neovim", ft = clojure_filetype },
