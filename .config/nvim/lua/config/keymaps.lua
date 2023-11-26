@@ -162,3 +162,5 @@ map({ "n" }, "<C-d>", [[:<C-u>call SaveJump("\<lt>C-d>")<CR>:call SetJump()<CR>]
 -- map <M-C-Up> and <M-C-Down> to increase/decrease window height, like the way that <M-C-Left> curently works
 
 map("t", "<C-N><C-N>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+map("i", "<M-BS>", "<Del>", { desc = "Delete forward" })

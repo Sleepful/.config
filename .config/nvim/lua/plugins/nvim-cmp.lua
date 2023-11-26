@@ -50,7 +50,7 @@ return {
               },
             },
           }),
-          ["<C-s>"] = cmp.mapping.complete({
+          ["<C-t>"] = cmp.mapping.complete({
             config = {
               sources = {
                 { name = "luasnip" },
@@ -86,7 +86,7 @@ return {
               },
             },
           }),
-          ["<C-t>"] = function(fallback)
+          ["<C-s>"] = function(fallback)
             -- TODO:
             -- [ ] - does not work great with snippets yet
             -- [ ] - does not preview anything, should preview docs for LSP and snippets for snipets
