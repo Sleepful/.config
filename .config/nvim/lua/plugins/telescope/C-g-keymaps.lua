@@ -92,7 +92,7 @@ return {
   },
   vim_bookmarks = {
     page = {
-      "<C-g>b",
+      "<C-g><C-g>",
       "<cmd>Telescope vim_bookmarks current_file<cr>",
       desc = "📘 Bookmarks ",
     },

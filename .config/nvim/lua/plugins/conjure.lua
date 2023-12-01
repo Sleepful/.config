@@ -28,14 +28,15 @@ return {
       -- these are taken from the docs:
       --    https://github.com/guns/vim-sexp/blob/master/doc/vim-sexp.txt#L647
       --    *sexp-explicit-mappings*
+      -- the % and $ match with kitty config
       vim.cmd([=[
         function! s:vim_sexp_mappings()
-            nmap <silent><buffer> (               <Plug>(sexp_move_to_prev_bracket)
-            xmap <silent><buffer> (               <Plug>(sexp_move_to_prev_bracket)
-            omap <silent><buffer> (               <Plug>(sexp_move_to_prev_bracket)
-            nmap <silent><buffer> )               <Plug>(sexp_move_to_next_bracket)
-            xmap <silent><buffer> )               <Plug>(sexp_move_to_next_bracket)
-            omap <silent><buffer> )               <Plug>(sexp_move_to_next_bracket)
+            nmap <silent><buffer> $               <Plug>(sexp_move_to_prev_bracket)
+            xmap <silent><buffer> $               <Plug>(sexp_move_to_prev_bracket)
+            omap <silent><buffer> $               <Plug>(sexp_move_to_prev_bracket)
+            nmap <silent><buffer> %               <Plug>(sexp_move_to_next_bracket)
+            xmap <silent><buffer> %               <Plug>(sexp_move_to_next_bracket)
+            omap <silent><buffer> %               <Plug>(sexp_move_to_next_bracket)
             imap <silent><buffer> <BS>            <Plug>(sexp_insert_backspace)
             imap <silent><buffer> "               <Plug>(sexp_insert_double_quote)
             imap <silent><buffer> (               <Plug>(sexp_insert_opening_round)
@@ -53,12 +54,12 @@ return {
     end,
     keys = {
       {
-        "<M-[>", -- overwrites default
+        "<F25>", -- <C-[> in kittyconf
         function()
           vim.cmd([[execute "normal \<Plug>(sexp_flow_to_prev_open)"]])
         end },
       {
-        "<M-]>", -- same as default
+        "<F26>", -- <C-]> in kittyconf
         function()
           vim.cmd([[execute "normal \<Plug>(sexp_flow_to_next_open)"]])
         end },
