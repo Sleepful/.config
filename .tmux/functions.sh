@@ -2,9 +2,23 @@
 #
 source ~/.profile.subshell
 
+function select_layout() {
+	tmux select-layout $(echo "even-horizontal\neven-vertical\nmain-horizontal\nmain-vertical\ntiled" | fzf-tmux -p --border-label="Select layout")
+}
+
+function bring_pane() {
+	windows=$(
+		tmux list-windows -F "#{window_active} #{window_index} #{window_name}" | sort -r | awk '{print $2 " : " $3}' \
+			| fzf-tmux -p --border-label="Bring pane" | awk '{print $1}' | sort -r
+	)
+	if [ -n "$windows" ]; then
+		echo $windows | xargs -n1 -I {i} tmux join-pane -s {i}
+	fi
+}
+
 function move_windows() {
 	windows=$(
-		tmux list-windows -F "#{window_active} #{window_index} #{window_name}" | sort -r | awk '{print $2 " : " $3}' | fzf-tmux -p | awk '{print $1}' | sort -r
+	tmux list-windows -F "#{window_active} #{window_index} #{window_name}" | sort -r | awk '{print $2 " : " $3}' | fzf-tmux -p --border-label="Move Window(s) to Session" | awk '{print $1}' | sort -r
 	)
 	if [ -n "$windows" ]; then
 		session=$(tmux list-sessions -F '#{session_attached} #{session_name}' | sort -r | awk '{print $2}' | fzf-tmux -p | awk '{print $1}')
@@ -13,7 +27,7 @@ function move_windows() {
 	fi
 }
 function session_picker() {
-	tmux list-sessions -F '#{session_attached} #{session_name}' | sort -r | awk '{print $2}' | fzf-tmux -p | xargs tmux switchc -t
+	tmux list-sessions -F '#{session_attached} #{session_name}' | sort -r | awk '{print $2}' | fzf-tmux -p --border-label="Pick Session" | xargs tmux switchc -t
 }
 
 function close_session() {
