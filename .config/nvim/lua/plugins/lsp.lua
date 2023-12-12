@@ -22,6 +22,7 @@ return {
       lua.setup()
       clojure.setup()
       autoformat.autoformat()
+      require 'lspconfig'.csharp_ls.setup {}
     end,
     keys = {
       { k .. "e", vim.lsp.buf.declaration,                                    desc = "Declaration" },

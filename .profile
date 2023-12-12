@@ -289,3 +289,18 @@ fkill() {
 	fi
 }
 . "$HOME/.cargo/env"
+
+# dotnet stuff START
+# installing this for the LSP mainly, but might work for local dev too
+# The .NET tools collect usage data in order to help us improve your experience
+# set to 1 to remove telemetry
+export DOTNET_CLI_TELEMETRY_OPTOUT=1 
+export PATH=$PATH:~/.dotnet/tools
+# dotnet runtime:
+export DOTNET_ROOT=~/.asdf/installs/dotnet-core/7.0.404 # maybe not necsesary? IDK
+# `asdf plugin-add dotnet-core https://github.com/emersonsoares/asdf-dotnet-core.git`
+# `dotnet tool install --global csharp-ls`
+# funny thing but for `cls-sharp` I needed this version: 
+# `asdf install dotnet-core 7.0.404`
+# dotnet stuff END
+
