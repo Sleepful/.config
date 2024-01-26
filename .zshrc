@@ -420,3 +420,8 @@ ddate
 
 eval "$(direnv hook zsh)"
 
+# Nix
+# ## some issue, looks like nix isn't found on macos every now and then
+# ## https://github.com/NixOS/nix/issues/2280#issuecomment-1559447638
+# export PATH="$NIX_LINK/bin:/nix/var/nix/profiles/default/bin:$PATH"
+export PATH="/nix/var/nix/profiles/default/bin:$PATH"

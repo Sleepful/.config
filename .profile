@@ -5,6 +5,9 @@ export FLAVOURS_CONFIG_FILE="$XDG_CONFIG_HOME/flavours/config.toml"
 # MacPorts Installer addition on 2020-11-05_at_09:38:36: adding an appropriate PATH variable for use with MacPorts.
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
+# nix installed bins
+export PATH=~/.nix-profile/bin:$PATH
+
 # Finished adapting your PATH environment variable for use with MacPorts.
 
 export PATH="/opt/homebrew/bin:$PATH"
