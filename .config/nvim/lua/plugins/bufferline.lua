@@ -430,7 +430,7 @@ return {
               name = "⚙️R", -- Mandatory
               string_name = "Rc",
               separator = {},
-              auto_close = true,
+              auto_close = false,
               matcher = function(buf) -- Mandatory
                 local name = buf.name:match("^%..+$")
                 if name == nil then

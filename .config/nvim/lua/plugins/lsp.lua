@@ -22,6 +22,7 @@ return {
       lua.setup()
       clojure.setup()
       autoformat.autoformat()
+      rust.setup()
       require 'lspconfig'.csharp_ls.setup {}
     end,
     keys = {
@@ -83,7 +84,6 @@ return {
   },
   -- elixirls,
   -- lexical,
-  -- rust,
   {
     -- https://clojure-lsp.io/features/#code-lenses-showing-symbol-references
     -- not working?? apparently zero lenses available in most files :l
