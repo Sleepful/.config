@@ -6,17 +6,30 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, agenix }:
   let
+    system = "aarch64-darwin";
     configuration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
         [ pkgs.vim
           pkgs.frp
+          pkgs.netcat
+          agenix.packages.${system}.default
         ];
+
+      # services.frp.enable= true;
+      # services.frp = {
+      #   enable = true;
+      #   common = {
+      #     server_addr = "x.x.x.x";
+      #     server_port = 7000;
+      #   };
+      # };
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
@@ -37,7 +50,7 @@
       system.stateVersion = 4;
 
       # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "aarch64-darwin";
+      nixpkgs.hostPlatform = system;
     };
   in
   {
