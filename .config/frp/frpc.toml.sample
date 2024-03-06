@@ -1,0 +1,10 @@
+# frpc.toml
+serverAddr = "<Your.Server.IP.Here>" # with tailscale you can use a private IP
+serverPort = 7000
+vhost_http_port = 8080
+
+[[proxies]]
+name = "web"
+type = "http"
+localPort = 8000
+customDomains = ["subdomain.domain.tld"] # this would be the domain you are proxying from
