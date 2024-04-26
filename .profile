@@ -15,6 +15,9 @@ export PATH=~/.emacs.d/bin:$PATH
 export PATH="$HOME/.bin:$PATH"
 # rust cargo
 
+# deno 
+export PATH="$HOME/.deno/bin:$PATH"
+
 export TERM="xterm-kitty"
 
 alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
