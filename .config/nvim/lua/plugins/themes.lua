@@ -17,6 +17,17 @@ local function trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
   end
 end
 
+local function diff_source()
+  local gitsigns = vim.b.gitsigns_status_dict
+  if gitsigns then
+    return {
+      added = gitsigns.added,
+      modified = gitsigns.changed,
+      removed = gitsigns.removed
+    }
+  end
+end
+
 local lualine_opts = function()
   return {
     options = {
@@ -54,7 +65,8 @@ local lualine_opts = function()
           symbols = { modified = "📖", readonly = "🔑", unnamed = "🧸" },
         },
       },
-      lualine_b = { { "branch", fmt = trunc(140, 18, nil, true) } },
+      lualine_b = { { "b:gitsigns_head", icon = '', fmt = trunc(140, 18, nil, true) },
+        { 'diff', source = diff_source } },
       lualine_c = {},
       lualine_x = {},
       lualine_y = {

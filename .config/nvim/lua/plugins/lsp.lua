@@ -16,7 +16,7 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = { { "nvim-telescope/telescope.nvim" } },
     config = function()
-      -- tsserver.setup()
+      tsserver.setup()
       marksman.setup()
       deno.setup()
       lua.setup()
@@ -61,7 +61,11 @@ return {
         function()
           vim.lsp.buf.code_action({
             filter = function(action)
-              return action.command.command == "drag-forward"
+              if action.command then
+                -- clojure LSP
+                return action.command.command == "drag-forward"
+              end
+              return false
             end,
             apply = true
           })
@@ -73,7 +77,11 @@ return {
         function()
           vim.lsp.buf.code_action({
             filter = function(action)
-              return action.command.command == "drag-backward"
+              if action.command then
+                -- clojure LSP
+                return action.command.command == "drag-backward"
+              end
+              return false
             end,
             apply = true
           })

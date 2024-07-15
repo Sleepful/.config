@@ -39,6 +39,7 @@ return {
       require("plugins.telescope.C-g-keymaps").vim_bookmarks.page,
       { "mk", "<cmd>BookmarkMoveUp<CR>",   mode = "n" },
       { "mj", "<cmd>BookmarkMoveDown<CR>", mode = "n" },
+      -- create new bookmark with mi
     },
   },
 }

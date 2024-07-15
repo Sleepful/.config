@@ -1,4 +1,5 @@
 return {
+  -- install with: rustup component add rust-analyzer
   setup = function()
     local lspconfig = require('lspconfig')
     lspconfig.rust_analyzer.setup {

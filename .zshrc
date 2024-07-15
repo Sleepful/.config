@@ -418,6 +418,8 @@ ddate
 . "$HOME/.asdf/asdf.sh"
 . "$HOME/.asdf/completions/asdf.bash"
 
+export PATH="`asdf where deno`/.deno/bin:$PATH"
+
 eval "$(direnv hook zsh)"
 
 # Nix

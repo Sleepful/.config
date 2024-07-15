@@ -205,7 +205,9 @@ require('lazy').setup({
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
   -- require 'kickstart.plugins.autoformat',
-  require 'kickstart.plugins.debug',
+
+  -- NOTE: removed debug for now
+  -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -324,7 +326,7 @@ vim.defer_fn(function()
       'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx',
       'javascript', 'typescript', 'vimdoc', 'vim', 'bash',
       "elixir", "eex", "heex", "erlang", "css", "fennel",
-      "sql", "markdown", "clojure"
+      "sql", "markdown", "clojure", "graphql"
     },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
