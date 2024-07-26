@@ -58,6 +58,13 @@ end, { desc = "Git branch name" })
 map("n", "[p", "O<esc>p", { desc = "Paste above", remap = true })
 map("n", "]p", "o<esc>p", { desc = "Paste below", remap = true })
 
+-- Paste without losing yank in visual mode
+map("v", "p", "pgvy", { desc = "Paste in visual and yank back the original yank", remap = true })
+map("v", "P", "p", { desc = "Paste normally with P in visual, which loses original yank", remap = true })
+-- https://stackoverflow.com/a/25282274/2446144
+-- xnoremap p pgvy
+-- --
+
 -- Start interactive EasyAlign in visual mode (e.g. vipga)
 vim.cmd("xmap ga <Plug>(EasyAlign)")
 
