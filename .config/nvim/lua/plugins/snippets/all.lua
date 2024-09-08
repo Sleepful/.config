@@ -8,4 +8,7 @@ return {
   s("todo", t("TODO: ")),
   s("note", t("NOTE: ")),
   s("coauthor", { t("Co-authored-by: "), i(1, "NAME"), t(" <"), i(2, "EMAIL"), t(">") }),
+  -- javascript/typescript:
+  s("iife", { t("(() => {"), i(0, "body"), t("})()") }),
+  s("foo", { t("() => {"), i(0, "body"), t("}") }),
 }

@@ -16,7 +16,8 @@ export PATH="$HOME/.bin:$PATH"
 # rust cargo
 
 # deno 
-export PATH="$HOME/.deno/bin:$PATH"
+# export PATH="$HOME/.deno/bin:$PATH"
+# export PATH="`asdf where deno`/.deno/bin:$PATH"
 
 export TERM="xterm-kitty"
 
@@ -35,10 +36,11 @@ alias prcs='vim ~/.profile.subshell'
 # Begin CDs
 alias home='cd ~/'
 alias code='cd ~/Code'
-alias auto='cd ~/Code/autokroma'
+alias apps='cd ~/Code/apps'
 alias lx='cd ~/Code/Lexical'
 alias notif='cd ~/Code/notifs'
 alias wb='cd ~/Code/WordDatabase/phx'
+alias nt='cd ~/Code/Notateca'
 alias conf='cd ~/.config'
 alias notes='cd ~/Notes'
 alias lang='cd ~/Language'

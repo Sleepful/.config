@@ -125,6 +125,10 @@ map("i", "<F22>", ")<Left>", { desc = "Insert closing parens ) to the right" })
 map("i", "<F16>", "{}<Left>", { desc = "Insert closed parens {}" })
 map("i", "<F17>", "}<Left>", { desc = "Insert closing parens } to the right" })
 
+-- test if this one is a good idea:
+map("i", "<F25>", "${}<Left>", { desc = "Specific JavaScript interpolation inside string" })
+map("i", "", "=> ", { desc = "Specific JavaScript arrow =>" })
+
 -- `set jump` and `save jump` taken from:
 -- https://vi.stackexchange.com/questions/31197/add-current-position-to-the-jump-list-the-first-time-c-u-or-c-d-is-pressed
 local save_jump = [[function! SaveJump(motion)

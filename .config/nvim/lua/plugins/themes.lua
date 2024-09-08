@@ -65,8 +65,11 @@ local lualine_opts = function()
           symbols = { modified = "📖", readonly = "🔑", unnamed = "🧸" },
         },
       },
-      lualine_b = { { "b:gitsigns_head", icon = '', fmt = trunc(140, 18, nil, true) },
-        { 'diff', source = diff_source } },
+      -- # commented out to see if it helps with weird `git too many open files` issue
+      --  https://github.com/nvim-lualine/lualine.nvim/issues/699
+      --
+      -- lualine_b = { { "b:gitsigns_head", icon = '', fmt = trunc(140, 18, nil, true) },
+      --   { 'diff', source = diff_source } },
       lualine_c = {},
       lualine_x = {},
       lualine_y = {
