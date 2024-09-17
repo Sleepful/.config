@@ -15,7 +15,14 @@ spoon.FuzzySwitcher:start()
 hs.hotkey.bind({ "cmd", "alt" }, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 
 require("./redCircleMouse")
-require("./windowsModule")
+
+local wm = require("./windowsModule")
+hs.hotkey.bind({ "cmd" }, "space", function() wm:showSwitcher() end)
+
+-- hs.hotkey.bind({ "cmd", "alt" }, "W", function() wm:showSwitcher() end)
+-- hs.hotkey.bind('alt', 'tab', 'Next window', function() switcher:next() end)
+
+
 
 
 -- Disabled:

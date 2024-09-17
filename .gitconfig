@@ -65,6 +65,7 @@
  
 [core]
 	hooksPath = ~/.githooks/
+	autocrlf = false
 [github]
 	user = Sleepful
 [pull]

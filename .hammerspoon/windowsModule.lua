@@ -7,7 +7,7 @@ local M = {}
 -- defaults:
 M.logger = hs.logger.new("WindowSwitcher", "info")
 -- Remember last selection in the popup
-M.remember_last = true
+M.remember_last = false
 
 function M:init()
   self.wf_current = hs.window.filter.new()
@@ -16,6 +16,7 @@ function M:init()
   self.wf_other:setCurrentSpace(false)
   self.chooserPopup = hs.chooser.new(hs.fnutils.partial(self.processSelected, self))
   self.chooserPopup:choices(hs.fnutils.partial(self.getWindowChoices, self))
+  self.chooserPopup:searchSubText(true)
   self.spaceWatcher = hs.spaces.watcher.new(hs.fnutils.partial(self.spaceChangeHandler, self))
 end
 
@@ -33,14 +34,17 @@ function M:getWindowChoices()
   for i, v in pairs(current_space_windows) do table.insert(all_windows, v) end
   local result = {}
   for i, v in ipairs(all_windows) do
-    local maxLen = 15
-    local appTitle = v:application():title():sub(1, maxLen)
-    -- local appTitlePadded = string.format("%" .. maxLen .. "s", appTitle)
-    -- padding isn't working well without monospaced font
-    local text = appTitle .. " | " .. v:title()
+    -- local maxLen = 15
+    -- local appTitle = v:application():title():sub(1, maxLen)
+    -- local largeText = appTitle .. " | " .. v:title()
+    local text = v:application():title()
+    local subtext = v:title()
     table.insert(result,
       {
-        text = text,
+        subText = hs.styledtext.new(subtext,
+          { font = { size = 16 }, color = hs.drawing.color.definedCollections.hammerspoon.white }),
+        text = hs.styledtext.new(text,
+          { font = { size = 18 }, color = hs.drawing.color.definedCollections.hammerspoon.grey }),
         hs_window_id = v:id(),
       })
   end
@@ -81,7 +85,6 @@ end
 function M:showSwitcher()
   if self.chooserPopup ~= nil then
     self.chooserPopup:refreshChoicesCallback()
-    -- self.prevFocusedWindow = hs.window.focusedWindow()
     if M.remember_last == false then
       self.chooserPopup:query("")
     end
@@ -91,19 +94,19 @@ function M:showSwitcher()
   end
 end
 
--- windowsFoo is used for testing right now
-function M:windowsFoo()
-  local ws = hs.window.allWindows() -- only in current screen/workspace
-  print(ws)
-  print(u.dump(ws))
-
-  local wf = hs.window.filter.new()
-  local all_w = wf:getWindows()
-  print(all_w)
-  print(u.dump(all_w))
-  hs.alert.show("windo!")
-end
+-- DEBUG FUNCTION
+-- function M:windowsFoo()
+--   local ws = hs.window.allWindows() -- only in current screen/workspace
+--   print(ws)
+--   print(u.dump(ws))
+--
+--   local wf = hs.window.filter.new()
+--   local all_w = wf:getWindows()
+--   print(all_w)
+--   print(u.dump(all_w))
+--   hs.alert.show("windo!")
+-- end
 
 M:init()
 
-hs.hotkey.bind({ "cmd", "alt" }, "W", function() M:showSwitcher() end)
+return M
