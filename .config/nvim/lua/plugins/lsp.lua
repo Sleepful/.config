@@ -4,9 +4,12 @@ local lexical = require("plugins.lsp.lexical")
 local marksman = require("plugins.lsp.marksman")
 local deno = require("plugins.lsp.deno")
 local rust = require("plugins.lsp.rust")
+local golang = require("plugins.lsp.golang")
 local lua = require("plugins.lsp.lua-ls")
 local clojure = require("plugins.lsp.clojure")
 local autoformat = require("plugins.lsp.autoformat")
+
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 
 -- leaderkey
 local k = "<C-n>"
@@ -23,6 +26,7 @@ return {
       clojure.setup()
       autoformat.autoformat()
       rust.setup()
+      golang.setup()
       require 'lspconfig'.csharp_ls.setup {}
     end,
     keys = {
