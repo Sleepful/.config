@@ -66,6 +66,9 @@ alias vimf='vim $(`fc -ln -1`)'
 alias vimr='vim README.md'
 
 # tmux
+function cd {
+	builtin cd "$@" && tmux renamew $(basename `pwd` | cut -c1-5)
+}
 alias tm='tmux'
 alias tmrc='vim ~/.tmux.conf'
 
