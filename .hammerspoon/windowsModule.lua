@@ -30,8 +30,15 @@ function M:getWindowChoices()
   local current_space_windows = self.wf_current:getWindows()
   local other_space_windows = self.wf_other:getWindows()
   local all_windows = {}
-  for i, v in pairs(other_space_windows) do table.insert(all_windows, v) end
   for i, v in pairs(current_space_windows) do table.insert(all_windows, v) end
+  if #all_windows > 1 then
+    -- switch first and second windows
+    -- that way currently selected window isn't the first option
+    local temp = all_windows[1]
+    all_windows[1] = all_windows[2]
+    all_windows[2] = temp
+  end
+  for i, v in pairs(other_space_windows) do table.insert(all_windows, v) end
   local result = {}
   for i, v in ipairs(all_windows) do
     -- local maxLen = 15
