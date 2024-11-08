@@ -6,13 +6,13 @@ return {
       mappings = {
         -- `i` for insert-mode
         i = {
-          j = {
-            k = "<Esc>",
-            j = "<Esc>",
-          },
           k = {
             k = "<Esc>",
-            j = "<Esc>",
+            l = "<Esc>",
+          },
+          l = {
+            k = "<Esc>",
+            l = "<Esc>",
           },
         },
       },

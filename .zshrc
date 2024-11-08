@@ -65,7 +65,7 @@ fi
 # vim mode
 # https://github.com/jeffreytse/zsh-vi-mode
 source $HOME/.config/zsh/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
-ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+ZVM_VI_INSERT_ESCAPE_BINDKEY=kl
 
 # god sent code to have clipboard available inside the vi mode plugin
 # https://github.com/jeffreytse/zsh-vi-mode/issues/19#issuecomment-1268057812

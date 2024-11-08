@@ -5,6 +5,12 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+-- movement keys remapped for better right hand pos
+map({ "x", "o", "n" }, "k", "j", { desc = "" })
+map({ "x", "o", "n" }, "l", "k", { desc = "" })
+map({ "x", "o", "n" }, "h", "h", { desc = "" })
+map({ "x", "o", "n" }, "j", "l", { desc = "" })
+
 map("n", "<leader>uw", "<Cmd>set wrap!<CR>", { desc = "Toggle word wrap" })
 map("n", "<S-h>", "40zh", { desc = "Scroll left" })
 map("n", "<S-l>", "40zl", { desc = "Scroll right" })
@@ -114,9 +120,9 @@ map("i", "<C-l>", "<Right>", { desc = "Insert mode move right" })
 -- Minimal mode: line highlight,
 -- map({ "n" }, "<leader>uum", "", { desc = "Minimal mode" })
 
-map({ "n" }, "<M-l>", "<Cmd>BufferLineMoveNext<CR>", { desc = "Move buffer right" })
+map({ "n" }, "<M-j>", "<Cmd>BufferLineMoveNext<CR>", { desc = "Move buffer right" })
 map({ "n" }, "<M-h>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Move buffer left" })
-map({ "n" }, "<C-l>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
+map({ "n" }, "<C-j>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
 map({ "n" }, "<C-h>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
 
 map("i", "<F21>", "()<Left>", { desc = "Insert closed parens ()" })

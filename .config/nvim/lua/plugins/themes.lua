@@ -113,16 +113,21 @@ local source_flavour = function()
 end
 
 local setup_lualine = function()
-  -- seems like `hide` should be called before
-  -- `setup` in order to avoid a weird statusline
-  -- blank line when reloading lualine with `setup`
-  vim.cmd("set laststatus=0") -- to hide stock statusline
-  require("lualine").hide()
-  require("lualine").setup(lualine_opts())
-  require("lualine").hide({
-    place = { "statusline" }, -- The segment this change applies to.
-    unhide = false,           -- whether to re-enable lualine again/
-  })
+  local turn_off = true
+  -- had to turn it off due to issue with git:
+  -- https://github.com/nvim-lualine/lualine.nvim/issues/699
+  if not turn_off then
+    -- seems like `hide` should be called before
+    -- `setup` in order to avoid a weird statusline
+    -- blank line when reloading lualine with `setup`
+    vim.cmd("set laststatus=0") -- to hide stock statusline
+    require("lualine").hide()
+    require("lualine").setup(lualine_opts())
+    require("lualine").hide({
+      place = { "statusline" }, -- The segment this change applies to.
+      unhide = false,           -- whether to re-enable lualine again/
+    })
+  end
 end
 
 local set_flavours = function()
