@@ -104,7 +104,7 @@ map(
 
 -- Classic moves in insert mode
 map("i", "<C-h>", "<Left>", { desc = "Insert mode move left" })
-map("i", "<C-l>", "<Right>", { desc = "Insert mode move right" })
+map("i", "<C-j>", "<Right>", { desc = "Insert mode move right" })
 
 -- vim-quickscope
 -- map("n", "<leader>uq", "<cmd>QuickScopeToggle<cr>", {
@@ -120,10 +120,11 @@ map("i", "<C-l>", "<Right>", { desc = "Insert mode move right" })
 -- Minimal mode: line highlight,
 -- map({ "n" }, "<leader>uum", "", { desc = "Minimal mode" })
 
-map({ "n" }, "<M-j>", "<Cmd>BufferLineMoveNext<CR>", { desc = "Move buffer right" })
-map({ "n" }, "<M-h>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Move buffer left" })
-map({ "n" }, "<C-j>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
-map({ "n" }, "<C-h>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
+-- <F29> is mapped to cmd+:
+map({ "n" }, "<C-l>", "<Cmd>BufferLineMoveNext<CR>", { desc = "Swap buffer right" })
+map({ "n" }, "<F29>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
+map({ "n" }, "<C-k>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Swap buffer left" })
+map({ "n" }, "<C-j>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
 
 map("i", "<F21>", "()<Left>", { desc = "Insert closed parens ()" })
 map("i", "<F22>", ")<Left>", { desc = "Insert closing parens ) to the right" })

@@ -383,7 +383,7 @@ return {
         end,
       },
       {
-        "<F21>",
+        "<F22>",
         function()
           require("bufferline").go_to(10, true)
         end,

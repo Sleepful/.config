@@ -42,7 +42,7 @@ end
 return {
   { 'nvim-telescope/telescope-ui-select.nvim' }, -- delete maybe?
   { "kkharji/sqlite.lua" },
-  { "sleepful/telescope-pathogen.nvim" },
+  { "brookhong/telescope-pathogen.nvim" },
   { "nvim-telescope/telescope-symbols.nvim" }, -- delete maybe?
   {
     -- TODO: neoclip needs better sorting on its results
@@ -83,7 +83,7 @@ return {
       require("telescope").load_extension("neoclip")
       require("telescope").load_extension("pathogen")
       require("telescope").load_extension("hop")
-      -- require("telescope").load_extension("ui-select")
+      require("telescope").load_extension("ui-select")
     end,
     opts = function()
       local find_hidden_files = function()
@@ -136,12 +136,6 @@ return {
           sorting_strategy = "ascending",
           winblend = 0,
           scroll_strategy = "limit",
-          extensions = {
-            hop = {},
-            -- ["ui-select"] = {
-            --   codeactions = false,
-            -- }
-          },
           -- mappings
           mappings = {
             i = {
@@ -155,11 +149,10 @@ return {
               ["<M-a>"] = find_all_files,
               ["<C-u>"] = require("telescope.actions").results_scrolling_up,
               ["<C-d>"] = require("telescope.actions").results_scrolling_down,
-              ["<M-k>"] = require("telescope.actions").preview_scrolling_up,
-              ["<M-j>"] = require("telescope.actions").preview_scrolling_down,
-              -- ["<C-l>"] = "<Right>",
-              ["<C-j>"] = require("telescope.actions").move_selection_next,
-              ["<C-k>"] = require("telescope.actions").move_selection_previous,
+              ["<M-l>"] = require("telescope.actions").preview_scrolling_up,
+              ["<M-k>"] = require("telescope.actions").preview_scrolling_down,
+              ["<C-k>"] = require("telescope.actions").move_selection_next,
+              ["<C-l>"] = require("telescope.actions").move_selection_previous,
               ["<C-r>"] = require("telescope.actions").to_fuzzy_refine,
               ["<C-s>"] = function(prompt_bufnr)
                 require 'telescope'.extensions.hop._hop(prompt_bufnr,
@@ -172,8 +165,28 @@ return {
               ["<C-b>"] = require("telescope.actions").preview_scrolling_up,
               ["<C-f>"] = require("telescope.actions").preview_scrolling_down,
               ["<C-r>"] = require("telescope.actions").to_fuzzy_refine,
+              -- ["<C-l>"] = require("telescope.actions").move_selection_next,
             },
           },
+        },
+        extensions = {
+          ["pathogen"] = {
+            attach_mappings = function(map, actions)
+              map("i", "<C-o>", actions.proceed_with_parent_dir)
+              -- map("i", "<C-l>", actions.revert_back_last_dir)
+              map("i", "<C-b>", actions.change_working_directory)
+              map("i", "<C-g>g", actions.grep_in_result)
+              map("i", "<C-g>i", actions.invert_grep_in_result)
+            end,
+            -- remove below if you want to enable it
+            use_last_search_for_live_grep = false,
+            -- quick_buffer_characters = "asdfgqwertzxcvb",
+            prompt_prefix_length = 100
+          },
+          hop = {},
+          -- ["ui-select"] = {
+          --   codeactions = false,
+          -- }
         },
       }
     end,
