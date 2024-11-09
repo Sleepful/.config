@@ -5,10 +5,10 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-local left = { bound = "f", og = "h" }
-local right = { bound = "j", og = "l" }
-local up = { bound = "d", og = "k" }
-local down = { bound = "k", og = "j" }
+local left = { bound = "d", og = "h" }
+local right = { bound = "k", og = "l" }
+local up = { bound = "f", og = "k" }
+local down = { bound = "j", og = "j" }
 local delete = { bound = "h", og = "d" }
 -- movement keys remapped for better right hand pos
 map({ "x", "o", "n" }, down.bound, down.og, { desc = "" })
