@@ -5,11 +5,30 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+local left = { bound = "f", og = "h" }
+local right = { bound = "j", og = "l" }
+local up = { bound = "d", og = "k" }
+local down = { bound = "k", og = "j" }
+local delete = { bound = "h", og = "d" }
 -- movement keys remapped for better right hand pos
-map({ "x", "o", "n" }, "k", "j", { desc = "" })
-map({ "x", "o", "n" }, "l", "k", { desc = "" })
-map({ "x", "o", "n" }, "h", "h", { desc = "" })
-map({ "x", "o", "n" }, "j", "l", { desc = "" })
+map({ "x", "o", "n" }, down.bound, down.og, { desc = "" })
+map({ "x", "o", "n" }, up.bound, up.og, { desc = "" })
+map({ "x", "o", "n" }, left.bound, left.og, { desc = "" })
+map({ "x", "o", "n" }, right.bound, right.og, { desc = "" })
+-- delete key moved so it doesn't clash with the movement keybinds
+map({ "x", "o", "n" }, delete.bound, delete.og, { desc = "" })
+
+function toggle_mode()
+  local ret = vim.api.nvim_get_mode()
+  print(vim.inspect(ret))
+  if ret.mode == "n" then
+    vim.api.nvim_input('i')
+  elseif ret.mode == "i" then
+    vim.api.nvim_input('<Esc>')
+  end
+end
+
+map({ "n", "i" }, "<C-i>", toggle_mode, { desc = "Toggle vim mode" })
 
 map("n", "<leader>uw", "<Cmd>set wrap!<CR>", { desc = "Toggle word wrap" })
 map("n", "<S-h>", "40zh", { desc = "Scroll left" })
@@ -103,8 +122,8 @@ map(
 )
 
 -- Classic moves in insert mode
-map("i", "<C-h>", "<Left>", { desc = "Insert mode move left" })
-map("i", "<C-j>", "<Right>", { desc = "Insert mode move right" })
+map("i", "<C-" .. left.bound .. ">", "<Left>", { desc = "Insert mode move left" })
+map("i", "<C-" .. right.bound .. ">", "<Right>", { desc = "Insert mode move right" })
 
 -- vim-quickscope
 -- map("n", "<leader>uq", "<cmd>QuickScopeToggle<cr>", {
@@ -121,10 +140,10 @@ map("i", "<C-j>", "<Right>", { desc = "Insert mode move right" })
 -- map({ "n" }, "<leader>uum", "", { desc = "Minimal mode" })
 
 -- <F29> is mapped to cmd+:
-map({ "n" }, "<C-l>", "<Cmd>BufferLineMoveNext<CR>", { desc = "Swap buffer right" })
-map({ "n" }, "<F29>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
-map({ "n" }, "<C-k>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Swap buffer left" })
-map({ "n" }, "<C-j>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
+map({ "n" }, "<C-" .. right.bound .. ">", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
+map({ "n" }, "<M-" .. down.bound .. ">", "<Cmd>BufferLineMoveNext<CR>", { desc = "Swap buffer right" })
+map({ "n" }, "<M-" .. up.bound .. ">", "<Cmd>BufferLineMovePrev<CR>", { desc = "Swap buffer left" })
+map({ "n" }, "<C-" .. left.bound .. ">", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
 
 map("i", "<F21>", "()<Left>", { desc = "Insert closed parens ()" })
 map("i", "<F22>", ")<Left>", { desc = "Insert closing parens ) to the right" })
@@ -160,8 +179,12 @@ local set_jump = [[function! SetJump()
 endfunction]]
 vim.cmd(set_jump)
 
-map({ "n" }, "<C-u>", [[:<C-u>call SaveJump("\<lt>C-u>")<CR>:call SetJump()<CR>]], { desc = "C-u/C-d with jumplist" })
-map({ "n" }, "<C-d>", [[:<C-u>call SaveJump("\<lt>C-d>")<CR>:call SetJump()<CR>]], { desc = "C-u/C-d with jumplist" })
+map({ "n" },
+  "<C-" .. up.bound .. ">",
+  [[:<C-u>call SaveJump("\<lt>C-u>")<CR>:call SetJump()<CR>]], { desc = "C-u/C-d with jumplist" })
+map({ "n" },
+  "<C-" .. down.bound .. ">",
+  [[:<C-u>call SaveJump("\<lt>C-d>")<CR>:call SetJump()<CR>]], { desc = "C-u/C-d with jumplist" })
 
 -- tabs
 -- map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })

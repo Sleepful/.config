@@ -162,15 +162,6 @@ require('lazy').setup({
   --   },
   -- },
 
-  {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help ibl`
-    main = 'ibl',
-    opts = {},
-  },
-
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
@@ -348,6 +339,14 @@ vim.defer_fn(function()
       },
     },
     textobjects = {
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        goto_next_start = {
+          ["]s"] = { query = "@local.scope", query_group = "locals", desc = "Next scope" },
+          -- ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+        },
+      },
       -- move = {
       --   enable = true,
       --   set_jumps = true, -- whether to set jumps in the jumplist
