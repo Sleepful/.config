@@ -1,3 +1,5 @@
+local keys = require("keys")
+
 -- TODO:: add keybinds to show only LSP suggetions oconfirm after close r others,
 -- e.g. show only Text suggestions or show only Snippet suggestions
 -- Example: <C-l> in lua-snip to show only emmet snips
@@ -34,11 +36,12 @@ return {
         mapping = {
           -- set behavior to "Select", I do not like the "Insert" behavior, I prefer
           -- selecting the items explicitly `cmp.mapping.confirm` before the text is inserted
-          ["<C-k>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-          ["<C-l>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<C-" .. keys.down.bound .. ">"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<C-" .. keys.up.bound .. ">"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
           -- page up and page down for menu
-          ["<C-d>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select, count = 6 }),
-          ["<C-u>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select, count = 6 }),
+          -- ["<C-d>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select, count = 6 }),
+          -- ["<C-u>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select, count = 6 }),
+          --
           -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
           -- ["<C-e>"] = cmp.mapping.abort(),

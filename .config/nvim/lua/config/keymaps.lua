@@ -1,22 +1,27 @@
+local K = require("keys")
+
 local function map(mode, lhs, rhs, opts)
   opts = opts or {}
-  opts.silent = opts.silent ~= false
-  opts.noremap = opts.noremap ~= true
+  if opts.silent == nil then
+    opts.silent = false
+  end
+  if opts.silent == nil then
+    opts.noremap = true
+  end
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-local left = { bound = "d", og = "h" }
-local right = { bound = "k", og = "l" }
-local up = { bound = "f", og = "k" }
-local down = { bound = "j", og = "j" }
-local delete = { bound = "h", og = "d" }
 -- movement keys remapped for better right hand pos
-map({ "x", "o", "n" }, down.bound, down.og, { desc = "" })
-map({ "x", "o", "n" }, up.bound, up.og, { desc = "" })
-map({ "x", "o", "n" }, left.bound, left.og, { desc = "" })
-map({ "x", "o", "n" }, right.bound, right.og, { desc = "" })
+map({ "x", "o", "n" }, K.down.bound, K.down.og, { desc = "" })
+map({ "x", "o", "n" }, K.up.bound, K.up.og, { desc = "" })
+map({ "x", "o", "n" }, K.left.bound, K.left.og, { desc = "" })
+map({ "x", "o", "n" }, K.right.bound, K.right.og, { desc = "" })
 -- delete key moved so it doesn't clash with the movement keybinds
-map({ "x", "o", "n" }, delete.bound, delete.og, { desc = "" })
+map({ "x", "o", "n" }, K.delete.bound, K.delete.og, { desc = "" })
+-- moving lines up and down with alt
+-- commented because these would clash with swapping the buffers in bufferline
+-- map({ "x", "o", "n" }, "<M-" .. down.bound .. ">", "<M-" .. down.og .. ">", { desc = "" })
+-- map({ "x", "o", "n" }, "<M-" .. up.bound .. ">", "<M-" .. up.og .. ">", { desc = "" })
 
 function toggle_mode()
   local ret = vim.api.nvim_get_mode()
@@ -28,7 +33,9 @@ function toggle_mode()
   end
 end
 
-map({ "n", "i" }, "<C-i>", toggle_mode, { desc = "Toggle vim mode" })
+-- temporarily removed because it clashes with TAB (same term key code) and
+-- it also clashes with "prev jump position"
+-- map({ "n", "i" }, "<C-i>", toggle_mode, { desc = "Toggle vim mode" })
 
 map("n", "<leader>uw", "<Cmd>set wrap!<CR>", { desc = "Toggle word wrap" })
 map("n", "<S-h>", "40zh", { desc = "Scroll left" })
@@ -122,8 +129,8 @@ map(
 )
 
 -- Classic moves in insert mode
-map("i", "<C-" .. left.bound .. ">", "<Left>", { desc = "Insert mode move left" })
-map("i", "<C-" .. right.bound .. ">", "<Right>", { desc = "Insert mode move right" })
+map("i", "<C-" .. K.left.bound .. ">", "<Left>", { desc = "Insert mode move left" })
+map("i", "<C-" .. K.right.bound .. ">", "<Right>", { desc = "Insert mode move right" })
 
 -- vim-quickscope
 -- map("n", "<leader>uq", "<cmd>QuickScopeToggle<cr>", {
@@ -140,10 +147,10 @@ map("i", "<C-" .. right.bound .. ">", "<Right>", { desc = "Insert mode move righ
 -- map({ "n" }, "<leader>uum", "", { desc = "Minimal mode" })
 
 -- <F29> is mapped to cmd+:
-map({ "n" }, "<C-" .. right.bound .. ">", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
-map({ "n" }, "<M-" .. down.bound .. ">", "<Cmd>BufferLineMoveNext<CR>", { desc = "Swap buffer right" })
-map({ "n" }, "<M-" .. up.bound .. ">", "<Cmd>BufferLineMovePrev<CR>", { desc = "Swap buffer left" })
-map({ "n" }, "<C-" .. left.bound .. ">", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
+map({ "n" }, "<C-" .. K.right.bound .. ">", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
+map({ "n" }, "<M-" .. K.right_helper_one.key .. ">", "<Cmd>BufferLineMoveNext<CR>", { desc = "Swap buffer right" })
+map({ "n" }, "<C-" .. K.left.bound .. ">", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
+map({ "n" }, "<M-" .. K.left_helper_one.key .. ">", "<Cmd>BufferLineMovePrev<CR>", { desc = "Swap buffer left" })
 
 map("i", "<F21>", "()<Left>", { desc = "Insert closed parens ()" })
 map("i", "<F22>", ")<Left>", { desc = "Insert closing parens ) to the right" })
@@ -180,10 +187,10 @@ endfunction]]
 vim.cmd(set_jump)
 
 map({ "n" },
-  "<C-" .. up.bound .. ">",
+  "<C-" .. K.up.bound .. ">",
   [[:<C-u>call SaveJump("\<lt>C-u>")<CR>:call SetJump()<CR>]], { desc = "C-u/C-d with jumplist" })
 map({ "n" },
-  "<C-" .. down.bound .. ">",
+  "<C-" .. K.down.bound .. ">",
   [[:<C-u>call SaveJump("\<lt>C-d>")<CR>:call SetJump()<CR>]], { desc = "C-u/C-d with jumplist" })
 
 -- tabs

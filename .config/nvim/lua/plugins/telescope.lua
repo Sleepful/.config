@@ -1,4 +1,10 @@
 local Util = require("util")
+local keys = require("keys")
+
+
+-- local down = { bound = "k", og = "j" }
+-- local left_helper_one = { key = "f" } -- leap
+-- local right_helper_one = { key = "j" }
 
 -- Good candidates for removal:
 -- <leader>..
@@ -147,12 +153,12 @@ return {
               ["<C-p>"] = require("telescope.actions.layout").toggle_preview,
               -- ["<M-k>"] = find_hidden_files,
               ["<M-a>"] = find_all_files,
-              ["<C-u>"] = require("telescope.actions").results_scrolling_up,
-              ["<C-d>"] = require("telescope.actions").results_scrolling_down,
+              ["<C-" .. keys.left_helper_one.key .. ">"] = require("telescope.actions").results_scrolling_up,
+              ["<C-" .. keys.right_helper_one.key .. ">"] = require("telescope.actions").results_scrolling_down,
               ["<M-l>"] = require("telescope.actions").preview_scrolling_up,
               ["<M-k>"] = require("telescope.actions").preview_scrolling_down,
-              ["<C-k>"] = require("telescope.actions").move_selection_next,
-              ["<C-l>"] = require("telescope.actions").move_selection_previous,
+              ["<C-" .. keys.down.bound .. ">"] = require("telescope.actions").move_selection_next,
+              ["<C-" .. keys.up.bound .. ">"] = require("telescope.actions").move_selection_previous,
               ["<C-r>"] = require("telescope.actions").to_fuzzy_refine,
               ["<C-s>"] = function(prompt_bufnr)
                 require 'telescope'.extensions.hop._hop(prompt_bufnr,
