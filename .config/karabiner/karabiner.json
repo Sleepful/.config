@@ -5,6 +5,21 @@
                 "parameters": { "basic.to_if_held_down_threshold_milliseconds": 5000 },
                 "rules": [
                     {
+                        "description": "Quick backspace (`delate` key into `delete last word`)",
+                        "manipulators": [
+                            {
+                                "from": { "key_code": "delete_forward" },
+                                "to": [
+                                    {
+                                        "key_code": "delete_or_backspace",
+                                        "modifiers": ["option"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Change Control+Tab to Command+Tab",
                         "manipulators": [
                             {

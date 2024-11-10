@@ -1,0 +1,18 @@
+{
+    "description": "Quick backspace (`delate` key into `delete last word`)",
+    "manipulators": [
+        {
+            "from": {
+                "key_code": "delete_forward"
+            },
+            "to": [
+                {
+                    "key_code": "delete_or_backspace",
+                    "modifiers": ["option"]
+                }
+            ],
+            "type": "basic"
+        }
+    ]
+}
+
