@@ -19,9 +19,9 @@ map({ "x", "o", "n" }, K.right.bound, K.right.og, { desc = "" })
 -- delete key moved so it doesn't clash with the movement keybinds
 map({ "x", "o", "n" }, K.delete.bound, K.delete.og, { desc = "" })
 -- moving lines up and down with alt
--- commented because these would clash with swapping the buffers in bufferline
--- map({ "x", "o", "n" }, "<M-" .. down.bound .. ">", "<M-" .. down.og .. ">", { desc = "" })
--- map({ "x", "o", "n" }, "<M-" .. up.bound .. ">", "<M-" .. up.og .. ">", { desc = "" })
+-- https://stackoverflow.com/a/28186505/2446144
+map({ "x", "o", "n" }, "<M-" .. K.down.bound .. ">", "<Cmd>:m +1<CR>", { desc = "" })
+map({ "x", "o", "n" }, "<M-" .. K.up.bound .. ">", "<Cmd>:m -2<CR>", { desc = "" })
 
 function toggle_mode()
   local ret = vim.api.nvim_get_mode()

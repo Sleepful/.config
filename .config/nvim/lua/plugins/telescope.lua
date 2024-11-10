@@ -90,6 +90,7 @@ return {
       require("telescope").load_extension("pathogen")
       require("telescope").load_extension("hop")
       require("telescope").load_extension("ui-select")
+      require("telescope").load_extension("file_browser")
     end,
     opts = function()
       local find_hidden_files = function()
@@ -166,12 +167,13 @@ return {
               end,
             },
             n = {
-              ["<C-u>"] = require("telescope.actions").results_scrolling_up,
-              ["<C-d>"] = require("telescope.actions").results_scrolling_down,
+              ["<C-" .. keys.up.bound .. ">"] = require("telescope.actions").results_scrolling_up,
+              ["<C-" .. keys.down.bound .. ">"] = require("telescope.actions").results_scrolling_down,
+              [keys.down.bound] = require("telescope.actions").move_selection_next,
+              [keys.up.bound] = require("telescope.actions").move_selection_previous,
               ["<C-b>"] = require("telescope.actions").preview_scrolling_up,
               ["<C-f>"] = require("telescope.actions").preview_scrolling_down,
               ["<C-r>"] = require("telescope.actions").to_fuzzy_refine,
-              -- ["<C-l>"] = require("telescope.actions").move_selection_next,
             },
           },
         },
@@ -217,6 +219,7 @@ return {
         desc = "Fuzzy Word (root dir)",
       },
       --- <C-g> keymaps
+      require("plugins.telescope.C-g-keymaps").file_browser,
       require("plugins.telescope.C-g-keymaps").neoclip,
       require("plugins.telescope.C-g-keymaps").pathogen.fuzzy,
       require("plugins.telescope.C-g-keymaps").pathogen.grep,

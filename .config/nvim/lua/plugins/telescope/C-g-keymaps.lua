@@ -18,6 +18,11 @@ local live_grep_harpoon_files = function()
 end
 
 return {
+  file_browser = {
+    "<C-g>d",
+    ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
+    desc = "📁 Directory",
+  },
   neoclip = {
     "<C-g>n",
     "<cmd>Telescope neoclip plus extra=0<cr>",
