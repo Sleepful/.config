@@ -20,8 +20,10 @@ map({ "x", "o", "n" }, K.right.bound, K.right.og, { desc = "" })
 map({ "x", "o", "n" }, K.delete.bound, K.delete.og, { desc = "" })
 -- moving lines up and down with alt
 -- https://stackoverflow.com/a/28186505/2446144
-map({ "x", "o", "n" }, "<M-" .. K.down.bound .. ">", "<Cmd>:m +1<CR>", { desc = "" })
-map({ "x", "o", "n" }, "<M-" .. K.up.bound .. ">", "<Cmd>:m -2<CR>", { desc = "" })
+map({ "o", "n" }, "<M-" .. K.down.bound .. ">", "<Cmd>:m +1<CR>", { desc = "" })
+map({ "o", "n" }, "<M-" .. K.up.bound .. ">", "<Cmd>:m -2<CR>", { desc = "" })
+map({ "x" }, "<M-" .. K.down.bound .. ">", ":m '>+1<CR>gv=gv", { desc = "" })
+map({ "x" }, "<M-" .. K.up.bound .. ">", ":m '<-2<CR>gv=gv", { desc = "" })
 
 function toggle_mode()
   local ret = vim.api.nvim_get_mode()
