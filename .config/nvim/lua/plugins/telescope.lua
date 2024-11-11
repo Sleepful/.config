@@ -153,6 +153,7 @@ return {
               end,
               ["<C-p>"] = require("telescope.actions.layout").toggle_preview,
               -- ["<M-k>"] = find_hidden_files,
+              -- not gonna work because it intereferes with kitty/tmux bind
               ["<M-a>"] = find_all_files,
               ["<C-" .. keys.left_helper_one.key .. ">"] = require("telescope.actions").results_scrolling_up,
               ["<C-" .. keys.right_helper_one.key .. ">"] = require("telescope.actions").results_scrolling_down,

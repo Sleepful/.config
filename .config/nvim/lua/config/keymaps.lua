@@ -148,7 +148,10 @@ map("i", "<C-" .. K.right.bound .. ">", "<Right>", { desc = "Insert mode move ri
 -- Minimal mode: line highlight,
 -- map({ "n" }, "<leader>uum", "", { desc = "Minimal mode" })
 
--- <F29> is mapped to cmd+:
+-- <F29> is mapped to cmd+
+-- <F30> is mapped to cmd"
+map("i", "<F30>", '""<Left>', { desc = "Insert double quotes twice" })
+
 map({ "n" }, "<C-" .. K.right.bound .. ">", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
 map({ "n" }, "<M-" .. K.right_helper_one.key .. ">", "<Cmd>BufferLineMoveNext<CR>", { desc = "Swap buffer right" })
 map({ "n" }, "<C-" .. K.left.bound .. ">", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
