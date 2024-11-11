@@ -1,0 +1,73 @@
+{
+    "title": "Use CMD+s/CMD+l to Switch Tabs in Chrome & Firefox",
+    "rules": [
+	{
+	    "description": "Use CMD+s/CMD+l to Switch Tabs in Chrome & Firefox",
+	    "manipulators": [
+		{
+		    "type": "basic",
+		    "from": {
+			"key_code": "s",
+			"modifiers": {
+			    "mandatory": [
+				"left_command"
+			    ],
+			    "optional": [
+				"any"
+			    ]
+			}
+		    },
+		    "to": [
+			{
+			    "key_code": "tab",
+			    "modifiers": [
+				"left_control",
+				"left_shift"
+			    ]
+			}
+		    ],
+		    "conditions": [
+			{
+			    "type": "frontmost_application_if",
+			    "bundle_identifiers": [
+				"^com.google.Chrome",
+				"^org.mozilla.firefox"
+			    ]
+			}
+		    ]
+		},
+		{
+		    "type": "basic",
+		    "from": {
+			"key_code": "l",
+			"modifiers": {
+			    "mandatory": [
+				"left_command"
+			    ],
+			    "optional": [
+				"any"
+			    ]
+			}
+		    },
+		    "to": [
+			{
+			    "key_code": "tab",
+			    "modifiers": [
+				"left_control"
+			    ]
+			}
+		    ],
+		    "conditions": [
+			{
+			    "type": "frontmost_application_if",
+			    "bundle_identifiers": [
+				"^com.google.Chrome",
+				"^org.mozilla.firefox"
+			    ]
+			}
+		    ]
+		}
+	    ]
+	}
+    ]
+}
