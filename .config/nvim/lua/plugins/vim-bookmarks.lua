@@ -1,3 +1,5 @@
+local K = require("keys")
+
 -- function to have bookmarks per workdir per buffer
 -- taken from official docs iirc
 local vim_bookmarks_fun = [[
@@ -37,8 +39,10 @@ return {
     keys = {
       require("plugins.telescope.C-g-keymaps").vim_bookmarks.all,
       require("plugins.telescope.C-g-keymaps").vim_bookmarks.page,
-      { "mk", "<cmd>BookmarkMoveUp<CR>",   mode = "n" },
-      { "mj", "<cmd>BookmarkMoveDown<CR>", mode = "n" },
+      { "<C-" .. K.right_helper_one.key .. ">", "<cmd>BookmarkNext<CR>", mode = "n" },
+      { "<C-" .. K.left_helper_one.key .. ">",  "<cmd>BookmarkPrev<CR>", mode = "n" },
+      -- { "<F29>",                               "<cmd>BookmarkNext<CR>", mode = "n" },
+      -- { "<NL>",                                 "<cmd>BookmarkPrev<CR>", mode = "n" },
       -- create new bookmark with mi
     },
   },

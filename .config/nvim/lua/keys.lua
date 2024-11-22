@@ -1,12 +1,12 @@
-local left = { bound = "s", og = "h" }
-local right = { bound = "l", og = "l" }
-local up = { bound = "d", og = "k" }
-local down = { bound = "k", og = "j" }
-local left_helper_one = { key = "f" } -- leap
-local left_helper_two = { key = "g" }
-local right_helper_one = { key = "j" }
-local right_helper_two = { key = "h" }
-local delete = { bound = right_helper_one.key, og = "d" }
+local left = { bound = "r", og = "h" }
+local right = { bound = "a", og = "l" }
+local up = { bound = "t", og = "k" }
+local down = { bound = "e", og = "j" }
+local left_helper_one = { key = "c" }
+-- local left_helper_two = { key = "g" }
+local right_helper_one = { key = "l" }
+-- local right_helper_two = { key = "h" }
+local delete = { bound = "d", og = "d" }
 
 local M = {
   right = right,
@@ -14,9 +14,9 @@ local M = {
   up = up,
   down = down,
   left_helper_one = left_helper_one,
-  left_helper_two = left_helper_two,
+  -- left_helper_two = left_helper_two,
   right_helper_one = right_helper_one,
-  right_helper_two = right_helper_two,
+  -- right_helper_two = right_helper_two,
   delete = delete
 }
 

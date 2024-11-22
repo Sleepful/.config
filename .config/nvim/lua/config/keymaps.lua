@@ -16,6 +16,12 @@ map({ "x", "o", "n" }, K.down.bound, K.down.og, { desc = "" })
 map({ "x", "o", "n" }, K.up.bound, K.up.og, { desc = "" })
 map({ "x", "o", "n" }, K.left.bound, K.left.og, { desc = "" })
 map({ "x", "o", "n" }, K.right.bound, K.right.og, { desc = "" })
+-- and their inverse...
+map({ "x", "o", "n" }, K.down.og, K.down.bound, { desc = "" })
+map({ "x", "o", "n" }, K.up.og, K.up.bound, { desc = "" })
+map({ "x", "o", "n" }, K.left.og, K.left.bound, { desc = "" })
+map({ "x", "o", "n" }, K.right.og, K.right.bound, { desc = "" })
+
 -- delete key moved so it doesn't clash with the movement keybinds
 map({ "x", "o", "n" }, K.delete.bound, K.delete.og, { desc = "" })
 -- moving lines up and down with alt

@@ -228,7 +228,7 @@ local function fmt(buf)
   -- local trailing_chars = 4
   local max_len = 4
   local trailing_chars = 0
-  if string.len(name) > max_len + 1 then
+  if name and string.len(name) > max_len + 1 then
     local trim = max_len - trailing_chars - 1
     local first = string.sub(name, 1, trim)
     if trailing_chars ~= 0 then
