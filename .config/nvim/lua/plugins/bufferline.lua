@@ -282,6 +282,7 @@ return {
       { buffer_leader .. "I",  "<Cmd>BufferLineCloseLeft<CR>" },
       { buffer_leader .. "a",  "<Cmd>BufferLinePick<CR>" },
       { buffer_leader .. "W",  "<Cmd>BufferLinePickClose<CR>" },
+      { buffer_leader .. "k",  "<Cmd>:bd<CR>",                            desc = "Kill this buffer" },
       { buffer_leader .. "K",  "<Cmd>%bd<CR>",                            desc = "Kill all buffers" },
       { buffer_leader .. "D",  "<Cmd>%bd|e#|bd#<CR>",                     desc = "Kill other buffers" },
       -- some bindings in keymaps.lua

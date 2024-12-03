@@ -4,7 +4,7 @@ return {
     dependencies = { "ggandor/leap.nvim", "ggandor/leap-spooky.nvim" },
     dev = true,
     keys = { {
-      "f",
+      "s",
       function()
         require("leap-by-word").leap()
       end,

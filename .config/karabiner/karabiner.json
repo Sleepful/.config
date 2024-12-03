@@ -20,7 +20,7 @@
                                 "from": {
                                     "key_code": "s",
                                     "modifiers": {
-                                        "mandatory": ["left_command"],
+                                        "mandatory": ["command"],
                                         "optional": ["any"]
                                     }
                                 },
@@ -45,7 +45,7 @@
                                 "from": {
                                     "key_code": "l",
                                     "modifiers": {
-                                        "mandatory": ["left_command"],
+                                        "mandatory": ["command"],
                                         "optional": ["any"]
                                     }
                                 },
@@ -76,6 +76,7 @@
                     },
                     {
                         "description": "Change Control+Tab to Command+Tab",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -485,6 +486,7 @@
                     },
                     {
                         "description": "ctrl + h/k/l/m = ctrl + arrow_directions",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -724,6 +726,7 @@
                     },
                     {
                         "description": "swap quote with double quote and backslash",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -840,25 +843,13 @@
                 {
                     "identifiers": {
                         "is_keyboard": true,
-                        "product_id": 10203,
-                        "vendor_id": 5824
+                        "product_id": 519,
+                        "vendor_id": 1241
                     },
                     "simple_modifications": [
                         {
                             "from": { "key_code": "caps_lock" },
-                            "to": [{ "key_code": "caps_lock" }]
-                        },
-                        {
-                            "from": { "key_code": "delete_forward" },
                             "to": [{ "key_code": "left_command" }]
-                        },
-                        {
-                            "from": { "key_code": "left_command" },
-                            "to": [{ "key_code": "delete_forward" }]
-                        },
-                        {
-                            "from": { "key_code": "left_control" },
-                            "to": [{ "key_code": "left_control" }]
                         }
                     ]
                 }
@@ -911,20 +902,6 @@
             ],
             "name": "Default profile",
             "selected": true,
-            "simple_modifications": [
-                {
-                    "from": { "key_code": "caps_lock" },
-                    "to": [{ "key_code": "left_command" }]
-                },
-                {
-                    "from": { "key_code": "left_command" },
-                    "to": [{ "key_code": "left_control" }]
-                },
-                {
-                    "from": { "key_code": "left_control" },
-                    "to": [{ "key_code": "caps_lock" }]
-                }
-            ],
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         },
         { "name": "Numbers" }

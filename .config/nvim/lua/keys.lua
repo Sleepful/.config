@@ -1,7 +1,9 @@
-local left = { bound = "r", og = "h" }
-local right = { bound = "a", og = "l" }
-local up = { bound = "t", og = "k" }
-local down = { bound = "e", og = "j" }
+-- DEPRECATED:
+-- TODO delete all references to this file (require.*keys)
+local left = { bound = "h", og = "h" }
+local right = { bound = "l", og = "l" }
+local up = { bound = "k", og = "k" }
+local down = { bound = "j", og = "j" }
 local left_helper_one = { key = "c" }
 -- local left_helper_two = { key = "g" }
 local right_helper_one = { key = "l" }

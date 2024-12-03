@@ -11,40 +11,35 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
--- movement keys remapped for better right hand pos
-map({ "x", "o", "n" }, K.down.bound, K.down.og, { desc = "" })
-map({ "x", "o", "n" }, K.up.bound, K.up.og, { desc = "" })
-map({ "x", "o", "n" }, K.left.bound, K.left.og, { desc = "" })
-map({ "x", "o", "n" }, K.right.bound, K.right.og, { desc = "" })
--- and their inverse...
-map({ "x", "o", "n" }, K.down.og, K.down.bound, { desc = "" })
-map({ "x", "o", "n" }, K.up.og, K.up.bound, { desc = "" })
-map({ "x", "o", "n" }, K.left.og, K.left.bound, { desc = "" })
-map({ "x", "o", "n" }, K.right.og, K.right.bound, { desc = "" })
-
--- delete key moved so it doesn't clash with the movement keybinds
-map({ "x", "o", "n" }, K.delete.bound, K.delete.og, { desc = "" })
--- moving lines up and down with alt
+-- Moving lines up and down smoothly
 -- https://stackoverflow.com/a/28186505/2446144
-map({ "o", "n" }, "<M-" .. K.down.bound .. ">", "<Cmd>:m +1<CR>", { desc = "" })
-map({ "o", "n" }, "<M-" .. K.up.bound .. ">", "<Cmd>:m -2<CR>", { desc = "" })
-map({ "x" }, "<M-" .. K.down.bound .. ">", ":m '>+1<CR>gv=gv", { desc = "" })
-map({ "x" }, "<M-" .. K.up.bound .. ">", ":m '<-2<CR>gv=gv", { desc = "" })
+map({ "o", "n" }, "<S-Down>", "<Cmd>:m +1<CR>", { desc = "" })
+map({ "o", "n" }, "<S-Up>", "<Cmd>:m -2<CR>", { desc = "" })
+map({ "x" }, "<S-Down>", ":m '>+1<CR>gv=gv", { desc = "" })
+map({ "x" }, "<S-Up>", ":m '<-2<CR>gv=gv", { desc = "" })
 
-function toggle_mode()
-  local ret = vim.api.nvim_get_mode()
-  print(vim.inspect(ret))
-  if ret.mode == "n" then
-    vim.api.nvim_input('i')
-  elseif ret.mode == "i" then
-    vim.api.nvim_input('<Esc>')
-  end
-end
+-- Oil
+vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 
--- temporarily removed because it clashes with TAB (same term key code) and
--- it also clashes with "prev jump position"
--- map({ "n", "i" }, "<C-i>", toggle_mode, { desc = "Toggle vim mode" })
+-- Navigate between quickfix items
+vim.keymap.set("n", "<S-PageDown>", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist" })
+vim.keymap.set("n", "<S-PageUp>", "<cmd>cprev<CR>zz", { desc = "Backward qfixlist" })
 
+-- Quickfix ops
+map({ "n" }, "<leader>lo", "<Cmd>copen<CR>", { desc = "Open quickfix list" })
+
+-- Write file
+map({ "n" }, "<leader>w", "<Cmd>w<CR>", { desc = "Write file" })
+-- Quit
+map({ "n" }, "<leader>Q", "<Cmd>q<CR>", { desc = "Quit" })
+
+-- Navigate between bookmarks
+vim.keymap.set("n", "<Home>", "<cmd>BookmarkNext<CR>", { desc = "Next Bookmark" })
+vim.keymap.set("n", "<End>", "<cmd>BookmarkPrev<CR>", { desc = "Previous Bookmark" })
+
+-- CMP uses Tab and S-Tab to select next and prev
+
+-- Wrap lines
 map("n", "<leader>uw", "<Cmd>set wrap!<CR>", { desc = "Toggle word wrap" })
 map("n", "<S-h>", "40zh", { desc = "Scroll left" })
 map("n", "<S-l>", "40zl", { desc = "Scroll right" })
@@ -52,9 +47,6 @@ map("n", "<S-l>", "40zl", { desc = "Scroll right" })
 -- <p> move with parens
 map({ "n", "x", "o" }, "(", "{", { desc = "Prefer paragraph movement" })
 map({ "n", "x", "o" }, ")", "}", { desc = "Prefer paragraph movement" })
--- these match with kitty config:
-map({ "n", "x", "o" }, "{", "$", { desc = "Prefer end of line movement" })
-map({ "n", "x", "o" }, "}", "%", { desc = "Prefer match symbols movement" })
 
 map({ "n", "x", "o" }, "<C-x>i", "<C-a>", { desc = "Increment number" })
 map({ "n", "x", "o" }, "g<C-x>i", "g<C-a>", { desc = "Increment number" })
@@ -136,9 +128,9 @@ map(
   { noremap = true, silent = false, desc = "🧙 open Quickfix files" }
 )
 
--- Classic moves in insert mode
-map("i", "<C-" .. K.left.bound .. ">", "<Left>", { desc = "Insert mode move left" })
-map("i", "<C-" .. K.right.bound .. ">", "<Right>", { desc = "Insert mode move right" })
+-- Cursor moves in insert mode
+map("i", "<C-h>", "<Left>", { desc = "Insert mode move left" })
+map("i", "<C-l>", "<Right>", { desc = "Insert mode move right" })
 
 -- vim-quickscope
 -- map("n", "<leader>uq", "<cmd>QuickScopeToggle<cr>", {
@@ -158,10 +150,10 @@ map("i", "<C-" .. K.right.bound .. ">", "<Right>", { desc = "Insert mode move ri
 -- <F30> is mapped to cmd"
 map("i", "<F30>", '""<Left>', { desc = "Insert double quotes twice" })
 
-map({ "n" }, "<C-" .. K.right.bound .. ">", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
-map({ "n" }, "<M-" .. K.right_helper_one.key .. ">", "<Cmd>BufferLineMoveNext<CR>", { desc = "Swap buffer right" })
-map({ "n" }, "<C-" .. K.left.bound .. ">", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
-map({ "n" }, "<M-" .. K.left_helper_one.key .. ">", "<Cmd>BufferLineMovePrev<CR>", { desc = "Swap buffer left" })
+map({ "n" }, "<M-Down>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
+map({ "n" }, "<M-S-Down>", "<Cmd>BufferLineMoveNext<CR>", { desc = "Swap buffer right" })
+map({ "n" }, "<M-Up>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
+map({ "n" }, "<M-S-Up>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Swap buffer left" })
 
 map("i", "<F21>", "()<Left>", { desc = "Insert closed parens ()" })
 map("i", "<F22>", ")<Left>", { desc = "Insert closing parens ) to the right" })

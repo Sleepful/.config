@@ -1,5 +1,3 @@
-local keys = require("keys")
-
 -- TODO:: add keybinds to show only LSP suggetions oconfirm after close r others,
 -- e.g. show only Text suggestions or show only Snippet suggestions
 -- Example: <C-l> in lua-snip to show only emmet snips
@@ -36,8 +34,8 @@ return {
         mapping = {
           -- set behavior to "Select", I do not like the "Insert" behavior, I prefer
           -- selecting the items explicitly `cmp.mapping.confirm` before the text is inserted
-          ["<C-" .. keys.down.bound .. ">"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-          ["<C-" .. keys.up.bound .. ">"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
           -- page up and page down for menu
           -- ["<C-d>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select, count = 6 }),
           -- ["<C-u>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select, count = 6 }),
@@ -53,7 +51,7 @@ return {
               },
             },
           }),
-          ["<C-t>"] = cmp.mapping.complete({
+          ["<C-s>"] = cmp.mapping.complete({
             config = {
               sources = {
                 { name = "luasnip" },
@@ -61,7 +59,7 @@ return {
             },
           }),
           -- could change this to "if filetype" and then add more functionality
-          ["<C-e>"] = cmp.mapping.complete({
+          ["<C-h>"] = cmp.mapping.complete({
             config = {
               sources = {
                 -- Add Emmet from dcampos/cmp-emmet-vim
@@ -89,7 +87,7 @@ return {
               },
             },
           }),
-          ["<C-s>"] = function(fallback)
+          ["<C-z>"] = function(fallback)
             -- TODO:
             -- [ ] - does not work great with snippets yet
             -- [ ] - does not preview anything, should preview docs for LSP and snippets for snipets
