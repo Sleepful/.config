@@ -23,8 +23,8 @@ return {
           completeopt = "menu,menuone,noinsert,preview",
         },
         window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
+          -- completion = cmp.config.window.bordered(),
+          -- documentation = cmp.config.window.bordered(),
         },
         snippet = {
           expand = function(args)
@@ -36,14 +36,43 @@ return {
           -- selecting the items explicitly `cmp.mapping.confirm` before the text is inserted
           ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
           ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<PageDown>"] = cmp.mapping.select_next_item({ count = 7, behavior = cmp.SelectBehavior.Select }),
+          ["<PageUp>"] = cmp.mapping.select_prev_item({ count = 7, behavior = cmp.SelectBehavior.Select }),
           -- page up and page down for menu
           -- ["<C-d>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select, count = 6 }),
           -- ["<C-u>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select, count = 6 }),
           --
           -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          -- ["<C-e>"] = cmp.mapping.abort(),
+          ["<C-e>"] = function(fallback)
+            if cmp.visible() then
+              cmp.abort()
+            else
+              cmp.complete()
+            end
+          end,
+          ["<Left>"] = function(fallback)
+            if cmp.visible() then
+              cmp.abort()
+              fallback()
+            else
+              fallback()
+            end
+          end,
           ["<F2>"] = cmp.mapping.confirm({ select = true }),
+          ["<Right>"] = function(fallback)
+            if cmp.visible() then
+              vim.api.nvim_feedkeys(
+              -- create new "undo" point
+                vim.api.nvim_replace_termcodes('<C-g>u', true, true, true),
+                'n', false)
+              cmp.confirm()
+            else
+              fallback() -- If you use vim-endwise, this fallback will behave the same as vim-endwise.
+            end
+          end,
           ["<C-b>"] = cmp.mapping.complete({
             config = {
               sources = {
@@ -51,7 +80,7 @@ return {
               },
             },
           }),
-          ["<C-s>"] = cmp.mapping.complete({
+          ["<C-l>"] = cmp.mapping.complete({
             config = {
               sources = {
                 { name = "luasnip" },
@@ -87,7 +116,7 @@ return {
               },
             },
           }),
-          ["<C-z>"] = function(fallback)
+          ["<C-s>"] = function(fallback)
             -- TODO:
             -- [ ] - does not work great with snippets yet
             -- [ ] - does not preview anything, should preview docs for LSP and snippets for snipets

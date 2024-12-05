@@ -18,6 +18,9 @@ map({ "o", "n" }, "<S-Up>", "<Cmd>:m -2<CR>", { desc = "" })
 map({ "x" }, "<S-Down>", ":m '>+1<CR>gv=gv", { desc = "" })
 map({ "x" }, "<S-Up>", ":m '<-2<CR>gv=gv", { desc = "" })
 
+-- Undo
+map("i", "<C-u>", "<C-o>u", { desc = "Undo from insert mode" })
+
 -- Oil
 vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 
