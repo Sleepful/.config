@@ -342,7 +342,8 @@ return {
         end,
       },
       {
-        "<F15>",
+        -- "<F15>",
+        "<S-F3>", -- no idea why, but this is what kitty is giving me for CMD-3
         function()
           require("bufferline").go_to(3, true)
         end,

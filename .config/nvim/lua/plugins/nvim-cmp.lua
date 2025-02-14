@@ -40,17 +40,21 @@ return {
           ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
           ["<PageDown>"] = cmp.mapping.select_next_item({ count = 7, behavior = cmp.SelectBehavior.Select }),
           ["<PageUp>"] = cmp.mapping.select_prev_item({ count = 7, behavior = cmp.SelectBehavior.Select }),
-          -- page up and page down for menu
-          -- ["<C-d>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select, count = 6 }),
-          -- ["<C-u>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select, count = 6 }),
-          --
-          -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<S-PageUp>"] = cmp.mapping.scroll_docs(-4),
+          ["<S-PageDown>"] = cmp.mapping.scroll_docs(4),
           ["<C-e>"] = function(fallback)
             if cmp.visible() then
               cmp.abort()
             else
               cmp.complete()
+            end
+          end,
+          ["<Right>"] = function(fallback)
+            if cmp.visible() then
+              cmp.abort()
+              fallback()
+            else
+              fallback()
             end
           end,
           ["<Left>"] = function(fallback)
@@ -62,15 +66,13 @@ return {
             end
           end,
           ["<F2>"] = cmp.mapping.confirm({ select = true }),
-          ["<Right>"] = function(fallback)
+          ["<End>"] = function(fallback)
             if cmp.visible() then
-              vim.api.nvim_feedkeys(
               -- create new "undo" point
-                vim.api.nvim_replace_termcodes('<C-g>u', true, true, true),
-                'n', false)
+              vim.cmd("let &undolevels = &undolevels")
               cmp.confirm()
             else
-              fallback() -- If you use vim-endwise, this fallback will behave the same as vim-endwise.
+              fallback()
             end
           end,
           ["<C-b>"] = cmp.mapping.complete({
@@ -230,8 +232,14 @@ return {
           format = function(_, item)
             local icons = require("util").icons.kinds
             if icons[item.kind] then
-              item.kind = icons[item.kind] .. item.kind
+              -- add icons and keep the name of the "kind"
+              item.kind = icons[item.kind] -- .. item.kind
             end
+            if item.menu then
+              -- shorten really long URLs/paths
+              item.menu = item.menu:sub(1, 20)
+            end
+            item.abbr = item.abbr:sub(1, 25)
             return item
           end,
         },

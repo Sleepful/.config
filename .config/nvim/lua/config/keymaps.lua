@@ -13,10 +13,10 @@ end
 
 -- Moving lines up and down smoothly
 -- https://stackoverflow.com/a/28186505/2446144
-map({ "o", "n" }, "<S-Down>", "<Cmd>:m +1<CR>", { desc = "" })
-map({ "o", "n" }, "<S-Up>", "<Cmd>:m -2<CR>", { desc = "" })
-map({ "x" }, "<S-Down>", ":m '>+1<CR>gv=gv", { desc = "" })
-map({ "x" }, "<S-Up>", ":m '<-2<CR>gv=gv", { desc = "" })
+map({ "o", "n" }, "<S-Right>", "<Cmd>:m +1<CR>", { desc = "" })
+map({ "o", "n" }, "<S-Left>", "<Cmd>:m -2<CR>", { desc = "" })
+map({ "x" }, "<S-Right>", ":m '>+1<CR>gv=gv", { desc = "" })
+map({ "x" }, "<S-Left>", ":m '<-2<CR>gv=gv", { desc = "" })
 
 -- Undo
 map("i", "<C-u>", "<C-o>u", { desc = "Undo from insert mode" })
@@ -34,7 +34,8 @@ map({ "n" }, "<leader>lo", "<Cmd>copen<CR>", { desc = "Open quickfix list" })
 -- Write file
 map({ "n" }, "<leader>w", "<Cmd>w<CR>", { desc = "Write file" })
 -- Quit
-map({ "n" }, "<leader>Q", "<Cmd>q<CR>", { desc = "Quit" })
+map({ "n" }, "<leader>q", "<Cmd>q<CR>", { desc = "Quit" })
+map({ "n" }, "<leader>Q", "<Cmd>q!<CR>", { desc = "Quit!" })
 
 -- Navigate between bookmarks
 vim.keymap.set("n", "<Home>", "<cmd>BookmarkNext<CR>", { desc = "Next Bookmark" })
@@ -46,6 +47,12 @@ vim.keymap.set("n", "<End>", "<cmd>BookmarkPrev<CR>", { desc = "Previous Bookmar
 map("n", "<leader>uw", "<Cmd>set wrap!<CR>", { desc = "Toggle word wrap" })
 map("n", "<S-h>", "40zh", { desc = "Scroll left" })
 map("n", "<S-l>", "40zl", { desc = "Scroll right" })
+
+-- <p> move in paragraphs with arrows
+map({ "i" }, "<S-Up>", "<C-o>{", { desc = "Move to start of paragraph" })
+map({ "i" }, "<S-Down>", "<C-o>}", { desc = "Move to start of paragraph" })
+map({ "n", "x", "o" }, "<S-Up>", "{", { desc = "Move to start of paragraph" })
+map({ "n", "x", "o" }, "<S-Down>", "}", { desc = "Move to start of paragraph" })
 
 -- <p> move with parens
 map({ "n", "x", "o" }, "(", "{", { desc = "Prefer paragraph movement" })
@@ -131,10 +138,6 @@ map(
   { noremap = true, silent = false, desc = "🧙 open Quickfix files" }
 )
 
--- Cursor moves in insert mode
-map("i", "<C-h>", "<Left>", { desc = "Insert mode move left" })
-map("i", "<C-l>", "<Right>", { desc = "Insert mode move right" })
-
 -- vim-quickscope
 -- map("n", "<leader>uq", "<cmd>QuickScopeToggle<cr>", {
 --   desc = "Toggle QuickScope",
@@ -153,9 +156,13 @@ map("i", "<C-l>", "<Right>", { desc = "Insert mode move right" })
 -- <F30> is mapped to cmd"
 map("i", "<F30>", '""<Left>', { desc = "Insert double quotes twice" })
 
+-- special mapping of C-j to F29, because C-j is actually translated to RETURN in nvim
 map({ "n" }, "<M-Down>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
+map({ "n" }, "<F29>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
 map({ "n" }, "<M-S-Down>", "<Cmd>BufferLineMoveNext<CR>", { desc = "Swap buffer right" })
 map({ "n" }, "<M-Up>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
+map({ "n" }, "<C-k>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
+map({ "n" }, "<M-S-Up>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Swap buffer left" })
 map({ "n" }, "<M-S-Up>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Swap buffer left" })
 
 map("i", "<F21>", "()<Left>", { desc = "Insert closed parens ()" })
@@ -193,10 +200,10 @@ endfunction]]
 vim.cmd(set_jump)
 
 map({ "n" },
-  "<C-" .. K.up.bound .. ">",
+  "<PageUp>",
   [[:<C-u>call SaveJump("\<lt>C-u>")<CR>:call SetJump()<CR>]], { desc = "C-u/C-d with jumplist" })
 map({ "n" },
-  "<C-" .. K.down.bound .. ">",
+  "<PageDown>",
   [[:<C-u>call SaveJump("\<lt>C-d>")<CR>:call SetJump()<CR>]], { desc = "C-u/C-d with jumplist" })
 
 -- tabs

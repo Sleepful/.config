@@ -18,8 +18,8 @@
 	r = restore --staged
 	co = checkout
 	cob = checkout -b
-	logl = log --stat
-	logf = log -p
+	logf = log --stat
+	logl = log -p
 	logo = log --oneline
 	fetcha = fetch --all
 	pulla = pull --all
