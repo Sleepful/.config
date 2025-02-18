@@ -160,6 +160,7 @@ return {
               ["<M-l>"] = require("telescope.actions").preview_scrolling_up,
               ["<M-k>"] = require("telescope.actions").preview_scrolling_down,
               ["<C-" .. keys.down.bound .. ">"] = require("telescope.actions").move_selection_next,
+              ["<F29>"] = require("telescope.actions").move_selection_next,
               ["<C-" .. keys.up.bound .. ">"] = require("telescope.actions").move_selection_previous,
               ["<C-r>"] = require("telescope.actions").to_fuzzy_refine,
               ["<C-s>"] = function(prompt_bufnr)
