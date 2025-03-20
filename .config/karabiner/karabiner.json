@@ -6,6 +6,7 @@
                 "rules": [
                     {
                         "description": "Use option+arrow to Switch Tabs in Chrome & Firefox",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -991,11 +992,9 @@
                         "vendor_id": 1149
                     },
                     "ignore": false,
-                    "mouse_flip_x": true,
-                    "mouse_flip_y": true,
                     "simple_modifications": [
                         {
-                            "from": { "pointing_button": "button4" },
+                            "from": { "pointing_button": "button2" },
                             "to": [{ "pointing_button": "button1" }]
                         },
                         {
@@ -1003,7 +1002,7 @@
                             "to": [{ "pointing_button": "button2" }]
                         },
                         {
-                            "from": { "pointing_button": "button2" },
+                            "from": { "pointing_button": "button4" },
                             "to": [{ "pointing_button": "button3" }]
                         }
                     ]
@@ -1017,12 +1016,12 @@
                     "ignore": true,
                     "simple_modifications": [
                         {
-                            "from": { "pointing_button": "button4" },
-                            "to": [{ "pointing_button": "button3" }]
-                        },
-                        {
                             "from": { "pointing_button": "button3" },
                             "to": [{ "pointing_button": "button2" }]
+                        },
+                        {
+                            "from": { "pointing_button": "button4" },
+                            "to": [{ "pointing_button": "button3" }]
                         }
                     ]
                 },

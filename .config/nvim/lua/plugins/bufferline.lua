@@ -226,17 +226,19 @@ local function fmt(buf)
   end
   -- local max_len = 11
   -- local trailing_chars = 4
-  local max_len = 4
+  local max_len = 7
   local trailing_chars = 0
   if name and string.len(name) > max_len + 1 then
-    local trim = max_len - trailing_chars - 1
-    local first = string.sub(name, 1, trim)
-    if trailing_chars ~= 0 then
-      local last = string.sub(name, -trailing_chars)
-      name = first .. separator .. last
-    else
-      name = first
-    end
+    local trim = max_len - trailing_chars
+    name = name:sub(1, trim)
+    -- name = name:sub(1)
+    -- local first = string.sub(name, 1, trim)
+    -- if trailing_chars ~= 0 then
+    --   local last = string.sub(name, -trailing_chars)
+    --   name = first .. separator .. last
+    -- else
+    --   name = first
+    -- end
   end
   return name
 end
@@ -462,6 +464,7 @@ return {
         truncate_names = true,
         show_buffer_close_icons = false,
         name_formatter = fmt,
+        show_duplicate_prefix = false,
         close_command = function(n)
           require("mini.bufremove").delete(n, false)
         end,
@@ -472,8 +475,10 @@ return {
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
           local icons = require("util").icons.diagnostics
-          local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-              .. (diag.warning and icons.Warn .. diag.warning or "")
+          -- local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+          --     .. (diag.warning and icons.Warn .. diag.warning or "")
+          local ret = (diag.error and icons.Error or "")
+              .. (diag.warning and icons.Warn or "")
           return vim.trim(ret)
         end,
         separator_style = "slope",

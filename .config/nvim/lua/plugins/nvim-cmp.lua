@@ -90,7 +90,7 @@ return {
             },
           }),
           -- could change this to "if filetype" and then add more functionality
-          ["<C-h>"] = cmp.mapping.complete({
+          ["<C-e>"] = cmp.mapping.complete({
             config = {
               sources = {
                 -- Add Emmet from dcampos/cmp-emmet-vim

@@ -10,7 +10,7 @@ M.cmd = function(cmd)
   return format
 end
 
-M.root_patterns = { ".git", "lua" }
+M.root_patterns = { ".git", "lua", ".root" }
 
 -- returns the root directory based on:
 -- * lsp workspace folders

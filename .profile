@@ -61,6 +61,7 @@ alias gbs='cd ~/Code/GitBuilds'
 # neovim
 export PATH="$HOME/local/nvim/bin:$PATH"
 alias vim='nvim'
+alias vih='nvim .'
 alias vrc='nvim ~/.vimrc'
 alias vimf='vim $(`fc -ln -1`)'
 alias vimr='vim README.md'
