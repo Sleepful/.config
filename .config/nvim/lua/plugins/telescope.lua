@@ -64,11 +64,13 @@ return {
         telescope = {
           n = {
             paste_behind = "<C-b>",
-            paste = "<C-p>",
+            -- paste = "<C-p>",
+            paste = "<F2>",
           },
           i = {
             paste_behind = "<C-b>",
-            paste = "<C-p>",
+            -- paste = "<C-p>",
+            paste = "<F2>",
           },
         },
       },
@@ -230,9 +232,7 @@ return {
       require("plugins.telescope.C-g-keymaps").grep_open_buffers,
       require("plugins.telescope.C-g-keymaps").fuzzy_open_buffers,
       require("plugins.telescope.C-g-keymaps").grep_current_buffer,
-      require("plugins.telescope.C-g-keymaps").grep_harpoon_filenames,
-      require("plugins.telescope.C-g-keymaps").harpoon_menu,
-      require("plugins.telescope.C-g-keymaps").grep_harpoon_files,
+      require("plugins.telescope.C-g-keymaps").marks,
       -- Custom keymaps
       {
         -- help pages, moved from `leader sh`

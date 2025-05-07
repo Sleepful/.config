@@ -1,35 +1,19 @@
-local function prepare_harpoon_results()
-  local list = require("harpoon").get_mark_config().marks
-  local next = {}
-  for idx = 1, #list do
-    if list[idx].filename ~= "" then
-      local path = vim.loop.cwd() .. "/" .. list[idx].filename
-      table.insert(next, path)
-      print(path)
-    end
-  end
-  return next
-end
-
-local live_grep_harpoon_files = function()
-  require("telescope.builtin").live_grep({
-    search_dirs = prepare_harpoon_results(),
-  })
-end
+local cgLeader = "<F2>" -- used to be <C-g>
 
 return {
+  cgLeader = cgLeader,
   file_browser = {
-    "<C-g>d",
+    cgLeader .. "d",
     ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
     desc = "📁 Directory",
   },
   neoclip = {
-    "<C-g>n",
+    cgLeader .. "n",
     "<cmd>Telescope neoclip plus extra=0<cr>",
     desc = "👻 neoClip",
   },
   fuzzy_current_buffer = {
-    "<C-g>p",
+    cgLeader .. "p",
     function()
       require("telescope.builtin").current_buffer_fuzzy_find({
         -- tiebreak function from
@@ -47,75 +31,65 @@ return {
         additional_args = { "--ignore-case", "--pcre2" },
       })
     end,
-    desc = "💤 lazy Page",
+    desc = "💤 fuzzy buffer",
   },
   fuzzy_open_buffers = {
-    "<C-g>o",
+    cgLeader .. "o",
     function()
       require("telescope.builtin").grep_string({
         grep_open_files = true,
         additional_args = { "--ignore-case", "--pcre2" },
       })
     end,
-    desc = "💤 lazy Open buffers",
+    desc = "💤 fuzzy all buffers",
   },
   grep_open_buffers = {
-    "<C-g><C-o>",
+    cgLeader .. "O",
     function()
       require("telescope.builtin").live_grep({
         grep_open_files = true,
         additional_args = { "--ignore-case", "--pcre2" },
       })
     end,
-    desc = "🪄 grep Open buffers",
+    desc = "🪄 grep all buffers",
   },
   grep_current_buffer = {
-    "<C-g><C-p>",
+    cgLeader .. "P",
     function()
       require("telescope.builtin").live_grep({
         search_dirs = { vim.fn.expand("%:p") },
       })
     end,
-    desc = "🪄 grep Page",
-  },
-  grep_harpoon_filenames = {
-    "<C-g>q",
-    "<cmd>Telescope harpoon marks<cr>",
-    desc = "🎣 Quick menu",
-  },
-  harpoon_menu = {
-    "<C-g>m",
-    function()
-      require("harpoon.ui").toggle_quick_menu()
-    end,
-    desc = "🎣 Menu",
-  },
-  grep_harpoon_files = {
-    "<C-g>s",
-    live_grep_harpoon_files,
-    desc = "🎣 Shark grep",
+    desc = "🪄 grep buffer",
   },
   vim_bookmarks = {
     page = {
-      "<C-g><C-g>",
+      cgLeader .. cgLeader,
       "<cmd>Telescope vim_bookmarks current_file<cr>",
-      desc = "📘 Bookmarks ",
+      desc = "📘 Bookmarks in buffer",
     },
     all = {
-      "<C-g>a",
+      cgLeader .. "a",
       "<cmd>Telescope vim_bookmarks all<cr>",
-      desc = "📚 All bookmarks",
+      desc = "📘 All Bookmarks",
     },
+  },
+  marks = {
+    cgLeader .. "m",
+    function()
+      require("telescope.builtin").marks()
+    end,
+    desc = "vim marks",
   },
   neotree = {
     rg = {
-      "<C-g><C-t>",
+      cgLeader .. "<C-t>",
       desc = "🌳 grep Tree!",
     },
   },
   pathogen = {
     fuzzy = {
-      "<C-g>l",
+      cgLeader .. "l",
       function()
         local opts = {
           cwd = require("telescope.utils").buffer_dir(),
@@ -123,10 +97,10 @@ return {
         }
         require("telescope").extensions["pathogen"].grep_string(opts)
       end,
-      desc = "⚡️ Pathogen Lazy",
+      desc = "⚡️ Pathogen this word",
     },
     grep = {
-      "<C-g>/",
+      cgLeader .. "/",
       function()
         local opts = {
           cwd = require("telescope.utils").buffer_dir(),
@@ -136,7 +110,7 @@ return {
       desc = "⚡️ Pathogen Grep",
     },
     files = {
-      "<C-g>f",
+      cgLeader .. "f",
       function()
         local opts = {
           cwd = require("telescope.utils").buffer_dir(),
@@ -156,7 +130,7 @@ return {
       -- - [ ] and add another hotkey to traverse into the directory structure for good measure, this one requires an arg, how to?
       --  - perhaps the arg to this one is currently selected file, derive the 1 level traversal from there
       -- - [ ] and for extra good measure, add a hotkey that resets the traversal to the leaf directory of currently highlit file
-      "<C-g>f",
+      cgLeader .. "f",
       function()
         require("telescope.builtin").find_files({
           cwd = require("telescope.utils").buffer_dir(),

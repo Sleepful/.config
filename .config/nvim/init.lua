@@ -322,7 +322,7 @@ vim.defer_fn(function()
       'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx',
       'javascript', 'typescript', 'vimdoc', 'vim', 'bash',
       "elixir", "eex", "heex", "erlang", "css", "fennel",
-      "sql", "markdown", "clojure", "graphql"
+      "sql", "markdown", "clojure", "graphql", "templ"
     },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)

@@ -23,7 +23,7 @@ return {
       marksman.setup()
       deno.setup()
       lua.setup()
-      -- clojure.setup()
+      clojure.setup()
       autoformat.autoformat()
       rust.setup()
       golang.setup()
@@ -61,7 +61,7 @@ return {
         desc = "Code action"
       },
       {
-        "<C-j>",
+        k .. "w",
         function()
           vim.lsp.buf.code_action({
             filter = function(action)
@@ -77,7 +77,7 @@ return {
         desc = "Drag Forward"
       },
       {
-        "<C-k>",
+        k .. "b",
         function()
           vim.lsp.buf.code_action({
             filter = function(action)

@@ -1,3 +1,7 @@
+#https://superuser.com/questions/433746/is-there-a-fix-for-the-too-many-open-files-in-system-error-on-os-x-10-7-1
+ulimit -S -n 40444
+alias culprit="sudo lsof -n | cut -f1 -d' ' | uniq -c | sort | tail"
+
 export XDG_CONFIG_HOME=~/.config
 export XDG_DATA_HOME=~/.local/share
 export FLAVOURS_DATA_DIRECTORY="$XDG_DATA_HOME/flavours"
@@ -7,6 +11,13 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
 # nix installed bins
 export PATH=~/.nix-profile/bin:$PATH
+
+# static default port for Clojure nrepl with lein
+export LEIN_REPL_PORT=1337
+# start clojure repl wilh clj build tools, uses the :alias `repl/conjure` which ought to be found in user directory,
+# per https://clojure.org/reference/clojure_cli#config_dir
+# in theory, "~/.config/clojure/deps.edn"
+alias repl="clj -M:repl/conjure -p 1337"
 
 # Finished adapting your PATH environment variable for use with MacPorts.
 
@@ -221,6 +232,9 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 alias org='cd ~/Code/orgzly'
+
+alias clearndocker='docker system prune -a'
+alias tunnel='frpc -c ~/.config/frp/frpc.toml'
 alias ngdav='ngrok http 80 -subdomain=orgzlying'
 function npmdav() {
 	sudo echo -n "WebDav Password: "

@@ -253,6 +253,9 @@ end
 
 local buffer_leader = "<M-b>"
 
+
+require("which-key").add({ buffer_leader .. "s", group = '[S]ort'  })
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -274,20 +277,20 @@ return {
       require("bufferline").setup(opts)
     end,
     keys = {
-
-      { buffer_leader .. "U",  "<Cmd>set bufhidden=hide<CR>",             desc = "Unhide buffer" },
-      { buffer_leader .. "L",  "<Cmd>set buflisted<CR>",                  desc = "List buffer" },
-      { buffer_leader .. "p",  "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
-      { buffer_leader .. "Q",  "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+      { buffer_leader .. "U",  "<Cmd>set bufhidden=hide<CR>",       desc = "Unhide buffer" },
+      { buffer_leader .. "L",  "<Cmd>set buflisted<CR>",            desc = "List buffer" },
+      -- { buffer_leader .. "p",  "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
+      -- { buffer_leader .. "Q",  "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
       { buffer_leader .. "P" },
       { buffer_leader .. "O",  "<Cmd>BufferLineCloseRight<CR>" },
       { buffer_leader .. "I",  "<Cmd>BufferLineCloseLeft<CR>" },
-      { buffer_leader .. "a",  "<Cmd>BufferLinePick<CR>" },
-      { buffer_leader .. "W",  "<Cmd>BufferLinePickClose<CR>" },
-      { buffer_leader .. "d",  "<Cmd>:bd<CR>",                            desc = "Kill this buffer" },
-      { buffer_leader .. "K",  "<Cmd>%bd<CR>",                            desc = "Kill all buffers" },
-      { buffer_leader .. "D",  "<Cmd>%bd|e#|bd#<CR>",                     desc = "Kill other buffers" },
+      -- { buffer_leader .. "a",  "<Cmd>BufferLinePick<CR>" }, -- dont need this with number travel
+      -- { buffer_leader .. "W",  "<Cmd>BufferLinePickClose<CR>" }, -- dont need this with buffer deletion
+      { buffer_leader .. "d",  "<Cmd>:bd<CR>",                      desc = "Kill this buffer" },
+      { buffer_leader .. "D",  "<Cmd>%bd<CR>",                      desc = "Kill all buffers" },
+      { buffer_leader .. "k",  "<Cmd>%bd|e#|bd#<CR>",               desc = "Kill other buffers" },
       -- some bindings in keymaps.lua
+      { buffer_leader .. "se", "<Cmd>BufferLineSortByExtension<CR>" },
       { buffer_leader .. "se", "<Cmd>BufferLineSortByExtension<CR>" },
       { buffer_leader .. "sd", "<Cmd>BufferLineSortByDirectory<CR>" },
       {
@@ -298,7 +301,7 @@ return {
         desc = "Sort by last time the file was modified",
       },
       {
-        buffer_leader .. "r",
+        buffer_leader .. "sr",
         function()
           require("bufferline").sort_by(sort_by_recently_sorter)
         end,
@@ -400,65 +403,66 @@ return {
           options = {
             toggle_hidden_on_enter = true, -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
           },
-          items = {
-            {
-              name = "🧪T", -- Mandatory
-              string_name = "Test",
-              priority = 2, -- determines where it will appear relative to other groups (Optional)
-              -- icon = "🧪", -- Optional
-              separator = { -- Optional
-                -- style = require("bufferline.groups").separator.tab,
-              },
-              -- auto_close = true,
-              matcher = function(buf) -- Mandatory
-                -- print(vim.inspect(buf))
-                return buf.path:match("test") or buf.path:match("spec")
-              end,
-              highlight = {
-                -- empty, colors set in flavours.lua
-              },
-            },
-            bufferline_ungrouped(),
-            {
-              name = "📚D",
-              string_name = "Docs",
-              auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
-              matcher = function(buf)
-                return buf.path:match("%.md") or buf.path:match("%.txt")
-              end,
-              separator = {
-                -- style = require("bufferline.groups").separator.tab,
-              },
-            },
-            {
-              name = "⚙️R", -- Mandatory
-              string_name = "Rc",
-              separator = {},
-              auto_close = false,
-              matcher = function(buf) -- Mandatory
-                local name = buf.name:match("^%..+$")
-                if name == nil then
-                  return false
-                end
-                return true
-              end,
-              highlight = {},
-            },
-            {
-              name = "?", -- Mandatory
-              string_name = "Unnamed",
-              auto_close = true,
-              separator = {},
-              matcher = function(buf) -- Mandatory
-                local name = buf.name:match("^%[No Name%]$")
-                if name == nil then
-                  return false
-                end
-                return true
-              end,
-              highlight = {},
-            },
-          },
+          -- REMOVED groups because they mess up the numbering that is used to travel
+          -- items = {
+          --   {
+          --     name = "🧪T", -- Mandatory
+          --     string_name = "Test",
+          --     priority = 2, -- determines where it will appear relative to other groups (Optional)
+          --     -- icon = "🧪", -- Optional
+          --     separator = { -- Optional
+          --       -- style = require("bufferline.groups").separator.tab,
+          --     },
+          --     -- auto_close = true,
+          --     matcher = function(buf) -- Mandatory
+          --       -- print(vim.inspect(buf))
+          --       return buf.path:match("test") or buf.path:match("spec")
+          --     end,
+          --     highlight = {
+          --       -- empty, colors set in flavours.lua
+          --     },
+          --   },
+          --   bufferline_ungrouped(),
+          --   {
+          --     name = "📚D",
+          --     string_name = "Docs",
+          --     auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
+          --     matcher = function(buf)
+          --       return buf.path:match("%.md") or buf.path:match("%.txt")
+          --     end,
+          --     separator = {
+          --       -- style = require("bufferline.groups").separator.tab,
+          --     },
+          --   },
+          --   {
+          --     name = "⚙️R", -- Mandatory
+          --     string_name = "Rc",
+          --     separator = {},
+          --     auto_close = false,
+          --     matcher = function(buf) -- Mandatory
+          --       local name = buf.name:match("^%..+$")
+          --       if name == nil then
+          --         return false
+          --       end
+          --       return true
+          --     end,
+          --     highlight = {},
+          --   },
+          --   {
+          --     name = "?", -- Mandatory
+          --     string_name = "Unnamed",
+          --     auto_close = true,
+          --     separator = {},
+          --     matcher = function(buf) -- Mandatory
+          --       local name = buf.name:match("^%[No Name%]$")
+          --       if name == nil then
+          --         return false
+          --       end
+          --       return true
+          --     end,
+          --     highlight = {},
+          --   },
+          -- },
         },
         show_buffer_icons = false,
         truncate_names = true,

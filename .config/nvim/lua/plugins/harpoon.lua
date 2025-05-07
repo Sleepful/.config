@@ -24,12 +24,12 @@ return {
       {
         "<leader>hs",
         live_grep_harpoon_files,
-        desc = "🐡 Big one incoming!",
+        desc = "🐡 Big one incoming! (live grep)",
       },
       {
         "<leader>hf",
         "<cmd>Telescope harpoon marks<cr>",
-        desc = "🎣 Where is my fishing rod?",
+        desc = "🎣 Where is my fishing rod? (telescope files)",
       },
       {
         "<leader>h",
@@ -41,6 +41,13 @@ return {
           require("harpoon.ui").toggle_quick_menu()
         end,
         desc = "🐟 Give them to me!",
+      },
+      {
+        "<leader>ha",
+        function()
+          require("harpoon.mark").add_file()
+        end,
+        desc = "Add file to harpoon list",
       },
       -- NOTE: commented out over preference for bufferline keys
       -- {

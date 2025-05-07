@@ -20,6 +20,7 @@
 local clojure_filetype = "clojure"
 return {
   {
+    enabled = false, -- not liking these hotkeys
     "guns/vim-sexp",
     ft = clojure_filetype,
     init = function()
@@ -66,13 +67,15 @@ return {
     }
   },
   {
+    -- review conjure by using `:ConjureSchool`
     "Olical/conjure",
     ft = clojure_filetype,
     init = function()
       -- this gives weird error, even though this is in the docs:
       --      https://github.com/Olical/conjure#lazynvim
       --      vim.g["conjure#mapping#doc_word"] = false
-      vim.cmd("let g:conjure#mapping#doc_word = v:false")
+      -- vim.cmd("let g:conjure#mapping#doc_word = v:false")
+      vim.cmd("let g:conjure#mapping#doc_word = \"ed\"")
       -- we remove this conjure option because it overwrites the LSP `K` hover
       -- and replaces it with `(doc <name>)`, which is less than ideal
       vim.cmd("let g:conjure#mapping#eval_root_form = \"eo\"")
@@ -88,12 +91,30 @@ return {
         "<cmd>ConjureEval (clojure.tools.namespace.repl/refresh)<cr>",
         desc = "(tools.namespace refresh)"
       }
+      -- other default hotkeys not shown here, include:
+      -- <leader>l ... display the repl logs
+      -- <leader>lg ... toggle logs buffer
+      -- <leader>em<mark> ... evaluate code at mark
+      -- <leader>ew ... display variable contents
+      -- <leader>E ... evaluate visual selections
+      -- <leader>E<motion> ... evaluate in motion, such as Eab (around block with mini.ai from mini.nvim)
     }
   },
-  { "tpope/vim-dispatch",            ft = clojure_filetype },
-  { "radenling/vim-dispatch-neovim", ft = clojure_filetype },
+  -- relevant docs here:
+  -- https://github.com/Olical/conjure/wiki/Quick-start:-Clojure
+  {
+    "tpope/vim-dispatch",
+    enabled = false, -- not sure why I would need this
+    ft = clojure_filetype
+  },
+  {
+    "radenling/vim-dispatch-neovim",
+    enabled = false, -- not sure why I would need this
+    ft = clojure_filetype
+  },
   {
     "clojure-vim/vim-jack-in",
+    enabled = false, -- not sure why I would need this
     ft = clojure_filetype,
     config = function()
       vim.g.default_lein_task = "with-profile dev repl"

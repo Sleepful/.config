@@ -2,6 +2,9 @@
 # timer=$(gdate +%s%3N)
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile && source ~/.secret'
 
+# kubectl tab completion
+source <(kubectl completion zsh)
+
 alias sorc='source ~/.zshrc'
 autoload zmv
 

@@ -133,7 +133,8 @@ endfunction
 
 map(
   "n",
-  "<C-g><C-q>",
+  -- "<C-g><C-q>",
+  require("plugins.telescope.C-g-keymaps").cgLeader .. "<C-q>",
   ":call QuickFixOpenAll()<CR>",
   { noremap = true, silent = false, desc = "🧙 open Quickfix files" }
 )
@@ -158,11 +159,12 @@ map("i", "<F30>", '""<Left>', { desc = "Insert double quotes twice" })
 
 -- special mapping of C-j to F29, because C-j is actually translated to RETURN in nvim
 map({ "n" }, "<M-Down>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
-map({ "n" }, "<F29>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
+map({ "n" }, "<C-k>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Move buffer right" })
+map({ "n" }, "<M-k>", "<Cmd>BufferLineMoveNext<CR>", { desc = "Swap buffer right" })
 map({ "n" }, "<M-S-Down>", "<Cmd>BufferLineMoveNext<CR>", { desc = "Swap buffer right" })
 map({ "n" }, "<M-Up>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
-map({ "n" }, "<C-k>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
-map({ "n" }, "<M-S-Up>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Swap buffer left" })
+map({ "n" }, "<F29>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Move buffer left" })
+map({ "n" }, "<M-j>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Swap buffer left" })
 map({ "n" }, "<M-S-Up>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Swap buffer left" })
 
 map("i", "<F21>", "()<Left>", { desc = "Insert closed parens ()" })

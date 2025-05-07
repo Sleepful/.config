@@ -65,8 +65,7 @@ return {
               fallback()
             end
           end,
-          ["<F2>"] = cmp.mapping.confirm({ select = true }),
-          ["<End>"] = function(fallback)
+          ["<F2>"] = function(fallback)
             if cmp.visible() then
               -- create new "undo" point
               vim.cmd("let &undolevels = &undolevels")
@@ -75,6 +74,15 @@ return {
               fallback()
             end
           end,
+          -- ["<End>"] = function(fallback)
+          --   if cmp.visible() then
+          --     -- create new "undo" point
+          --     vim.cmd("let &undolevels = &undolevels")
+          --     cmp.confirm()
+          --   else
+          --     fallback()
+          --   end
+          -- end,
           ["<C-b>"] = cmp.mapping.complete({
             config = {
               sources = {
@@ -102,6 +110,7 @@ return {
                       "elixir",
                       -- the rest are defaults from emmet-cmp
                       "html",
+                      "templ",
                       "xml",
                       "typescriptreact",
                       "javascriptreact",
