@@ -67,7 +67,74 @@ return {
     }
   },
   {
+    -- SUPER TRIPPY!!!
+    -- https://github.com/gpanders/nvim-parinfer/blob/master/doc/parinfer.txt
+    -- https://shaunlebron.github.io/parinfer/
+    "gpanders/nvim-parinfer",
+    ft = clojure_filetype,
+    keys = {
+      {
+        "<leader>ci",
+        "<cmd>if b:parinfer_enabled ==# 1 | echo 'Parinfer is enabled' | else | echo 'Parinfer is disabled' | endif<cr>",
+        desc = "Parinfer Check",
+        ft = clojure_filetype,
+      },
+      { "<leader>cI", "<cmd>ParinferToggle<cr>", desc = "Parinfer Toggle", ft = clojure_filetype, }
+    }
+  },
+  {
+    "julienvincent/nvim-paredit",
+    ft = clojure_filetype,
+    config = function()
+      paredit = require("nvim-paredit")
+      paredit.setup({
+        use_default_keys = false,
+        keys = {
+          ["<M-x>"] = { paredit.unwrap.unwrap_form_under_cursor, "Splice sexp" },
+          ["<M-e>"] = { paredit.api.slurp_forwards, "Slurp forwards" },
+          ["<M-t>"] = { paredit.api.barf_forwards, "Barf forwards" },
+
+          -- [""] = { paredit.api.slurp_backwards, "Slurp backwards" },
+          -- [""] = { paredit.api.barf_backwards, "Barf backwards" },
+
+          ["<M-a>"] = { paredit.api.drag_element_forwards, "Drag element right" },
+          ["<M-r>"] = { paredit.api.drag_element_backwards, "Drag element left" },
+
+          -- [">p"] = { paredit.api.drag_pair_forwards, "Drag element pairs right" },
+          -- ["<p"] = { paredit.api.drag_pair_backwards, "Drag element pairs left" },
+
+          -- ["<M-B>"] = { paredit.api.drag_form_forwards, "Drag form right" },
+          -- ["<f"] = { paredit.api.drag_form_backwards, "Drag form left" },
+
+          ["<M-w>"] = { paredit.api.raise_element, "Raise element" },
+          -- ["<localleader>o"] = { paredit.api.raise_form, "Raise form" },
+          ["<M-o>"] = {
+            paredit.api.move_to_parent_form_start,
+            "Jump to parent form's head",
+            repeatable = false,
+            mode = { "n", "x", "v" },
+          },
+          ["<M-i>"] = {
+            paredit.api.move_to_next_element_head,
+            "Jump to next element head",
+            repeatable = false,
+            mode = { "n", "x", "o", "v" },
+          },
+          ["<M-d>"] = {
+            paredit.api.select_element,
+            "Around element",
+            repeatable = false,
+            -- mode = { "o", "v" },
+          },
+        },
+      })
+    end
+  },
+  {
     -- review conjure by using `:ConjureSchool`
+    -- uses `.config/clojure/deps.edn` to set nrepl & cider dependencies for all projects
+    -- per:
+    --  - https://github.com/Olical/conjure/wiki/Quick-start:-Clojure#start-your-nrepl--cider-middleware
     "Olical/conjure",
     ft = clojure_filetype,
     init = function()
@@ -79,18 +146,34 @@ return {
       -- we remove this conjure option because it overwrites the LSP `K` hover
       -- and replaces it with `(doc <name>)`, which is less than ideal
       vim.cmd("let g:conjure#mapping#eval_root_form = \"eo\"")
+      -- vim.cmd("<cmd>ConjureEval (do (require \'[clojure.tools.namespace.repl :refer [refresh]]) (refresh))<cr>")
+      -- vim.cmd("let g:conjure#on-load = \"lua print(5)\"")
     end,
+    -- dependencies must be included in the repl profile (.config/clojure/deps.edn) to be able to
+    -- run some of these commands:
     keys = {
-      {
-        "<leader>er",
-        "<cmd>ConjureEval (dev/reset)<cr>",
-        desc = "(reset)"
-      },
-      {
-        "<leader>eR",
-        "<cmd>ConjureEval (clojure.tools.namespace.repl/refresh)<cr>",
-        desc = "(tools.namespace refresh)"
-      }
+      -- tried a variety of commands to run tests and stuff... turns out there are some already provided:
+      -- https://github.com/Olical/conjure/blob/a8686aa6f8760bd3cd4f219a8a4101af037c9d9b/doc/conjure-client-clojure-nrepl.txt
+      --
+      -- {
+      --   "<leader>er",
+      --   "<cmd>ConjureEval (dev/reset)<cr>",
+      --   desc = "(reset)"
+      -- },
+      -- info about this command, here:
+      -- https://github.com/clojure/tools.namespace
+      -- {
+      --   "<leader>eR",
+      --   "<cmd>ConjureEval (do (require '[clojure.tools.namespace.repl :refer [refresh]]) (refresh))<cr>",
+      --   desc = "(tools.namespace refresh)"
+      -- },
+      -- {
+      --   "<leader>et",
+      --   -- test suite, per:
+      --   -- - https://github.com/cognitect-labs/test-runner
+      --   "<cmd>ConjureEval (cognitect.test-runner.api/test test)<cr>", -- searches "test" directory
+      --   desc = "(cognitect.test-runner.api/test)"
+      -- }
       -- other default hotkeys not shown here, include:
       -- <leader>l ... display the repl logs
       -- <leader>lg ... toggle logs buffer
@@ -100,8 +183,6 @@ return {
       -- <leader>E<motion> ... evaluate in motion, such as Eab (around block with mini.ai from mini.nvim)
     }
   },
-  -- relevant docs here:
-  -- https://github.com/Olical/conjure/wiki/Quick-start:-Clojure
   {
     "tpope/vim-dispatch",
     enabled = false, -- not sure why I would need this

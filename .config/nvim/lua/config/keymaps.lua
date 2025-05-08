@@ -64,6 +64,7 @@ map({ "n", "x", "o" }, "<C-x>d", "<C-a>", { desc = "Decrement number" })
 map({ "n", "x", "o" }, "g<C-x>d", "g<C-a>", { desc = "Decrement number" })
 
 -- Yank filename of current buffer and display as message
+require("which-key").add({ "<leader>y", group = '[Y]ank' })
 map("n", "<leader>yf", function()
   vim.fn.setreg("+", vim.fn.expand("%:t"))
   vim.cmd("echo getreg('+')")

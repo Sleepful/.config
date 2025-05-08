@@ -17,6 +17,8 @@ local live_grep_harpoon_files = function()
   })
 end
 
+require("which-key").add({ "<leader>h", group = 'Harpoon' })
+
 return {
   {
     "ThePrimeagen/harpoon",
@@ -40,7 +42,7 @@ return {
         function()
           require("harpoon.ui").toggle_quick_menu()
         end,
-        desc = "🐟 Give them to me!",
+        desc = "🐟 Give them to me! (show list)",
       },
       {
         "<leader>ha",
@@ -63,65 +65,65 @@ return {
       --   end,
       -- },
       -- {
-      --   "<S-F10>",
+      --   "<M-0>",
       --   function()
-      --     require("harpoon.mark").add_file()
+      --     require("harpoon.ui").nav_file(99)
       --   end,
       -- },
-      -- {
-      --   "<S-F1>",
-      --   function()
-      --     require("harpoon.ui").nav_file(1)
-      --   end,
-      -- },
-      -- {
-      --   "<S-F2>",
-      --   function()
-      --     require("harpoon.ui").nav_file(2)
-      --   end,
-      -- },
-      -- {
-      --   "<S-F3>",
-      --   function()
-      --     require("harpoon.ui").nav_file(3)
-      --   end,
-      -- },
-      -- {
-      --   "<S-F4>",
-      --   function()
-      --     require("harpoon.ui").nav_file(4)
-      --   end,
-      -- },
-      -- {
-      --   "<S-F5>",
-      --   function()
-      --     require("harpoon.ui").nav_file(5)
-      --   end,
-      -- },
-      -- {
-      --   "<S-F6>",
-      --   function()
-      --     require("harpoon.ui").nav_file(6)
-      --   end,
-      -- },
-      -- {
-      --   "<S-F7>",
-      --   function()
-      --     require("harpoon.ui").nav_file(7)
-      --   end,
-      -- },
-      -- {
-      --   "<S-F8>",
-      --   function()
-      --     require("harpoon.ui").nav_file(8)
-      --   end,
-      -- },
-      -- {
-      --   "<S-F9>",
-      --   function()
-      --     require("harpoon.ui").nav_file(9)
-      --   end,
-      -- },
+      {
+        "<M-1>",
+        function()
+          require("harpoon.ui").nav_file(1)
+        end,
+      },
+      {
+        "<M-2>",
+        function()
+          require("harpoon.ui").nav_file(2)
+        end,
+      },
+      {
+        "<M-3>",
+        function()
+          require("harpoon.ui").nav_file(3)
+        end,
+      },
+      {
+        "<M-4>",
+        function()
+          require("harpoon.ui").nav_file(4)
+        end,
+      },
+      {
+        "<M-5>",
+        function()
+          require("harpoon.ui").nav_file(5)
+        end,
+      },
+      {
+        "<M-6>",
+        function()
+          require("harpoon.ui").nav_file(6)
+        end,
+      },
+      {
+        "<M-7>",
+        function()
+          require("harpoon.ui").nav_file(7)
+        end,
+      },
+      {
+        "<M-8>",
+        function()
+          require("harpoon.ui").nav_file(8)
+        end,
+      },
+      {
+        "<M-9>",
+        function()
+          require("harpoon.ui").nav_file(9)
+        end,
+      },
     },
   },
 }

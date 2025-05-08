@@ -254,7 +254,7 @@ end
 local buffer_leader = "<M-b>"
 
 
-require("which-key").add({ buffer_leader .. "s", group = '[S]ort'  })
+require("which-key").add({ buffer_leader .. "s", group = '[S]ort' })
 
 return {
   {
@@ -282,13 +282,12 @@ return {
       -- { buffer_leader .. "p",  "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
       -- { buffer_leader .. "Q",  "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
       { buffer_leader .. "P" },
-      { buffer_leader .. "O",  "<Cmd>BufferLineCloseRight<CR>" },
-      { buffer_leader .. "I",  "<Cmd>BufferLineCloseLeft<CR>" },
-      -- { buffer_leader .. "a",  "<Cmd>BufferLinePick<CR>" }, -- dont need this with number travel
+      { buffer_leader .. "O",  "<Cmd>BufferLineCloseRight<CR>",     desc = "Close all on the right" },
+      { buffer_leader .. "I",  "<Cmd>BufferLineCloseLeft<CR>",      desc = "Close all on the left" }, -- { buffer_leader .. "a",  "<Cmd>BufferLinePick<CR>" }, -- dont need this with number travel
       -- { buffer_leader .. "W",  "<Cmd>BufferLinePickClose<CR>" }, -- dont need this with buffer deletion
-      { buffer_leader .. "d",  "<Cmd>:bd<CR>",                      desc = "Kill this buffer" },
-      { buffer_leader .. "D",  "<Cmd>%bd<CR>",                      desc = "Kill all buffers" },
-      { buffer_leader .. "k",  "<Cmd>%bd|e#|bd#<CR>",               desc = "Kill other buffers" },
+      { buffer_leader .. "d",  "<Cmd>:bd<CR>",                      desc = "Delete this buffer" },
+      { buffer_leader .. "k",  "<Cmd>%bd<CR>",                      desc = "Kill all buffers" },
+      { buffer_leader .. "o",  "<Cmd>%bd|e#|bd#<CR>",               desc = "Kill other buffers" },
       -- some bindings in keymaps.lua
       { buffer_leader .. "se", "<Cmd>BufferLineSortByExtension<CR>" },
       { buffer_leader .. "se", "<Cmd>BufferLineSortByExtension<CR>" },
@@ -307,12 +306,13 @@ return {
         end,
         desc = "Sort by recently visited buffer",
       },
-      { buffer_leader .. "i",  "<Cmd>BufferLineGoToBuffer 1<CR>",  desc = "Travel to first buffer" },
-      { buffer_leader .. "o",  "<Cmd>BufferLineGoToBuffer -1<CR>", desc = "Travel to last buffer" },
-      { buffer_leader .. "gh", hide_all_groups,                    desc = "Hide all groups" },
-      { buffer_leader .. "gc", close_all_groups,                   desc = "Close all groups" },
-      { buffer_leader .. "ge", expand_all_groups,                  desc = "Expand all groups" },
-      { buffer_leader .. "gt", toggle_group_by_search,             desc = "Toggle group (search)" },
+      -- no longer necessary, just do number-based travel, and if there are too many buffers and you want to go to the last one, just go the first and cycle left
+      -- { buffer_leader .. "i",  "<Cmd>BufferLineGoToBuffer 1<CR>",  desc = "Travel to first buffer" },
+      -- { buffer_leader .. "o",  "<Cmd>BufferLineGoToBuffer -1<CR>", desc = "Travel to last buffer" },
+      { buffer_leader .. "gh", hide_all_groups,        desc = "Hide all groups" },
+      { buffer_leader .. "gc", close_all_groups,       desc = "Close all groups" },
+      { buffer_leader .. "ge", expand_all_groups,      desc = "Expand all groups" },
+      { buffer_leader .. "gt", toggle_group_by_search, desc = "Toggle group (search)" },
       {
         buffer_leader .. "f",
         function()

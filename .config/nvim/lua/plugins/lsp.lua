@@ -74,7 +74,8 @@ return {
             apply = true
           })
         end,
-        desc = "Drag Forward"
+        desc = "Drag Forward (clojure)",
+        ft = "clojure"
       },
       {
         k .. "b",
@@ -90,8 +91,75 @@ return {
             apply = true
           })
         end,
-        desc = "Drag Backwards"
-      }
+        desc = "Drag Backwards (clojure)",
+        ft = "clojure"
+      },
+      -- not in code actions, need to figure out how to pass these to the server
+      -- https://clojure-lsp.io/features/#execute-command
+      -- {
+      --   k .. "<Tab>",
+      --   function()
+      --     vim.lsp.buf.code_action({
+      --       filter = function(action)
+      --         if action.command then
+      --           -- clojure LSP
+      --           return action.command.command == "forward-slurp"
+      --         end
+      --         return false
+      --       end,
+      --       apply = true
+      --     })
+      --   end,
+      --   desc = "Forwards slurp"
+      -- },
+      -- {
+      --   k .. "<S-Tab>",
+      --   function()
+      --     vim.lsp.buf.code_action({
+      --       filter = function(action)
+      --         if action.command then
+      --           -- clojure LSP
+      --           return action.command.command == "forward-barf"
+      --         end
+      --         return false
+      --       end,
+      --       apply = true
+      --     })
+      --   end,
+      --   desc = "Forward barf"
+      -- },
+      -- {
+      --   k .. "<Del>",
+      --   function()
+      --     vim.lsp.buf.code_action({
+      --       filter = function(action)
+      --         if action.command then
+      --           -- clojure LSP
+      --           return action.command.command == "backward-barf"
+      --         end
+      --         return false
+      --       end,
+      --       apply = true
+      --     })
+      --   end,
+      --   desc = "Backwards barf"
+      -- },
+      -- {
+      --   k .. "<BS>",
+      --   function()
+      --     vim.lsp.buf.code_action({
+      --       filter = function(action)
+      --         if action.command then
+      --           -- clojure LSP
+      --           return action.command.command == "backward-slurp"
+      --         end
+      --         return false
+      --       end,
+      --       apply = true
+      --     })
+      --   end,
+      --   desc = "Backwards slurp"
+      -- },
     },
   },
   -- elixirls,
