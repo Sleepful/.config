@@ -1,6 +1,8 @@
 local K = require("keys")
 
 local function map(mode, lhs, rhs, opts)
+  -- map mode:
+  -- https://neovim.io/doc/user/map.html
   opts = opts or {}
   if opts.silent == nil then
     opts.silent = false
@@ -17,6 +19,18 @@ map({ "o", "n" }, "<S-Right>", "<Cmd>:m +1<CR>", { desc = "" })
 map({ "o", "n" }, "<S-Left>", "<Cmd>:m -2<CR>", { desc = "" })
 map({ "x" }, "<S-Right>", ":m '>+1<CR>gv=gv", { desc = "" })
 map({ "x" }, "<S-Left>", ":m '<-2<CR>gv=gv", { desc = "" })
+
+-- adjust indentation while in visual mode without losing the selection
+map({ "x" }, ">", ">gv", { desc = "" })
+map({ "x" }, "<", "<gv", { desc = "" })
+map({ "x" }, "<Tab>", ">gv", { desc = "" })
+map({ "x" }, "<S-Tab>", "<gv", { desc = "" })
+
+map({ "n" }, "<Tab>", ">>", { desc = "" })
+map({ "n" }, "<S-Tab>", "<<", { desc = "" })
+-- C-i is mapped to F3 in kitty conf, to differentiate it from tab, as C-i and Tab are the same keycode in nvim
+-- so here we map F3 to C-i (tab) for jump position navigation, and map tab to an indentation command
+map({ "n" }, "<F3>", "<C-i>", { desc = "" })
 
 -- Undo
 map("i", "<C-u>", "<C-o>u", { desc = "Undo from insert mode" })
@@ -43,6 +57,7 @@ vim.keymap.set("n", "<End>", "<cmd>BookmarkPrev<CR>", { desc = "Previous Bookmar
 
 -- CMP uses Tab and S-Tab to select next and prev
 
+require("which-key").add({ "<leader>u", group = '[U]ser Interface' })
 -- Wrap lines
 map("n", "<leader>uw", "<Cmd>set wrap!<CR>", { desc = "Toggle word wrap" })
 map("n", "<S-h>", "40zh", { desc = "Scroll left" })

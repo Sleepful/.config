@@ -91,8 +91,8 @@ return {
         use_default_keys = false,
         keys = {
           ["<M-x>"] = { paredit.unwrap.unwrap_form_under_cursor, "Splice sexp" },
-          ["<M-e>"] = { paredit.api.slurp_forwards, "Slurp forwards" },
-          ["<M-t>"] = { paredit.api.barf_forwards, "Barf forwards" },
+          ["<M-t>"] = { paredit.api.slurp_forwards, "Slurp forwards" },
+          ["<M-e>"] = { paredit.api.barf_forwards, "Barf forwards" },
 
           -- [""] = { paredit.api.slurp_backwards, "Slurp backwards" },
           -- [""] = { paredit.api.barf_backwards, "Barf backwards" },
@@ -108,13 +108,25 @@ return {
 
           ["<M-w>"] = { paredit.api.raise_element, "Raise element" },
           -- ["<localleader>o"] = { paredit.api.raise_form, "Raise form" },
-          ["<M-o>"] = {
+          ["<M-i>"] = {
             paredit.api.move_to_parent_form_start,
             "Jump to parent form's head",
             repeatable = false,
             mode = { "n", "x", "v" },
           },
-          ["<M-i>"] = {
+          ["<M-o>"] = {
+            paredit.api.move_to_parent_form_end,
+            "Jump to parent form's tail",
+            repeatable = false,
+            mode = { "n", "x", "v" },
+          },
+          ["<M-n>"] = {
+            paredit.api.move_to_prev_element_head,
+            "Jump to next element head",
+            repeatable = false,
+            mode = { "n", "x", "o", "v" },
+          },
+          ["<M-s>"] = {
             paredit.api.move_to_next_element_head,
             "Jump to next element head",
             repeatable = false,
@@ -135,6 +147,8 @@ return {
     -- uses `.config/clojure/deps.edn` to set nrepl & cider dependencies for all projects
     -- per:
     --  - https://github.com/Olical/conjure/wiki/Quick-start:-Clojure#start-your-nrepl--cider-middleware
+    --  some extra keybinds
+    --  - https://github.com/Olical/conjure/blob/a8686aa6f8760bd3cd4f219a8a4101af037c9d9b/doc/conjure-client-clojure-nrepl.txt
     "Olical/conjure",
     ft = clojure_filetype,
     init = function()
