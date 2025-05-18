@@ -63,14 +63,14 @@ return {
       keys = {
         telescope = {
           n = {
-            paste_behind = "<C-b>",
+            paste_behind = "<F2>",
             -- paste = "<C-p>",
-            paste = "<F2>",
+            -- paste = "<F2>",
           },
           i = {
-            paste_behind = "<C-b>",
+            paste_behind = "<F2>",
             -- paste = "<C-p>",
-            paste = "<F2>",
+            -- paste = "<F2>",
           },
         },
       },

@@ -52,8 +52,8 @@ map({ "n" }, "<leader>q", "<Cmd>q<CR>", { desc = "Quit" })
 map({ "n" }, "<leader>Q", "<Cmd>q!<CR>", { desc = "Quit!" })
 
 -- Navigate between bookmarks
-vim.keymap.set("n", "<Home>", "<cmd>BookmarkNext<CR>", { desc = "Next Bookmark" })
-vim.keymap.set("n", "<End>", "<cmd>BookmarkPrev<CR>", { desc = "Previous Bookmark" })
+vim.keymap.set("n", "<Home>", "<cmd>BookmarkPrev<CR>", { desc = "Previous Bookmark" })
+vim.keymap.set("n", "<End>", "<cmd>BookmarkNext<CR>", { desc = "Next Bookmark" })
 
 -- CMP uses Tab and S-Tab to select next and prev
 

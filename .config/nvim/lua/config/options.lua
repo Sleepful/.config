@@ -25,3 +25,7 @@ o.expandtab = true   -- expand tab input with spaces characters
 o.smartindent = true -- syntax aware indentations for newline inserts
 o.tabstop = 2        -- num of space characters per tab
 o.shiftwidth = 2     -- spaces per indentation level
+
+-- :set indentkeys-=o
+-- run this command to disable indentation based on open parentheses and similar,
+-- gets buggy when open parens are left unclosed in comments or strings, so on and so forth...

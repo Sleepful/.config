@@ -160,6 +160,8 @@ return {
       -- we remove this conjure option because it overwrites the LSP `K` hover
       -- and replaces it with `(doc <name>)`, which is less than ideal
       vim.cmd("let g:conjure#mapping#eval_root_form = \"eo\"")
+      -- vim.cmd("let g:conjure#client#clojure#nrepl#mapping#run_current_ns_tests = \"tn\"")
+      vim.cmd([[let conjure#client#clojure#nrepl#mapping#run_alternate_ns_tests = "tt"]])
       -- vim.cmd("<cmd>ConjureEval (do (require \'[clojure.tools.namespace.repl :refer [refresh]]) (refresh))<cr>")
       -- vim.cmd("let g:conjure#on-load = \"lua print(5)\"")
     end,
