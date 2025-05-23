@@ -868,7 +868,7 @@
                         ]
                     },
                     {
-                        "description": "Paste with ÷ (alt+/)",
+                        "description": "Quit application by holding command-q",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -880,13 +880,17 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "slash",
-                                    "modifiers": { "mandatory": ["left_alt"] }
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "mandatory": ["command"],
+                                        "optional": ["caps_lock"]
+                                    }
                                 },
-                                "to": [
+                                "to_if_held_down": [
                                     {
-                                        "key_code": "v",
-                                        "modifiers": ["left_command"]
+                                        "key_code": "q",
+                                        "modifiers": ["left_command"],
+                                        "repeat": false
                                     }
                                 ],
                                 "type": "basic"

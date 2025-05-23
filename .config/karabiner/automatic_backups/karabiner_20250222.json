@@ -6,7 +6,6 @@
                 "rules": [
                     {
                         "description": "Use option+arrow to Switch Tabs in Chrome & Firefox",
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -868,7 +867,7 @@
                         ]
                     },
                     {
-                        "description": "Paste with ÷ (alt+/)",
+                        "description": "Quit application by holding command-q",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -880,13 +879,17 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "slash",
-                                    "modifiers": { "mandatory": ["left_alt"] }
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "mandatory": ["command"],
+                                        "optional": ["caps_lock"]
+                                    }
                                 },
-                                "to": [
+                                "to_if_held_down": [
                                     {
-                                        "key_code": "v",
-                                        "modifiers": ["left_command"]
+                                        "key_code": "q",
+                                        "modifiers": ["left_command"],
+                                        "repeat": false
                                     }
                                 ],
                                 "type": "basic"
@@ -988,9 +991,11 @@
                         "vendor_id": 1149
                     },
                     "ignore": false,
+                    "mouse_flip_x": true,
+                    "mouse_flip_y": true,
                     "simple_modifications": [
                         {
-                            "from": { "pointing_button": "button2" },
+                            "from": { "pointing_button": "button4" },
                             "to": [{ "pointing_button": "button1" }]
                         },
                         {
@@ -998,7 +1003,7 @@
                             "to": [{ "pointing_button": "button2" }]
                         },
                         {
-                            "from": { "pointing_button": "button4" },
+                            "from": { "pointing_button": "button2" },
                             "to": [{ "pointing_button": "button3" }]
                         }
                     ]
@@ -1012,12 +1017,12 @@
                     "ignore": true,
                     "simple_modifications": [
                         {
-                            "from": { "pointing_button": "button3" },
-                            "to": [{ "pointing_button": "button2" }]
-                        },
-                        {
                             "from": { "pointing_button": "button4" },
                             "to": [{ "pointing_button": "button3" }]
+                        },
+                        {
+                            "from": { "pointing_button": "button3" },
+                            "to": [{ "pointing_button": "button2" }]
                         }
                     ]
                 },

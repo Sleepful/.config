@@ -5,112 +5,6 @@
                 "parameters": { "basic.to_if_held_down_threshold_milliseconds": 5000 },
                 "rules": [
                     {
-                        "description": "Use option+arrow to Switch Tabs in Chrome & Firefox",
-                        "enabled": false,
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.google.Chrome",
-                                            "^org.mozilla.firefox"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "left_arrow",
-                                    "modifiers": {
-                                        "mandatory": ["left_option"],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "tab",
-                                        "modifiers": ["left_control", "left_shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.google.Chrome",
-                                            "^org.mozilla.firefox"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "right_arrow",
-                                    "modifiers": {
-                                        "mandatory": ["left_option"],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "tab",
-                                        "modifiers": ["left_control"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Use Larrow/Rarrow to Switch Tabs in Chrome & Firefox",
-                        "enabled": false,
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.google.Chrome",
-                                            "^org.mozilla.firefox"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "left_arrow",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "tab",
-                                        "modifiers": ["left_control", "left_shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.google.Chrome",
-                                            "^org.mozilla.firefox"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "right_arrow",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "tab",
-                                        "modifiers": ["left_control"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Use CMD+s/CMD+l to Switch Tabs in Chrome & Firefox",
                         "manipulators": [
                             {
@@ -868,7 +762,7 @@
                         ]
                     },
                     {
-                        "description": "Paste with ÷ (alt+/)",
+                        "description": "Quit application by holding command-q",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -880,13 +774,17 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "slash",
-                                    "modifiers": { "mandatory": ["left_alt"] }
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "mandatory": ["command"],
+                                        "optional": ["caps_lock"]
+                                    }
                                 },
-                                "to": [
+                                "to_if_held_down": [
                                     {
-                                        "key_code": "v",
-                                        "modifiers": ["left_command"]
+                                        "key_code": "q",
+                                        "modifiers": ["left_command"],
+                                        "repeat": false
                                     }
                                 ],
                                 "type": "basic"
@@ -928,7 +826,6 @@
                         "product_id": 833,
                         "vendor_id": 1452
                     },
-                    "manipulate_caps_lock_led": false,
                     "simple_modifications": [
                         {
                             "from": { "key_code": "caps_lock" },
@@ -968,75 +865,15 @@
                     "mouse_flip_y": true,
                     "simple_modifications": [
                         {
-                            "from": { "pointing_button": "button2" },
-                            "to": [{ "pointing_button": "button3" }]
-                        },
-                        {
                             "from": { "pointing_button": "button3" },
                             "to": [{ "pointing_button": "button2" }]
                         },
                         {
                             "from": { "pointing_button": "button4" },
                             "to": [{ "pointing_button": "button1" }]
-                        }
-                    ]
-                },
-                {
-                    "identifiers": {
-                        "is_pointing_device": true,
-                        "product_id": 32983,
-                        "vendor_id": 1149
-                    },
-                    "ignore": false,
-                    "simple_modifications": [
+                        },
                         {
                             "from": { "pointing_button": "button2" },
-                            "to": [{ "pointing_button": "button1" }]
-                        },
-                        {
-                            "from": { "pointing_button": "button3" },
-                            "to": [{ "pointing_button": "button2" }]
-                        },
-                        {
-                            "from": { "pointing_button": "button4" },
-                            "to": [{ "pointing_button": "button3" }]
-                        }
-                    ]
-                },
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "product_id": 32983,
-                        "vendor_id": 1149
-                    },
-                    "ignore": true,
-                    "simple_modifications": [
-                        {
-                            "from": { "pointing_button": "button3" },
-                            "to": [{ "pointing_button": "button2" }]
-                        },
-                        {
-                            "from": { "pointing_button": "button4" },
-                            "to": [{ "pointing_button": "button3" }]
-                        }
-                    ]
-                },
-                {
-                    "identifiers": {
-                        "is_pointing_device": true,
-                        "product_id": 32982,
-                        "vendor_id": 1149
-                    },
-                    "ignore": false,
-                    "mouse_flip_x": true,
-                    "mouse_flip_y": true,
-                    "simple_modifications": [
-                        {
-                            "from": { "pointing_button": "button3" },
-                            "to": [{ "pointing_button": "button2" }]
-                        },
-                        {
-                            "from": { "pointing_button": "button4" },
                             "to": [{ "pointing_button": "button3" }]
                         }
                     ]
