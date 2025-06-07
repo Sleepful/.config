@@ -12,6 +12,9 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # nix installed bins
 export PATH=~/.nix-profile/bin:$PATH
 
+# aider.chat, installed through pip/python
+export PATH=~/.local/share/../bin:$PATH
+
 # static default port for Clojure nrepl with lein
 export LEIN_REPL_PORT=1337
 # start clojure repl wilh clj build tools, uses the :alias `repl/conjure` which ought to be found in user directory,

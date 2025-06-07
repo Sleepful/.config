@@ -51,6 +51,7 @@ return {
   { 'echasnovski/mini.cursorword', version = false, config = {} },
   { 'echasnovski/mini.move',       version = false, config = {} },
   { 'echasnovski/mini.operators',  version = false, config = {} },
+  { 'echasnovski/mini.jump',       version = false, config = {} },
 
   {
     "echasnovski/mini.surround",
@@ -70,19 +71,107 @@ return {
       mappings = vim.tbl_filter(function(m)
         return m[1] and #m[1] > 0
       end, mappings)
+      vim.list_extend(mappings, {
+        --- without visual selection, normal mode
+        {
+          "[",
+          [[viw:<C-u>lua MiniSurround.add('visual')<CR>[]],
+          mode = { "n" },
+          desc = "Surround with [",
+        },
+        {
+          "(",
+          [[viw:<C-u>lua MiniSurround.add('visual')<CR>(]],
+          mode = { "n" },
+          desc = "Surround with (",
+        },
+        {
+          "{",
+          [[viw:<C-u>lua MiniSurround.add('visual')<CR>{]],
+          mode = { "n" },
+          desc = "Surround with {",
+        },
+        {
+          "\"",
+          [[viw:<C-u>lua MiniSurround.add('visual')<CR>"]],
+          mode = { "n" },
+          desc = "Surround with \"",
+        },
+        {
+          "'",
+          [[viw:<C-u>lua MiniSurround.add('visual')<CR>']],
+          mode = { "n" },
+          desc = "Surround with '",
+        },
+        {
+          "`",
+          [[viw:<C-u>lua MiniSurround.add('visual')<CR>`]],
+          mode = { "n" },
+          desc = "Surround with `",
+        },
+        --- with visual selection
+        {
+          "[",
+          [[:<C-u>lua MiniSurround.add('visual')<CR>[]],
+          mode = { "x", "o" },
+          desc = "Surround with [",
+        },
+        {
+          "(",
+          [[:<C-u>lua MiniSurround.add('visual')<CR>(]],
+          mode = { "x", "o" },
+          desc = "Surround with (",
+        },
+        {
+          "{",
+          [[:<C-u>lua MiniSurround.add('visual')<CR>{]],
+          mode = { "x", "o" },
+          desc = "Surround with {",
+        },
+        {
+          "\"",
+          [[:<C-u>lua MiniSurround.add('visual')<CR>"]],
+          mode = { "x", "o" },
+          desc = "Surround with \"",
+        },
+        {
+          "'",
+          [[:<C-u>lua MiniSurround.add('visual')<CR>']],
+          mode = { "x", "o" },
+          desc = "Surround with '",
+        },
+        {
+          "`",
+          [[:<C-u>lua MiniSurround.add('visual')<CR>`]],
+          mode = { "x", "o" },
+          desc = "Surround with `",
+        },
+        {
+          "<leader>a",
+          [[:<C-u>lua MiniSurround.add('visual')<CR>]],
+          mode = { "x", "o" },
+          desc = "Surround with [input]",
+        },
+        {
+          "<leader>aa",
+          [[:<C-u>lua MiniSurround.add('visual')<CR>]],
+          mode = { "n" },
+          desc = "Surround with [input]",
+        }
+      })
       return vim.list_extend(mappings, keys)
     end,
     opts = {
       mappings = {
-        add = "\\",                     -- Add surrounding in Normal and Visual modes,
-        delete = "<M-Bslash>d",         -- Delete surrounding
-        find = "<M-Bslash>f",           -- Find surrounding (to the right)
-        find_left = "<M-Bslash>F",      -- Find surrounding (to the left)
-        highlight = "<M-Bslash>h",      -- Highlight surrounding
-        replace = "<M-Bslash>r",        -- Replace surrounding
-        update_n_lines = "<M-Bslash>n", -- Update `n_lines`
-        suffix_last = "",
-        suffix_next = "",
+        -- add = "<leader>aa",            -- Add surrounding in Normal and Visual modes,
+        delete = "<leader>ad",         -- Delete surrounding
+        find = "<leader>an",           -- Find surrounding (to the right)
+        find_left = "<leader>al",      -- Find surrounding (to the left)
+        highlight = "<leader>ah",      -- Highlight surrounding
+        replace = "<leader>ar",        -- Replace surrounding
+        update_n_lines = "<leader>aN", -- Update `n_lines`
+        suffix_last = "l",
+        suffix_next = "n",
       },
     },
   },

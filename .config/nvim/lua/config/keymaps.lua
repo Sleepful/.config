@@ -15,10 +15,10 @@ end
 
 -- Moving lines up and down smoothly
 -- https://stackoverflow.com/a/28186505/2446144
-map({ "o", "n" }, "<S-Right>", "<Cmd>:m +1<CR>", { desc = "" })
-map({ "o", "n" }, "<S-Left>", "<Cmd>:m -2<CR>", { desc = "" })
-map({ "x" }, "<S-Right>", ":m '>+1<CR>gv=gv", { desc = "" })
-map({ "x" }, "<S-Left>", ":m '<-2<CR>gv=gv", { desc = "" })
+map({ "o", "n" }, "<S-Down>", "<Cmd>:m +1<CR>", { desc = "" })
+map({ "o", "n" }, "<S-Up>", "<Cmd>:m -2<CR>", { desc = "" })
+map({ "x" }, "<S-Down>", ":m '>+1<CR>gv=gv", { desc = "" })
+map({ "x" }, "<S-Up>", ":m '<-2<CR>gv=gv", { desc = "" })
 
 -- adjust indentation while in visual mode without losing the selection
 map({ "x" }, ">", ">gv", { desc = "" })
@@ -64,10 +64,10 @@ map("n", "<S-h>", "40zh", { desc = "Scroll left" })
 map("n", "<S-l>", "40zl", { desc = "Scroll right" })
 
 -- <p> move in paragraphs with arrows
-map({ "i" }, "<S-Up>", "<C-o>{", { desc = "Move to start of paragraph" })
-map({ "i" }, "<S-Down>", "<C-o>}", { desc = "Move to start of paragraph" })
-map({ "n", "x", "o" }, "<S-Up>", "{", { desc = "Move to start of paragraph" })
-map({ "n", "x", "o" }, "<S-Down>", "}", { desc = "Move to start of paragraph" })
+map({ "i" }, "<S-Left>", "<C-o>{", { desc = "Move to start of paragraph" })
+map({ "i" }, "<S-Right>", "<C-o>}", { desc = "Move to start of paragraph" })
+map({ "n", "x", "o" }, "<S-Left>", "{", { desc = "Move to start of paragraph" })
+map({ "n", "x", "o" }, "<S-Right>", "}", { desc = "Move to start of paragraph" })
 
 -- <p> move with parens
 map({ "n", "x", "o" }, "(", "{", { desc = "Prefer paragraph movement" })
