@@ -73,6 +73,13 @@ return {
       end, mappings)
       vim.list_extend(mappings, {
         --- without visual selection, normal mode
+        ---
+        {
+          "<",
+          [[viw:<C-u>lua MiniSurround.add('visual')<CR><]],
+          mode = { "n" },
+          desc = "Surround with <",
+        },
         {
           "[",
           [[viw:<C-u>lua MiniSurround.add('visual')<CR>[]],
@@ -110,6 +117,13 @@ return {
           desc = "Surround with `",
         },
         --- with visual selection
+        ---
+        {
+          "<",
+          [[:<C-u>lua MiniSurround.add('visual')<CR><]],
+          mode = { "x", "o" },
+          desc = "Surround with <",
+        },
         {
           "[",
           [[:<C-u>lua MiniSurround.add('visual')<CR>[]],

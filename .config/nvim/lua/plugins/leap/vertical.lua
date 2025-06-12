@@ -18,32 +18,32 @@ local function get_line_starts(winid)
       if lnum ~= cur_line then
         -- table.insert(targets, { pos = { lnum, 1 } })
         local line = vim.fn.getline(lnum)
-        local max_col = string.len(line)
+        local line_length = string.len(line)
         local col_pos = nil
-        if max_col < cur_col then
-          col_pos = max_col
+        if line_length < cur_col then
+          col_pos = line_length + 1
         else
           col_pos = cur_col
         end
-        print(line)
+        -- print(line)
         table.insert(targets, { pos = { lnum, col_pos } })
       end
       lnum = lnum + 1
     end
   end
+  if #targets == 0 then return end
   -- Sort them by vertical screen distance from cursor.
   local cur_screen_row = vim.fn.screenpos(winid, cur_line, 1)["row"]
-  local function screen_rows_from_cur(t)
-    local t_screen_row = vim.fn.screenpos(winid, t.pos[1], t.pos[2])["row"]
-    return math.abs(cur_screen_row - t_screen_row)
+  for _, t in ipairs(targets) do
+    local pos = vim.fn.screenpos(winid, t.pos[1], t.pos[2])
+    if pos.row > 0 and pos.col > 0 then
+      t.screen_line_diff = math.abs(cur_screen_row - pos.row)
+    else
+      t.screen_line_diff = math.huge
+    end
   end
-  table.sort(targets, function(t1, t2)
-    return screen_rows_from_cur(t1) < screen_rows_from_cur(t2)
-  end)
-
-  if #targets >= 1 then
-    return targets
-  end
+  table.sort(targets, function(t1, t2) return t1.screen_line_diff < t2.screen_line_diff end)
+  return targets
 end
 
 -- Usage:

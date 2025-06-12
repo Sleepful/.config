@@ -42,6 +42,14 @@ vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory
 vim.keymap.set("n", "<S-PageDown>", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist" })
 vim.keymap.set("n", "<S-PageUp>", "<cmd>cprev<CR>zz", { desc = "Backward qfixlist" })
 
+-- Navigate between diagnostic items
+vim.keymap.set("n", "<S-End>", function()
+  vim.diagnostic.goto_next()
+end, { desc = "Forward diagnostic" })
+vim.keymap.set("n", "<S-Home>", function()
+  vim.diagnostic.goto_prev()
+end, { desc = "Previous diagnostic" })
+
 -- Quickfix ops
 map({ "n" }, "<leader>lo", "<Cmd>copen<CR>", { desc = "Open quickfix list" })
 
@@ -70,8 +78,8 @@ map({ "n", "x", "o" }, "<S-Left>", "{", { desc = "Move to start of paragraph" })
 map({ "n", "x", "o" }, "<S-Right>", "}", { desc = "Move to start of paragraph" })
 
 -- <p> move with parens
-map({ "n", "x", "o" }, "(", "{", { desc = "Prefer paragraph movement" })
-map({ "n", "x", "o" }, ")", "}", { desc = "Prefer paragraph movement" })
+-- map({ "n", "x", "o" }, "(", "{", { desc = "Prefer paragraph movement" })
+-- map({ "n", "x", "o" }, ")", "}", { desc = "Prefer paragraph movement" })
 
 map({ "n", "x", "o" }, "<C-x>i", "<C-a>", { desc = "Increment number" })
 map({ "n", "x", "o" }, "g<C-x>i", "g<C-a>", { desc = "Increment number" })
