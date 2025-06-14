@@ -230,8 +230,8 @@ return {
       require("plugins.telescope.C-g-keymaps").pathogen.files,
       require("plugins.telescope.C-g-keymaps").fuzzy_current_buffer,
       require("plugins.telescope.C-g-keymaps").grep_open_buffers,
-      require("plugins.telescope.C-g-keymaps").fuzzy_open_buffers,
-      require("plugins.telescope.C-g-keymaps").grep_current_buffer,
+      -- require("plugins.telescope.C-g-keymaps").fuzzy_open_buffers,
+      -- require("plugins.telescope.C-g-keymaps").grep_current_buffer,
       require("plugins.telescope.C-g-keymaps").marks,
       -- Custom keymaps
       {

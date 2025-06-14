@@ -51,7 +51,7 @@ return {
   { 'echasnovski/mini.cursorword', version = false, config = {} },
   { 'echasnovski/mini.move',       version = false, config = {} },
   { 'echasnovski/mini.operators',  version = false, config = {} },
-  { 'echasnovski/mini.jump',       version = false, config = {} },
+  -- { 'echasnovski/mini.jump',       version = false, config = {} },
 
   {
     "echasnovski/mini.surround",

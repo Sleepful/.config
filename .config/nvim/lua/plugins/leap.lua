@@ -32,6 +32,10 @@ return {
         desc = "Leap vertical to",
       },
       {
+        "zf", -- remove "create fold" in visual mode because it interferes with leap labels when doing vertical leaps
+        false
+      },
+      {
         "<C-w>e",
         require("plugins.leap.window"),
         desc = "Leap to window",

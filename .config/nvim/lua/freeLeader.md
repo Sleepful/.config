@@ -19,3 +19,7 @@ telescope:
 
 - <c-s> hop to result
 - <c-q> send to quickfix list
+
+other:
+
+- allow oil.nvim to exit with esc key

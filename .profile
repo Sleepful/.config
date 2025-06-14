@@ -47,6 +47,8 @@ export CLOUD=~/Documents/Cloud-Drive
 source ~/.profile.subshell
 alias prcs='vim ~/.profile.subshell'
 
+alias k='kubectl'
+
 # Begin CDs
 alias home='cd ~/'
 alias code='cd ~/Code'

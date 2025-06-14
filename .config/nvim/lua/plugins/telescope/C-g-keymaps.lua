@@ -13,7 +13,7 @@ return {
     desc = "👻 neoClip",
   },
   fuzzy_current_buffer = {
-    cgLeader .. "p",
+    cgLeader .. "/",
     function()
       require("telescope.builtin").current_buffer_fuzzy_find({
         -- tiebreak function from
@@ -33,18 +33,18 @@ return {
     end,
     desc = "💤 fuzzy buffer",
   },
-  fuzzy_open_buffers = {
-    cgLeader .. "o",
-    function()
-      require("telescope.builtin").grep_string({
-        grep_open_files = true,
-        additional_args = { "--ignore-case", "--pcre2" },
-      })
-    end,
-    desc = "💤 fuzzy all buffers",
-  },
+  -- fuzzy_open_buffers = {
+  --   cgLeader .. "o",
+  --   function()
+  --     require("telescope.builtin").grep_string({
+  --       grep_open_files = true,
+  --       additional_args = { "--ignore-case", "--pcre2" },
+  --     })
+  --   end,
+  --   desc = "💤 fuzzy all buffers",
+  -- },
   grep_open_buffers = {
-    cgLeader .. "O",
+    cgLeader .. "o",
     function()
       require("telescope.builtin").live_grep({
         grep_open_files = true,
@@ -54,7 +54,7 @@ return {
     desc = "🪄 grep all buffers",
   },
   grep_current_buffer = {
-    cgLeader .. "P",
+    cgLeader .. ",",
     function()
       require("telescope.builtin").live_grep({
         search_dirs = { vim.fn.expand("%:p") },
@@ -89,7 +89,7 @@ return {
   },
   pathogen = {
     fuzzy = {
-      cgLeader .. "l",
+      cgLeader .. "w",
       function()
         local opts = {
           cwd = require("telescope.utils").buffer_dir(),
@@ -100,7 +100,7 @@ return {
       desc = "⚡️ Pathogen this word",
     },
     grep = {
-      cgLeader .. "/",
+      cgLeader .. ".",
       function()
         local opts = {
           cwd = require("telescope.utils").buffer_dir(),
@@ -110,7 +110,7 @@ return {
       desc = "⚡️ Pathogen Grep",
     },
     files = {
-      cgLeader .. "f",
+      cgLeader .. "<leader>",
       function()
         local opts = {
           cwd = require("telescope.utils").buffer_dir(),

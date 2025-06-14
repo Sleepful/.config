@@ -3,15 +3,45 @@ local K = require("keys")
 local function map(mode, lhs, rhs, opts)
   -- map mode:
   -- https://neovim.io/doc/user/map.html
+  -- https://neovim.io/doc/user/map.html#map-table
   opts = opts or {}
   if opts.silent == nil then
     opts.silent = false
   end
-  if opts.silent == nil then
-    opts.noremap = true
-  end
+  opts.noremap = true
+  -- if opts.silent == nil then
+  --   opts.noremap = true
+  -- end
   vim.keymap.set(mode, lhs, rhs, opts)
 end
+
+-- Basic movements remapped:
+map({ "o", "x", "n" }, "B", "gE", { desc = "jump to previous word ending" })
+map({ "o", "x", "n" }, "b", "ge", { desc = "jump to previous word ending" })
+
+-- switch t with w for movement ergonomics
+map({ "o", "x", "n" }, "t", "e", { desc = "swaps" })
+map({ "o", "x", "n" }, "w", "t", { desc = "swaps" })
+map({ "o", "x", "n" }, "e", "w", { desc = "swaps" })
+map({ "o", "x", "n" }, "T", "E", { desc = "swaps" })
+map({ "o", "x", "n" }, "W", "T", { desc = "swaps" })
+map({ "o", "x", "n" }, "E", "W", { desc = "swaps" })
+
+-- change inside word with quick tap of cc
+-- map({ "n" }, "cc", "ciw", { desc = "change" })
+--
+-- use 'c' in 'operator pending' to effect inside word, useful for 'cc' to change inside word and similar
+map({ "o" }, "c", "iw", { desc = "effect inside word" })
+-- map({ "n" }, "C", "ciW", { desc = "change" })
+-- map({ "o" }, "x", "$", { desc = "effect til end of line" })
+-- use 'x' as big word, similar to 'c' above but larger
+map({ "o" }, "x", "iW", { desc = "effect inside BIG word" })
+-- map({ "n" }, "X", "viW", { desc = "quick select inside BIG word" })
+map({ "n" }, "x", "viw", { desc = "quick select inside little word" })
+map({ "x" }, "x", "<esc>viW", { desc = "reselect with BIG word" })
+
+-- remove highlights:
+map({ "o", "x", "n" }, "<leader>uu", "<Cmd>:noh<CR>", { desc = "Remove highlight search" })
 
 -- Moving lines up and down smoothly
 -- https://stackoverflow.com/a/28186505/2446144
@@ -254,3 +284,7 @@ map({ "n" },
 map("t", "<C-N><C-N>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 map("i", "<M-BS>", "<Del>", { desc = "Delete forward" })
+
+
+-- remove "create fold" in visual mode because it interferes with leap labels when doing vertical leaps
+-- vim.keymap.del("n", "zf")

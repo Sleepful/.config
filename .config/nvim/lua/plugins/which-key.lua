@@ -49,9 +49,16 @@ return {              -- Useful plugin to show you pending keybinds.
       { '<leader>g', group = '[G]it' },
       { '<leader>r', group = '[R]ename' },
       { '<leader>s', group = '[S]earch' },
+      -- { "zf",        hidden = true } -- did not work
       -- { '<leader>w', group = '[W]orkspace' },
       -- { '<leader>t', group = '[T]oggle' },
       -- { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+    },
+    triggers = {
+      -- remove visual mode 'x' because which key pops up for 'z' due to 'zf' which creates folds, but I am using 'z' for leap vertical
+      -- also remove 'o' pending operator, feels buggy
+      -- { "gc",     mode = { "n", "x" } },
+      { "<auto>", mode = "nsxo" },
     },
   },
 }
