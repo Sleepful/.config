@@ -38,6 +38,8 @@ return {
           ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
           ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
           ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<F29>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
           ["<PageDown>"] = cmp.mapping.select_next_item({ count = 7, behavior = cmp.SelectBehavior.Select }),
           ["<PageUp>"] = cmp.mapping.select_prev_item({ count = 7, behavior = cmp.SelectBehavior.Select }),
           ["<S-PageUp>"] = cmp.mapping.scroll_docs(-4),
