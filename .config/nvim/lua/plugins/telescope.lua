@@ -115,6 +115,7 @@ return {
         })()
       end
 
+      actions = require("telescope.actions")
       return {
         defaults = {
           preview = { hide_on_startup = true },
@@ -169,6 +170,7 @@ return {
                 require 'telescope'.extensions.hop._hop(prompt_bufnr,
                   { callback = require("telescope.actions").select_default })
               end,
+              ['<C-c>'] = actions.close
             },
             n = {
               ["<C-" .. keys.up.bound .. ">"] = require("telescope.actions").results_scrolling_up,
