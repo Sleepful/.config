@@ -49,6 +49,8 @@ alias prcs='vim ~/.profile.subshell'
 
 alias k='kubectl'
 
+alias pb='pbpaste'
+
 # Begin CDs
 alias home='cd ~/'
 alias code='cd ~/Code'
