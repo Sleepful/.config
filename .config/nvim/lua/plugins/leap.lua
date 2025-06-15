@@ -26,14 +26,24 @@ return {
     end,
     keys = {
       {
-        "z", -- removes the folding key, meh (create folds, etc)
-        require("plugins.leap.vertical"),
+        "z",                              -- removes the folding key, meh (create folds, etc)
+        require("plugins.leap.vertical"), -- this is my custom jump
         mode = { "n", "x", "o" },
         desc = "Leap vertical to",
       },
       {
-        "zf", -- remove "create fold" in visual mode because it interferes with leap labels when doing vertical leaps
-        false
+        "f",
+        function()
+          require('leap').leap({})
+        end,
+        desc = "Standard leap"
+      },
+      {
+        "F",
+        function()
+          require('leap').leap({ backward = true })
+        end,
+        desc = "Standard leap"
       },
       {
         "<C-w>e",

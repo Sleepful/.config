@@ -16,16 +16,16 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- Basic movements remapped:
-map({ "o", "x", "n" }, "B", "gE", { desc = "jump to previous word ending" })
-map({ "o", "x", "n" }, "b", "ge", { desc = "jump to previous word ending" })
+-- map({ "o", "x", "n" }, "B", "gE", { desc = "jump to previous word ending" })
+-- map({ "o", "x", "n" }, "b", "ge", { desc = "jump to previous word ending" })
 
 -- switch t with w for movement ergonomics
-map({ "o", "x", "n" }, "t", "e", { desc = "swaps" })
-map({ "o", "x", "n" }, "w", "t", { desc = "swaps" })
-map({ "o", "x", "n" }, "e", "w", { desc = "swaps" })
-map({ "o", "x", "n" }, "T", "E", { desc = "swaps" })
-map({ "o", "x", "n" }, "W", "T", { desc = "swaps" })
-map({ "o", "x", "n" }, "E", "W", { desc = "swaps" })
+-- map({ "o", "x", "n" }, "t", "e", { desc = "swaps" })
+-- map({ "o", "x", "n" }, "w", "t", { desc = "swaps" })
+-- map({ "o", "x", "n" }, "e", "w", { desc = "swaps" })
+-- map({ "o", "x", "n" }, "T", "E", { desc = "swaps" })
+-- map({ "o", "x", "n" }, "W", "T", { desc = "swaps" })
+-- map({ "o", "x", "n" }, "E", "W", { desc = "swaps" })
 
 -- change inside word with quick tap of cc
 -- map({ "n" }, "cc", "ciw", { desc = "change" })
