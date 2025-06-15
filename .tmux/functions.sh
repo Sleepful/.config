@@ -82,14 +82,15 @@ function open_notes() {
   fi
 }
 
+# opens pop up, option to send-keys for quick command, attaches or creates session and attaches if not exists
 popup ()
 {
   # inspired by https://blog.meain.io/2020/tmux-flating-scratch-terminal/
   width=${2:-90%}
   height=${2:-90%}
+  # calling this function with 'jq' argument:
   if [[ "$1" == "jq" ]]; then
     sendKeys="pbpaste|jq Enter"
-    # sendKeys="tmux send-keys -c popup $initCmd"
   fi
   if [ "$(tmux display-message -p -F "#{session_name}")" = "popup" ];then
     tmux detach-client

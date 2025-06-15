@@ -315,12 +315,11 @@ function prompt_date(){
 prompt_date
 
 function prompt(){
+  prompt_date
   SUCCESS_PROMPT=$SUCCESS_COLOR$PROMPT_SYMBOL
   FAIL_PROMPT=$FAIL_COLOR$PROMPT_SYMBOL
   PROMPT="%$DATE %(?:$SUCCESS_PROMPT:$FAIL_PROMPT) %{$fg_no_bold[default]%}%"
 }
-
-prompt
 
 # TODO:
 # Remove OMZ
@@ -331,6 +330,7 @@ function preexec() {
 }
 
 function precmd() {
+  prompt
   if [ $timer ]; then
     local now=$(gdate +%s%3N)
     local d_ms=$(($now-$timer))
@@ -345,7 +345,6 @@ function precmd() {
     elif ((s > 0)); then elapsed=${s}.$((ms / 10))s
     else elapsed=${ms}ms
     fi
-
     # Overrides the RPROMPT above
     RPROMPT=' %{$reset_color%}${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}${elapsed} %c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} %{$reset_color%}'
     unset timer
