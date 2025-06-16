@@ -17,7 +17,30 @@ return {
         ">",
         "<",
       }
+      -- `g:wordmotion_mappings` shows up in the docs but does not work
     end,
+    keys = {
+      -- {
+      --   "b",
+      --   "<plug>WordMotion_w"
+      -- },
+      {
+        "B",
+        "<plug>WordMotion_gE"
+      },
+      -- {
+      --   "b",
+      --   "<plug>WordMotion_ge"
+      -- },
+      {
+        "t",
+        "<plug>WordMotion_w"
+      },
+      {
+        "T",
+        "<plug>WordMotion_W"
+      }
+    }
   },
 }
 -- test string:
