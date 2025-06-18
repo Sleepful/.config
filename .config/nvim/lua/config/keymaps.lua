@@ -17,6 +17,7 @@ end
 
 -- Basic movements remapped:
 -- map({ "o", "x", "n" }, "B", "gE", { desc = "jump to previous word ending" })
+-- map({ "o", "x", "n" }, "B", "<plug>WordMotion_gE", { desc = "jump to previous word ending" })
 -- map({ "o", "x", "n" }, "b", "ge", { desc = "jump to previous word ending" })
 
 -- switch t with w for movement ergonomics

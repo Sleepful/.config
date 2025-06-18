@@ -1,6 +1,7 @@
 return {
   {
     "chaoren/vim-wordmotion",
+    lazy = false,
     init = function()
       vim.g.wordmotion_spaces = { ".", "_", "-", "," }
       vim.g.wordmotion_uppercase_spaces = {
@@ -17,17 +18,19 @@ return {
         ">",
         "<",
       }
-      -- `g:wordmotion_mappings` shows up in the docs but does not work
+      -- key = behavior
+      -- value = keybind
+      vim.g.wordmotion_mappings = { gE = 'B' }
     end,
     keys = {
       -- {
       --   "b",
       --   "<plug>WordMotion_w"
       -- },
-      {
-        "B",
-        "<plug>WordMotion_gE"
-      },
+      -- { -- not working?
+      --   "B",
+      --   "<plug>WordMotion_gE"
+      -- },
       -- {
       --   "b",
       --   "<plug>WordMotion_ge"

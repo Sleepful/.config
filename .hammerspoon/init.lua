@@ -16,8 +16,8 @@ hs.hotkey.bind({ "cmd", "alt" }, "V", function() hs.eventtap.keyStrokes(hs.paste
 
 require("./redCircleMouse")
 
-local wm = require("./windowsModule")
-hs.hotkey.bind({ "cmd" }, "space", function() wm:showSwitcher() end)
+-- local wm = require("./windowsModule")
+-- hs.hotkey.bind({ "cmd" }, "space", function() wm:showSwitcher() end)
 
 -- hs.hotkey.bind({ "cmd", "alt" }, "W", function() wm:showSwitcher() end)
 -- hs.hotkey.bind('alt', 'tab', 'Next window', function() switcher:next() end)
