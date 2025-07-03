@@ -15,6 +15,13 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+-- allow cmd-delete combo
+map({ "i" }, "<M-Del>", "<C-o>de", { desc = "Use delete-forward on insert mode" })
+map({ "n" }, "<M-Del>", "de", { desc = "Use delete-forward on normal mode" })
+-- allow in normal mode, this is kinda laggy, could use <C-w> for something else maybe
+-- TODO: this interferes with C-w for window operations
+-- map({ "n" }, "<C-W>", "i<C-w><esc><Right>", { desc = "Use delete-forward on normal mode" })
+
 -- Basic movements remapped:
 -- map({ "o", "x", "n" }, "B", "gE", { desc = "jump to previous word ending" })
 -- map({ "o", "x", "n" }, "B", "<plug>WordMotion_gE", { desc = "jump to previous word ending" })
