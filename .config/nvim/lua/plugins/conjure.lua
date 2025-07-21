@@ -18,84 +18,43 @@
 
 
 local clojure_filetype = "clojure"
+local fennel_filetype = "fennel"
+local racket_filetype = "racket"
+local cl_filetype = "lisp"
+local filetypes = { clojure_filetype, fennel_filetype, racket_filetype, cl_filetype }
+local filetypes_conjure = { clojure_filetype, fennel_filetype, racket_filetype }
 return {
-  {
-    enabled = false, -- not liking these hotkeys
-    "guns/vim-sexp",
-    ft = clojure_filetype,
-    init = function()
-      -- Disable mapping hooks
-      vim.g.sexp_filetypes = ''
-      -- these are taken from the docs:
-      --    https://github.com/guns/vim-sexp/blob/master/doc/vim-sexp.txt#L647
-      --    *sexp-explicit-mappings*
-      -- the % and $ match with kitty config
-      vim.cmd([=[
-        function! s:vim_sexp_mappings()
-            nmap <silent><buffer> $               <Plug>(sexp_move_to_prev_bracket)
-            xmap <silent><buffer> $               <Plug>(sexp_move_to_prev_bracket)
-            omap <silent><buffer> $               <Plug>(sexp_move_to_prev_bracket)
-            nmap <silent><buffer> %               <Plug>(sexp_move_to_next_bracket)
-            xmap <silent><buffer> %               <Plug>(sexp_move_to_next_bracket)
-            omap <silent><buffer> %               <Plug>(sexp_move_to_next_bracket)
-            imap <silent><buffer> <BS>            <Plug>(sexp_insert_backspace)
-            imap <silent><buffer> "               <Plug>(sexp_insert_double_quote)
-            imap <silent><buffer> (               <Plug>(sexp_insert_opening_round)
-            imap <silent><buffer> )               <Plug>(sexp_insert_closing_round)
-            imap <silent><buffer> [               <Plug>(sexp_insert_opening_square)
-            imap <silent><buffer> ]               <Plug>(sexp_insert_closing_square)
-            imap <silent><buffer> {               <Plug>(sexp_insert_opening_curly)
-            imap <silent><buffer> }               <Plug>(sexp_insert_closing_curly)
-          endfunction
-              augroup VIM_SEXP_MAPPING
-              autocmd!
-              autocmd FileType clojure,scheme,lisp,timl call s:vim_sexp_mappings()
-          augroup END
-      ]=])
-    end,
-    keys = {
-      {
-        "<F25>", -- <C-[> in kittyconf
-        function()
-          vim.cmd([[execute "normal \<Plug>(sexp_flow_to_prev_open)"]])
-        end },
-      {
-        "<F26>", -- <C-]> in kittyconf
-        function()
-          vim.cmd([[execute "normal \<Plug>(sexp_flow_to_next_open)"]])
-        end },
-    }
-  },
   {
     -- SUPER TRIPPY!!!
     -- https://github.com/gpanders/nvim-parinfer/blob/master/doc/parinfer.txt
     -- https://shaunlebron.github.io/parinfer/
     "gpanders/nvim-parinfer",
-    ft = clojure_filetype,
+    ft = filetypes,
     keys = {
       {
         "<leader>ci",
         "<cmd>if b:parinfer_enabled ==# 1 | echo 'Parinfer is enabled' | else | echo 'Parinfer is disabled' | endif<cr>",
         desc = "Parinfer Check",
-        ft = clojure_filetype,
+        ft = filetypes,
       },
-      { "<leader>cI", "<cmd>ParinferToggle<cr>", desc = "Parinfer Toggle", ft = clojure_filetype, }
+      { "<leader>cI", "<cmd>ParinferToggle<cr>", desc = "Parinfer Toggle", ft = filetypes, }
     }
   },
   {
     "julienvincent/nvim-paredit",
-    ft = clojure_filetype,
+    ft = filetypes,
     config = function()
       paredit = require("nvim-paredit")
       paredit.setup({
+        filetypes = filetypes,
         use_default_keys = false,
         keys = {
           ["<M-x>"] = { paredit.unwrap.unwrap_form_under_cursor, "Splice sexp" },
           ["<M-t>"] = { paredit.api.slurp_forwards, "Slurp forwards" },
           ["<M-e>"] = { paredit.api.barf_forwards, "Barf forwards" },
 
-          -- [""] = { paredit.api.slurp_backwards, "Slurp backwards" },
-          -- [""] = { paredit.api.barf_backwards, "Barf backwards" },
+          ["<M-c>"] = { paredit.api.slurp_backwards, "Slurp backwards" },
+          ["<M-l>"] = { paredit.api.barf_backwards, "Barf backwards" },
 
           ["<M-a>"] = { paredit.api.drag_element_forwards, "Drag element right" },
           ["<M-r>"] = { paredit.api.drag_element_backwards, "Drag element left" },
@@ -150,7 +109,7 @@ return {
     --  some extra keybinds
     --  - https://github.com/Olical/conjure/blob/a8686aa6f8760bd3cd4f219a8a4101af037c9d9b/doc/conjure-client-clojure-nrepl.txt
     "Olical/conjure",
-    ft = clojure_filetype,
+    ft = filetypes_conjure,
     init = function()
       -- this gives weird error, even though this is in the docs:
       --      https://github.com/Olical/conjure#lazynvim
@@ -202,19 +161,68 @@ return {
   {
     "tpope/vim-dispatch",
     enabled = false, -- not sure why I would need this
-    ft = clojure_filetype
+    ft = filetypes_conjure
   },
   {
     "radenling/vim-dispatch-neovim",
     enabled = false, -- not sure why I would need this
-    ft = clojure_filetype
+    ft = filetypes_conjure
   },
   {
     "clojure-vim/vim-jack-in",
     enabled = false, -- not sure why I would need this
-    ft = clojure_filetype,
+    ft = filetypes_conjure,
     config = function()
       vim.g.default_lein_task = "with-profile dev repl"
     end
-  }
+  },
+  -- DISABLED --
+  {
+    enabled = false, -- not liking these hotkeys
+    "guns/vim-sexp",
+    ft = filetypes,
+    init = function()
+      -- Disable mapping hooks
+      vim.g.sexp_filetypes = ''
+      -- these are taken from the docs:
+      --    https://github.com/guns/vim-sexp/blob/master/doc/vim-sexp.txt#L647
+      --    *sexp-explicit-mappings*
+      -- the % and $ match with kitty config
+      vim.cmd([=[
+        function! s:vim_sexp_mappings()
+            nmap <silent><buffer> $               <Plug>(sexp_move_to_prev_bracket)
+            xmap <silent><buffer> $               <Plug>(sexp_move_to_prev_bracket)
+            omap <silent><buffer> $               <Plug>(sexp_move_to_prev_bracket)
+            nmap <silent><buffer> %               <Plug>(sexp_move_to_next_bracket)
+            xmap <silent><buffer> %               <Plug>(sexp_move_to_next_bracket)
+            omap <silent><buffer> %               <Plug>(sexp_move_to_next_bracket)
+            imap <silent><buffer> <BS>            <Plug>(sexp_insert_backspace)
+            imap <silent><buffer> "               <Plug>(sexp_insert_double_quote)
+            imap <silent><buffer> (               <Plug>(sexp_insert_opening_round)
+            imap <silent><buffer> )               <Plug>(sexp_insert_closing_round)
+            imap <silent><buffer> [               <Plug>(sexp_insert_opening_square)
+            imap <silent><buffer> ]               <Plug>(sexp_insert_closing_square)
+            imap <silent><buffer> {               <Plug>(sexp_insert_opening_curly)
+            imap <silent><buffer> }               <Plug>(sexp_insert_closing_curly)
+          endfunction
+              augroup VIM_SEXP_MAPPING
+              autocmd!
+              autocmd FileType clojure,scheme,lisp,timl call s:vim_sexp_mappings()
+          augroup END
+      ]=])
+    end,
+    keys = {
+      {
+        "<F25>", -- <C-[> in kittyconf
+        function()
+          vim.cmd([[execute "normal \<Plug>(sexp_flow_to_prev_open)"]])
+        end },
+      {
+        "<F26>", -- <C-]> in kittyconf
+        function()
+          vim.cmd([[execute "normal \<Plug>(sexp_flow_to_next_open)"]])
+        end },
+    }
+  },
+
 }

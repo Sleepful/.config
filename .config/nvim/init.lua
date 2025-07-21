@@ -322,7 +322,7 @@ vim.defer_fn(function()
       'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx',
       'javascript', 'typescript', 'vimdoc', 'vim', 'bash',
       "elixir", "eex", "heex", "erlang", "css", "fennel",
-      "sql", "markdown", "clojure", "graphql", "templ"
+      "sql", "markdown", "clojure", "graphql", "templ", "racket", "commonlisp"
     },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
@@ -462,7 +462,7 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
+  fennel_ls,
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },

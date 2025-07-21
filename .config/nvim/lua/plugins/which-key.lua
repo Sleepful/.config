@@ -54,6 +54,7 @@ return {              -- Useful plugin to show you pending keybinds.
       -- { '<leader>t', group = '[T]oggle' },
       -- { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
     },
+    -- delay = 1000,
     triggers = {
       -- remove visual mode 'x' because which key pops up for 'z' due to 'zf' which creates folds, but I am using 'z' for leap vertical
       -- also remove 'o' pending operator, feels buggy

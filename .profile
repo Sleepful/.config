@@ -15,6 +15,21 @@ export PATH=~/.nix-profile/bin:$PATH
 # aider.chat, installed through pip/python
 export PATH=~/.local/share/../bin:$PATH
 
+## LISP
+# Racket
+export PATH="/Applications/Racket v8.17/bin:$PATH"
+# Common Lisp
+## Qlot
+export PATH="/Users/jose/.local/share/qlot/bin:$PATH"
+
+alias cl="rlwrap sbcl"
+## using the ocicl to load asdf systems, so make sure ocicl is installed, and this will install swank
+## to install swank globally and avoid a project-local install: `ocicl install -g swank`
+## requires setting up ocicl in ~/.sbclrc
+alias swank='cl --eval "(asdf:load-system :swank)" --eval "(swank:create-server :dont-close t)"'
+## needs the qlot available
+alias qswank='qlot exec sbcl --eval "(asdf:load-system :swank)" --eval "(swank:create-server :dont-close t)"'
+
 # static default port for Clojure nrepl with lein
 export LEIN_REPL_PORT=1337
 # start clojure repl wilh clj build tools, uses the :alias `repl/conjure` which ought to be found in user directory,

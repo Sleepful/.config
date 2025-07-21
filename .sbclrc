@@ -1,0 +1,14 @@
+;; .sbclrc
+;; asdf comes bundled with "most lisps", such as SBCL:
+;; https://asdf.common-lisp.dev/#downloads
+(require 'asdf)
+
+;; not going to use qlot, but just in case:
+; (push ".qlot" asdf::*default-source-registry-exclusions*)
+; (asdf:initialize-source-registry)
+;
+#-ocicl
+(when (probe-file #P"~/.local/share/ocicl/ocicl-runtime.lisp")
+  (load #P"~/.local/share/ocicl/ocicl-runtime.lisp"))
+(asdf:initialize-source-registry
+  (list :source-registry (list :directory (uiop:getcwd)) :inherit-configuration))

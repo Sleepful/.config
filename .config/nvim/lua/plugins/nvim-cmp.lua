@@ -18,6 +18,10 @@ return {
     },
     opts = function()
       local cmp = require("cmp")
+      -- disable for lisp to prefer slimv
+      cmp.setup.filetype({ 'lisp' }, {
+        enabled = false
+      })
       return {
         completion = {
           completeopt = "menu,menuone,noinsert,preview",

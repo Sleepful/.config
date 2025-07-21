@@ -112,6 +112,7 @@
                     },
                     {
                         "description": "Use CMD+s/CMD+l to Switch Tabs in Chrome & Firefox",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -777,6 +778,7 @@
                     },
                     {
                         "description": "swap semi-colon with colon",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [

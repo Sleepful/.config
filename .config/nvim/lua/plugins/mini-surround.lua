@@ -173,6 +173,9 @@ return {
           desc = "Surround with [input]",
         }
       })
+      require('which-key').add {
+        { "<leader>a", group = "Around" }, }
+
       return vim.list_extend(mappings, keys)
     end,
     opts = {
