@@ -84,6 +84,7 @@ return {
       { "AckslD/nvim-neoclip.lua" },
       { "nvim-telescope/telescope-hop.nvim" },
       { 'nvim-telescope/telescope-ui-select.nvim' },
+      { "octarect/telescope-menu.nvim" }
     },
     config = function(LazyPlugin, opts)
       require("telescope").setup(opts)
@@ -93,6 +94,7 @@ return {
       require("telescope").load_extension("hop")
       require("telescope").load_extension("ui-select")
       require("telescope").load_extension("file_browser")
+      require("telescope").load_extension("menu")
     end,
     opts = function()
       local find_hidden_files = function()
@@ -184,6 +186,7 @@ return {
           },
         },
         extensions = {
+          menu = require("plugins.telescope.menu"),
           ["pathogen"] = {
             attach_mappings = function(map, actions)
               map("i", "<C-o>", actions.proceed_with_parent_dir)

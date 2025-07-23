@@ -251,10 +251,12 @@ local function bufferline_ungrouped()
   return groups.builtin.ungrouped
 end
 
-local buffer_leader = "<M-b>"
+local buffer_leader = "<leader>e"
 
 
-require("which-key").add({ buffer_leader .. "s", group = '[S]ort' })
+require("which-key").add({
+  { buffer_leader .. "s", group = '[S]ort' },
+})
 
 return {
   {

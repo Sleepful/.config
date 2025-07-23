@@ -37,11 +37,13 @@ return {
       -- },
       {
         "t",
-        "<plug>WordMotion_w"
+        "<plug>WordMotion_w",
+        mode = { "o", "x", "n" }
       },
       {
         "T",
-        "<plug>WordMotion_W"
+        "<plug>WordMotion_W",
+        mode = { "o", "x", "n" }
       }
     }
   },

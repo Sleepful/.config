@@ -1,0 +1,6 @@
+#!/bin/bash
+
+aider --watch-files --model opus \
+	--no-suggest-shell-commands --attribute-commit-message-author \
+	--anthropic-api-key ${CLAUDE_KEY}
+

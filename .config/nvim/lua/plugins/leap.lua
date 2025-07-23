@@ -13,7 +13,7 @@ return {
     }, {
       "s",
       function()
-        require("leap-by-word").EXPERIMENTAL_spooky_leap()
+        require("leap-by-word").EXPERIMENTAL_spooky_leap(nil, { paste_on_remote_yank = true })
       end,
       mode = { "o" },
       desc = "Spooki",
@@ -30,6 +30,11 @@ return {
         require("plugins.leap.vertical"), -- this is my custom jump
         mode = { "n", "x", "o" },
         desc = "Leap vertical to",
+      },
+      {
+        "zf", -- annoying default: "Create fold"
+        "<Nop>",
+        mode = { "n", "x", "o" },
       },
       {
         "f",

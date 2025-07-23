@@ -50,6 +50,10 @@ map({ "x" }, "x", "<esc>viW", { desc = "reselect with BIG word" })
 
 -- remove highlights:
 map({ "o", "x", "n" }, "<leader>uu", "<Cmd>:noh<CR>", { desc = "Remove highlight search" })
+-- easy reset buffer
+require("which-key").add({ "<leader>e", group = 'Buffer Edit' })
+map({ "o", "x", "n" }, "<leader>ee", "<Cmd>:e<CR>", { desc = ":e - Reload" })
+map({ "o", "x", "n" }, "<leader>eE", "<Cmd>:e!<CR>", { desc = ":e! - Reload!" })
 
 -- Moving lines up and down smoothly
 -- https://stackoverflow.com/a/28186505/2446144
@@ -163,8 +167,8 @@ map("n", "[p", "O<esc>p", { desc = "Paste above", remap = true })
 map("n", "]p", "o<esc>p", { desc = "Paste below", remap = true })
 
 -- Paste without losing yank in visual mode
-map("v", "p", "pgvy", { desc = "Paste in visual and yank back the original yank", remap = true })
-map("v", "P", "p", { desc = "Paste normally with P in visual, which loses original yank", remap = true })
+map("v", "p", "pgvy", { desc = "Paste in visual and yank back the original yank" })
+map("v", "P", "p", { desc = "Paste normally with P in visual, which loses original yank" })
 -- https://stackoverflow.com/a/25282274/2446144
 -- xnoremap p pgvy
 -- --

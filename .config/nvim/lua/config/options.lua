@@ -10,6 +10,9 @@ vim.opt.hlsearch = true -- highlight all matches when searching with: / ? # *
 -- overwrite jumps when moving after jumping back
 vim.opt.jumpoptions = "stack"
 
+-- should reload files as they change by other programs
+vim.o.autoread = true
+
 -- unmap the <C-j> as linefeed, this way it can be mapped as a keybind elsewhere
 -- https://unix.stackexchange.com/a/329645/235506
 -- vim.opt.BASH_Ctrl_j = "stack"
