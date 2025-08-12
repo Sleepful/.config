@@ -2,7 +2,7 @@ return {
   {
     "Sleepful/leap-by-word.nvim",
     dependencies = { "ggandor/leap.nvim", "ggandor/leap-spooky.nvim" },
-    dev = true,
+    -- dev = true,
     keys = { {
       "s",
       function()

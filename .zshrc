@@ -1,6 +1,11 @@
 # comment out to avoid timer on first prompt:
 # timer=$(gdate +%s%3N)
-[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile && source ~/.secret'
+[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile && test -f ~/.secret && source ~/.secret'
+
+# apparently necessary for macos m chip
+# https://stackoverflow.com/a/76900597
+autoload -Uz compinit && compinit
+
 
 # kubectl tab completion
 source <(kubectl completion zsh)
@@ -67,8 +72,11 @@ fi
 
 # vim mode
 # https://github.com/jeffreytse/zsh-vi-mode
-source $HOME/.config/zsh/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
-ZVM_VI_INSERT_ESCAPE_BINDKEY=kl
+# source $HOME/.config/zsh/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# changed to follow the official website:
+export ZSH_CUSTOM=~/.oh-my-zsh/custom
+source $ZSH_CUSTOM/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# ZVM_VI_INSERT_ESCAPE_BINDKEY=kl
 
 # god sent code to have clipboard available inside the vi mode plugin
 # https://github.com/jeffreytse/zsh-vi-mode/issues/19#issuecomment-1268057812
@@ -417,10 +425,12 @@ ddate
 # eval "$(jenv init -)"
 # source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 # asdf
-. "$HOME/.asdf/asdf.sh"
-. "$HOME/.asdf/completions/asdf.bash"
+if [ -x "$(command -v asdf)" ]; then
+  . "$HOME/.asdf/asdf.sh"
+  . "$HOME/.asdf/completions/asdf.bash"
 
-export PATH="`asdf where deno`/.deno/bin:$PATH"
+  export PATH="`asdf where deno`/.deno/bin:$PATH"
+fi
 
 eval "$(direnv hook zsh)"
 

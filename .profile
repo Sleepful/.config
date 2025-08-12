@@ -247,7 +247,13 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 ### scripty
 
 # go, for LSP
-export PATH="$(go env GOPATH)/bin:$PATH"
+
+# this is how to check for a command existing:
+# https://stackoverflow.com/questions/592620/how-can-i-check-if-a-program-exists-from-a-bash-script
+if [ -x "$(command -v go)" ]; then
+  export PATH="$(go env GOPATH)/bin:$PATH"
+fi
+
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -342,7 +348,10 @@ fkill() {
 		echo $pid | xargs kill -${1:-9}
 	fi
 }
-. "$HOME/.cargo/env"
+
+if [ -x "$(command -v cargo)" ]; then
+  . "$HOME/.cargo/env"
+fi
 
 # dotnet stuff START
 # installing this for the LSP mainly, but might work for local dev too
