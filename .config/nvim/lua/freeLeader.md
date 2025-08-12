@@ -1,8 +1,28 @@
+leader keys free?:
+
+- ; - localleader
+- , - could b quick hotkeys
+- \
+- ? - could replace this, perhaps "navigation leader"
+
+use for local leaders? or for custom keys?
+need better one for buffer operations... <space>b is taken for bookmarks
+
+<space> leader:
+
+...
 
 This are up for grabs:
 
-- t (could be for teles bc `s` is too loaded)
 - m (could be for jumping to marks, as I overwrote \` key, but `m` still leaves marks)
+
+Taken:
+
+- t (could be for teles bc `s` is too loaded): used for forward-word
+- <C-n>     for LSP stuff
+- <leader>b for buffer
+- <leader>a for surround
+- <leader>e for bookmarks
 
 additionally:
 

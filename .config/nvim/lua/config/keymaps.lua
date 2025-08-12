@@ -51,7 +51,7 @@ map({ "x" }, "x", "<esc>viW", { desc = "reselect with BIG word" })
 -- remove highlights:
 map({ "o", "x", "n" }, "<leader>uu", "<Cmd>:noh<CR>", { desc = "Remove highlight search" })
 -- easy reset buffer
-require("which-key").add({ "<leader>e", group = 'Buffer Edit' })
+require("which-key").add({ "<leader>b", group = 'Buffer Operations' })
 map({ "o", "x", "n" }, "<leader>ee", "<Cmd>:e<CR>", { desc = ":e - Reload" })
 map({ "o", "x", "n" }, "<leader>eE", "<Cmd>:e!<CR>", { desc = ":e! - Reload!" })
 
@@ -299,4 +299,5 @@ map("i", "<M-BS>", "<Del>", { desc = "Delete forward" })
 
 
 -- remove "create fold" in visual mode because it interferes with leap labels when doing vertical leaps
--- vim.keymap.del("n", "zf")
+-- vim.keymap.del({ "o", "x", "n" }, "zf")
+-- require("which-key").remove ... ?

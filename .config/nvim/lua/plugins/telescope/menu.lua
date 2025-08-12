@@ -9,8 +9,8 @@ local menu = {
   slimv = {
     items = {
       { "Find definition",                     ':call SlimvFindDefinitions()' },
-      { "Eval - Defun",                        ':call SlimvEvalDefun()' },
-      { "Eval - Current",                      ':call SlimvEvalExp()' },
+      { "Eval - Root form ('defun')",          ':call SlimvEvalDefun()' },
+      { "Eval - Current Expression",           ':call SlimvEvalExp()' },
       { "Eval - Region",                       ':call SlimvEvalRegion()' },
       { "Eval - Buffer",                       ':call SlimvEvalBuffer()' },
       { "Eval - Interactive",                  ':call SlimvInteractiveEval()' },
@@ -23,6 +23,7 @@ local menu = {
       { "Debug - Set-Breakpoint",              ':call SlimvBreak()' },
       { "Debug - Break-on-Exception",          ':call SlimvBreakOnException()' },
       { "Debug - Disassemble",                 ':call SlimvDisassemble()' },
+      { "Debug - Inspect...",                  ':call SlimvInspect()' },
       { "Debug - Abort",                       ':call SlimvDebugAbort()' },
       { "Debug - Quit-to-Toplevel",            ':call SlimvDebugQuit()' },
       { "Debug - Continue",                    ':call SlimvDebugContinue()' },
@@ -34,7 +35,7 @@ local menu = {
       { "Debug - Kill-Thread...",              ':call SlimvKillThread()' },
       { "Debug - Debug-Thread...",             ':call SlimvDebugThread()' },
 
-      { "Compile - Defun",                     ':call SlimvCompileDefun()' },
+      { "Compile - Root form ('defun')",       ':call SlimvCompileDefun()' },
       { "Compile - Load-File",                 ':call SlimvCompileLoadFile()' },
       { "Compile - File",                      ':call SlimvCompileFile()' },
       { "Compile - Region",                    ':call SlimvCompileRegion()' },

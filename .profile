@@ -110,7 +110,10 @@ alias tm='tmux'
 alias tmrc='vim ~/.tmux.conf'
 
 tmux-join() {
+	# tmux new-session -s hi
+	# new_session=`tmux ls | sort | awk '{print $1}' | tr -d ':' | xargs shuf -n1 -e`
 	if pgrep tmux; then
+	# if new_session; then
 		# join tmux existing session
 		new_session=`tmux ls | sort | awk '{print $1}' | tr -d ':' | xargs shuf -n1 -e`
 		tmux attach -t $new_session

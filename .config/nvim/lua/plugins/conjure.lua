@@ -123,6 +123,28 @@ return {
       vim.cmd([[let conjure#client#clojure#nrepl#mapping#run_alternate_ns_tests = "tt"]])
       -- vim.cmd("<cmd>ConjureEval (do (require \'[clojure.tools.namespace.repl :refer [refresh]]) (refresh))<cr>")
       -- vim.cmd("let g:conjure#on-load = \"lua print(5)\"")
+      require("which-key").add({
+        { "<localleader>l", group = ' [L]og' },
+        { "<localleader>e", group = ' [E]val' },
+        { "<localleader>c", group = ' [C]onnect REPL' },
+        { "<localleader>g", group = ' [G]et under cursor' },
+        { "<localleader>r", group = ' [R]efresh ns' },
+        { "<localleader>s", group = ' [S]ession nREPL' },
+        { "<localleader>t", group = ' [T]ests' },
+        { "<localleader>v", group = ' [V]iew' },
+      })
+      -- to connect to js runtime with clJS
+      -- per https://github.com/Olical/conjure/wiki/Quick-start:-ClojureScript-(shadow-cljs)#connect-and-select
+      -- NOTE: Does not really work if I start the cljs process with `npm run dev` (the gsed won't find it).
+      -- vim.cmd([=[
+      --   function! AutoConjureSelect()
+      --     let shadow_build=system("ps aux | grep 'shadow-cljs watch' | head -1 | gsed -E 's/.*?shadow-cljs watch //' | tr -d '\n'")
+      --     let cmd='ConjureShadowSelect ' . shadow_build
+      --     execute cmd
+      --   endfunction
+      --   command! AutoConjureSelect call AutoConjureSelect()
+      --   autocmd BufReadPost *.cljs :AutoConjureSelect
+      -- ]=])
     end,
     -- dependencies must be included in the repl profile (.config/clojure/deps.edn) to be able to
     -- run some of these commands:

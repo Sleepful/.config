@@ -29,8 +29,8 @@ return {
       -- vim.g.slime_suggest_default = true
     end,
     keys = {
-      { ",u", "<Cmd>:call SlimvFindDefinitions()<Cr>", desc = "Find definition" },
-      { ";",  "<Cmd>:Telescope menu slimv<Cr>",        desc = "Telescope menu" },
+      { ",u", "<Cmd>:call SlimvFindDefinitions()<Cr>", desc = "Find definition", ft = "lisp" },
+      { ";",  "<Cmd>:Telescope menu slimv<Cr>",        desc = "Telescope menu",  ft = "lisp" },
     },
     init = function()
       require('which-key').add {

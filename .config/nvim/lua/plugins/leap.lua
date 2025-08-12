@@ -32,11 +32,6 @@ return {
         desc = "Leap vertical to",
       },
       {
-        "zf", -- annoying default: "Create fold"
-        "<Nop>",
-        mode = { "n", "x", "o" },
-      },
-      {
         "f",
         function()
           require('leap').leap({})

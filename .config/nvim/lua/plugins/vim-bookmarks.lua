@@ -22,7 +22,7 @@ function! g:BMBufferFileLocation(file)
 endfunction
 ]]
 
-require("which-key").add({ "<leader>b", group = 'Bookmarks' })
+require("which-key").add({ "<leader>e", group = 'Bookmarks' })
 
 return {
   { -- https://github.com/chentoast/marks.nvim
@@ -71,19 +71,19 @@ return {
       {
         -- I did not like the preview too much:
         -- require("plugins.telescope.C-g-keymaps").cgLeader .. "i",
-        "<leader>bp",
+        "<leader>ep",
         "<Plug>(Marks-preview)",
         desc = "📙 Preview vim marks"
       },
       {
-        "<leader>bl",
+        "<leader>el",
         "<Plug>(Marks-deleteline)",
         desc = "📙 Delete line"
       },
       {
-        "<leader>bd",
+        "<leader>ed",
         "<Plug>(Marks-deletebuf)",
-        desc = "📙 Delete buffer"
+        desc = "📙 Delete buffer marks"
       }
     }
   },
@@ -107,17 +107,17 @@ return {
       require("plugins.telescope.C-g-keymaps").vim_bookmarks.all,
       require("plugins.telescope.C-g-keymaps").vim_bookmarks.page,
       {
-        "<leader>bb", "<Plug>BookmarkToggle", desc = "📗 Set bookmark (toggle)",
+        "<leader>eb", "<Plug>BookmarkToggle", desc = "📗 Set bookmark (toggle)",
       },
-      { "<Leader>bi", "<Plug>BookmarkAnnotate", desc = "📗 annotate" },
-      { "<Leader>ba", "<Plug>BookmarkShowAll", desc = "📗 all qf" },
-      -- { "<Leader>bj",  "<Plug>BookmarkNext",       desc = "next" },
-      -- { "<Leader>bk",  "<Plug>BookmarkPrev",       desc = "prev" },
-      { "<Leader>bc", "<Plug>BookmarkClear", desc = "📗 clear buffer" },
-      { "<Leader>bx", "<Plug>BookmarkClearAll", desc = "📗 clear all" },
-      -- { "<Leader>bkk", "<Plug>BookmarkMoveUp",     desc = "move up" },
-      -- { "<Leader>bjj", "<Plug>BookmarkMoveDown",   desc = "move down" },
-      -- { "<Leader>bg",  "<Plug>BookmarkMoveToLine", desc = "move to line" },
+      { "<leader>ei", "<Plug>BookmarkAnnotate", desc = "📗 annotate" },
+      { "<leader>ea", "<Plug>BookmarkShowAll", desc = "📗 all qf" },
+      -- { "<leader>ej",  "<Plug>BookmarkNext",       desc = "next" },
+      -- { "<leader>ek",  "<Plug>BookmarkPrev",       desc = "prev" },
+      { "<leader>ec", "<Plug>BookmarkClear", desc = "📗 clear buffer" },
+      { "<leader>ex", "<Plug>BookmarkClearAll", desc = "📗 clear all" },
+      -- { "<leader>ekk", "<Plug>BookmarkMoveUp",     desc = "move up" },
+      -- { "<leader>ejj", "<Plug>BookmarkMoveDown",   desc = "move down" },
+      -- { "<leader>eg",  "<Plug>BookmarkMoveToLine", desc = "move to line" },
     },
   },
 }
