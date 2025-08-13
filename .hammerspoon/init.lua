@@ -2,9 +2,9 @@
 -- package.path = package.path .. ";" ..  hs.configdir .. "/MySpoons/?.spoon/init.lua"
 
 -- https://github.com/minusf/FuzzySwitcher.spoon
-hs.loadSpoon("FuzzySwitcher")
-spoon.FuzzySwitcher:bindHotkeys({ show_switcher = { { "option" }, "space" } })
-spoon.FuzzySwitcher:start()
+-- hs.loadSpoon("FuzzySwitcher")
+-- spoon.FuzzySwitcher:bindHotkeys({ show_switcher = { { "option" }, "space" } })
+-- spoon.FuzzySwitcher:start()
 
 
 -- some switcher gist that didn't work well:

@@ -52,8 +52,8 @@ map({ "x" }, "x", "<esc>viW", { desc = "reselect with BIG word" })
 map({ "o", "x", "n" }, "<leader>uu", "<Cmd>:noh<CR>", { desc = "Remove highlight search" })
 -- easy reset buffer
 require("which-key").add({ "<leader>b", group = 'Buffer Operations' })
-map({ "o", "x", "n" }, "<leader>ee", "<Cmd>:e<CR>", { desc = ":e - Reload" })
-map({ "o", "x", "n" }, "<leader>eE", "<Cmd>:e!<CR>", { desc = ":e! - Reload!" })
+map({ "o", "x", "n" }, "<leader>be", "<Cmd>:e<CR>", { desc = ":e - Reload" })
+map({ "o", "x", "n" }, "<leader>bE", "<Cmd>:e!<CR>", { desc = ":e! - Reload!" })
 
 -- Moving lines up and down smoothly
 -- https://stackoverflow.com/a/28186505/2446144
@@ -75,7 +75,7 @@ map({ "n" }, "<S-Tab>", "<<", { desc = "" })
 map({ "n" }, "<F3>", "<C-i>", { desc = "" })
 
 -- Undo
-map("i", "<C-u>", "<C-o>u", { desc = "Undo from insert mode" })
+-- map("i", "<C-u>", "<C-o>u", { desc = "Undo from insert mode" })
 
 -- Oil
 vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })

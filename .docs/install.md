@@ -6,6 +6,7 @@
 		    + https://www.nerdfonts.com/font-downloads
 	    + Open Font Book on MacOS
 	    + Then move the unzipped font folder into Font Book
+    * Download Hammerspoon from official website
 - Downloaded the `cfg` repo
 	- installed kitty through curl command in kitty page
 	- `brew install coreutils`

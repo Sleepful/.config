@@ -78,6 +78,44 @@ h.hotkey.bind(megaLeaderModifier, "t", function() -- TOGGLE CONSOLE
   end
 end)
 
+-- good reference for geometry
+-- https://github.com/Hammerspoon/hammerspoon/blob/master/extensions/alert/alert.lua
+function drawIndicator(message)
+  local screenObj = h.screen.mainScreen()
+  local screenFrame = screenObj.fullFrame and screenObj:fullFrame() or screenObj:frame()
+  local absoluteTop = screenFrame.y
+
+  local rect = h.geometry.rect(0, absoluteTop, 80, 80)
+  local text = h.drawing.text(rect, message):show()
+  return text
+  -- Some options that may be set, taken from the hs.alert sample code
+  -- :setTextFont(textFont)
+  -- :setTextSize(textSize)
+  -- :setTextColor(textColor)
+  -- :orderAbove(alertEntry.drawings[1])
+  -- :show(thisAlertStyle.fadeInDuration)
+end
+
+local statusShape = nil
+local preventSleep = false
+h.hotkey.bind(megaLeaderModifier, "j", function() -- CAFFEINATE
+  print("Toggling sleep prevention:")
+  if preventSleep then
+    print("Allow sleep")
+    preventSleep = false
+    h.caffeinate.set("displayIdle", false, false)
+    statusShape:delete()
+    statusShape = nil
+  else
+    print("PREVENT")
+    preventSleep = true
+    h.caffeinate.set("displayIdle", true, true)
+    statusShape = drawIndicator("ON")
+  end
+end)
+
+
+
 local KeyWindowDict = {}
 
 local function clearWindows()
@@ -121,6 +159,7 @@ local PredefWindoKeys = {
   [13] = "WhatsApp",
   [1] = "Spotify",
   [2] = "Discord",
+  [11] = "Chrome", -- B key as in Browser
 }
 
 local function jumpToWindowTap(evt)
@@ -137,7 +176,7 @@ local function jumpToWindowTap(evt)
     if win == nil then
       hint = PredefWindoKeys[code]
       if hint == nil then
-        print("Did not find window")
+        print("Did not find window, key-code: " .. code)
         return false
       end
       print("Looking for predefined window")
