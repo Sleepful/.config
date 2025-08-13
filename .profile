@@ -48,7 +48,9 @@ export PATH="$HOME/.bin:$PATH"
 # export PATH="$HOME/.deno/bin:$PATH"
 # export PATH="`asdf where deno`/.deno/bin:$PATH"
 
-export TERM="xterm-kitty"
+# not sure why I would need this... it makes it impossible to start a termnial from a non-kitty emulator such as apple terminal
+# export TERM="xterm-kitty"
+# might be useful to ssh into servers from kitty term, pending confirmation on this...
 
 alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias cfgsetup='cfg config status.showuntrackedfiles no'

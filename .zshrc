@@ -1,6 +1,9 @@
 # comment out to avoid timer on first prompt:
 # timer=$(gdate +%s%3N)
-[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile && test -f ~/.secret && source ~/.secret'
+[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
+#  && test -f ~/.secret && source ~/.secret
+[[ -e ~/.secret ]] && emulate sh -c 'source ~/.secret'
+[[ -e ~/.zshrc.optional ]] && emulate sh -c 'source ~/.zshrc.optional'
 
 # apparently necessary for macos m chip
 # https://stackoverflow.com/a/76900597
