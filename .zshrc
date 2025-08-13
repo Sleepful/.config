@@ -435,7 +435,9 @@ if [ -x "$(command -v asdf)" ]; then
   export PATH="`asdf where deno`/.deno/bin:$PATH"
 fi
 
-eval "$(direnv hook zsh)"
+if [ -x "$(command -v direnv)" ]; then
+  eval "$(direnv hook zsh)"
+fi
 
 # Nix
 # ## some issue, looks like nix isn't found on macos every now and then
