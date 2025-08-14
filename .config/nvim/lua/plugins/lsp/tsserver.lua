@@ -1,5 +1,9 @@
 return {
   setup = function()
+    vim.lsp.enable('ts_ls')
+    vim.lsp.enable('eslint')
+  end,
+  old_tsls_setup = function()
     local lspconfig = require('lspconfig')
     local root_dir = require("lspconfig").util.root_pattern("package.json")
     -- it used to be called tsserver, but not anymore
