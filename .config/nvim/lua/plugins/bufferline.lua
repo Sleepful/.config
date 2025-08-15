@@ -263,7 +263,7 @@ return {
     "nvim-telescope/telescope.nvim",
     keys = {
       {
-        buffer_leader .. buffer_leader,
+        buffer_leader .. "b",
         function()
           require("telescope.builtin").buffers()
         end,
