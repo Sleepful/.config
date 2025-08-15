@@ -287,7 +287,7 @@ return {
       { buffer_leader .. "O",  "<Cmd>BufferLineCloseRight<CR>",     desc = "Close all on the right" },
       { buffer_leader .. "I",  "<Cmd>BufferLineCloseLeft<CR>",      desc = "Close all on the left" }, -- { buffer_leader .. "a",  "<Cmd>BufferLinePick<CR>" }, -- dont need this with number travel
       -- { buffer_leader .. "W",  "<Cmd>BufferLinePickClose<CR>" }, -- dont need this with buffer deletion
-      { buffer_leader .. "d",  "<Cmd>:bd<CR>",                      desc = "Delete this buffer" },
+      { buffer_leader .. "d",  "<Cmd>:bp|bd#<CR>",                  desc = "Delete this buffer" },
       { buffer_leader .. "k",  "<Cmd>%bd<CR>",                      desc = "Kill all buffers" },
       { buffer_leader .. "o",  "<Cmd>%bd|e#|bd#<CR>",               desc = "Kill other buffers" },
       -- some bindings in keymaps.lua

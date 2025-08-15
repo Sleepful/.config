@@ -1,7 +1,9 @@
 return {
   setup = function()
-    vim.lsp.enable('ts_ls')
-    vim.lsp.enable('eslint')
+    -- vim.lsp.enable('ts_ls')
+    vim.lsp.enable('vtsls')
+    -- cannot manage to get eslint working fine...
+    -- vim.lsp.enable('eslint')
   end,
   old_tsls_setup = function()
     local lspconfig = require('lspconfig')

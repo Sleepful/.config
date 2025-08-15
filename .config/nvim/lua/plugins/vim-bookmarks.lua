@@ -104,16 +104,24 @@ return {
     -- the key to set bookmarks is `mm`
     -- https://github.com/MattesGroeger/vim-bookmarks#usage
     keys = {
-      require("plugins.telescope.C-g-keymaps").vim_bookmarks.all,
-      require("plugins.telescope.C-g-keymaps").vim_bookmarks.page,
       {
-        "<leader>eb", "<Plug>BookmarkToggle", desc = "📗 Set bookmark (toggle)",
+        "<leader>eb",
+        "<cmd>Telescope vim_bookmarks current_file<cr>",
+        desc = "📘 Bookmarks in buffer (tele)",
       },
-      { "<leader>ei", "<Plug>BookmarkAnnotate", desc = "📗 annotate" },
+      {
+        "<leader>et",
+        "<cmd>Telescope vim_bookmarks all<cr>",
+        desc = "📘 All Bookmarks (tele)",
+      },
+      {
+        "<leader>ee", "<Plug>BookmarkToggle", desc = "📗 Set bookmark (toggle)",
+      },
+      { "<leader>ec", "<Plug>BookmarkAnnotate", desc = "📗 annotate with comment" },
       { "<leader>ea", "<Plug>BookmarkShowAll", desc = "📗 all qf" },
       -- { "<leader>ej",  "<Plug>BookmarkNext",       desc = "next" },
       -- { "<leader>ek",  "<Plug>BookmarkPrev",       desc = "prev" },
-      { "<leader>ec", "<Plug>BookmarkClear", desc = "📗 clear buffer" },
+      { "<leader>ed", "<Plug>BookmarkClear", desc = "📗 clear buffer" },
       { "<leader>ex", "<Plug>BookmarkClearAll", desc = "📗 clear all" },
       -- { "<leader>ekk", "<Plug>BookmarkMoveUp",     desc = "move up" },
       -- { "<leader>ejj", "<Plug>BookmarkMoveDown",   desc = "move down" },

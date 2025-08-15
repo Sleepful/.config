@@ -22,7 +22,7 @@ return {
     dependencies = { { "nvim-telescope/telescope.nvim" } },
     config = function()
       tsserver.setup()
-      marksman.setup()
+      -- marksman.setup()
       deno.setup()
       lua.setup()
       clojure.setup()

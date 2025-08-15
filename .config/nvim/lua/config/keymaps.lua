@@ -94,6 +94,8 @@ end, { desc = "Previous diagnostic" })
 
 -- Quickfix ops
 map({ "n" }, "<leader>lo", "<Cmd>copen<CR>", { desc = "Open quickfix list" })
+map({ "n" }, "<leader>lp", "<Cmd>cold<CR>", { desc = "Older quickfix list" })
+map({ "n" }, "<leader>ln", "<Cmd>cnew<CR>", { desc = "Newer quickfix list" })
 
 -- Write file
 map({ "n" }, "<leader>w", "<Cmd>w<CR>", { desc = "Write file" })
@@ -282,6 +284,15 @@ map({ "n" },
 -- map("n", "<leader><tab>l", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 -- map("n", "<leader><tab>h", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 -- map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+
+require("which-key").add({ "<leader>t", group = '[T]abs' })
+map("n", "<leader>tl", "<cmd>tablast<cr>", { desc = "Last Tab" })
+map("n", "<leader>tf", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "<leader>tn", "<cmd>tabnew %<cr>", { desc = "New Tab" })
+map("n", "<leader>tt", "<cmd>tabnext #<cr>", { desc = "Last accessed Tab" })
+map("n", "<leader>tl", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<leader>th", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<leader>td", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 
 -- TODO: conflict with <C-I>
 -- map("n", "<tab><tab>", "<cmd>tabnext #<cr>", { desc = "Last Tab" })

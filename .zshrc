@@ -444,3 +444,11 @@ fi
 # ## https://github.com/NixOS/nix/issues/2280#issuecomment-1559447638
 # export PATH="$NIX_LINK/bin:/nix/var/nix/profiles/default/bin:$PATH"
 export PATH="/nix/var/nix/profiles/default/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/jv/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

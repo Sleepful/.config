@@ -1,6 +1,6 @@
 leader keys free?:
 
-- ; - localleader
+- ; - localleader, taken for filetype-based plugins like paredit
 - , - could b quick hotkeys
 - \
 - ? - could replace this, perhaps "navigation leader"
