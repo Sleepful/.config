@@ -29,7 +29,7 @@ return {
         desc = "🐡 Big one incoming! (live grep)",
       },
       {
-        "<leader>hf",
+        "<leader>ht",
         "<cmd>Telescope harpoon marks<cr>",
         desc = "🎣 Where is my fishing rod? (telescope files)",
       },

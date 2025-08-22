@@ -5,6 +5,53 @@
                 "parameters": { "basic.to_if_held_down_threshold_milliseconds": 5000 },
                 "rules": [
                     {
+                        "description": "Change Option+Tab to Command+Tab",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "tab",
+                                    "modifiers": {
+                                        "mandatory": ["option"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "tab",
+                                        "modifiers": ["command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Paste with ÷ (alt+/)",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^net\\.kovidgoyal\\.kitty$"
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "slash",
+                                    "modifiers": { "mandatory": ["left_alt"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "v",
+                                        "modifiers": ["left_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Use option+arrow to Switch Tabs in Chrome & Firefox",
                         "enabled": false,
                         "manipulators": [
@@ -206,6 +253,7 @@
                     },
                     {
                         "description": "Use Option + Number to Switch Tabs in Chrome & Firefox",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -436,6 +484,7 @@
                     },
                     {
                         "description": "Change Command+Tab to Control+Tab",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -457,6 +506,7 @@
                     },
                     {
                         "description": "cmd + backspace to delete backwards word",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -478,6 +528,7 @@
                     },
                     {
                         "description": "cmd + delete to option + delete",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -515,6 +566,7 @@
                     },
                     {
                         "description": "cmd + arrow to option + arrow",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -552,6 +604,7 @@
                     },
                     {
                         "description": "ctrl+o to cmd+`",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -573,6 +626,7 @@
                     },
                     {
                         "description": "ctrl+o to cmd+esc",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -664,6 +718,7 @@
                     },
                     {
                         "description": "Change input source to U.S. by ctrl + 1.",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -693,6 +748,7 @@
                     },
                     {
                         "description": "capslock + top row => numbers",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -813,27 +869,6 @@
                         ]
                     },
                     {
-                        "description": "Change Option+Tab to Command+Tab",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "tab",
-                                    "modifiers": {
-                                        "mandatory": ["option"],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "tab",
-                                        "modifiers": ["command"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "swap quote with double quote and backslash",
                         "enabled": false,
                         "manipulators": [
@@ -865,32 +900,6 @@
                                     "modifiers": { "mandatory": ["shift"] }
                                 },
                                 "to": [{ "key_code": "quote" }],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Paste with ÷ (alt+/)",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^net\\.kovidgoyal\\.kitty$"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "slash",
-                                    "modifiers": { "mandatory": ["left_alt"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "v",
-                                        "modifiers": ["left_command"]
-                                    }
-                                ],
                                 "type": "basic"
                             }
                         ]
@@ -1038,6 +1047,23 @@
                         {
                             "from": { "pointing_button": "button4" },
                             "to": [{ "pointing_button": "button3" }]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": { "is_keyboard": true },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "caps_lock" },
+                            "to": [{ "key_code": "left_command" }]
+                        },
+                        {
+                            "from": { "key_code": "left_command" },
+                            "to": [{ "key_code": "left_option" }]
+                        },
+                        {
+                            "from": { "key_code": "right_command" },
+                            "to": [{ "key_code": "escape" }]
                         }
                     ]
                 }
