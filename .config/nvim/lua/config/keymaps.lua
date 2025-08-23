@@ -48,6 +48,13 @@ map({ "o" }, "x", "iW", { desc = "effect inside BIG word" })
 map({ "n" }, "x", "viw", { desc = "quick select inside little word" })
 map({ "x" }, "x", "<esc>viW", { desc = "reselect with BIG word" })
 
+-- marks:
+map({ "o", "x", "n" }, "<leader>m", "`", { desc = "Marks" })
+-- TODO: instead make it so that this allows using many hotkeys with names,
+-- then use a leader-mm for ` key
+-- add commands like MarksListBuf
+-- add "next/previous" mark commands too, etc
+--
 -- remove highlights:
 map({ "o", "x", "n" }, "<leader>uu", "<Cmd>:noh<CR>", { desc = "Remove highlight search" })
 -- easy reset buffer

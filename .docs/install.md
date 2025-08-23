@@ -7,6 +7,8 @@
 	    + Open Font Book on MacOS
 	    + Then move the unzipped font folder into Font Book
     * Download Hammerspoon from official website
+    * Download Rectangle and Alt-Tab
+	    + the configs are not stored yet
 - Downloaded the `cfg` repo
 	- installed kitty through curl command in kitty page
 	- `brew install coreutils`
@@ -22,7 +24,9 @@
 	- `git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode`
 	- `brew install tmux`
 	- `brew install fzf`
-	-
+	- `brew tap FelixKratz/formulae`
+		* `brew install borders`
+		* `brew services start borders`
 	- TODO..
 		- hammerspoon
 		- karabiner

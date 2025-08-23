@@ -29,7 +29,7 @@ return {
         desc = "🐡 Big one incoming! (live grep)",
       },
       {
-        "<leader>hf",
+        "<leader>ht",
         "<cmd>Telescope harpoon marks<cr>",
         desc = "🎣 Where is my fishing rod? (telescope files)",
       },
@@ -51,6 +51,8 @@ return {
         end,
         desc = "Add file to harpoon list",
       },
+      -- TODO: kill all buffers that are not harpoon
+      --
       -- NOTE: commented out over preference for bufferline keys
       -- {
       --   "",
@@ -70,60 +72,62 @@ return {
       --     require("harpoon.ui").nav_file(99)
       --   end,
       -- },
+      -- <F7><F8><F9>
+      -- <F7><F8><F9><F4><F5><F6>
       {
-        "<M-1>",
+        "<F7>",
         function()
           require("harpoon.ui").nav_file(1)
         end,
       },
       {
-        "<M-2>",
+        "<F8>",
         function()
           require("harpoon.ui").nav_file(2)
         end,
       },
       {
-        "<M-3>",
+        "<F9>",
         function()
           require("harpoon.ui").nav_file(3)
         end,
       },
       {
-        "<M-4>",
+        "<F4>",
         function()
           require("harpoon.ui").nav_file(4)
         end,
       },
       {
-        "<M-5>",
+        "<F5>",
         function()
           require("harpoon.ui").nav_file(5)
         end,
       },
       {
-        "<M-6>",
+        "<F6>",
         function()
           require("harpoon.ui").nav_file(6)
         end,
       },
-      {
-        "<M-7>",
-        function()
-          require("harpoon.ui").nav_file(7)
-        end,
-      },
-      {
-        "<M-8>",
-        function()
-          require("harpoon.ui").nav_file(8)
-        end,
-      },
-      {
-        "<M-9>",
-        function()
-          require("harpoon.ui").nav_file(9)
-        end,
-      },
+      -- {
+      --   "<M-7>",
+      --   function()
+      --     require("harpoon.ui").nav_file(7)
+      --   end,
+      -- },
+      -- {
+      --   "<M-8>",
+      --   function()
+      --     require("harpoon.ui").nav_file(8)
+      --   end,
+      -- },
+      -- {
+      --   "<M-9>",
+      --   function()
+      --     require("harpoon.ui").nav_file(9)
+      --   end,
+      -- },
     },
   },
 }
