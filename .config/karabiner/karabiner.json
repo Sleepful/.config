@@ -206,6 +206,7 @@
                     },
                     {
                         "description": "Use Option + Number to Switch Tabs in Chrome & Firefox",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -436,6 +437,7 @@
                     },
                     {
                         "description": "Change Command+Tab to Control+Tab",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -457,6 +459,7 @@
                     },
                     {
                         "description": "cmd + backspace to delete backwards word",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -478,6 +481,7 @@
                     },
                     {
                         "description": "cmd + delete to option + delete",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -552,6 +556,7 @@
                     },
                     {
                         "description": "ctrl+o to cmd+`",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -573,6 +578,7 @@
                     },
                     {
                         "description": "ctrl+o to cmd+esc",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -693,6 +699,7 @@
                     },
                     {
                         "description": "capslock + top row => numbers",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
