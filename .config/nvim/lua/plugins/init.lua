@@ -4,7 +4,7 @@
 -- See the kickstart.nvim README for more information
 return {
   "junegunn/vim-easy-align",
-  "sindrets/diffview.nvim",
+  -- "sindrets/diffview.nvim", in its own file
   { "rmagatti/auto-session", opts = {} },
   "windwp/nvim-ts-autotag",
   "dkarter/bullets.vim",

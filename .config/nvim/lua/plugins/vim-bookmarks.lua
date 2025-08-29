@@ -22,7 +22,10 @@ function! g:BMBufferFileLocation(file)
 endfunction
 ]]
 
-require("which-key").add({ "<leader>e", group = 'Bookmarks' })
+local bookmark_key = "b"
+
+require("which-key").add({ "<leader>" .. bookmark_key, group = 'Bookmarks' })
+
 
 return {
   { -- https://github.com/chentoast/marks.nvim
@@ -71,17 +74,17 @@ return {
       {
         -- I did not like the preview too much:
         -- require("plugins.telescope.C-g-keymaps").cgLeader .. "i",
-        "<leader>ep",
+        "<leader>" .. bookmark_key .. "p",
         "<Plug>(Marks-preview)",
         desc = "📙 Preview vim marks"
       },
       {
-        "<leader>el",
+        "<leader>" .. bookmark_key .. "l",
         "<Plug>(Marks-deleteline)",
         desc = "📙 Delete line"
       },
       {
-        "<leader>ed",
+        "<leader>" .. bookmark_key .. "d",
         "<Plug>(Marks-deletebuf)",
         desc = "📙 Delete buffer marks"
       }
@@ -105,24 +108,24 @@ return {
     -- https://github.com/MattesGroeger/vim-bookmarks#usage
     keys = {
       {
-        "<leader>eb",
+        "<leader>" .. bookmark_key .. "b",
         "<cmd>Telescope vim_bookmarks current_file<cr>",
         desc = "📘 Bookmarks in buffer (tele)",
       },
       {
-        "<leader>et",
+        "<leader>" .. bookmark_key .. "t",
         "<cmd>Telescope vim_bookmarks all<cr>",
         desc = "📘 All Bookmarks (tele)",
       },
       {
-        "<leader>ee", "<Plug>BookmarkToggle", desc = "📗 Set bookmark (toggle)",
+        "<leader>" .. bookmark_key .. "e", "<Plug>BookmarkToggle", desc = "📗 Set bookmark (toggle)",
       },
-      { "<leader>ec", "<Plug>BookmarkAnnotate", desc = "📗 annotate with comment" },
-      { "<leader>ea", "<Plug>BookmarkShowAll", desc = "📗 all qf" },
+      { "<leader>" .. bookmark_key .. "c", "<Plug>BookmarkAnnotate", desc = "📗 annotate with comment" },
+      { "<leader>" .. bookmark_key .. "a", "<Plug>BookmarkShowAll", desc = "📗 all qf" },
       -- { "<leader>ej",  "<Plug>BookmarkNext",       desc = "next" },
       -- { "<leader>ek",  "<Plug>BookmarkPrev",       desc = "prev" },
-      { "<leader>ed", "<Plug>BookmarkClear", desc = "📗 clear buffer" },
-      { "<leader>ex", "<Plug>BookmarkClearAll", desc = "📗 clear all" },
+      { "<leader>" .. bookmark_key .. "d", "<Plug>BookmarkClear", desc = "📗 clear buffer" },
+      { "<leader>" .. bookmark_key .. "x", "<Plug>BookmarkClearAll", desc = "📗 clear all" },
       -- { "<leader>ekk", "<Plug>BookmarkMoveUp",     desc = "move up" },
       -- { "<leader>ejj", "<Plug>BookmarkMoveDown",   desc = "move down" },
       -- { "<leader>eg",  "<Plug>BookmarkMoveToLine", desc = "move to line" },

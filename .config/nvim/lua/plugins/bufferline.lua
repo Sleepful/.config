@@ -251,7 +251,7 @@ local function bufferline_ungrouped()
   return groups.builtin.ungrouped
 end
 
-local buffer_leader = "<leader>b"
+local buffer_leader = "<leader>e"
 
 
 require("which-key").add({

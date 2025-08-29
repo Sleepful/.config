@@ -58,9 +58,9 @@ map({ "o", "x", "n" }, "<leader>m", "`", { desc = "Marks" })
 -- remove highlights:
 map({ "o", "x", "n" }, "<leader>uu", "<Cmd>:noh<CR>", { desc = "Remove highlight search" })
 -- easy reset buffer
-require("which-key").add({ "<leader>b", group = 'Buffer Operations' })
-map({ "o", "x", "n" }, "<leader>be", "<Cmd>:e<CR>", { desc = ":e - Reload" })
-map({ "o", "x", "n" }, "<leader>bE", "<Cmd>:e!<CR>", { desc = ":e! - Reload!" })
+require("which-key").add({ "<leader>e", group = 'Buffer Operations' })
+map({ "o", "x", "n" }, "<leader>ee", "<Cmd>:e<CR>", { desc = ":e - Reload" })
+map({ "o", "x", "n" }, "<leader>eE", "<Cmd>:e!<CR>", { desc = ":e! - Reload!" })
 
 -- Moving lines up and down smoothly
 -- https://stackoverflow.com/a/28186505/2446144
