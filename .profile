@@ -310,14 +310,22 @@ export GUILE_LOAD_PATH="/opt/homebrew/share/guile/site/3.0"
 export GUILE_LOAD_COMPILED_PATH="/opt/homebrew/lib/guile/3.0/site-ccache"
 export GUILE_SYSTEM_EXTENSIONS_PATH="/opt/homebrew/lib/guile/3.0/extensions"
 
+
 # always tmuxify my shell :)
 # https://unix.stackexchange.com/a/113768/235506
-if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-       # `exec` with `export`, otherwise exec fails and terminal exits as soon as it opens
-       # https://unix.stackexchange.com/questions/50692/executing-user-defined-function-in-a-#find-exec-call
-	exec bash -c $(
-		$(export -f tmux-join)
-	)
+if [[ "$TERM" == "xterm-kitty" ]]; then
+  # echo "Running in Kitty terminal."
+  # Add Kitty-specific commands or configurations here
+  if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+	  # `exec` with `export`, otherwise exec fails and terminal exits as soon as it opens
+	  # https://unix.stackexchange.com/questions/50692/executing-user-defined-function-in-a-#find-exec-call
+	  exec bash -c $(
+		  $(export -f tmux-join)
+	  )
+  fi
+else
+  echo "Not running in Kitty terminal. Current TERM is: $TERM"
+  # Handle non-Kitty environments
 fi
 
 # cannot call GH from non-iteractive shell such as neovim cmd
@@ -368,4 +376,4 @@ export DOTNET_ROOT=~/.asdf/installs/dotnet-core/7.0.404 # maybe not necsesary? I
 # funny thing but for `cls-sharp` I needed this version: 
 # `asdf install dotnet-core 7.0.404`
 # dotnet stuff END
-
+. "/Users/jose/.deno/env"
