@@ -1,0 +1,3 @@
+{:cljfmt {:function-arguments-indentation :zprint}
+ :auto-add-ns-to-new-files? true}
+; :indents {#re ".*" ns [[:inner 0] [:inner 1]]}

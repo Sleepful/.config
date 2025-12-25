@@ -60,15 +60,15 @@ function mouseHighlight(stroke, radius)
   end)
 end
 
-local megaLeaderModifier = { "cmd", "alt", "shift" }
-h.hotkey.bind(megaLeaderModifier, "D", redCircle)
-h.hotkey.bind(megaLeaderModifier, "r", function() -- RELOAD CONSOLE
+local leaderModifier2 = { "ctrl", "alt" }
+h.hotkey.bind(leaderModifier2, "D", redCircle)
+h.hotkey.bind(leaderModifier2, "r", function() -- RELOAD CONSOLE
   print("Reloading config")
   h.console.clearConsole()
   h.reload()
   h.openConsole()
 end)
-h.hotkey.bind(megaLeaderModifier, "t", function() -- TOGGLE CONSOLE
+h.hotkey.bind(leaderModifier2, "t", function() -- TOGGLE CONSOLE
   local win = h.console.hswindow()
   if win == nil then
     h.openConsole()
@@ -98,7 +98,7 @@ end
 
 local statusShape = nil
 local preventSleep = false
-h.hotkey.bind(megaLeaderModifier, "j", function() -- CAFFEINATE
+h.hotkey.bind(leaderModifier2, "j", function() -- CAFFEINATE
   print("Toggling sleep prevention:")
   if preventSleep then
     print("Allow sleep")
@@ -167,7 +167,7 @@ local function jumpToWindowTap(evt)
   -- if window is found, it becomes focused
   -- lets hope that focused window makes OS jump to the right space/monitor, otherwise add more code to handle these edge cases
   local mods = h.eventtap.checkKeyboardModifiers()
-  print(require('util').dump(mods))
+  -- print(require('util').dump(mods))
   if mods["ctrl"] and mods then -- activates window picker with this modifier key
     -- local chars = evt:getCharacters() -- ctrl combinations do not have characters.
     local code = evt:getKeyCode()
