@@ -313,7 +313,7 @@ export GUILE_SYSTEM_EXTENSIONS_PATH="/opt/homebrew/lib/guile/3.0/extensions"
 
 # always tmuxify my shell :)
 # https://unix.stackexchange.com/a/113768/235506
-if [[ "$TERM" == "xterm-kitty" ]]; then
+if [[ "$TERM" == "xterm-kitty" || "$TERM" == "xterm-ghostty" ]]; then
   # echo "Running in Kitty terminal."
   # Add Kitty-specific commands or configurations here
   if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then

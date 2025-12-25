@@ -35,7 +35,8 @@ defmodule AC do
     default_prompt:
       [
         # ANSI CHA, move cursor to column 1
-        "\e[G",
+        # "\e[G", // buggy:
+        # maybe this is the bug https://elixirforum.com/t/iex-crashes-with-recent-erlang-installs/59004/7
         :light_magenta,
         # plain string
         # "%counter 🧪",

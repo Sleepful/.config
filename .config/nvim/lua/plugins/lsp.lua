@@ -28,10 +28,14 @@ return {
       clojure.setup()
       fennel.setup()
       autoformat.autoformat()
-      rust.setup()
+      -- rust.setup()
       golang.setup()
       racket.setup()
       -- require 'lspconfig'.csharp_ls.setup {}
+      -- for QML, the QtQuick file format / declarative code
+      vim.lsp.enable('qmlls')
+      -- vim.lsp.enable('basedpyright')
+      vim.lsp.enable('ruff')
     end,
     keys = {
       { k .. "e", vim.lsp.buf.declaration,                                    desc = "Declaration" },

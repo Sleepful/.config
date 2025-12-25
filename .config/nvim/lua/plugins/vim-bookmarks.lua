@@ -22,7 +22,7 @@ function! g:BMBufferFileLocation(file)
 endfunction
 ]]
 
-local bookmark_key = "b"
+local bookmark_key = "e"
 
 require("which-key").add({ "<leader>" .. bookmark_key, group = 'Bookmarks' })
 

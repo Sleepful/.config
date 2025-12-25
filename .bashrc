@@ -144,3 +144,4 @@ else
 	echo "Unknown OS: $OSTYPE"
 fi
 . "$HOME/.cargo/env"
+. "/Users/jose/.deno/env"

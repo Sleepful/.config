@@ -1,9 +1,12 @@
+-- path returned by `which pynvim-python` after installing `pipx install  pynvim`
+vim.g.python3_host_prog = '~/.local/share/../bin/pynvim-python'
+
 vim.opt.scrolloff = 40 -- keep cursor in the middle
 -- sidescrolloff cuts the first column too often, annoying!
 -- vim.opt.sidescrolloff = 40 -- keep cursor away from side borders
 vim.opt.number = false         -- no line numbers
 vim.opt.relativenumber = false -- no line numbers
-vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("off")   -- lsp log level
 -- set cursor column highlighting
 vim.opt.cuc = true
 vim.opt.hlsearch = true -- highlight all matches when searching with: / ? # *

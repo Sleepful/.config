@@ -1,3 +1,6 @@
+-- To get filetype on a buffer:
+-- lua print(vim.bo.filetype)
+
 -- NOTE: maybe consider adding this:
 --    https://github.com/guns/vim-sexp
 -- or this:
@@ -21,7 +24,8 @@ local clojure_filetype = "clojure"
 local fennel_filetype = "fennel"
 local racket_filetype = "racket"
 local cl_filetype = "lisp"
-local filetypes = { clojure_filetype, fennel_filetype, racket_filetype, cl_filetype }
+local hy_filetype = "hy"
+local filetypes = { hy_filetype, clojure_filetype, fennel_filetype, racket_filetype, cl_filetype }
 local filetypes_conjure = { clojure_filetype, fennel_filetype, racket_filetype }
 return {
   {
@@ -30,14 +34,20 @@ return {
     -- https://shaunlebron.github.io/parinfer/
     "gpanders/nvim-parinfer",
     ft = filetypes,
+    init = function()
+      vim.cmd("let g:parinfer_mode = \"paren\"")
+    end,
     keys = {
+      { "<leader>cp", "<cmd>let b:parinfer_mode = \"paren\"<cr>",  desc = "Parinfer Toggle", ft = filetypes, desc = "parinfer paren mode" },
+      { "<leader>cs", "<cmd>let b:parinfer_mode = \"smart\"<cr>",  desc = "Parinfer Toggle", ft = filetypes, desc = "parinfer smart mode" },
+      { "<leader>ci", "<cmd>let b:parinfer_mode = \"indent\"<cr>", desc = "Parinfer Toggle", ft = filetypes, desc = "parinfer indent mode" },
       {
-        "<leader>ci",
+        "<leader>ct",
         "<cmd>if b:parinfer_enabled ==# 1 | echo 'Parinfer is enabled' | else | echo 'Parinfer is disabled' | endif<cr>",
         desc = "Parinfer Check",
         ft = filetypes,
       },
-      { "<leader>cI", "<cmd>ParinferToggle<cr>", desc = "Parinfer Toggle", ft = filetypes, }
+      { "<leader>cT", "<cmd>ParinferToggle<cr>", desc = "Parinfer Toggle", ft = filetypes, }
     }
   },
   {
@@ -49,15 +59,17 @@ return {
         filetypes = filetypes,
         use_default_keys = false,
         keys = {
-          ["<M-x>"] = { paredit.unwrap.unwrap_form_under_cursor, "Splice sexp" },
+          ["<M-d>"] = { paredit.unwrap.unwrap_form_under_cursor, "Splice sexp" },
+
+          ["<M-a>"] = { paredit.api.drag_element_forwards, "Drag element right" },
+          ["<M-r>"] = { paredit.api.drag_element_backwards, "Drag element left" },
+
           ["<M-t>"] = { paredit.api.slurp_forwards, "Slurp forwards" },
           ["<M-e>"] = { paredit.api.barf_forwards, "Barf forwards" },
 
           ["<M-c>"] = { paredit.api.slurp_backwards, "Slurp backwards" },
           ["<M-l>"] = { paredit.api.barf_backwards, "Barf backwards" },
 
-          ["<M-a>"] = { paredit.api.drag_element_forwards, "Drag element right" },
-          ["<M-r>"] = { paredit.api.drag_element_backwards, "Drag element left" },
 
           -- [">p"] = { paredit.api.drag_pair_forwards, "Drag element pairs right" },
           -- ["<p"] = { paredit.api.drag_pair_backwards, "Drag element pairs left" },
@@ -91,7 +103,8 @@ return {
             repeatable = false,
             mode = { "n", "x", "o", "v" },
           },
-          ["<M-d>"] = {
+
+          ["<M-x>"] = {
             paredit.api.select_element,
             "Around element",
             repeatable = false,

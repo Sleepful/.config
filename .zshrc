@@ -5,10 +5,17 @@
 [[ -e ~/.secret ]] && emulate sh -c 'source ~/.secret'
 [[ -e ~/.zshrc.optional ]] && source ~/.zshrc.optional
 
+counter=1
+
+echo "Hi: $counter"
+counter=$((counter+1))
+
 # apparently necessary for macos m chip
 # https://stackoverflow.com/a/76900597
 autoload -Uz compinit && compinit
 
+echo "Hi: $counter"
+counter=$((counter+1))
 
 # kubectl tab completion
 source <(kubectl completion zsh)
@@ -63,6 +70,8 @@ else
   echo "Unknown OS: $OSTYPE"
 fi
 
+echo "Hi: $counter"
+counter=$((counter+1))
 
 # Uncomment to turn on Emacs!
 
@@ -83,6 +92,9 @@ source $ZSH_CUSTOM/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # god sent code to have clipboard available inside the vi mode plugin
 # https://github.com/jeffreytse/zsh-vi-mode/issues/19#issuecomment-1268057812
+
+echo "Hi: $counter" # 4, slows here
+counter=$((counter+1))
 
 my_zvm_vi_yank() {
   zvm_vi_yank
@@ -248,7 +260,13 @@ ZSH_THEME="robbyrussell"
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 #MODE_INDICATOR="%F{yellow}+%f"
 
+echo "Hi: $counter" # I guess this might be the slow part?
+counter=$((counter+1))
+
 source $ZSH/oh-my-zsh.sh
+
+echo "Hi: $counter" 
+counter=$((counter+1))
 
 # Pure must be activated ~after~ `source $ZSH/oh-my-zsh.sh`
 # fpath+=$HOME/Code/GitBuilds/pure
@@ -322,6 +340,9 @@ function prompt_date(){
   local color="{$fg_bold[blue]%}"
   DATE=$color$date
 }
+
+echo "Hi: $counter" # not slow
+counter=$((counter+1))
 
 prompt_date
 
@@ -452,3 +473,8 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+. "/Users/jose/.deno/env"
+
+echo "Hi: $counter"
+counter=$((counter+1))
+

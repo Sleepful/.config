@@ -17,6 +17,7 @@ subtemplate = "default-256"
 [[items]]
 # to figure out the directory of the nvim sockets, run this neovim:
 # :echo v:servername
+# hook = "timeout 1s bash -c 'fd -t s nvim /var/folders | xargs -n1 nvim --remote-send \":Recolor<CR>\" --server'"
 hook = 'fd -t s nvim /var/folders | xargs -n1 nvim --remote-send ":Recolor<CR>" --server'
 file = "~/.config/nvim/colors/flavours.lua"
 template = "nvim"

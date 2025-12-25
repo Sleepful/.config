@@ -66,6 +66,7 @@
 [core]
 	hooksPath = ~/.githooks/
 	autocrlf = false
+	pager = diff-so-fancy | less --tabs=4 -RF
 [github]
 	user = Sleepful
 [pull]
@@ -74,3 +75,5 @@
 	defaultBranch = main
 [status]
 	submoduleSummary = true
+[interactive]
+	diffFilter = diff-so-fancy --patch

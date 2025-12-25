@@ -15,6 +15,9 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+-- C-v paste:
+map({ "i", "n" }, "<M-v>", "<C-v>", { desc = "C-v taken for pasting, so rewrite to M-v" })
+
 -- allow cmd-delete combo
 map({ "i" }, "<M-Del>", "<C-o>de", { desc = "Use delete-forward on insert mode" })
 map({ "n" }, "<M-Del>", "de", { desc = "Use delete-forward on normal mode" })
@@ -58,9 +61,9 @@ map({ "o", "x", "n" }, "<leader>m", "`", { desc = "Marks" })
 -- remove highlights:
 map({ "o", "x", "n" }, "<leader>uu", "<Cmd>:noh<CR>", { desc = "Remove highlight search" })
 -- easy reset buffer
-require("which-key").add({ "<leader>e", group = 'Buffer Operations' })
-map({ "o", "x", "n" }, "<leader>ee", "<Cmd>:e<CR>", { desc = ":e - Reload" })
-map({ "o", "x", "n" }, "<leader>eE", "<Cmd>:e!<CR>", { desc = ":e! - Reload!" })
+require("which-key").add({ "<leader>b", group = 'Buffer Operations' })
+map({ "o", "x", "n" }, "<leader>be", "<Cmd>:e<CR>", { desc = ":e - Reload" })
+map({ "o", "x", "n" }, "<leader>bE", "<Cmd>:e!<CR>", { desc = ":e! - Reload!" })
 
 -- Moving lines up and down smoothly
 -- https://stackoverflow.com/a/28186505/2446144
@@ -108,7 +111,7 @@ map({ "n" }, "<leader>ln", "<Cmd>cnew<CR>", { desc = "Newer quickfix list" })
 map({ "n" }, "<leader>w", "<Cmd>w<CR>", { desc = "Write file" })
 -- Quit
 map({ "n" }, "<leader>q", "<Cmd>q<CR>", { desc = "Quit" })
-map({ "n" }, "<leader>Q", "<Cmd>q!<CR>", { desc = "Quit!" })
+map({ "n" }, "<leader>Q", "<Cmd>qa!<CR>", { desc = "Quit!" })
 
 -- Navigate between bookmarks
 vim.keymap.set("n", "<Home>", "<cmd>BookmarkPrev<CR>", { desc = "Previous Bookmark" })
