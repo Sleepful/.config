@@ -1,0 +1,16 @@
+#:schema https://docs.jj-vcs.dev/latest/config-schema.json
+
+[user]
+name = "Jose Vargas"
+email = "josepablov@gmail.com"
+
+[aliases]
+# Funny way to access cli args!
+genb = ["util", "exec", "--", "bash", "-c", """
+  jj bookmark c "jv-`gdate -I`-$0"
+  """]
+# https://steveklabnik.github.io/jujutsu-tutorial/branching-merging-and-conflicts/revsets.html#putting-it-all-together
+map = [ "log", "-r", '@ | ancestors(remote_bookmarks().., 2) | trunk()' ]
+# genbb = ["util", "exec", "--", """echo "jv-`gdate -I`-$0""""]
+# genbb = ["util", "exec", "--", "bash", "-c", """ !f(){ echo "jv-`gdate -I`-$1; }; f """"]
+
