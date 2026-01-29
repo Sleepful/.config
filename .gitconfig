@@ -1,6 +1,3 @@
-[user]
-	email = josepablov@gmail.com
-	name = Sleepful
 [alias]
 	br = !git for-each-ref --sort=committerdate refs/heads --format='%(color:bold)%(align:15)%(HEAD)%(color:yellow)%(refname:short)%(end)%(align:20)%(color:bold green)%(committerdate:relative)%(end)%(color:magenta)%(authorname)\n%(color:blue)%(subject)\n%(color:reset)' --color=always|column -ts'|'
 	amend = commit --amend
@@ -18,13 +15,14 @@
 	r = restore --staged
 	co = checkout
 	cob = checkout -b
+	genb = "!f(){ git checkout -b jv-`gdate -I`-$1; }; f"
 	logf = log --stat
 	logl = log -p
 	logo = log --oneline
 	fetcha = fetch --all
 	pulla = pull --all
-  pwd = branch --show-current
-  cls = "!cls(){ git check-ignore $(ls); }; cls"
+	pwd = branch --show-current
+	cls = "!cls(){ git check-ignore $(ls); }; cls"
 	clonesub = clone --recurse-submodules -j8
 	# checkout new branch with commit message:
 	# conew BRANCHNAME commit-msg
@@ -77,3 +75,6 @@
 	submoduleSummary = true
 [interactive]
 	diffFilter = diff-so-fancy --patch
+[user]
+	name = Jose Vargas
+	email = josepablov@gmail.com

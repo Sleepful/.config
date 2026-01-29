@@ -237,7 +237,7 @@
                                 "from": {
                                     "key_code": "tab",
                                     "modifiers": {
-                                        "mandatory": ["control"],
+                                        "mandatory": ["option"],
                                         "optional": ["any"]
                                     }
                                 },
@@ -483,7 +483,7 @@
                         ]
                     },
                     {
-                        "description": "Change Command+Tab to Control+Tab",
+                        "description": "Change Command+Tab to Option+Tab",
                         "manipulators": [
                             {
                                 "from": {
@@ -946,11 +946,11 @@
                         },
                         {
                             "from": { "key_code": "left_command" },
-                            "to": [{ "key_code": "right_control" }]
+                            "to": [{ "key_code": "left_option" }]
                         },
                         {
                             "from": { "key_code": "right_command" },
-                            "to": [{ "key_code": "left_control" }]
+                            "to": [{ "key_code": "right_option" }]
                         }
                     ]
                 },

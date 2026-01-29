@@ -27,6 +27,25 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+-- use tabs inside a makefile
+-- vim.api.nvim_create_autocmd('FileType', {
+--   desc = 'Ensures tabs are used on Makefiles instead of spaces',
+--   callback = function(event)
+--     if event.match == 'make' or event.match == 'makefile' then
+--       vim.o.expandtab = false -- also tried with vim.opt
+--     end
+--   end,
+-- })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "make",
+  callback = function(ev)
+    -- might not be working as expected:
+    vim.cmd("setlocal noexpandtab softtabstop=0")
+    -- cannot manage to disable editorconfig settings, but that is the intention here:
+    vim.cmd("let b:editorconfig = v:false")
+  end
+})
+
 -- keybinds local to a filetype
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("file_type_bindings"),

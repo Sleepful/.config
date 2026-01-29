@@ -3,6 +3,7 @@ local tsserver = require("plugins.lsp.tsserver")
 local lexical = require("plugins.lsp.lexical")
 local marksman = require("plugins.lsp.marksman")
 local deno = require("plugins.lsp.deno")
+local php = require("plugins.lsp.php")
 local rust = require("plugins.lsp.rust")
 local golang = require("plugins.lsp.golang")
 local racket = require("plugins.lsp.racket")
@@ -31,11 +32,12 @@ return {
       -- rust.setup()
       golang.setup()
       racket.setup()
+      php.setup()
       -- require 'lspconfig'.csharp_ls.setup {}
       -- for QML, the QtQuick file format / declarative code
-      vim.lsp.enable('qmlls')
+      -- vim.lsp.enable('qmlls')
       -- vim.lsp.enable('basedpyright')
-      vim.lsp.enable('ruff')
+      vim.lsp.enable('ruff') -- python
     end,
     keys = {
       { k .. "e", vim.lsp.buf.declaration,                                    desc = "Declaration" },

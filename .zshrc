@@ -478,3 +478,4 @@ esac
 echo "Hi: $counter"
 counter=$((counter+1))
 
+export PATH="/opt/homebrew/opt/bison/bin:$PATH"

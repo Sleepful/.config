@@ -13,4 +13,6 @@ genb = ["util", "exec", "--", "bash", "-c", """
 map = [ "log", "-r", '@ | ancestors(remote_bookmarks().., 2) | trunk()' ]
 # genbb = ["util", "exec", "--", """echo "jv-`gdate -I`-$0""""]
 # genbb = ["util", "exec", "--", "bash", "-c", """ !f(){ echo "jv-`gdate -I`-$1; }; f """"]
-
+prepend-commit = [ "new", "-A", '@-', '--no-edit' ]
+prepend-main = [ "bookmark", "set", '-r', '@-', 'main' ]
+set-main = [ "bookmark", "set", '-r', '@', 'main' ]

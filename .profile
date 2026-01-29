@@ -104,6 +104,9 @@ alias vimr='vim README.md'
 # golang alias
 alias gog='go run main.go'
 
+# alias for vscode from terminal
+vsc () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+
 # tmux
 function cd {
 	builtin cd "$@" && tmux renamew $(basename `pwd` | cut -c1-5)
