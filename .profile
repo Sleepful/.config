@@ -11,6 +11,11 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
 # nix installed bins
 export PATH=~/.nix-profile/bin:$PATH
+export NIX_SSL_CERT_FILE=/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt
+
+# conf alias
+alias conf-ssh="$EDITOR ~/.ssh/config"
+alias conf-nix="$EDITOR ~/.config/nix/nix.conf"
 
 # aider.chat, installed through pip/python
 export PATH=~/.local/share/../bin:$PATH
