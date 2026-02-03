@@ -6,8 +6,6 @@ emacs-app
 flux
 flux-app
 font-iosevka
-fuse-t
-fuse-t-sshfs
 ghostty
 gifcapture
 karabiner-elements
