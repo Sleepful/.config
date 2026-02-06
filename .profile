@@ -13,6 +13,14 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH=~/.nix-profile/bin:$PATH
 export NIX_SSL_CERT_FILE=/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt
 
+# ssh
+# remove an old host by line:
+ssh-clear() {
+  sed -i '' "${1}d" ~/.ssh/known_hosts
+}
+# use correct TERM
+alias ssh="TERM=xterm-256color ssh"
+
 # conf alias
 alias conf-ssh="$EDITOR ~/.ssh/config"
 alias conf-nix="$EDITOR ~/.config/nix/nix.conf"

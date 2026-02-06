@@ -467,7 +467,7 @@ fi
 export PATH="/nix/var/nix/profiles/default/bin:$PATH"
 
 # pnpm
-export PNPM_HOME="/Users/jv/.local/share/pnpm"
+export PNPM_HOME="~/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
